@@ -1,0 +1,79 @@
+require "stdlib"
+require "timer"
+require "defl_util"
+
+-- Chebyshev polynomial acceleration parameters
+-- cheb = {cheb_n, cheb_a, cheb_b, cheb_x0}
+
+-- Lanczos algorithm parameters
+-- lanczos_param =  { 
+--   ["nev"]      = 10,
+--   ["ncv"]      = 20,
+--   ["maxiter"]  = 10000,
+--   ["tol"]      = 1.e-08
+-- }
+
+
+-- Chebyshev polynomial acceleration parameters
+-- cheb_param = { ["which"]          = "LR",                   -- default: "SR"
+--                ["arpack_logfile"] = "arpack_log_file"       -- ARPACK verbose printing
+--                ["cheb_accel"]     = {n, a, b, x0},          -- poly.acceleration
+--                ["inplace"]        = true,                   -- default: false
+--                ["eigcg"]          = {vmax, nev, tol, umax},
+--              }
+
+
+-- mixed solver parameters
+--mixed_solver_param = {
+--  ["eps_i"]          = 1.e-10,
+--  ["max_iter_i"]     = 50000,
+--  ["eps_f"]          = 1.e-22, 
+--  ["dirac_max_iter"] = 50000 
+--}
+
+-- eigenspace parameters
+
+--evec_param = {
+--  ["read_eigenspace"] = true,
+--  ["evec_pack_eopc"] = ,
+--  ["evec_file"] = ,
+--}
+
+
+function make_cl_solver (L, u, kappa, csw, bc, evec_param, lanczos_param, cheb_param, mixed_solver_param)
+
+  local D_CL = qcd.Clover(u, kappa, csw, bc)
+
+  if evec_param["read_eigenspace"] then
+    -- construct a deflator
+    Defl_CL = D_CL:eig_deflator(eigcg_param["vmax"], eigcg_param["nev"], eigcg_parma["tol"], eigcg_param["umax"])
+    df_load_timer = timer("load_df_space")
+    qdp_r = open_qdpc_read(L, evec_param["evec_file"])
+    deflator_read_espace_d4(Defl_CL, qdp_r, eigcg_param["umax"], evec_param["evec_pack_eopc"])
+    qdp_r:close()
+    printf("# df_cur_dim = %d\n", Defl_CL:current_dim())
+    df_load_timer("done")
+  else
+    Defl_CL = D_CL:eig_deflator_lanczos(
+      lanczos_param["nev"], lanczos_param["ncv"], lanczos_param["max_iter"], lanczos_param["tol"],
+      cheb_param)
+  end
+
+  -- print eigenvalues
+  local evals = Defl_CL:eigenvalues()
+  printf("# str(evals) = %s\n", tostring(evals))
+  for i=0, #evals-1 do
+    printf("# eval[%04d] = %e\n", i, evals[i])
+  end
+
+  -- construct a solver
+  solver = Defl_CL:mixed_solver(
+    mixed_solver_param["eps_i"],
+    mixed_solver_param["max_iter_i"],
+    mixed_solver_param["eps_f"],
+    mixed_solver_param["dirac_max_iter"]
+  )
+
+  return solver
+
+end

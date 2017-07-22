@@ -1,0 +1,2 @@
+salloc -N 27 -p debug -t 00:30:00
+sru -n 27 -c 44 ./mpi_parallel_extract_ll.out

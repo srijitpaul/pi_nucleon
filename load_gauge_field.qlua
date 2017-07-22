@@ -1,0 +1,20 @@
+function load_nersc(lat, file_name)
+  local U, msg
+  U, msg = qcd.nersc.read_gauge(lat, file_name)
+  printf("# HEADER of %q BEGIN\n", file_name)
+  for i, v in pairs(msg) do
+    printf("\t%s = %s\n", i, tostring(v))
+  end
+  printf("# END of %q HEADER\n", file_name)
+  return U
+end
+
+function load_ildg(lat, filename)
+  local U, U_info
+  local reader, rinfo
+  reader, rinfo = qcd.qdpc.Reader(lat, filename)
+  U, U_info = reader:ColorMatrix(#lat)
+  -- printf("# %s\n", U_info)
+  reader:close()
+  return U
+end

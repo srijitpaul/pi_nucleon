@@ -1,0 +1,17 @@
+function plaquette_full(u)
+   local volume = 1
+   local Nd = #L
+   local plaq = 0
+   local n_plaq = ((Nd-1) * Nd) / 2
+
+   for i = 0, Nd-1 do
+      volume = volume * L[i]
+   end
+
+   for i = 0, Nd-1 do
+      for j = i+1, Nd-1 do
+	 plaq = plaq + plaquette(u, i, j):trace():real():sum()
+      end
+   end
+   return plaq / (n_plaq * 3 * volume)
+end

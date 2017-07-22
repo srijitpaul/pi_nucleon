@@ -1,0 +1,73 @@
+-- package.path = package.path .. ''
+require "stdlib"
+require "gauge"
+-- require "lhpc-std"
+
+
+function write_propagator (v, param)
+
+
+  Pcreat = { method = "phdf5", chunk = "natural", transfer = "collective", alignment = 1024 * 512, threshold = 1024 }
+
+  Pwrite = { precision = "double" }
+
+
+  if string.find(param.name, "forward") then
+    filename = string.format("%s.%.4d.x%.2dy%.2dz%.2dt%.2d.h5", param.name, param.cfg, param.src_pos[1], param.src_pos[2], param.src_pos[3], param.src_t)
+  elseif string.find(param.name, "sequential") then
+    filename = string.format("%s.%.4d.x%.2dy%.2dz%.2dt%.2d.px%.2dpy%.2dpz%.2d.h5", param.name, param.cfg,
+        param.src_pos[1], param.src_pos[2], param.src_pos[3], param.src_t,
+        param.mom[1], param.mom[2], param.mom[3])
+  elseif string.find(param.name, "stochastic_source") then
+    filename = string.format("%s.%.4d.%.5d.h5", param.name, param.cfg, param.sample)
+  elseif string.find(param.name, "stochastic_propagator") and not string.find(param.name, "oet") then
+    filename = string.format("%s.%.4d.t%.2d.%.5d.h5", param.name, param.cfg, param.src_t, param.sample)
+  elseif string.find(param.name, "stochastic_propagator") and string.find(param.name, "oet") then
+    filename = string.format("%s.%.4d.t%.2d.%.5d.px%.2dpy%.2dpz%.2d.h5", param.name, param.cfg, param.src_t, param.sample,
+        param.mom[1], param.mom[2], param.mom[3])
+  else
+    os.exit(1)
+  end
+  
+  printf("# [write_propagator] filename is %s\n", filename)
+  h5_writer = qcd.hdf5.Writer(filename, Pcreat )
+
+  h5_writer:write("/diracpropagator/ensemble", param.ensemble)
+  h5_writer:write("/diracpropagator/config", param.cfg)
+  h5_writer:write("/diracpropagator/source/type", param.name)
+  h5_writer:write("/diracpropagator/source/location/x", param.src_pos[1])
+  h5_writer:write("/diracpropagator/source/location/y", param.src_pos[2])
+  h5_writer:write("/diracpropagator/source/location/z", param.src_pos[3])
+  h5_writer:write("/diracpropagator/source/location/t", param.src_t)
+  h5_writer:write("/diracpropagator/source/smearingparams/ape_alpha", param.ape_alpha)
+  h5_writer:write("/diracpropagator/source/smearingparams/ape_N", param.ape_n)
+  h5_writer:write("/diracpropagator/source/smearingparams/ape_accu", param.ape_accu)
+  h5_writer:write("/diracpropagator/source/smearingparams/ape_maxiter", param.ape_maxiter)
+  h5_writer:write("/diracpropagator/source/smearingparams/wup_alpha", param.wup_alpha)
+  h5_writer:write("/diracpropagator/source/smearingparams/wup_N", param.wup_n)
+  h5_writer:write("/diracpropagator/action/type", param.action_type)
+  h5_writer:write("/diracpropagator/action/params/m_q", param.m_q)
+  h5_writer:write("/diracpropagator/action/params/c_sw", param.c_sw)
+  h5_writer:write("/diracpropagator/action/params/stout_rho", param.stout_rho)
+  h5_writer:write("/diracpropagator/action/params/stout_N", param.stout_n)
+  h5_writer:write("/diracpropagator/action/params/bc_x", param.ferm_bc[1])
+  h5_writer:write("/diracpropagator/action/params/bc_y", param.ferm_bc[2])
+  h5_writer:write("/diracpropagator/action/params/bc_z", param.ferm_bc[3])
+  h5_writer:write("/diracpropagator/action/params/bc_t", param.ferm_bc[4])
+  h5_writer:write("/diracpropagator/solver/type", "multigrid")
+  h5_writer:write("/diracpropagator/solver/params/solver_eps", param.solver_eps)
+
+  cur_timer = timer("write " .. param.name )
+  if string.find(param.name, "stochastic_propagator") and string.find(param.name, "oet") then
+
+    h5_writer:write("/diracpropagator/s0/data", v[0], Pwrite)
+    h5_writer:write("/diracpropagator/s1/data", v[1], Pwrite)
+    h5_writer:write("/diracpropagator/s2/data", v[2], Pwrite)
+    h5_writer:write("/diracpropagator/s3/data", v[3], Pwrite)
+  else
+    h5_writer:write("/diracpropagator/data", v, Pwrite)
+  end
+  h5_writer:close()
+  cur_timer("done")
+
+end

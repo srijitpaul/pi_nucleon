@@ -1,0 +1,132 @@
+package.path = '/global/homes/s/srijitp/spaul/build2/parts/qlua/tree/lhpc/?.qlua;/global/homes/s/srijitp/spaul/build2/parts/qlua/tree/qlib/?.qlua;' .. package.path
+require "stdlib"
+require "gauge"
+
+-- mg_block = {{4,4,4,4}, {2,2,2,2}}
+-- mg_max_error = 1.e-22
+-- mg_ferm_bc = {1,1,1,-1}
+-- mg_kappa = kappa_l = 1. / (8 + 2 * m_l); m_l     = -0.2850
+-- mg_csw = c_sw = 1.24930970916466
+
+function make_mg_solver (
+    L,
+    u, 
+    mg_block, 
+    mg_max_abserr, -- absolute solver precision
+    mg_max_relerr, -- relative solver precision
+    mg_ferm_bc,
+    mg_kappa, 
+    mg_csw    -- c_sw coefficient
+  )
+
+  local mg_name = "mg-wilson-clover"
+  local mg_max_iter = 2000
+  local mg_restart = 202
+  local mg_max_restarts = 5
+  local mg_evenodd = "evenodd" -- or "odd" or "even"
+
+
+  local function vec_div(a,b)
+    local r = {};
+    local i;
+    for i = 1, #a do
+      r[i] = a[i] / b[i];
+    end
+    return r;
+  end
+
+  local lattice_1 = vec_div( {L[0],L[1],L[2],L[3]}, mg_block[1])
+  local lattice_2 = vec_div(lattice_1, mg_block[2])
+
+
+  -- multigrid parameters
+  local mg_params = {
+      name     = mg_name, -- optional for tostring()
+      verbose  = 2, -- for -2
+      residual = {
+        rsqmin   = mg_max_abserr
+        -- relmin = mg_max_relerr
+      },
+      inverter = {
+         max_iter     = mg_max_iter,
+         restart      = mg_restart,
+         max_restarts = mg_max_restarts,
+         evenodd      = mg_evenodd
+      },
+      -- boundary conditions Antiperiodic
+      action = { -- should be together with kappas, but it's not how it is done in examples
+        boundary = mg_ferm_bc,
+        kappa    = mg_kappa,
+        c_sw     = mg_csw,
+
+      };action,
+      global = { -- for -1
+         -- nlevels is #multigrid
+         -- nc is U[1]:colors()
+         verbose = 0,
+         profile = 1,
+         kappa   = kappa,
+         kappanv = kappa,
+         itmax   = 5000,
+         ngcr    = 8,
+      },
+      multigrid = { -- start with 1
+        { lattice = lattice_1,
+           -- verbose
+          nvecs            =  24,
+          npre             =   0,
+          npost            =   4,
+          scale            =   1,
+          cres             = 0.2,
+          itmax            =  50,
+          ngcr             =   8,
+          setup_res        = 0.4,
+          setup_maxit      = 100;
+          setup_change_fac = 0.5
+          -- setup_nvecs
+        },
+        { lattice = lattice_2,
+          -- verbose
+          nvecs            =  30,
+          npre             =   0,
+          npost            =   3,
+          scale            =   1,
+          cres             = 0.2,
+          itmax            =  50,
+          ngcr             =   8,
+          setup_res        = 0.4,
+          setup_maxit      = 100;
+          setup_change_fac = 0.5
+           --- setup_nvecs
+        },
+
+      }
+  };
+  local t2 = timer("set up mg solver")
+
+  mg = qcd.qop.WilsonMG(u, mg_params);
+ 
+  t2("done")
+
+  -- return mg
+ 
+  return function (v)
+    local s = tostring(v)
+    if string.find(s, "^QDP:DiracFermion") then
+      return mg:solve(v)
+    elseif string.find(s, "^QDP:DiracPropagator") then
+      local lat = v.lattice
+      printf("L[3] = %d\n", lat[3])
+      dv = lat:DiracPropagator()
+      for icol=0, 2 do
+      for ispin = 0, 3 do
+        dv[{c=icol, d=ispin}] = mg:solve(v[{c=icol,d=ispin}])
+      end
+      end
+      return dv
+    end
+  end
+
+
+
+end

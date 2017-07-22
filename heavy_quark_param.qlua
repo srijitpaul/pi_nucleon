@@ -1,0 +1,25 @@
+-- parameters for charm quark
+  charm = {}
+  charm.mass      = 0.03772567135052  -- +/- 0.0087
+  charm.nu        = 1.19897836954450  -- +/- 0.0061
+  charm.ce        = 1.79163556092025  -- +/- 0.0049
+  charm.cb        = 1.95375481032591  -- +/- 0.0099
+  charm.tolerance = 1e-40;
+  charm.max_iter  = 10000;
+  charm.wup_chroma_width = 3.0
+  charm.wup_n            = 20
+  charm.bc               = {1,1,1,-1}
+  charm.wup_alpha        = 0
+
+-- parameters for bottom quark
+  bottom = {}
+  bottom.mass      = 7.41366306166084  -- +/- 0.19
+  bottom.nu        = 3.44758525730892  -- +/- 0.060
+  bottom.ce        = 3.62370636181832  -- +/- 0.049
+  bottom.cb        = 5.61789641212207  -- +/- 0.097
+  bottom.tolerance = 1e-80;
+  bottom.max_iter  = 10000;
+  bottom.wup_chroma_width = 2.0
+  bottom.wup_n            = 10
+  bottom.bc               = {1,1,1,-1}
+  bottom.wup_alpha        = 0

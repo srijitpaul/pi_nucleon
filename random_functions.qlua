@@ -1,0 +1,42 @@
+
+
+function random_state(L)
+  local pv = L:Int(os.random())
+  for i = 0, #L - 1 do
+    pv = pv * L[i] + L:pcoord(i)
+  end
+  return L:RandomState(os.random(), pv)
+end
+
+function Z2_SpinComponent_DiracFermion(S,d)
+
+  local function make_Z2 (S)
+    local L = S.lattice
+    local R = S:random_Real(1.0)
+    local Z2 = L:Real(1.0)
+    L:Subset(qcd.lt(R,0.5)):where(
+      function ()
+        Z2:set(-Z2)
+      end
+    )
+    return(Z2)
+  end
+
+  local v = L:DiracFermion()
+  local nc = v:colors()
+
+  if type(d) == "number" then
+    for c = 0, nc - 1 do
+      v[{c=c,d=d}] = L:Complex(make_Z2(S), make_Z2(S))
+    end
+  end
+  if type(d) == "table" then
+    for c = 0, nc - 1 do
+      for i, k in pairs(d) do
+        v[{c=c,d=k}] = L:Complex(make_Z2(S), make_Z2(S))
+      end
+    end
+  end
+
+  return v / math.sqrt(2)
+end

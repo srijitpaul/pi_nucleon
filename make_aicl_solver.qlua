@@ -1,0 +1,80 @@
+require "stdlib"
+require "gauge"
+
+
+function make_aicl_solver (L, u, charm, bottom ) 
+
+  -- heavy-quark action and CG solver parameters
+  
+  local function wup_alpha(chroma_width, wup_n)
+          return chroma_width*chroma_width/(4*wup_n-6*chroma_width*chroma_width)
+        end
+
+  charm.wup_alpha  = wup_alpha(charm.wup_chroma_width, charm.wup_n)
+  bottom.wup_alpha = wup_alpha(bottom.wup_chroma_width, bottom.wup_n)
+  
+  -- anisotropic clover definitions for heavy quarks
+  local function aniso_normcoeff(mass, nu)
+    return mass + 1.0 + 3.0*nu
+  end
+  
+  local function aniso_kappa(mass, nu)
+    local nc = aniso_normcoeff(mass, nu)
+    local kp = {nu /(2.0*nc),
+                nu /(2.0*nc),
+                nu /(2.0*nc),
+                1.0/(2.0*nc)}
+    return kp
+  end
+  
+  local function aniso_csw(mass, nu, ce, cb)
+    local nc = aniso_normcoeff(mass, nu)
+    local cxy = 1.0/(2.0*nc)*cb
+    local cxz = 1.0/(2.0*nc)*cb
+    local cxt = 1.0/(2.0*nc)*ce
+    local cyz = 1.0/(2.0*nc)*cb
+    local cyt = 1.0/(2.0*nc)*ce
+    local czt = 1.0/(2.0*nc)*ce
+    local csw = {{0.0, cxy, cxz, cxt},
+                 {cxy, 0.0, cyz, cyt},
+                 {cxz, cyz, 0.0, czt},
+                 {cxt, cyt, czt, 0.0}}
+    return csw
+  end
+  
+  -- cur_timer = timer("make_AnisotropicClover_operator_charm")
+  charm.kappa     = aniso_kappa(charm.mass, charm.nu)
+  charm.normcoeff = aniso_normcoeff(charm.mass, charm.nu)
+  charm.csw       = aniso_csw(charm.mass, charm.nu, charm.ce, charm.cb)
+  charm_CL        = qcd.AnisotropicClover(u, {kappa = charm.kappa, c_sw = charm.csw, boundary = charm.bc});
+  -- cur_timer("done")
+  
+  -- cur_timer = timer("create_CG_solver_charm")
+  charm_CG_solver = charm_CL:solver(charm.tolerance, charm.max_iter)
+  -- cur_timer("done")
+  
+  
+  -- cur_timer = timer("make_AnisotropicClover_operator_bottom")
+  bottom.kappa = aniso_kappa(bottom.mass, bottom.nu)
+  bottom.normcoeff = aniso_normcoeff(bottom.mass, bottom.nu)
+  bottom.csw = aniso_csw(bottom.mass, bottom.nu, bottom.ce, bottom.cb)
+  bottom_CL = qcd.AnisotropicClover(u, {kappa = bottom.kappa, c_sw = bottom.csw, boundary = bottom.bc});
+  -- cur_timer("done")
+  
+  -- cur_timer = timer("create_CG_solver_bottom")
+  bottom_CG_solver = bottom_CL:solver(bottom.tolerance, bottom.max_iter)
+  -- cur_timer("done")
+  
+
+  return function (v, flavor)
+    if string.find(flavor, "charm") then
+      return (1.0/charm.normcoeff) * charm_CG_solver(v)
+    elseif string.find(flavor, "bottom") then
+      return (1.0/bottom.normcoeff) * bottom_CG_solver(v)
+    else
+      printf("[solver] Error, solver for either charm of bottom flavor\n")
+      return nil
+    end
+  end
+  
+end

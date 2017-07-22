@@ -1,0 +1,117 @@
+-- package.path = package.path .. ''
+require "stdlib"
+require "gauge"
+-- require "lhpc-std"
+
+
+function read_propagator (L, param)
+
+  Popen = { method = "phdf5"}
+
+  Pread = { lattice = L }
+
+  if string.find(param.name, "forward") then
+  filename = string.format("%s.%.4d.x%.2dy%.2dz%.2dt%.2d.h5", param.name, param.cfg, param.src_pos[1], param.src_pos[2], param.src_pos[3], param.src_t)
+  elseif string.find(param.name, "sequential") then
+
+  filename = string.format("%s/%s.%.4d.x%.2dy%.2dz%.2dt%.2d.px%.2dpy%.2dpz%.2d.h5", param.path, param.name, param.cfg,
+      param.src_pos[1], param.src_pos[2], param.src_pos[3], param.src_t,
+      param.mom[1], param.mom[2], param.mom[3])
+
+  -- TEST
+  -- filename = string.format("%s/%s.%.4d.x%.2dy%.2dz%.2dt%.2d.h5", param.path, param.name, param.cfg,
+      --    param.src_pos[1], param.src_pos[2], param.src_pos[3], param.src_t)
+
+  elseif string.find(param.name, "stochastic_source") then
+
+  filename = string.format("%s/%s.%.4d.%.5d.h5", param.path, param.name, param.cfg, param.sample)
+
+  elseif string.find(param.name, "stochastic_propagator") and not string.find(param.name, "oet") then
+
+  filename = string.format("%s/%s.%.4d.t%.2d.%.5d.h5", param.path, param.name, param.cfg, param.src_t, param.sample)
+
+  elseif string.find(param.name, "stochastic_propagator") and string.find(param.name, "oet") then
+
+  filename = string.format("%s/%s.%.4d.t%.2d.%.5d.px%.2dpy%.2dpz%.2d.h5", param.path, param.name, param.cfg, param.src_t, param.sample,
+      param.mom[1], param.mom[2], param.mom[3])
+
+  else
+os.exit(1)
+  end
+
+  printf("# [read_propagator] filename is %s\n", filename)
+
+local h5_reader = qcd.hdf5.Reader(filename, Popen)
+
+  local cur_timer = timer("read " .. param.name )
+
+  if string.find(param.name, "stochastic_propagator") and string.find(param.name, "oet") then
+  v = {}
+  v[0] = h5_reader:read("/diracpropagator/s0/data", {lattice=L})
+  v[1] = h5_reader:read("/diracpropagator/s1/data", {lattice=L})
+  v[2] = h5_reader:read("/diracpropagator/s2/data", {lattice=L})
+  v[3] = h5_reader:read("/diracpropagator/s3/data", {lattice=L})
+
+  else
+  v = h5_reader:read("/diracpropagator/data", Pread)
+  end
+
+h5_reader:close()
+
+
+  cur_timer("done")
+
+  return v
+  end
+
+function read_propagator_lime (L, param)
+
+  if string.find(param.name, "forward") then
+  filename = string.format("%s.%.4d.x%.2dy%.2dz%.2dt%.2d.lime", param.name, param.cfg, param.src_pos[1], param.src_pos[2], param.src_pos[3], param.src_t)
+  elseif string.find(param.name, "sequential") then
+
+  filename = string.format("%s/%s.%.4d.x%.2dy%.2dz%.2dt%.2d.px%.2dpy%.2dpz%.2d.h5", param.path, param.name, param.cfg,
+      param.src_pos[1], param.src_pos[2], param.src_pos[3], param.src_t,
+      param.mom[1], param.mom[2], param.mom[3])
+
+  -- TEST
+  -- filename = string.format("%s/%s.%.4d.x%.2dy%.2dz%.2dt%.2d.h5", param.path, param.name, param.cfg,
+      --    param.src_pos[1], param.src_pos[2], param.src_pos[3], param.src_t)
+
+  elseif string.find(param.name, "stochastic_source") then
+
+  filename = string.format("%s/%s.%.4d.%.5d.h5", param.path, param.name, param.cfg, param.sample)
+
+  elseif string.find(param.name, "stochastic_propagator") and not string.find(param.name, "oet") then
+
+  filename = string.format("%s/%s.%.4d.t%.2d.%.5d.h5", param.path, param.name, param.cfg, param.src_t, param.sample)
+
+  elseif string.find(param.name, "stochastic_propagator") and string.find(param.name, "oet") then
+
+  filename = string.format("%s/%s.%.4d.t%.2d.%.5d.px%.2dpy%.2dpz%.2d.h5", param.path, param.name, param.cfg, param.src_t, param.sample,
+      param.mom[1], param.mom[2], param.mom[3])
+
+  else
+os.exit(1)
+  end
+
+  printf("# [read_propagator] filename is %s\n", filename)
+  r_timer = timer("forward propagator read")
+
+local reader, rinfo = qcd.qdpc.Reader(L, filename)
+
+local forward_prop = L:DiracPropagator()
+local forward_prop_info 
+for icol  = 0, 2 do
+  for ispin = 0, 3 do
+
+  forward_prop[{c=icol, d=ispin}] = reader:DiracFermion()
+
+  end
+  end
+
+reader:close()
+
+  r_timer("done")
+return forward_prop
+  end 

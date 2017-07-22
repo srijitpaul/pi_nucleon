@@ -1,0 +1,19 @@
+do
+  local tt = {}
+  local tstart = os.time()
+  timer = function(str)
+    local t0=os.time()
+    if tt[str] == nil then
+      tt[str] = {}
+    end
+    return function(es)
+      local dt = os.time() - t0
+      printf("TIME(%q,%q) = %.3f secs\n", str, es, dt)
+      if tt[str][es] == nil then
+        tt[str][es] = {n = 0, t = 0}
+      end
+      tt[str][es].n = tt[str][es].n + 1
+      tt[str][es].t = tt[str][es].t + dt
+    end   -- end of return function (es)
+  end  -- end of function timer = function(str)
+end
