@@ -132,3 +132,23 @@ TIME("contract B-B","done") = 42.312 secs
 # [invert_contract_v3] setting forward propagator no. 5
 # [invert_contract_v3] reading light forward propagator
 # [read_propagator] filename is forward_light.230031.x02y07z10t17.lime
+DML_partition_in times: read 0.44  send 9.62  total 10.64
+DML_partition_in times: read 0.38  send 9.57  total 10.52
+DML_partition_in times: read 0.38  send 9.57  total 10.52
+DML_partition_in times: read 0.37  send 9.59  total 10.53
+DML_partition_in times: read 0.37  send 9.56  total 10.50
+DML_partition_in times: read 0.36  send 9.08  total 9.98
+DML_partition_in times: read 0.36  send 9.58  total 10.51
+DML_partition_in times: read 0.38  send 9.61  total 10.56
+DML_partition_in times: read 0.37  send 9.75  total 10.69
+DML_partition_in times: read 0.36  send 9.66  total 10.59
+DML_partition_in times: read 0.37  send 9.59  total 10.53
+DML_partition_in times: read 0.32  send 9.54  total 10.42
+TIME("forward propagator read","done") = 127.383 secs
+# [invert_contract_baryon] B - B contraction for source location[5 / 5] = (2, 7, 10) t=17
+# [invert_contract_baryon] B - B 2pt output file u(Cg5*d*Cg5,u)contract_baryon_2pt.230031.t17
+TIME("contract B-B","done") = 44.065 secs
+# [invert_contract_v3] base source location[6] = (8, 11, 6) t=7
+# [invert_contract_v3] setting forward propagator no. 6
+# [invert_contract_v3] reading light forward propagator
+# [read_propagator] filename is forward_light.230031.x08y11z06t07.lime
