@@ -24,7 +24,7 @@ TSize=48
 Thalf=$(($TSize / 2))
 
 params=params.qlua
-include="$scripts/plaquette.qlua  $scripts/timer.qlua $scripts/stout_smear.qlua $scripts/load_gauge_field.qlua $scripts/random_functions.qlua $scripts/gamma_perm_phase.qlua $scripts/gi_dcovi.qlua $scripts/make_mg_solver.qlua $scripts/write_propagator.qlua $scripts/read_propagator.qlua $scripts/temp.qlua"
+include="$scripts/plaquette.qlua  $scripts/timer.qlua $scripts/stout_smear.qlua $scripts/load_gauge_field.qlua $scripts/random_functions.qlua $scripts/gamma_perm_phase.qlua $scripts/gi_dcovi.qlua $scripts/make_mg_solver.qlua $scripts/write_propagator.qlua $scripts/read_propagator.qlua $scripts/temp3.qlua"
 
 # gauge configuration number
 g=230031
@@ -48,7 +48,7 @@ cat $scripts/params.qlua | awk '
   {print}' > $input
 
 
-QLUA_SCRIPT=temp_contract.qlua
+QLUA_SCRIPT=temp3_contract.qlua
 export  OMP_NUM_THREADS=1
 sbcast --compress=lz4 $path_to_qlua/qlua_avx512_cori /tmp/qlua_avx512_cori
 srun -n $nproc -c 4 --cpu_bind=cores $path_to_qlua/qlua_avx512_cori $include $input $path_to_prog/$QLUA_SCRIPT

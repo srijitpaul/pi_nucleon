@@ -1,6 +1,6 @@
-/var/spool/slurmd/job5987363/slurm_script: line 34: /var/spool/slurmd/job5987363/slurm_script.log: Permission denied
-/var/spool/slurmd/job5987363/slurm_script: line 35: /var/spool/slurmd/job5987363/slurm_script.log: Permission denied
-/var/spool/slurmd/job5987363/slurm_script: line 38: /var/spool/slurmd/job5987363/slurm_script.log: Permission denied
+/var/spool/slurmd/job5988497/slurm_script: line 34: /var/spool/slurmd/job5988497/slurm_script.log: Permission denied
+/var/spool/slurmd/job5988497/slurm_script: line 35: /var/spool/slurmd/job5988497/slurm_script.log: Permission denied
+/var/spool/slurmd/job5988497/slurm_script: line 38: /var/spool/slurmd/job5988497/slurm_script.log: Permission denied
 WARN: *** No HBM found in system. Will use default (DDR) OR user specified type ***
 INFO: Only HBW allocations will be printed. Set AUTO_HBW_LOG to disable/enable.
 INFO: Using default values for array size thresholds. Set AUTO_HBW_SIZE=X:Y to change.
@@ -10,9 +10,6 @@ INFO: autohbw.so loaded!
 WARN: *** No HBM found in system. Will use default (DDR) OR user specified type ***
 INFO: Only HBW allocations will be printed. Set AUTO_HBW_LOG to disable/enable.
 INFO: Using default values for array size thresholds. Set AUTO_HBW_SIZE=X:Y to change.
-WARN: *** No HBM found in system. Will use default (DDR) OR user specified type ***
-INFO: Only HBW allocations will be printed. Set AUTO_HBW_LOG to disable/enable.
-INFO: Using default values for array size thresholds. Set AUTO_HBW_SIZE=X:Y to change.
 INFO: Allocations greater than 1024K will be allocated in HBW. Set AUTO_HBW_SIZE=X:Y to change this limit.
 INFO: autohbw.so loaded!
 	-HBW int call succeeded
@@ -103,9 +100,6 @@ INFO: autohbw.so loaded!
 WARN: *** No HBM found in system. Will use default (DDR) OR user specified type ***
 INFO: Only HBW allocations will be printed. Set AUTO_HBW_LOG to disable/enable.
 INFO: Using default values for array size thresholds. Set AUTO_HBW_SIZE=X:Y to change.
-INFO: Allocations greater than 1024K will be allocated in HBW. Set AUTO_HBW_SIZE=X:Y to change this limit.
-INFO: autohbw.so loaded!
-	-HBW int call succeeded
 INFO: Allocations greater than 1024K will be allocated in HBW. Set AUTO_HBW_SIZE=X:Y to change this limit.
 INFO: autohbw.so loaded!
 	-HBW int call succeeded
@@ -118,9 +112,6 @@ INFO: autohbw.so loaded!
 WARN: *** No HBM found in system. Will use default (DDR) OR user specified type ***
 INFO: Only HBW allocations will be printed. Set AUTO_HBW_LOG to disable/enable.
 INFO: Using default values for array size thresholds. Set AUTO_HBW_SIZE=X:Y to change.
-INFO: Allocations greater than 1024K will be allocated in HBW. Set AUTO_HBW_SIZE=X:Y to change this limit.
-INFO: autohbw.so loaded!
-	-HBW int call succeeded
 WARN: *** No HBM found in system. Will use default (DDR) OR user specified type ***
 INFO: Only HBW allocations will be printed. Set AUTO_HBW_LOG to disable/enable.
 INFO: Using default values for array size thresholds. Set AUTO_HBW_SIZE=X:Y to change.
@@ -133,6 +124,9 @@ INFO: Using default values for array size thresholds. Set AUTO_HBW_SIZE=X:Y to c
 INFO: Allocations greater than 1024K will be allocated in HBW. Set AUTO_HBW_SIZE=X:Y to change this limit.
 INFO: autohbw.so loaded!
 	-HBW int call succeeded
+INFO: Allocations greater than 1024K will be allocated in HBW. Set AUTO_HBW_SIZE=X:Y to change this limit.
+INFO: autohbw.so loaded!
+	-HBW int call succeeded
 WARN: *** No HBM found in system. Will use default (DDR) OR user specified type ***
 INFO: Only HBW allocations will be printed. Set AUTO_HBW_LOG to disable/enable.
 INFO: Using default values for array size thresholds. Set AUTO_HBW_SIZE=X:Y to change.
@@ -181,9 +175,15 @@ INFO: Using default values for array size thresholds. Set AUTO_HBW_SIZE=X:Y to c
 INFO: Allocations greater than 1024K will be allocated in HBW. Set AUTO_HBW_SIZE=X:Y to change this limit.
 INFO: autohbw.so loaded!
 	-HBW int call succeeded
+WARN: *** No HBM found in system. Will use default (DDR) OR user specified type ***
+INFO: Only HBW allocations will be printed. Set AUTO_HBW_LOG to disable/enable.
+INFO: Using default values for array size thresholds. Set AUTO_HBW_SIZE=X:Y to change.
 WARN: *** No HBM found in system. Will use default (DDR) OR user specified type ***
 INFO: Only HBW allocations will be printed. Set AUTO_HBW_LOG to disable/enable.
 INFO: Using default values for array size thresholds. Set AUTO_HBW_SIZE=X:Y to change.
+INFO: Allocations greater than 1024K will be allocated in HBW. Set AUTO_HBW_SIZE=X:Y to change this limit.
+INFO: autohbw.so loaded!
+	-HBW int call succeeded
 INFO: Allocations greater than 1024K will be allocated in HBW. Set AUTO_HBW_SIZE=X:Y to change this limit.
 INFO: autohbw.so loaded!
 	-HBW int call succeeded
@@ -4609,3 +4609,4 @@ INFO: Using default values for array size thresholds. Set AUTO_HBW_SIZE=X:Y to c
 INFO: Allocations greater than 1024K will be allocated in HBW. Set AUTO_HBW_SIZE=X:Y to change this limit.
 INFO: autohbw.so loaded!
 	-HBW int call succeeded
+/var/spool/slurmd/job5988497/slurm_script: line 75: /var/spool/slurmd/job5988497/slurm_script.log: Permission denied

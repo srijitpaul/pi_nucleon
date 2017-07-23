@@ -75,9 +75,9 @@ local bar_sign = vector.real(4)
 
   local a2 = u
 
---  local a3 = qcd.quarkContract13( Cgout * u * Cgin, u )
-local a4 = qcd.quarkContract13( Cgout * u, u * Cgin )
-local res = a2*((a4 ):spintrace()) -- + (a2 *( a3 + a4 ))
+local a3 = qcd.quarkContract13( Cgout * u * Cgin, u )
+--local a4 = qcd.quarkContract13( Cgout * u, u * Cgin )
+local res = a2*((a3 ):spintrace()) -- + (a2 *( a3 + a4 ))
 
  -- a4 = a2 * Cgin
 --  a3 = qcd.quarkContract13( Cgout * u, u )
