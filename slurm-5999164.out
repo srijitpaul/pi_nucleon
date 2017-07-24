@@ -1,0 +1,2 @@
+# [/var/spool/slurmd/job5999164/slurm_script] source location string is "source_locations = { {t=3, pos={3, 0, 21}}, {t=5, pos={14, 16, 5}}, {t=15, pos={7, 3, 12}}, {t=6, pos={23, 19, 8}}, {t=17, pos={2, 7, 10}}, {t=7, pos={8, 11, 6}}, {t=19, pos={8, 16, 1}}, {t=8, pos={4, 0, 15}}, }" 
+[/var/spool/slurmd/job5999164/slurm_script] Error from srun for invert_contract.qlua, status was 134

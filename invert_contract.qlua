@@ -318,144 +318,139 @@ dv[{pos[1], pos[2], pos[3], t, c=icol, d=ispin}] = complex(1, 0)
   light_propagator_list[i_prop] = read_propagator_lime (L, write_param)
   end
 
--- ************************************************************************************
--- * CONTRACTIONS 
--- ************************************************************************************
---  printf("# [invert_contract_baryon] B - B contraction for source location[%d / %d] = (%d, %d, %d) t=%d\n", i_src, i_prop, 
---      source_position[0], source_position[1], source_position[2], source_position[3]) 
---
---    local name = string.format("%s.%.4d.t%.2d", "u(Cg5*d*Cg5,u)contract_baryon_2pt", nconf, t)
---    printf("# [invert_contract_baryon] B - B 2pt output file %s\n", name)
---    aw_b_b_2pt, am = qcd.aff.Writer(name)
---    name = nil
---  local ctimer = timer("contract B-B")
---  contract_baryon_2pt(L, light_propagator_list[i_prop], source_position, sink_momentum_list, aw_b_b_2pt)
---  ctimer("done")
---
---  --    vector_gamma_index = {1,2,4,15}
---  --
---  --    ctimer = timer("contract m-m")
---  --    contract_vector_meson_2pt(L, light_propagator_smeared,       light_propagator_smeared,       source_position, sink_momentum_list, aw_b_b_2pt, "m-m")
---  --    ctimer("done")
---  --
---aw_b_b_2pt:close()
---
---
--- end  -- of loop on coherent source locations
---
+ --************************************************************************************
+ --* CONTRACTIONS 
+ --************************************************************************************
+  printf("# [invert_contract_baryon] B - B contraction for source location[%d / %d] = (%d, %d, %d) t=%d\n", i_src, i_prop, 
+      source_position[0], source_position[1], source_position[2], source_position[3]) 
+
+    local name = string.format("%s.%.4d.t%.2d", "contract_baryon_2pt", nconf, t)
+    printf("# [invert_contract_baryon] B - B 2pt output file %s\n", name)
+    aw_b_b_2pt, am = qcd.aff.Writer(name)
+    name = nil
+  local ctimer = timer("contract B-B")
+  contract_baryon_2pt(L, light_propagator_list[i_prop], source_position, sink_momentum_list, aw_b_b_2pt)
+  ctimer("done")
+
+  --    vector_gamma_index = {1,2,4,15}
+  --
+  --    ctimer = timer("contract m-m")
+  --    contract_vector_meson_2pt(L, light_propagator_smeared,       light_propagator_smeared,       source_position, sink_momentum_list, aw_b_b_2pt, "m-m")
+  --    ctimer("done")
+  --
+aw_b_b_2pt:close()
+
+
+ end  -- of loop on coherent source locations
+
 -- ************************************************************************************
 -- * INVERT SEQUENTIAL SOURCE
 -- ************************************************************************************
 
-  light_sequential_propagator_list[i_src] = {}
-
-  for i_seq_mom, seq_mom in ipairs(sequential_source_momentum_list) do
-
-    local seq_source_mom_timer = timer("seq_source_mom")
-    printf("#[invert_contract_v2]  sequential source momentum(%d) = (%d, %d, %d)\n", i_seq_mom, seq_mom[1], seq_mom[2], seq_mom[3])
-
-    local seq_source_mom = L:DiracPropagator()
-
-
-    if not read_sequential_propagator then
-
-      -- local field exp(i p x)
-      --   p = seq_mom sequential source momentum
-      --   x = sink of light propagator
-      local px = (2 * math.pi * seq_mom[1]) / L[0]
-      local py = (2 * math.pi * seq_mom[2]) / L[1]
-      local pz = (2 * math.pi * seq_mom[3]) / L[2]
-      local phase = ( (L:Real(L:pcoord(0)) ) * px +
-                      (L:Real(L:pcoord(1)) ) * py +
-                      (L:Real(L:pcoord(2)) ) * pz):expi()
-            
-      -- Dirac gamma matrix at sequential vertex, is always g5 (binary gamma id 15)
-      local seq_gamma = sequential_source_gamma["val"]
-          
-      -- sequential source at t = propagator at t
---      for i_coherent = 0, n_coherent_source - 1 do
---        local i_prop = ( i_src - 1) * n_coherent_source + i_coherent + 1
---        local t_coherent = ( t + i_coherent * (L[3]/n_coherent_source) ) % L[3]
-        printf("# [invert_contract_v2] adding source timeslice %d to sequential source list from propagator number %d\n", t, i_prop)
-        L:Subset{axis=3, position = t}:where(function()
-          seq_source_mom:set( light_propagator_list[i_prop] )
-        end)
---     end
-      solver_light = make_mg_solver (L, ustout, mg_block, mg_max_abserr, mg_max_relerr, quark_bc, kappa_l, csw )
-      -- seq_source_mom <- J exp(i p x) g5 J seq_source_mom
-      for icol  = 0, 2 do
-      for ispin = 0, 3 do
-          local dv  = L:DiracFermion()
-          dv[{pos[1], pos[2], pos[3], t, c=icol, d=ispin}] = complex(1, 0)
-
---        if wup_n > 0 then
---          printf("# [invert_contract_v2] smearing source + setting gamma x moentum + smearing source %d / %d - (c=%2d, s=%2d)\n", i_src, i_seq_mom, icol, ispin)
---          local dv = seq_source_mom[{c=icol,d=ispin}]
---          local dv2 = wuppertal_smear(uape, wup_alpha, wup_n, dv, 3)
---          dv = phase * ( seq_gamma * dv2 )
---          seq_source_mom[{c=icol,d=ispin}] = wuppertal_smear(uape, wup_alpha, wup_n, dv, 3)
---        else
-          printf("# [invert_contract_v2] setting gamma x momentum %d / %d - (c=%2d, s=%2d)\n", i_src, i_seq_mom, icol, ispin)
-          --seq_source_mom[{c=icol,d=ispin}] = phase * ( seq_gamma * seq_source_mom[{c=icol,d=ispin}] )
-          local sol = L:DiracFermion() 
-          sol = solver_light(dv)
-          
-          light_sequential_propagator_list[i_src][i_seq_mom][{c=icol, d=ispin}] = sol
-          seq_source_mom[{c=icol, d=ispin}] = dv
-          printf("seq_source = %g\n", seq_source_mom[{c=icol,d=ispin}]:norm2())
-    
---        end
-
-      end
-      end
-      seq_source_mom_timer("done")
-     -- solver_light = make_mg_solver (L, ustout, mg_block, mg_max_abserr, mg_max_relerr, quark_bc, kappa_l, csw )
-       
-      -- invert on the sequential momentum source
-      local i_timer = timer("light sequential inversion")
-      --light_sequential_propagator_list[i_src][i_seq_mom] = solver_light(seq_source_mom)
-      i_timer("done")
-
-      -- write sequential propagator to file
-      if write_sequential_propagator then
-        write_param["name"]    = seq_propfile_prefix
-        write_param["src_pos"] = pos
-        write_param["src_t"]   = t
-        write_param["mom"]     = seq_mom
-        write_propagator (light_sequential_propagator_list[i_src][i_seq_mom], write_param)
-      end  -- of if write_sequential_propagator
-
-    else
-      printf("# [invert_contract_v2] reading light sequential propagator\n")
-      write_param["name"]    = seq_propfile_prefix
-      write_param["path"]    = seq_propfile_path
-      write_param["src_pos"] = pos
-      write_param["src_t"]   = t
-      write_param["mom"]     = seq_mom
-      light_sequential_propagator_list[i_src][i_seq_mom] = read_propagator (L, write_param)
-    end
-
-     
-
-
-    
-    -- sink smearing of sequential propagator
-    --   can be smeared at this point, since for 2-point and 3-point functions we
-    --   always use the sequential propagator smeared at source and sink
---    if wup_n > 0 then
+--  light_sequential_propagator_list[i_src] = {}
+--
+--  for i_seq_mom, seq_mom in ipairs(sequential_source_momentum_list) do
+--
+--    local seq_source_mom_timer = timer("seq_source_mom")
+--    printf("#[invert_contract_v2]  sequential source momentum(%d) = (%d, %d, %d)\n", i_seq_mom, seq_mom[1], seq_mom[2], seq_mom[3])
+--
+--    local seq_source_mom = L:DiracPropagator()
+--
+--
+--    if not read_sequential_propagator then
+--
+--      -- local field exp(i p x)
+--      --   p = seq_mom sequential source momentum
+--      --   x = sink of light propagator
+--      local px = (2 * math.pi * seq_mom[1]) / L[0]
+--      local py = (2 * math.pi * seq_mom[2]) / L[1]
+--      local pz = (2 * math.pi * seq_mom[3]) / L[2]
+--      local phase = ( (L:Real(L:pcoord(0)) ) * px +
+--                      (L:Real(L:pcoord(1)) ) * py +
+--                      (L:Real(L:pcoord(2)) ) * pz):expi()
+--            
+--      -- Dirac gamma matrix at sequential vertex, is always g5 (binary gamma id 15)
+--      local seq_gamma = sequential_source_gamma["val"]
+--          
+--      -- sequential source at t = propagator at t
+--        printf("# [invert_contract_v2] adding source timeslice %d to sequential source list from propagator number %d\n", t, i_prop)
+--        L:Subset{axis=3, position = t}:where(function()
+--          seq_source_mom:set( light_propagator_list[i_prop] )
+--        end)
+--      solver_light = make_mg_solver (L, ustout, mg_block, mg_max_abserr, mg_max_relerr, quark_bc, kappa_l, csw )
+--      -- seq_source_mom <- J exp(i p x) g5 J seq_source_mom
 --      for icol  = 0, 2 do
 --      for ispin = 0, 3 do
---        printf("# [invert_contract_v2] smearing sequential propagator %d / %d - (c=%2d, s=%2d)\n", i_src, i_seq_mom, icol, ispin)
---        local dv = light_sequential_propagator_list[i_src][i_seq_mom][{c=icol, d=ispin}]
---        light_sequential_propagator_list[i_src][i_seq_mom][{c=icol, d=ispin}] = wuppertal_smear(uape, wup_alpha, wup_n, dv, 3)
+--          local dv  = L:DiracFermion()
+--          dv[{pos[1], pos[2], pos[3], t, c=icol, d=ispin}] = complex(1, 0)
+--
+----        if wup_n > 0 then
+----          printf("# [invert_contract_v2] smearing source + setting gamma x moentum + smearing source %d / %d - (c=%2d, s=%2d)\n", i_src, i_seq_mom, icol, ispin)
+----          local dv = seq_source_mom[{c=icol,d=ispin}]
+----          local dv2 = wuppertal_smear(uape, wup_alpha, wup_n, dv, 3)
+----          dv = phase * ( seq_gamma * dv2 )
+----          seq_source_mom[{c=icol,d=ispin}] = wuppertal_smear(uape, wup_alpha, wup_n, dv, 3)
+----        else
+--          printf("# [invert_contract_v2] setting gamma x momentum %d / %d - (c=%2d, s=%2d)\n", i_src, i_seq_mom, icol, ispin)
+--          --seq_source_mom[{c=icol,d=ispin}] = phase * ( seq_gamma * seq_source_mom[{c=icol,d=ispin}] )
+--          local sol = L:DiracFermion() 
+--          sol = solver_light(dv)
+--          
+--          light_sequential_propagator_list[i_src][i_seq_mom][{c=icol, d=ispin}] = sol
+--          seq_source_mom[{c=icol, d=ispin}] = dv
+--          printf("seq_source = %g\n", seq_source_mom[{c=icol,d=ispin}]:norm2())
+--    
+----        end
+--
 --      end
 --      end
+--      seq_source_mom_timer("done")
+--       
+--      -- invert on the sequential momentum source
+--      local i_timer = timer("light sequential inversion")
+--      --light_sequential_propagator_list[i_src][i_seq_mom] = solver_light(seq_source_mom)
+--      i_timer("done")
 --
---    end
+--      -- write sequential propagator to file
+--      if write_sequential_propagator then
+--        write_param["name"]    = seq_propfile_prefix
+--        write_param["src_pos"] = pos
+--        write_param["src_t"]   = t
+--        write_param["mom"]     = seq_mom
+--        write_propagator (light_sequential_propagator_list[i_src][i_seq_mom], write_param)
+--      end  -- of if write_sequential_propagator
 --
-    seq_source_mom = nil
-
-  end  -- end of loop on sequential source momenta
-
-end  -- end of loop on base source locations
-  total_timer("done")
+--      else
+--        printf("# [invert_contract_v2] reading light sequential propagator\n")
+--        write_param["name"]    = seq_propfile_prefix
+--        write_param["path"]    = seq_propfile_path
+--        write_param["src_pos"] = pos
+--        write_param["src_t"]   = t
+--        write_param["mom"]     = seq_mom
+--        light_sequential_propagator_list[i_src][i_seq_mom] = read_propagator (L, write_param)
+--      end
+--
+--     
+--
+--
+--    
+--    -- sink smearing of sequential propagator
+--    --   can be smeared at this point, since for 2-point and 3-point functions we
+--    --   always use the sequential propagator smeared at source and sink
+----    if wup_n > 0 then
+----      for icol  = 0, 2 do
+----      for ispin = 0, 3 do
+----        printf("# [invert_contract_v2] smearing sequential propagator %d / %d - (c=%2d, s=%2d)\n", i_src, i_seq_mom, icol, ispin)
+----        local dv = light_sequential_propagator_list[i_src][i_seq_mom][{c=icol, d=ispin}]
+----        light_sequential_propagator_list[i_src][i_seq_mom][{c=icol, d=ispin}] = wuppertal_smear(uape, wup_alpha, wup_n, dv, 3)
+----      end
+----      end
+----
+----    end
+----
+--      seq_source_mom = nil
+--
+--    end  -- end of loop on sequential source momenta
+--
+--end  -- end of loop on base source locations
+total_timer("done")

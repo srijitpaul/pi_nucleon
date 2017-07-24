@@ -8,6 +8,7 @@
 #SBATCH --mail-type=BEGIN,END,FAIL
 #SBATCH --mail-user=s.paul@cyi.ac.cy
 #SBATCH -e cori_error.out
+#SBATCH -o cori_seq.out
 module load autohbw/default
 module swap craype-haswell craype-mic-knl
 MyName=`echo $0 | awk -F\/ '{sub(/^\.\//,"",$0); sub(/\.sh$/,"",$0); print $0}'`
