@@ -14,7 +14,7 @@ function read_propagator (L, param)
   filename = string.format("%s.%.4d.x%.2dy%.2dz%.2dt%.2d.h5", param.name, param.cfg, param.src_pos[1], param.src_pos[2], param.src_pos[3], param.src_t)
   elseif string.find(param.name, "sequential") then
 
-  filename = string.format("%s/%s.%.4d.x%.2dy%.2dz%.2dt%.2d.px%.2dpy%.2dpz%.2d.h5", param.path, param.name, param.cfg,
+  filename = string.format("%s.%.4d.x%.2dy%.2dz%.2dt%.2d.px%.2dpy%.2dpz%.2d.h5", param.name, param.cfg,
       param.src_pos[1], param.src_pos[2], param.src_pos[3], param.src_t,
       param.mom[1], param.mom[2], param.mom[3])
 
@@ -69,8 +69,7 @@ function read_propagator_lime (L, param)
   if string.find(param.name, "forward") then
   filename = string.format("%s.%.4d.x%.2dy%.2dz%.2dt%.2d.lime", param.name, param.cfg, param.src_pos[1], param.src_pos[2], param.src_pos[3], param.src_t)
   elseif string.find(param.name, "sequential") then
-
-  filename = string.format("%s/%s.%.4d.x%.2dy%.2dz%.2dt%.2d.px%.2dpy%.2dpz%.2d.h5", param.path, param.name, param.cfg,
+  filename = string.format("%s.%.4d.x%.2dy%.2dz%.2dt%.2d.px%.2dpy%.2dpz%.2d.lime", param.name, param.cfg,
       param.src_pos[1], param.src_pos[2], param.src_pos[3], param.src_t,
       param.mom[1], param.mom[2], param.mom[3])
 

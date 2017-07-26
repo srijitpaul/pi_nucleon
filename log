@@ -1,0 +1,51 @@
+# [sandbox] source location string is "source_locations = { {t=3, pos={3, 0, 21}}, {t=5, pos={14, 16, 5}}, {t=6, pos={23, 19, 8}}, {t=7, pos={8, 11, 6}}, }" 
+# [invert_contract_v3] Dimensions                = 8 8 8 16
+# [invert_contract_v3] prefix to conf name       = /home/srijit/Dropbox/spaul/Dina_Work/pion_nucleon/configs/lat_130110_
+# [invert_contract_v3] suffix to conf name       = .lime
+# [invert_contract_v3] suffix to conf name       = _Stout_smeared.lime
+# [invert_contract_v3] Clover Inverter
+#	 light quark mass               = -0.0953
+#	 light quark kappa              = 0.128051
+#	 strange quark mass               = -0.04
+#	 strange quark kappa              = 0.126263
+#	 Boundary condition = 1, 1, 1, 1
+# [invert_contract] lattice volume = 8192
+# [invert_contract] reading original gauge configuration from file /home/srijit/Dropbox/spaul/Dina_Work/pion_nucleon/configs/lat_130110_230031.lime
+DML_partition_in times: read 0.00  send 0.24  total 0.25
+QIO_compare_record_info:Datatype mismatch expected QDP_D3_ColorMatrix found USQCD_D3_ColorMatrix 
+QIO_compare_record_info:Datatype mismatch expected QDP_D3_ColorMatrix found USQCD_D3_ColorMatrix 
+QIO_compare_record_info:Datatype mismatch expected QDP_D3_ColorMatrix found USQCD_D3_ColorMatrix 
+QIO_compare_record_info:Datatype mismatch expected QDP_D3_ColorMatrix found USQCD_D3_ColorMatrix 
+QIO_compare_record_info:Datatype mismatch expected QDP_D3_ColorMatrix found USQCD_D3_ColorMatrix 
+QIO_compare_record_info:Datatype mismatch expected QDP_D3_ColorMatrix found USQCD_D3_ColorMatrix 
+QIO_compare_record_info:Datatype mismatch expected QDP_D3_ColorMatrix found USQCD_D3_ColorMatrix 
+QIO_compare_record_info:Datatype mismatch expected QDP_D3_ColorMatrix found USQCD_D3_ColorMatrix 
+QIO_compare_record_info:Datatype mismatch expected QDP_D3_ColorMatrix found USQCD_D3_ColorMatrix 
+QIO_compare_record_info:Datatype mismatch expected QDP_D3_ColorMatrix found USQCD_D3_ColorMatrix 
+QIO_compare_record_info:Datatype mismatch expected QDP_D3_ColorMatrix found USQCD_D3_ColorMatrix 
+QIO_compare_record_info:Datatype mismatch expected QDP_D3_ColorMatrix found USQCD_D3_ColorMatrix 
+QIO_compare_record_info:Datatype mismatch expected QDP_D3_ColorMatrix found USQCD_D3_ColorMatrix 
+QIO_compare_record_info:Datatype mismatch expected QDP_D3_ColorMatrix found USQCD_D3_ColorMatrix 
+QIO_compare_record_info:Datatype mismatch expected QDP_D3_ColorMatrix found USQCD_D3_ColorMatrix 
+QIO_compare_record_info:Datatype mismatch expected QDP_D3_ColorMatrix found USQCD_D3_ColorMatrix 
+QIO_compare_record_info:Datatype mismatch expected QDP_D3_ColorMatrix found USQCD_D3_ColorMatrix 
+QIO_compare_record_info:Datatype mismatch expected QDP_D3_ColorMatrix found USQCD_D3_ColorMatrix 
+QIO_compare_record_info:Datatype mismatch expected QDP_D3_ColorMatrix found USQCD_D3_ColorMatrix 
+QIO_compare_record_info:Datatype mismatch expected QDP_D3_ColorMatrix found USQCD_D3_ColorMatrix 
+QIO_compare_record_info:Datatype mismatch expected QDP_D3_ColorMatrix found USQCD_D3_ColorMatrix 
+QIO_compare_record_info:Datatype mismatch expected QDP_D3_ColorMatrix found USQCD_D3_ColorMatrix 
+QIO_compare_record_info:Datatype mismatch expected QDP_D3_ColorMatrix found USQCD_D3_ColorMatrix 
+QIO_compare_record_info:Datatype mismatch expected QDP_D3_ColorMatrix found USQCD_D3_ColorMatrix 
+QIO_compare_record_info:Datatype mismatch expected QDP_D3_ColorMatrix found USQCD_D3_ColorMatrix 
+QIO_compare_record_info:Datatype mismatch expected QDP_D3_ColorMatrix found USQCD_D3_ColorMatrix 
+QIO_compare_record_info:Datatype mismatch expected QDP_D3_ColorMatrix found USQCD_D3_ColorMatrix 
+QIO_compare_record_info:Datatype mismatch expected QDP_D3_ColorMatrix found USQCD_D3_ColorMatrix 
+QIO_compare_record_info:Datatype mismatch expected QDP_D3_ColorMatrix found USQCD_D3_ColorMatrix 
+QIO_compare_record_info:Datatype mismatch expected QDP_D3_ColorMatrix found USQCD_D3_ColorMatrix 
+QIO_compare_record_info:Datatype mismatch expected QDP_D3_ColorMatrix found USQCD_D3_ColorMatrix 
+QIO_compare_record_info:Datatype mismatch expected QDP_D3_ColorMatrix found USQCD_D3_ColorMatrix 
+--------------------------------------------------------------------------
+mpirun noticed that process rank 6 with PID 3415 on node quark exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+8 total processes killed (some possibly by mpirun during cleanup)
+[sandbox] Error from srun for invert_contract.qlua, status was 139

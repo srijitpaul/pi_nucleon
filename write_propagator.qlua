@@ -71,3 +71,39 @@ function write_propagator (v, param)
   cur_timer("done")
 
 end
+
+function write_propagator_lime (v, param)
+  
+    if string.find(param.name, "forward") then
+    filename = string.format("%s.%.4d.x%.2dy%.2dz%.2dt%.2d.lime", param.name, param.cfg, param.src_pos[1], param.src_pos[2], param.src_pos[3], param.src_t)
+  elseif string.find(param.name, "sequential") then
+    filename = string.format("%s.%.4d.x%.2dy%.2dz%.2dt%.2d.px%.2dpy%.2dpz%.2d.lime", param.name, param.cfg,
+        param.src_pos[1], param.src_pos[2], param.src_pos[3], param.src_t,
+        param.mom[1], param.mom[2], param.mom[3])
+  elseif string.find(param.name, "stochastic_source") then
+    filename = string.format("%s.%.4d.%.5d.lime", param.name, param.cfg, param.sample)
+  elseif string.find(param.name, "stochastic_propagator") and not string.find(param.name, "oet") then
+    filename = string.format("%s.%.4d.t%.2d.%.5d.lime", param.name, param.cfg, param.src_t, param.sample)
+  elseif string.find(param.name, "stochastic_propagator") and string.find(param.name, "oet") then
+    filename = string.format("%s.%.4d.t%.2d.%.5d.px%.2dpy%.2dpz%.2d.lime", param.name, param.cfg, param.src_t, param.sample,
+        param.mom[1], param.mom[2], param.mom[3])
+  else
+    os.exit(1)
+  end
+  
+  printf("# [write_propagator] filename is %s\n", filename)
+    
+  finfo = {["$tag"] = "DiracFermion", "QDP/C propagator test file"}                     
+                                                                                 
+  w = qcd.qdpc.Writer(L, filename, xml.unparse(finfo))
+                                                                                 
+   --w:DiracFermion(src, xml.unparse({["$tag"] = "source"}))                     
+   for icol  = 0, 2 do                                                           
+   for ispin = 0, 3 do                                                           
+                                                                                 
+   w:DiracFermion(v[{c=icol, d=ispin}], xml.unparse({["$tag"] = "Fermion"}))
+                                                                                 
+   end                                                                           
+   end                                                                           
+   w:close()                                                                     
+end 
