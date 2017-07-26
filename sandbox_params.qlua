@@ -49,8 +49,8 @@ stochastic_sourcefile_prefix = "stochastic_source"
 
 read_forward_propagator     = true
 write_forward_propagator    = false
-write_sequential_propagator = false
-read_sequential_propagator  = true
+write_sequential_propagator = true
+read_sequential_propagator  = false
 write_stochastic_source     = false
 write_stochastic_propagator = false
 

@@ -3,65 +3,7 @@ require "stdlib"
 -- cvc  g0  g1  g2  g3 g5 id
 -- qlua g3  g0  g1  g2 g5 gamma[0]
 
--- proton and antiproton
-
-function proton_2pt(d, u)
-  --          g0            g2            g5         
-  local Cg5 = gamma{mu=2} * gamma{mu=0} 
-  local Pp =  (1 + gamma{mu=3}) / 4
-  local a2 = Pp * u
-  local a3 = qcd.quarkContract13(Cg5 * d * Cg5, u )
-
-return -(a2:spintrace() * a3:spintrace() + (a2 * a3):spintrace()):trace()
-end
-
-function antiproton_2pt(d, u)
-  local Cg5 = gamma{mu=2} * gamma{mu=0}
-  local Pm =  (1 - gamma{mu=3}) / 4
-  local a2 = Pm * u
-  local a3 = qcd.quarkContract13(Cg5* d * Cg5, u )
-return -(a2:spintrace() * a3:spintrace() + (a2 * a3):spintrace()):trace()
-end
-
-                                                                  --function proton2_2pt(d, u)
-  --  --          g0            g2
-  --  local C = gamma{mu=3} * gamma{mu=1} 
-  --  local Pp =  (1 + gamma{mu=3}) / 4
---  local a2 = gamma{mu=5} * ( Pp * ( gamma{mu=5}* u ) )
-  --  local a3 = qcd.quarkContract13(d * C, C * u)
---  return (a2:spintrace() * a3:spintrace() + (a2 * a3):spintrace()):trace()
-                                                                     --end
-  --
-    --function antiproton2_2pt(d, u)
-                                    --  local C = gamma{mu=3} * gamma{mu=1}
-                                    --  local Pm =  (1 - gamma{mu=3}) / 4
---  local a2 = gamma{mu=5} * ( Pm * ( gamma{mu=5}* u ) )
-  --  local a3 = qcd.quarkContract13(d * C, C * u)
---  return (a2:spintrace() * a3:spintrace() + (a2 * a3):spintrace()):trace()
-                                                                     --end
-  --
-    --function proton3_2pt(d, u)
-                                --    --          g0            g2            g5         
-                                                                     --  local Cg5 = gamma{mu=3} * gamma{mu=1} * gamma{mu=5} * gamma{mu=3}
-                                                                     --  local Pp =  (1 + gamma{mu=3}) / 4
-  --  local a2 = Pp * u
-  --  local a3 = qcd.quarkContract13(d * Cg5, Cg5 * u)
---  return (a2:spintrace() * a3:spintrace() + (a2 * a3):spintrace()):trace()
-                                                                     --end
-  --    
-        --function antiproton3_2pt(d, u)
-                                        --  local Cg5 = gamma{mu=3} * gamma{mu=1} * gamma{mu=5} * gamma{mu=3}
-                                        --  local Pm =  (1 - gamma{mu=3}) / 4
-  --  local a2 = Pm * u
-  --  local a3 = qcd.quarkContract13(d * Cg5, Cg5 * u)
---  return (a2:spintrace() * a3:spintrace() + (a2 * a3):spintrace()):trace()
-                                                                     --end
-                                                                     --    
-
-
-                                                                     -- delta and anti-delta
-
-function deltapp_2pt( u, inp, out)
+function piN_piN_2pt( u, inp, out)
   --          g0            g2            gmu 
   corr_proj = {}
   local Cgin = gamma{mu=3} * gamma{mu=1} * gamma{mu=inp}
@@ -93,171 +35,29 @@ function deltapp_2pt( u, inp, out)
 return corr_proj
 end
 
---function antideltapp_2pt(d, u, mu, nu)
-  --  --          g0            g2            gmu 
-  --  local Cgmu = gamma{mu=3} * gamma{mu=1} * gamma{mu=mu}
-  --  local Cgnu = gamma{mu=3} * gamma{mu=1} * gamma{mu=nu}
-  --  local Pp =  (1 - gamma{mu=3}) / 4
---  local bar_sign = vector.real(4)
-  --  bar_sign[0] =  1  -- x
-  --  bar_sign[1] = -1  -- y
-  --  bar_sign[2] =  1  -- z
-  --  bar_sign[3] =  1  -- t
-  --
-  --  local a2 = Pp * u
-  --
-  --  local a3 = qcd.quarkContract13( Cgmu * u * Cgnu, u )
-  --  local a4 = qcd.quarkContract13( Cgmu * u, u * Cgnu )
---  local res = ( a2:spintrace() * (a3 + a4):spintrace() ):trace()
-                                                           --
-  --        a4 = a2 * Cgnu
-  --        a3 = qcd.quarkContract13( u, Cgmu * u )
-                                                   --        res = res + (a4 * a3):spintrace():trace()
-  --
-  --        a3 = qcd.quarkContract13( Cgmu * u, u )
-                                                   --        res = res + (a4 * a3):spintrace():trace()
-  --  
-  --        a3 = qcd.quarkContract13( u * Cgnu, Cgmu * u )
-  --        a4 = qcd.quarkContract13( Cgmu * u * Cgnu, u )
-                                                          --        res = res + (a2 * (a3 + a4)):spintrace():trace()
-                                                                                                             --
-                                                                                                             --  return res * bar_sign[nu]
-                                                                                                             --end
---function deltapion_3pt (d, u inp, cur, out)
 
-
-
---end                                                                                                             -- ********************************************************************
-                                                                                                             -- * run contractions
-  -- ********************************************************************
+-- ********************************************************************
+-- * run contractions                                                 *
+-- ********************************************************************
 function contract_baryon_2pt(L, prop, src_loc, snk_momenta, aff_out)
 
-  -- boundary phase
+-- boundary phase
 boundary_phase = vector.complex(L[3])
-  for it = 0, src_loc[3] - 1 do
+for it = 0, src_loc[3] - 1 do
   boundary_phase[it] = -1
-  end
-  for it = src_loc[3], L[3]-1 do
+end
+for it = src_loc[3], L[3]-1 do
   boundary_phase[it] = 1
-  end
+end
 
-  --  -- proton
-  --  p2pt_fw = proton_2pt(prop, prop)
---  p2pt_bw = antiproton_2pt(prop, prop)
-  --
-  --  for isnk, snk_mom in ipairs(snk_momenta) do
-  --    local px = (2 * math.pi * snk_mom[1]) / L[0]
-  --    local py = (2 * math.pi * snk_mom[2]) / L[1]
-  --    local pz = (2 * math.pi * snk_mom[3]) / L[2]
-  --    local w = ( (L:Real(L:pcoord(0)) - src_loc[0]) * px +
-      --                (L:Real(L:pcoord(1)) - src_loc[1]) * py +
-      --                (L:Real(L:pcoord(2)) - src_loc[2]) * pz):expi()
-  --    local w2 = (p2pt_fw * w):sum(L:MultiSet(L[3], L:pcoord(3)))    
-  --    local w3 = (p2pt_bw * w):sum(L:MultiSet(L[3], L:pcoord(3)))
-  --    local q2 = vector.complex(L[3])
-                                 --    local q3 = vector.complex(L[3])
-                                 --
-                                 --    for i = 0, #w2 - 1 do                       -- print 2pt values
-                                 --      it = ( i + src_loc[3] ) % L[3]
-                                 --      q2[i] = w2[it] * boundary_phase[it]
-                                 --      q3[i] = w3[it] * boundary_phase[it]
-                                 --      --printf("%3d%3d%3d%5d%16.7e%16.7e%16.7e%16.7e\n", snk_mom[1], snk_mom[2], snk_mom[3], i, q2[i]:real(), q2[i]:imag(), q3[i]:real(), q3[i]:imag())
-                                 --    end
-                                 --
-                                 --    name = string.format("/proton/fw/px%.2dpy%.2dpz%.2d/x%.2dy%.2dz%.2dt%.2d",
-                                     --      snk_mom[1], snk_mom[2], snk_mom[3], src_loc[0], src_loc[1], src_loc[2],src_loc[3])
-                                 --    aff_out:write(name, q2)
-                                 --    name = string.format("/proton/bw/px%.2dpy%.2dpz%.2d/x%.2dy%.2dz%.2dt%.2d",
-                                     --      snk_mom[1], snk_mom[2], snk_mom[3], src_loc[0], src_loc[1], src_loc[2],src_loc[3])
-                                 --    aff_out:write(name, q3)
-                                 --
-                                 --    w2=nil
-                                 --    w3=nil
-                                 --    q2=nil
-                                 --    q3=nil
-                                 --  end  -- of loop on snk_momenta
 
-  --  -- proton2
-  --  p2pt_fw = proton2_2pt(prop, prop)
---  p2pt_bw = antiproton2_2pt(prop, prop)
-  --
-  --  for isnk, snk_mom in ipairs(snk_momenta) do
-  --    local px = (2 * math.pi * snk_mom[1]) / L[0]
-  --    local py = (2 * math.pi * snk_mom[2]) / L[1]
-  --    local pz = (2 * math.pi * snk_mom[3]) / L[2]
-  --    local w = ( (L:Real(L:pcoord(0)) - src_loc[0]) * px +
-      --                (L:Real(L:pcoord(1)) - src_loc[1]) * py +
-      --                (L:Real(L:pcoord(2)) - src_loc[2]) * pz):expi()
-  --    local w2 = (p2pt_fw * w):sum(L:MultiSet(L[3], L:pcoord(3)))    
-  --    local w3 = (p2pt_bw * w):sum(L:MultiSet(L[3], L:pcoord(3)))
-  --    local q2 = vector.complex(L[3])
-                                 --    local q3 = vector.complex(L[3])
-                                 --
-                                 --    for i = 0, #w2 - 1 do                       -- print 2pt values
-                                 --      it = ( i + src_loc[3] ) % L[3]
-                                 --      q2[i] = w2[it] * boundary_phase[it]
-                                 --      q3[i] = w3[it] * boundary_phase[it]
-                                 --      --printf("%3d%3d%3d%5d%16.7e%16.7e%16.7e%16.7e\n", snk_mom[1], snk_mom[2], snk_mom[3], i, q2[i]:real(), q2[i]:imag(), q3[i]:real(), q3[i]:imag())
-                                 --    end
-                                 --
-                                 --    name = string.format("/proton2/fw/px%.2dpy%.2dpz%.2d/x%.2dy%.2dz%.2dt%.2d",
-                                     --      snk_mom[1], snk_mom[2], snk_mom[3], src_loc[0], src_loc[1], src_loc[2],src_loc[3])
-                                 --    aff_out:write(name, q2)
-                                 --    name = string.format("/proton2/bw/px%.2dpy%.2dpz%.2d/x%.2dy%.2dz%.2dt%.2d",
-                                     --      snk_mom[1], snk_mom[2], snk_mom[3], src_loc[0], src_loc[1], src_loc[2],src_loc[3])
-                                 --    aff_out:write(name, q3)
-                                 --
-                                 --    w2=nil
-                                 --    w3=nil
-                                 --    q2=nil
-                                 --    q3=nil
-                                 --  end  -- of loop on snk_momenta
-                                 --
-  --  -- proton3
-  --  p2pt_fw = proton3_2pt(prop, prop)
-                                 --  p2pt_bw = antiproton3_2pt(prop, prop)
-                                 --
-                                 --  for isnk, snk_mom in ipairs(snk_momenta) do
-                                 --    local px = (2 * math.pi * snk_mom[1]) / L[0]
-                                 --    local py = (2 * math.pi * snk_mom[2]) / L[1]
-                                 --    local pz = (2 * math.pi * snk_mom[3]) / L[2]
-                                 --    local w = ( (L:Real(L:pcoord(0)) - src_loc[0]) * px +
-                                     --                (L:Real(L:pcoord(1)) - src_loc[1]) * py +
-                                     --                (L:Real(L:pcoord(2)) - src_loc[2]) * pz):expi()
-  --    local w2 = (p2pt_fw * w):sum(L:MultiSet(L[3], L:pcoord(3)))    
-  --    local w3 = (p2pt_bw * w):sum(L:MultiSet(L[3], L:pcoord(3)))
-  --    local q2 = vector.complex(L[3])
-                                 --    local q3 = vector.complex(L[3])
-                                 --
-                                 --    for i = 0, #w2 - 1 do                       -- print 2pt values
-                                 --      it = ( i + src_loc[3] ) % L[3]
-                                 --      q2[i] = w2[it] * boundary_phase[it]
-                                 --      q3[i] = w3[it] * boundary_phase[it]
-                                 --      --printf("%3d%3d%3d%5d%16.7e%16.7e%16.7e%16.7e\n", snk_mom[1], snk_mom[2], snk_mom[3], i, q2[i]:real(), q2[i]:imag(), q3[i]:real(), q3[i]:imag())
-                                 --    end
-                                 --
-                                 --    name = string.format("/proton3/fw/px%.2dpy%.2dpz%.2d/x%.2dy%.2dz%.2dt%.2d",
-                                     --      snk_mom[1], snk_mom[2], snk_mom[3], src_loc[0], src_loc[1], src_loc[2],src_loc[3])
-                                 --    aff_out:write(name, q2)
-                                 --    name = string.format("/proton3/bw/px%.2dpy%.2dpz%.2d/x%.2dy%.2dz%.2dt%.2d",
-                                     --      snk_mom[1], snk_mom[2], snk_mom[3], src_loc[0], src_loc[1], src_loc[2],src_loc[3])
-                                 --    aff_out:write(name, q3)
-                                 --
-                                 --    w2=nil
-                                 --    w3=nil
-                                 --    q2=nil
-                                 --    q3=nil
-                                 --  end  -- of loop on snk_momenta
-                                 --
-
-                                 -- delta 2-point
+-- delta 2-point
 for imu = 0, 3 do
   mu = (imu + 3) % 4
     for inu = 0, 3 do
       nu = (inu + 3) % 4
 
       dpp2pt_fw = deltapp_2pt(prop, mu, nu)
---    dpp2pt_bw = antideltapp_2pt(prop, prop, mu, nu)
 
       for isnk, snk_mom in ipairs(snk_momenta) do
       local px = (2 * math.pi * snk_mom[1]) / L[0]
@@ -268,30 +68,20 @@ for imu = 0, 3 do
       (L:Real(L:pcoord(2)) - src_loc[2]) * pz):expi()
       for index = 0,15 do
         local w2 = (dpp2pt_fw[index] * w):sum(L:MultiSet(L[3], L:pcoord(3)))    
-  --      local w3 = (dpp2pt_bw * w):sum(L:MultiSet(L[3], L:pcoord(3)))    
         local q2 = vector.complex(L[3])
-                                 --      local q3 = vector.complex(L[3])
+      
 
         for i = 0, #w2 - 1 do                       -- print 2pt values
           it = ( i + src_loc[3] ) % L[3]
           q2[i] = w2[it] * boundary_phase[it]
-                                     --        q3[i] = w3[it] * boundary_phase[it]
-                                     -- printf("%3d%3d%3d%5d%3d%3d%16.7e%16.7e%16.7e%16.7e\n", snk_mom[1], snk_mom[2], snk_mom[3], imu, inu, i, q2:real(), q2:imag(), q3:real(), q3:imag())
         end
 
         name = string.format("/deltapp/fw/proj%.2d/in%dout%d/px%.2dpy%.2dpz%.2d/x%.2dy%.2dz%.2dt%.2d",
                                          index, mu, nu,
                                          snk_mom[1], snk_mom[2], snk_mom[3], src_loc[0], src_loc[1], src_loc[2],src_loc[3])
         aff_out:write(name, q2)
-  --      name = string.format("/deltapp/bw/mu%dnu%d/px%.2dpy%.2dpz%.2d/x%.2dy%.2dz%.2dt%.2d",
-      --          imu, inu,
-      --          snk_mom[1], snk_mom[2], snk_mom[3], src_loc[0], src_loc[1], src_loc[2],src_loc[3])
---      aff_out:write(name, q3)
-
         w2=nil
-  --      w3=nil
         q2=nil
-  --      q3=nil
         end   -- of index of projectors
       end  -- of loop on snk_momenta
     end  -- of nu
