@@ -43,16 +43,20 @@ charm_propfile_prefix  = "forward_charm"
 bottom_propfile_prefix = "forward_bottom"
 
 seq_propfile_prefix = "sequential_light_light"
-
+twostep_seq_propfile_prefix = "twostep_sequential_light_light"
 stochastic_propfile_prefix   = "stochastic_propagator"
 stochastic_sourcefile_prefix = "stochastic_source"
 
-read_forward_propagator     = true
-write_forward_propagator    = false
-write_sequential_propagator = true
-read_sequential_propagator  = false
-write_stochastic_source     = false
-write_stochastic_propagator = false
+read_forward_propagator             = true
+write_forward_propagator            = false
+write_sequential_propagator         = false
+read_sequential_propagator          = true
+write_twostep_sequential_propagator   = false
+read_twostep_sequential_propagator    = true
+write_stochastic_source             = false
+write_stochastic_propagator         = false
+read_stochastic_source              = true
+read_stochastic_propagator          = true
 
 
 -- light quarks
@@ -124,7 +128,8 @@ prop_volfmt = "single"
 
 sequential_source_momentum_list = {
   { 0, 0, 0},
- { 0, 0, 1}
+  { 0, 0, 1}
+-- {0, 0, -1}
 }
 --[[
   { 0, 0,-1},
@@ -159,7 +164,11 @@ sequential_source_gamma = {tag="g5", val=gamma{mu=5}}
 
 sink_momentum_list = sequential_source_momentum_list
 
---dt_source_sink_2pt = 24
+pf1_list = sequential_source_momentum_list
+pf2_list = sequential_source_momentum_list
+pi2_list = sequential_source_momentum_list
+twostep_sequential_source_momentum_list = sequential_source_momentum_list
+dt_source_sink_2pt = 15
 --dt_source_sink_3pt_list = {8, 10, 12}
 
 -- Multigrid solver parameters

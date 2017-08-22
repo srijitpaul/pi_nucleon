@@ -1,0 +1,20 @@
+require "stdlib"
+L = qcd.lattice{3,4,5}
+v = (L:Real(L:pcoord(0)) * 0.1):sin() +
+    (L:Real(L:pcoord(1)) * 0.2):cos() +
+                                (L:Real(L:pcoord(2)) * 0.1):exp()
+                                                            s_all = v:sum()
+                                                            s_x = {}
+                                                            for i = 0, #L - 1 do
+                                                            s_x[i+1] = v:sum(L:MultiSet(L[i], L:pcoord(i)))
+                                                            end
+                                                            printf("full sum: %g\n\n", s_all)
+                                                            for i = 1, #L do
+                                                            printf("partial[%d] = %s\n", i, tostring(s_x[i]))
+                                                            local t = 0
+                                                            for x = 0, L[i-1] - 1 do
+                                                            printf("  [%d] = %g\n", x, s_x[i][x])
+                                                            t = t + s_x[i][x]
+                                                            end
+                                                            printf(" total %g\n\n", t)
+                                                            end

@@ -1,0 +1,1459 @@
+# [sandbox] source location string is "source_locations = { {t=3, pos={3, 0, 2}}, {t=5, pos={4, 6, 5}}, {t=1, pos={7, 3, 1}}, {t=6, pos={2, 1, 0}}, {t=7, pos={2, 7, 1}}, {t=7, pos={1, 1, 6}}, {t=1, pos={1, 6, 1}}, {t=7, pos={4, 0, 5}}, }" 
+# [invert_contract_v3] Dimensions                = 8 8 8 16
+# [invert_contract_v3] prefix to conf name       = /home/srijit/Dropbox/spaul/Dina_Work/pion_nucleon/configs/lat_130110_
+# [invert_contract_v3] suffix to conf name       = .nersc
+# [invert_contract_v3] suffix to conf name       = _Stout_smeared.nersc
+# [invert_contract_v3] Clover Inverter
+#	 light quark mass               = -0.0953
+#	 light quark kappa              = 0.128051
+#	 strange quark mass               = -0.04
+#	 strange quark kappa              = 0.126263
+#	 Boundary condition = 1, 1, 1, 1
+# [invert_contract] lattice volume = 8192
+# [invert_contract] reading original gauge configuration from file /home/srijit/Dropbox/spaul/Dina_Work/pion_nucleon/configs/lat_130110_230031.nersc
+# HEADER of "/home/srijit/Dropbox/spaul/Dina_Work/pion_nucleon/configs/lat_130110_230031.nersc" BEGIN
+	HDR_VERSION = 1.0
+	DIMENSION_3 = 8
+	BOUNDARY_3 = PERIODIC
+	ENSEMBLE_ID = 0
+	BOUNDARY_2 = PERIODIC
+	DIMENSION_4 = 16
+	CREATION_DATE = 05:14:22 24/06/2017
+	CHECKSUM = 1528009501
+	DIMENSION_1 = 8
+	unitarity = 1.4353746336e-07
+	DIMENSION_2 = 8
+	CREATOR = cori05
+	BOUNDARY_4 = PERIODIC
+	STORAGE_FORMAT = 1.0
+	DATATYPE = 4D_SU3_GAUGE
+	SEQUENCE_NUMBER = 1
+	BOUNDARY_1 = PERIODIC
+	PLAQUETTE = 0.35752561
+	LINK_TRACE = 0.77375675
+	FLOATING_POINT = IEEE32BIG
+# END of "/home/srijit/Dropbox/spaul/Dina_Work/pion_nucleon/configs/lat_130110_230031.nersc" HEADER
+TIME("u load","done") = 0.157 secs
+# [invert_contract] Plaquette (original) = 0.3575256072
+# [invert_contract] Stout-smearing gauge field
+# [invert_contract] Plaquette (smeared) = 0.7688143294
+TIME("stout smear","done") = 0.091 secs
+# [invert_contract_v3] src[1] = (3, 0, 2, t = 3
+# [invert_contract_v3] src[2] = (4, 6, 5, t = 5
+# [invert_contract_v3] src[3] = (7, 3, 1, t = 1
+# [invert_contract_v3] src[4] = (2, 1, 0, t = 6
+# [invert_contract_v3] src[5] = (2, 7, 1, t = 7
+# [invert_contract_v3] src[6] = (1, 1, 6, t = 7
+# [invert_contract_v3] src[7] = (1, 6, 1, t = 1
+# [invert_contract_v3] src[8] = (4, 0, 5, t = 7
+# [invert_contract_v3] base source location[1] = (3, 0, 2) t=3
+# [invert_contract_v3] setting forward propagator no. 1
+# [invert_contract_baryon] MB - MB contraction for source location[1 / 1] = (3, 0, 2) t=3
+# [invert_contract_v3] reading light forward propagator
+# [read_propagator] filename is forward_light.230031.x03y00z02t03.lime
+DML_partition_in times: read 0.02  send 0.00  total 0.02
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.02  send 0.00  total 0.02
+DML_partition_in times: read 0.02  send 0.00  total 0.02
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+DML_partition_in times: read 0.01  send 0.01  total 0.02
+DML_partition_in times: read 0.02  send 0.00  total 0.02
+DML_partition_in times: read 0.02  send 0.00  total 0.03
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+TIME(" propagator read","done") = 0.400 secs
+#[invert_contract_v2]  sequential source momentum(1) = (0, 0, 0)
+# [invert_contract] reading light sequential propagator
+# [read_propagator] filename is sequential_light_light.230031.x03y00z02t03.px00py00pz00.lime
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.01  send 0.01  total 0.02
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+DML_partition_in times: read 0.01  send 0.01  total 0.02
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+DML_partition_in times: read 0.02  send 0.00  total 0.03
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+TIME(" propagator read","done") = 0.441 secs
+#[invert_contract]  2-step sequential source momentum(1) = (0, 0, 0)
+# [invert_contract] reading light 2-step sequential propagator
+# [read_propagator] filename is twostep_sequential_light_light.230031.x03y00z02t03.px00py00pz00.kx00ky00kz00.lime
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+DML_partition_in times: read 0.04  send 0.00  total 0.05
+DML_partition_in times: read 0.08  send 0.00  total 0.08
+DML_partition_in times: read 0.01  send 0.01  total 0.02
+DML_partition_in times: read 0.14  send 0.00  total 0.15
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+DML_partition_in times: read 0.07  send 0.00  total 0.08
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+DML_partition_in times: read 0.09  send 0.00  total 0.10
+TIME(" propagator read","done") = 0.845 secs
+#[invert_contract]  2-step sequential source momentum(2) = (0, 0, 1)
+# [invert_contract] reading light 2-step sequential propagator
+# [read_propagator] filename is twostep_sequential_light_light.230031.x03y00z02t03.px00py00pz00.kx00ky00kz01.lime
+DML_partition_in times: read 0.14  send 0.00  total 0.15
+DML_partition_in times: read 0.12  send 0.00  total 0.13
+DML_partition_in times: read 0.06  send 0.01  total 0.07
+DML_partition_in times: read 0.11  send 0.00  total 0.12
+DML_partition_in times: read 0.09  send 0.01  total 0.10
+DML_partition_in times: read 0.06  send 0.01  total 0.07
+DML_partition_in times: read 0.08  send 0.00  total 0.09
+DML_partition_in times: read 0.08  send 0.00  total 0.08
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.04  send 0.00  total 0.05
+DML_partition_in times: read 0.05  send 0.00  total 0.06
+DML_partition_in times: read 0.11  send 0.00  total 0.12
+TIME(" propagator read","done") = 1.333 secs
+#[invert_contract_v2]  sequential source momentum(2) = (0, 0, 1)
+# [invert_contract] reading light sequential propagator
+# [read_propagator] filename is sequential_light_light.230031.x03y00z02t03.px00py00pz01.lime
+DML_partition_in times: read 0.11  send 0.00  total 0.11
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+DML_partition_in times: read 0.03  send 0.00  total 0.03
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+TIME(" propagator read","done") = 0.567 secs
+#[invert_contract]  2-step sequential source momentum(1) = (0, 0, 0)
+# [invert_contract] reading light 2-step sequential propagator
+# [read_propagator] filename is twostep_sequential_light_light.230031.x03y00z02t03.px00py00pz01.kx00ky00kz00.lime
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+DML_partition_in times: read 0.03  send 0.00  total 0.03
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+DML_partition_in times: read 0.06  send 0.00  total 0.07
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.08  send 0.00  total 0.09
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+DML_partition_in times: read 0.04  send 0.00  total 0.05
+DML_partition_in times: read 0.02  send 0.00  total 0.02
+TIME(" propagator read","done") = 0.619 secs
+#[invert_contract]  2-step sequential source momentum(2) = (0, 0, 1)
+# [invert_contract] reading light 2-step sequential propagator
+# [read_propagator] filename is twostep_sequential_light_light.230031.x03y00z02t03.px00py00pz01.kx00ky00kz01.lime
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+DML_partition_in times: read 0.02  send 0.00  total 0.02
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.01  send 0.01  total 0.03
+DML_partition_in times: read 0.12  send 0.00  total 0.13
+DML_partition_in times: read 0.11  send 0.00  total 0.12
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+DML_partition_in times: read 0.06  send 0.00  total 0.07
+DML_partition_in times: read 0.06  send 0.00  total 0.07
+DML_partition_in times: read 0.04  send 0.00  total 0.04
+TIME(" propagator read","done") = 0.780 secs
+# [invert_contract_v3] base source location[2] = (4, 6, 5) t=5
+# [invert_contract_v3] setting forward propagator no. 2
+# [invert_contract_baryon] MB - MB contraction for source location[2 / 2] = (4, 6, 5) t=5
+# [invert_contract_v3] reading light forward propagator
+# [read_propagator] filename is forward_light.230031.x04y06z05t05.lime
+DML_partition_in times: read 0.09  send 0.01  total 0.10
+DML_partition_in times: read 0.06  send 0.00  total 0.07
+DML_partition_in times: read 0.06  send 0.00  total 0.07
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+DML_partition_in times: read 0.06  send 0.00  total 0.07
+DML_partition_in times: read 0.02  send 0.01  total 0.02
+DML_partition_in times: read 0.09  send 0.01  total 0.10
+DML_partition_in times: read 0.06  send 0.01  total 0.07
+DML_partition_in times: read 0.01  send 0.01  total 0.02
+DML_partition_in times: read 0.01  send 0.01  total 0.03
+DML_partition_in times: read 0.01  send 0.01  total 0.02
+DML_partition_in times: read 0.01  send 0.01  total 0.02
+TIME(" propagator read","done") = 0.925 secs
+#[invert_contract_v2]  sequential source momentum(1) = (0, 0, 0)
+# [invert_contract] reading light sequential propagator
+# [read_propagator] filename is sequential_light_light.230031.x04y06z05t05.px00py00pz00.lime
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+TIME(" propagator read","done") = 0.368 secs
+#[invert_contract]  2-step sequential source momentum(1) = (0, 0, 0)
+# [invert_contract] reading light 2-step sequential propagator
+# [read_propagator] filename is twostep_sequential_light_light.230031.x04y06z05t05.px00py00pz00.kx00ky00kz00.lime
+DML_partition_in times: read 0.03  send 0.01  total 0.04
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+DML_partition_in times: read 0.06  send 0.00  total 0.07
+DML_partition_in times: read 0.07  send 0.00  total 0.08
+DML_partition_in times: read 0.06  send 0.00  total 0.06
+DML_partition_in times: read 0.02  send 0.00  total 0.02
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+DML_partition_in times: read 0.02  send 0.00  total 0.02
+DML_partition_in times: read 0.02  send 0.00  total 0.02
+TIME(" propagator read","done") = 0.583 secs
+#[invert_contract]  2-step sequential source momentum(2) = (0, 0, 1)
+# [invert_contract] reading light 2-step sequential propagator
+# [read_propagator] filename is twostep_sequential_light_light.230031.x04y06z05t05.px00py00pz00.kx00ky00kz01.lime
+DML_partition_in times: read 0.02  send 0.00  total 0.02
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.02  send 0.00  total 0.03
+DML_partition_in times: read 0.08  send 0.00  total 0.08
+DML_partition_in times: read 0.12  send 0.00  total 0.13
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+DML_partition_in times: read 0.09  send 0.00  total 0.10
+DML_partition_in times: read 0.05  send 0.00  total 0.06
+DML_partition_in times: read 0.04  send 0.00  total 0.05
+TIME(" propagator read","done") = 0.805 secs
+#[invert_contract_v2]  sequential source momentum(2) = (0, 0, 1)
+# [invert_contract] reading light sequential propagator
+# [read_propagator] filename is sequential_light_light.230031.x04y06z05t05.px00py00pz01.lime
+DML_partition_in times: read 0.11  send 0.00  total 0.11
+DML_partition_in times: read 0.03  send 0.00  total 0.03
+DML_partition_in times: read 0.09  send 0.00  total 0.10
+DML_partition_in times: read 0.05  send 0.00  total 0.06
+DML_partition_in times: read 0.06  send 0.00  total 0.07
+DML_partition_in times: read 0.10  send 0.00  total 0.11
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.06  send 0.00  total 0.07
+DML_partition_in times: read 0.06  send 0.00  total 0.07
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+DML_partition_in times: read 0.12  send 0.00  total 0.13
+DML_partition_in times: read 0.06  send 0.00  total 0.07
+TIME(" propagator read","done") = 1.050 secs
+#[invert_contract]  2-step sequential source momentum(1) = (0, 0, 0)
+# [invert_contract] reading light 2-step sequential propagator
+# [read_propagator] filename is twostep_sequential_light_light.230031.x04y06z05t05.px00py00pz01.kx00ky00kz00.lime
+DML_partition_in times: read 0.11  send 0.00  total 0.12
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+DML_partition_in times: read 0.05  send 0.00  total 0.06
+DML_partition_in times: read 0.06  send 0.01  total 0.07
+DML_partition_in times: read 0.06  send 0.00  total 0.07
+DML_partition_in times: read 0.02  send 0.01  total 0.03
+DML_partition_in times: read 0.11  send 0.00  total 0.12
+DML_partition_in times: read 0.04  send 0.01  total 0.05
+DML_partition_in times: read 0.07  send 0.01  total 0.08
+DML_partition_in times: read 0.08  send 0.01  total 0.09
+DML_partition_in times: read 0.01  send 0.01  total 0.02
+DML_partition_in times: read 0.03  send 0.00  total 0.04
+TIME(" propagator read","done") = 1.016 secs
+#[invert_contract]  2-step sequential source momentum(2) = (0, 0, 1)
+# [invert_contract] reading light 2-step sequential propagator
+# [read_propagator] filename is twostep_sequential_light_light.230031.x04y06z05t05.px00py00pz01.kx00ky00kz01.lime
+DML_partition_in times: read 0.10  send 0.00  total 0.10
+DML_partition_in times: read 0.01  send 0.01  total 0.02
+DML_partition_in times: read 0.10  send 0.00  total 0.11
+DML_partition_in times: read 0.04  send 0.01  total 0.05
+DML_partition_in times: read 0.09  send 0.00  total 0.09
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+DML_partition_in times: read 0.08  send 0.00  total 0.09
+DML_partition_in times: read 0.06  send 0.00  total 0.07
+DML_partition_in times: read 0.04  send 0.00  total 0.05
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+DML_partition_in times: read 0.16  send 0.00  total 0.17
+DML_partition_in times: read 0.06  send 0.00  total 0.07
+TIME(" propagator read","done") = 1.106 secs
+# [invert_contract_v3] base source location[3] = (7, 3, 1) t=1
+# [invert_contract_v3] setting forward propagator no. 3
+# [invert_contract_baryon] MB - MB contraction for source location[3 / 3] = (7, 3, 1) t=1
+# [invert_contract_v3] reading light forward propagator
+# [read_propagator] filename is forward_light.230031.x07y03z01t01.lime
+DML_partition_in times: read 0.12  send 0.01  total 0.13
+DML_partition_in times: read 0.01  send 0.01  total 0.02
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+TIME(" propagator read","done") = 0.436 secs
+#[invert_contract_v2]  sequential source momentum(1) = (0, 0, 0)
+# [invert_contract] reading light sequential propagator
+# [read_propagator] filename is sequential_light_light.230031.x07y03z01t01.px00py00pz00.lime
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+DML_partition_in times: read 0.03  send 0.00  total 0.03
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+DML_partition_in times: read 0.01  send 0.01  total 0.02
+DML_partition_in times: read 0.05  send 0.00  total 0.06
+DML_partition_in times: read 0.07  send 0.00  total 0.08
+TIME(" propagator read","done") = 0.548 secs
+#[invert_contract]  2-step sequential source momentum(1) = (0, 0, 0)
+# [invert_contract] reading light 2-step sequential propagator
+# [read_propagator] filename is twostep_sequential_light_light.230031.x07y03z01t01.px00py00pz00.kx00ky00kz00.lime
+DML_partition_in times: read 0.07  send 0.00  total 0.08
+DML_partition_in times: read 0.02  send 0.00  total 0.02
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.02  send 0.00  total 0.03
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+TIME(" propagator read","done") = 0.485 secs
+#[invert_contract]  2-step sequential source momentum(2) = (0, 0, 1)
+# [invert_contract] reading light 2-step sequential propagator
+# [read_propagator] filename is twostep_sequential_light_light.230031.x07y03z01t01.px00py00pz00.kx00ky00kz01.lime
+DML_partition_in times: read 0.02  send 0.00  total 0.02
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+DML_partition_in times: read 0.02  send 0.00  total 0.02
+DML_partition_in times: read 0.02  send 0.00  total 0.02
+DML_partition_in times: read 0.02  send 0.00  total 0.02
+DML_partition_in times: read 0.02  send 0.00  total 0.02
+DML_partition_in times: read 0.02  send 0.00  total 0.02
+DML_partition_in times: read 0.02  send 0.00  total 0.02
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+TIME(" propagator read","done") = 0.427 secs
+#[invert_contract_v2]  sequential source momentum(2) = (0, 0, 1)
+# [invert_contract] reading light sequential propagator
+# [read_propagator] filename is sequential_light_light.230031.x07y03z01t01.px00py00pz01.lime
+DML_partition_in times: read 0.01  send 0.01  total 0.02
+DML_partition_in times: read 0.03  send 0.01  total 0.04
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+DML_partition_in times: read 0.03  send 0.00  total 0.03
+TIME(" propagator read","done") = 0.387 secs
+#[invert_contract]  2-step sequential source momentum(1) = (0, 0, 0)
+# [invert_contract] reading light 2-step sequential propagator
+# [read_propagator] filename is twostep_sequential_light_light.230031.x07y03z01t01.px00py00pz01.kx00ky00kz00.lime
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+DML_partition_in times: read 0.03  send 0.00  total 0.03
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+DML_partition_in times: read 0.04  send 0.00  total 0.05
+DML_partition_in times: read 0.07  send 0.00  total 0.08
+TIME(" propagator read","done") = 0.496 secs
+#[invert_contract]  2-step sequential source momentum(2) = (0, 0, 1)
+# [invert_contract] reading light 2-step sequential propagator
+# [read_propagator] filename is twostep_sequential_light_light.230031.x07y03z01t01.px00py00pz01.kx00ky00kz01.lime
+DML_partition_in times: read 0.06  send 0.01  total 0.07
+DML_partition_in times: read 0.01  send 0.01  total 0.02
+DML_partition_in times: read 0.02  send 0.00  total 0.02
+DML_partition_in times: read 0.02  send 0.00  total 0.02
+DML_partition_in times: read 0.02  send 0.00  total 0.02
+DML_partition_in times: read 0.02  send 0.00  total 0.02
+DML_partition_in times: read 0.02  send 0.00  total 0.02
+DML_partition_in times: read 0.02  send 0.00  total 0.02
+DML_partition_in times: read 0.03  send 0.00  total 0.03
+DML_partition_in times: read 0.02  send 0.00  total 0.02
+DML_partition_in times: read 0.03  send 0.00  total 0.03
+DML_partition_in times: read 0.02  send 0.00  total 0.02
+TIME(" propagator read","done") = 0.482 secs
+# [invert_contract_v3] base source location[4] = (2, 1, 0) t=6
+# [invert_contract_v3] setting forward propagator no. 4
+# [invert_contract_baryon] MB - MB contraction for source location[4 / 4] = (2, 1, 0) t=6
+# [invert_contract_v3] reading light forward propagator
+# [read_propagator] filename is forward_light.230031.x02y01z00t06.lime
+DML_partition_in times: read 0.05  send 0.00  total 0.06
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+DML_partition_in times: read 0.13  send 0.00  total 0.14
+DML_partition_in times: read 0.11  send 0.00  total 0.11
+DML_partition_in times: read 0.13  send 0.00  total 0.14
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+DML_partition_in times: read 0.06  send 0.00  total 0.07
+DML_partition_in times: read 0.01  send 0.01  total 0.02
+DML_partition_in times: read 0.07  send 0.00  total 0.08
+DML_partition_in times: read 0.05  send 0.00  total 0.06
+DML_partition_in times: read 0.06  send 0.00  total 0.07
+DML_partition_in times: read 0.07  send 0.00  total 0.08
+TIME(" propagator read","done") = 1.108 secs
+#[invert_contract_v2]  sequential source momentum(1) = (0, 0, 0)
+# [invert_contract] reading light sequential propagator
+# [read_propagator] filename is sequential_light_light.230031.x02y01z00t06.px00py00pz00.lime
+DML_partition_in times: read 0.10  send 0.00  total 0.10
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+DML_partition_in times: read 0.08  send 0.00  total 0.09
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+DML_partition_in times: read 0.05  send 0.00  total 0.06
+DML_partition_in times: read 0.02  send 0.01  total 0.03
+DML_partition_in times: read 0.01  send 0.01  total 0.02
+DML_partition_in times: read 0.09  send 0.00  total 0.10
+DML_partition_in times: read 0.03  send 0.01  total 0.04
+DML_partition_in times: read 0.01  send 0.01  total 0.02
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+TIME(" propagator read","done") = 0.814 secs
+#[invert_contract]  2-step sequential source momentum(1) = (0, 0, 0)
+# [invert_contract] reading light 2-step sequential propagator
+# [read_propagator] filename is twostep_sequential_light_light.230031.x02y01z00t06.px00py00pz00.kx00ky00kz00.lime
+DML_partition_in times: read 0.03  send 0.00  total 0.03
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+DML_partition_in times: read 0.01  send 0.01  total 0.02
+DML_partition_in times: read 0.03  send 0.00  total 0.03
+DML_partition_in times: read 0.01  send 0.01  total 0.02
+DML_partition_in times: read 0.06  send 0.00  total 0.07
+DML_partition_in times: read 0.03  send 0.00  total 0.03
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+TIME(" propagator read","done") = 0.519 secs
+#[invert_contract]  2-step sequential source momentum(2) = (0, 0, 1)
+# [invert_contract] reading light 2-step sequential propagator
+# [read_propagator] filename is twostep_sequential_light_light.230031.x02y01z00t06.px00py00pz00.kx00ky00kz01.lime
+DML_partition_in times: read 0.05  send 0.00  total 0.06
+DML_partition_in times: read 0.13  send 0.00  total 0.14
+DML_partition_in times: read 0.06  send 0.01  total 0.07
+DML_partition_in times: read 0.02  send 0.00  total 0.02
+DML_partition_in times: read 0.02  send 0.00  total 0.02
+DML_partition_in times: read 0.02  send 0.00  total 0.02
+DML_partition_in times: read 0.02  send 0.00  total 0.02
+DML_partition_in times: read 0.02  send 0.00  total 0.02
+DML_partition_in times: read 0.02  send 0.00  total 0.02
+DML_partition_in times: read 0.03  send 0.00  total 0.03
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+TIME(" propagator read","done") = 0.628 secs
+#[invert_contract_v2]  sequential source momentum(2) = (0, 0, 1)
+# [invert_contract] reading light sequential propagator
+# [read_propagator] filename is sequential_light_light.230031.x02y01z00t06.px00py00pz01.lime
+DML_partition_in times: read 0.05  send 0.01  total 0.06
+DML_partition_in times: read 0.01  send 0.01  total 0.02
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+TIME(" propagator read","done") = 0.351 secs
+#[invert_contract]  2-step sequential source momentum(1) = (0, 0, 0)
+# [invert_contract] reading light 2-step sequential propagator
+# [read_propagator] filename is twostep_sequential_light_light.230031.x02y01z00t06.px00py00pz01.kx00ky00kz00.lime
+DML_partition_in times: read 0.03  send 0.00  total 0.03
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+TIME(" propagator read","done") = 0.370 secs
+#[invert_contract]  2-step sequential source momentum(2) = (0, 0, 1)
+# [invert_contract] reading light 2-step sequential propagator
+# [read_propagator] filename is twostep_sequential_light_light.230031.x02y01z00t06.px00py00pz01.kx00ky00kz01.lime
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+DML_partition_in times: read 0.05  send 0.01  total 0.06
+DML_partition_in times: read 0.02  send 0.01  total 0.03
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+DML_partition_in times: read 0.02  send 0.00  total 0.02
+DML_partition_in times: read 0.02  send 0.00  total 0.02
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+DML_partition_in times: read 0.02  send 0.00  total 0.02
+DML_partition_in times: read 0.02  send 0.00  total 0.02
+DML_partition_in times: read 0.02  send 0.00  total 0.02
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+TIME(" propagator read","done") = 0.472 secs
+# [invert_contract_v3] base source location[5] = (2, 7, 1) t=7
+# [invert_contract_v3] setting forward propagator no. 5
+# [invert_contract_baryon] MB - MB contraction for source location[5 / 5] = (2, 7, 1) t=7
+# [invert_contract_v3] reading light forward propagator
+# [read_propagator] filename is forward_light.230031.x02y07z01t07.lime
+DML_partition_in times: read 0.02  send 0.00  total 0.02
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.02  send 0.01  total 0.03
+DML_partition_in times: read 0.05  send 0.00  total 0.06
+DML_partition_in times: read 0.04  send 0.01  total 0.05
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+DML_partition_in times: read 0.07  send 0.00  total 0.08
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+DML_partition_in times: read 0.05  send 0.00  total 0.06
+DML_partition_in times: read 0.06  send 0.01  total 0.07
+DML_partition_in times: read 0.08  send 0.01  total 0.09
+TIME(" propagator read","done") = 0.744 secs
+#[invert_contract_v2]  sequential source momentum(1) = (0, 0, 0)
+# [invert_contract] reading light sequential propagator
+# [read_propagator] filename is sequential_light_light.230031.x02y07z01t07.px00py00pz00.lime
+DML_partition_in times: read 0.12  send 0.00  total 0.13
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+DML_partition_in times: read 0.07  send 0.00  total 0.08
+DML_partition_in times: read 0.10  send 0.00  total 0.11
+DML_partition_in times: read 0.10  send 0.01  total 0.11
+DML_partition_in times: read 0.04  send 0.00  total 0.05
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+DML_partition_in times: read 0.11  send 0.01  total 0.12
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.08  send 0.00  total 0.08
+DML_partition_in times: read 0.04  send 0.01  total 0.05
+DML_partition_in times: read 0.03  send 0.01  total 0.04
+TIME(" propagator read","done") = 1.079 secs
+#[invert_contract]  2-step sequential source momentum(1) = (0, 0, 0)
+# [invert_contract] reading light 2-step sequential propagator
+# [read_propagator] filename is twostep_sequential_light_light.230031.x02y07z01t07.px00py00pz00.kx00ky00kz00.lime
+DML_partition_in times: read 0.08  send 0.01  total 0.09
+DML_partition_in times: read 0.06  send 0.00  total 0.07
+DML_partition_in times: read 0.04  send 0.01  total 0.05
+DML_partition_in times: read 0.15  send 0.01  total 0.16
+DML_partition_in times: read 0.02  send 0.01  total 0.03
+DML_partition_in times: read 0.08  send 0.01  total 0.10
+DML_partition_in times: read 0.00  send 0.02  total 0.03
+DML_partition_in times: read 0.09  send 0.01  total 0.10
+DML_partition_in times: read 0.08  send 0.01  total 0.09
+DML_partition_in times: read 0.08  send 0.01  total 0.09
+DML_partition_in times: read 0.02  send 0.01  total 0.04
+DML_partition_in times: read 0.04  send 0.01  total 0.06
+TIME(" propagator read","done") = 1.177 secs
+#[invert_contract]  2-step sequential source momentum(2) = (0, 0, 1)
+# [invert_contract] reading light 2-step sequential propagator
+# [read_propagator] filename is twostep_sequential_light_light.230031.x02y07z01t07.px00py00pz00.kx00ky00kz01.lime
+DML_partition_in times: read 0.06  send 0.00  total 0.07
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.01  send 0.01  total 0.03
+DML_partition_in times: read 0.05  send 0.01  total 0.06
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+DML_partition_in times: read 0.03  send 0.01  total 0.04
+DML_partition_in times: read 0.12  send 0.01  total 0.14
+DML_partition_in times: read 0.02  send 0.01  total 0.03
+DML_partition_in times: read 0.01  send 0.01  total 0.02
+TIME(" propagator read","done") = 0.629 secs
+#[invert_contract_v2]  sequential source momentum(2) = (0, 0, 1)
+# [invert_contract] reading light sequential propagator
+# [read_propagator] filename is sequential_light_light.230031.x02y07z01t07.px00py00pz01.lime
+DML_partition_in times: read 0.05  send 0.01  total 0.06
+DML_partition_in times: read 0.14  send 0.01  total 0.15
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+DML_partition_in times: read 0.01  send 0.01  total 0.03
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.02  send 0.00  total 0.03
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+TIME(" propagator read","done") = 0.674 secs
+#[invert_contract]  2-step sequential source momentum(1) = (0, 0, 0)
+# [invert_contract] reading light 2-step sequential propagator
+# [read_propagator] filename is twostep_sequential_light_light.230031.x02y07z01t07.px00py00pz01.kx00ky00kz00.lime
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+DML_partition_in times: read 0.09  send 0.00  total 0.10
+DML_partition_in times: read 0.08  send 0.00  total 0.09
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+DML_partition_in times: read 0.08  send 0.00  total 0.09
+DML_partition_in times: read 0.06  send 0.01  total 0.07
+DML_partition_in times: read 0.01  send 0.01  total 0.02
+DML_partition_in times: read 0.03  send 0.00  total 0.03
+DML_partition_in times: read 0.02  send 0.00  total 0.02
+DML_partition_in times: read 0.02  send 0.00  total 0.02
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+TIME(" propagator read","done") = 0.694 secs
+#[invert_contract]  2-step sequential source momentum(2) = (0, 0, 1)
+# [invert_contract] reading light 2-step sequential propagator
+# [read_propagator] filename is twostep_sequential_light_light.230031.x02y07z01t07.px00py00pz01.kx00ky00kz01.lime
+DML_partition_in times: read 0.03  send 0.01  total 0.04
+DML_partition_in times: read 0.04  send 0.00  total 0.05
+DML_partition_in times: read 0.06  send 0.01  total 0.07
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+DML_partition_in times: read 0.10  send 0.01  total 0.11
+DML_partition_in times: read 0.05  send 0.01  total 0.06
+DML_partition_in times: read 0.06  send 0.01  total 0.07
+DML_partition_in times: read 0.14  send 0.00  total 0.14
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+DML_partition_in times: read 0.09  send 0.00  total 0.10
+DML_partition_in times: read 0.04  send 0.01  total 0.05
+DML_partition_in times: read 0.01  send 0.01  total 0.02
+TIME(" propagator read","done") = 0.888 secs
+# [invert_contract_v3] base source location[6] = (1, 1, 6) t=7
+# [invert_contract_v3] setting forward propagator no. 6
+# [invert_contract_baryon] MB - MB contraction for source location[6 / 6] = (1, 1, 6) t=7
+# [invert_contract_v3] reading light forward propagator
+# [read_propagator] filename is forward_light.230031.x01y01z06t07.lime
+DML_partition_in times: read 0.08  send 0.00  total 0.09
+DML_partition_in times: read 0.04  send 0.00  total 0.05
+DML_partition_in times: read 0.08  send 0.01  total 0.09
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+DML_partition_in times: read 0.04  send 0.01  total 0.05
+DML_partition_in times: read 0.10  send 0.00  total 0.10
+DML_partition_in times: read 0.09  send 0.01  total 0.10
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+DML_partition_in times: read 0.15  send 0.01  total 0.16
+DML_partition_in times: read 0.08  send 0.01  total 0.09
+DML_partition_in times: read 0.03  send 0.00  total 0.04
+DML_partition_in times: read 0.06  send 0.01  total 0.07
+TIME(" propagator read","done") = 1.182 secs
+#[invert_contract_v2]  sequential source momentum(1) = (0, 0, 0)
+# [invert_contract] reading light sequential propagator
+# [read_propagator] filename is sequential_light_light.230031.x01y01z06t07.px00py00pz00.lime
+DML_partition_in times: read 0.09  send 0.00  total 0.10
+DML_partition_in times: read 0.01  send 0.01  total 0.02
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+DML_partition_in times: read 0.02  send 0.01  total 0.03
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+DML_partition_in times: read 0.01  send 0.01  total 0.02
+DML_partition_in times: read 0.02  send 0.01  total 0.04
+DML_partition_in times: read 0.01  send 0.01  total 0.02
+TIME(" propagator read","done") = 0.509 secs
+#[invert_contract]  2-step sequential source momentum(1) = (0, 0, 0)
+# [invert_contract] reading light 2-step sequential propagator
+# [read_propagator] filename is twostep_sequential_light_light.230031.x01y01z06t07.px00py00pz00.kx00ky00kz00.lime
+DML_partition_in times: read 0.09  send 0.01  total 0.10
+DML_partition_in times: read 0.01  send 0.01  total 0.02
+DML_partition_in times: read 0.01  send 0.01  total 0.03
+DML_partition_in times: read 0.01  send 0.01  total 0.03
+DML_partition_in times: read 0.00  send 0.02  total 0.02
+DML_partition_in times: read 0.00  send 0.01  total 0.02
+DML_partition_in times: read 0.00  send 0.01  total 0.02
+DML_partition_in times: read 0.04  send 0.01  total 0.06
+DML_partition_in times: read 0.00  send 0.01  total 0.02
+DML_partition_in times: read 0.00  send 0.01  total 0.02
+DML_partition_in times: read 0.00  send 0.01  total 0.02
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+TIME(" propagator read","done") = 0.465 secs
+#[invert_contract]  2-step sequential source momentum(2) = (0, 0, 1)
+# [invert_contract] reading light 2-step sequential propagator
+# [read_propagator] filename is twostep_sequential_light_light.230031.x01y01z06t07.px00py00pz00.kx00ky00kz01.lime
+DML_partition_in times: read 0.15  send 0.01  total 0.17
+DML_partition_in times: read 0.02  send 0.01  total 0.03
+DML_partition_in times: read 0.05  send 0.01  total 0.07
+DML_partition_in times: read 0.03  send 0.01  total 0.03
+DML_partition_in times: read 0.02  send 0.00  total 0.02
+DML_partition_in times: read 0.02  send 0.00  total 0.02
+DML_partition_in times: read 0.02  send 0.00  total 0.02
+DML_partition_in times: read 0.02  send 0.00  total 0.02
+DML_partition_in times: read 0.01  send 0.01  total 0.02
+DML_partition_in times: read 0.02  send 0.00  total 0.02
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+TIME(" propagator read","done") = 0.652 secs
+#[invert_contract_v2]  sequential source momentum(2) = (0, 0, 1)
+# [invert_contract] reading light sequential propagator
+# [read_propagator] filename is sequential_light_light.230031.x01y01z06t07.px00py00pz01.lime
+DML_partition_in times: read 0.04  send 0.01  total 0.05
+DML_partition_in times: read 0.09  send 0.00  total 0.09
+DML_partition_in times: read 0.06  send 0.00  total 0.07
+DML_partition_in times: read 0.06  send 0.01  total 0.07
+DML_partition_in times: read 0.04  send 0.00  total 0.05
+DML_partition_in times: read 0.07  send 0.00  total 0.08
+DML_partition_in times: read 0.01  send 0.01  total 0.02
+DML_partition_in times: read 0.03  send 0.00  total 0.04
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.06  send 0.00  total 0.07
+DML_partition_in times: read 0.05  send 0.01  total 0.06
+DML_partition_in times: read 0.01  send 0.01  total 0.02
+TIME(" propagator read","done") = 0.892 secs
+#[invert_contract]  2-step sequential source momentum(1) = (0, 0, 0)
+# [invert_contract] reading light 2-step sequential propagator
+# [read_propagator] filename is twostep_sequential_light_light.230031.x01y01z06t07.px00py00pz01.kx00ky00kz00.lime
+DML_partition_in times: read 0.11  send 0.01  total 0.12
+DML_partition_in times: read 0.08  send 0.01  total 0.09
+DML_partition_in times: read 0.03  send 0.00  total 0.04
+DML_partition_in times: read 0.07  send 0.01  total 0.08
+DML_partition_in times: read 0.05  send 0.01  total 0.06
+DML_partition_in times: read 0.05  send 0.00  total 0.06
+DML_partition_in times: read 0.03  send 0.00  total 0.04
+DML_partition_in times: read 0.12  send 0.00  total 0.13
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.08  send 0.00  total 0.08
+DML_partition_in times: read 0.04  send 0.00  total 0.05
+DML_partition_in times: read 0.04  send 0.01  total 0.05
+TIME(" propagator read","done") = 1.069 secs
+#[invert_contract]  2-step sequential source momentum(2) = (0, 0, 1)
+# [invert_contract] reading light 2-step sequential propagator
+# [read_propagator] filename is twostep_sequential_light_light.230031.x01y01z06t07.px00py00pz01.kx00ky00kz01.lime
+DML_partition_in times: read 0.07  send 0.01  total 0.08
+DML_partition_in times: read 0.06  send 0.01  total 0.07
+DML_partition_in times: read 0.06  send 0.00  total 0.07
+DML_partition_in times: read 0.01  send 0.01  total 0.02
+DML_partition_in times: read 0.07  send 0.00  total 0.08
+DML_partition_in times: read 0.01  send 0.01  total 0.02
+DML_partition_in times: read 0.09  send 0.01  total 0.10
+DML_partition_in times: read 0.07  send 0.00  total 0.08
+DML_partition_in times: read 0.06  send 0.01  total 0.07
+DML_partition_in times: read 0.01  send 0.01  total 0.02
+DML_partition_in times: read 0.05  send 0.00  total 0.06
+DML_partition_in times: read 0.05  send 0.01  total 0.06
+TIME(" propagator read","done") = 1.005 secs
+# [invert_contract_v3] base source location[7] = (1, 6, 1) t=1
+# [invert_contract_v3] setting forward propagator no. 7
+# [invert_contract_baryon] MB - MB contraction for source location[7 / 7] = (1, 6, 1) t=1
+# [invert_contract_v3] reading light forward propagator
+# [read_propagator] filename is forward_light.230031.x01y06z01t01.lime
+DML_partition_in times: read 0.07  send 0.00  total 0.08
+DML_partition_in times: read 0.01  send 0.01  total 0.02
+DML_partition_in times: read 0.20  send 0.01  total 0.21
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+DML_partition_in times: read 0.01  send 0.01  total 0.02
+DML_partition_in times: read 0.01  send 0.01  total 0.02
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+DML_partition_in times: read 0.02  send 0.00  total 0.03
+DML_partition_in times: read 0.01  send 0.01  total 0.02
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+TIME(" propagator read","done") = 0.698 secs
+#[invert_contract_v2]  sequential source momentum(1) = (0, 0, 0)
+# [invert_contract] reading light sequential propagator
+# [read_propagator] filename is sequential_light_light.230031.x01y06z01t01.px00py00pz00.lime
+DML_partition_in times: read 0.13  send 0.01  total 0.14
+DML_partition_in times: read 0.01  send 0.01  total 0.02
+DML_partition_in times: read 0.05  send 0.01  total 0.06
+DML_partition_in times: read 0.12  send 0.01  total 0.14
+DML_partition_in times: read 0.01  send 0.01  total 0.02
+DML_partition_in times: read 0.05  send 0.01  total 0.06
+DML_partition_in times: read 0.06  send 0.01  total 0.07
+DML_partition_in times: read 0.06  send 0.01  total 0.07
+DML_partition_in times: read 0.09  send 0.01  total 0.10
+DML_partition_in times: read 0.01  send 0.01  total 0.02
+DML_partition_in times: read 0.05  send 0.01  total 0.06
+DML_partition_in times: read 0.01  send 0.01  total 0.02
+TIME(" propagator read","done") = 1.090 secs
+#[invert_contract]  2-step sequential source momentum(1) = (0, 0, 0)
+# [invert_contract] reading light 2-step sequential propagator
+# [read_propagator] filename is twostep_sequential_light_light.230031.x01y06z01t01.px00py00pz00.kx00ky00kz00.lime
+DML_partition_in times: read 0.08  send 0.01  total 0.09
+DML_partition_in times: read 0.02  send 0.01  total 0.03
+DML_partition_in times: read 0.01  send 0.01  total 0.02
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+DML_partition_in times: read 0.02  send 0.01  total 0.03
+DML_partition_in times: read 0.00  send 0.01  total 0.02
+DML_partition_in times: read 0.02  send 0.01  total 0.03
+DML_partition_in times: read 0.01  send 0.01  total 0.02
+DML_partition_in times: read 0.01  send 0.01  total 0.03
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+DML_partition_in times: read 0.01  send 0.01  total 0.03
+DML_partition_in times: read 0.02  send 0.02  total 0.04
+TIME(" propagator read","done") = 0.552 secs
+#[invert_contract]  2-step sequential source momentum(2) = (0, 0, 1)
+# [invert_contract] reading light 2-step sequential propagator
+# [read_propagator] filename is twostep_sequential_light_light.230031.x01y06z01t01.px00py00pz00.kx00ky00kz01.lime
+DML_partition_in times: read 0.01  send 0.01  total 0.03
+DML_partition_in times: read 0.01  send 0.01  total 0.03
+DML_partition_in times: read 0.00  send 0.01  total 0.02
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+DML_partition_in times: read 0.00  send 0.01  total 0.02
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+DML_partition_in times: read 0.01  send 0.01  total 0.02
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+DML_partition_in times: read 0.01  send 0.01  total 0.02
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+TIME(" propagator read","done") = 0.411 secs
+#[invert_contract_v2]  sequential source momentum(2) = (0, 0, 1)
+# [invert_contract] reading light sequential propagator
+# [read_propagator] filename is sequential_light_light.230031.x01y06z01t01.px00py00pz01.lime
+DML_partition_in times: read 0.02  send 0.01  total 0.04
+DML_partition_in times: read 0.01  send 0.01  total 0.02
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.03  send 0.00  total 0.03
+DML_partition_in times: read 0.03  send 0.00  total 0.05
+DML_partition_in times: read 0.05  send 0.01  total 0.06
+DML_partition_in times: read 0.02  send 0.00  total 0.02
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.02  send 0.00  total 0.03
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+TIME(" propagator read","done") = 0.521 secs
+#[invert_contract]  2-step sequential source momentum(1) = (0, 0, 0)
+# [invert_contract] reading light 2-step sequential propagator
+# [read_propagator] filename is twostep_sequential_light_light.230031.x01y06z01t01.px00py00pz01.kx00ky00kz00.lime
+DML_partition_in times: read 0.04  send 0.00  total 0.05
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.02  send 0.00  total 0.02
+DML_partition_in times: read 0.02  send 0.00  total 0.02
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.02  send 0.00  total 0.02
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+DML_partition_in times: read 0.08  send 0.00  total 0.09
+DML_partition_in times: read 0.07  send 0.01  total 0.08
+DML_partition_in times: read 0.06  send 0.00  total 0.07
+DML_partition_in times: read 0.05  send 0.01  total 0.06
+DML_partition_in times: read 0.01  send 0.01  total 0.02
+TIME(" propagator read","done") = 0.782 secs
+#[invert_contract]  2-step sequential source momentum(2) = (0, 0, 1)
+# [invert_contract] reading light 2-step sequential propagator
+# [read_propagator] filename is twostep_sequential_light_light.230031.x01y06z01t01.px00py00pz01.kx00ky00kz01.lime
+DML_partition_in times: read 0.11  send 0.00  total 0.12
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+DML_partition_in times: read 0.04  send 0.00  total 0.05
+DML_partition_in times: read 0.06  send 0.01  total 0.07
+DML_partition_in times: read 0.07  send 0.01  total 0.08
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+DML_partition_in times: read 0.09  send 0.00  total 0.10
+DML_partition_in times: read 0.05  send 0.00  total 0.06
+DML_partition_in times: read 0.05  send 0.01  total 0.06
+DML_partition_in times: read 0.04  send 0.00  total 0.05
+DML_partition_in times: read 0.01  send 0.01  total 0.02
+DML_partition_in times: read 0.10  send 0.00  total 0.10
+TIME(" propagator read","done") = 0.945 secs
+# [invert_contract_v3] base source location[8] = (4, 0, 5) t=7
+# [invert_contract_v3] setting forward propagator no. 8
+# [invert_contract_baryon] MB - MB contraction for source location[8 / 8] = (4, 0, 5) t=7
+# [invert_contract_v3] reading light forward propagator
+# [read_propagator] filename is forward_light.230031.x04y00z05t07.lime
+DML_partition_in times: read 0.14  send 0.00  total 0.15
+DML_partition_in times: read 0.04  send 0.01  total 0.05
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+DML_partition_in times: read 0.04  send 0.00  total 0.05
+DML_partition_in times: read 0.08  send 0.01  total 0.09
+DML_partition_in times: read 0.06  send 0.00  total 0.07
+DML_partition_in times: read 0.04  send 0.00  total 0.05
+DML_partition_in times: read 0.01  send 0.01  total 0.02
+DML_partition_in times: read 0.04  send 0.00  total 0.05
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+DML_partition_in times: read 0.10  send 0.00  total 0.10
+DML_partition_in times: read 0.02  send 0.01  total 0.03
+TIME(" propagator read","done") = 1.047 secs
+#[invert_contract_v2]  sequential source momentum(1) = (0, 0, 0)
+# [invert_contract] reading light sequential propagator
+# [read_propagator] filename is sequential_light_light.230031.x04y00z05t07.px00py00pz00.lime
+DML_partition_in times: read 0.13  send 0.01  total 0.14
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.02  send 0.00  total 0.02
+DML_partition_in times: read 0.02  send 0.00  total 0.02
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.02  send 0.00  total 0.02
+DML_partition_in times: read 0.02  send 0.00  total 0.02
+TIME(" propagator read","done") = 0.518 secs
+#[invert_contract]  2-step sequential source momentum(1) = (0, 0, 0)
+# [invert_contract] reading light 2-step sequential propagator
+# [read_propagator] filename is twostep_sequential_light_light.230031.x04y00z05t07.px00py00pz00.kx00ky00kz00.lime
+DML_partition_in times: read 0.02  send 0.00  total 0.02
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.02  send 0.01  total 0.03
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+TIME(" propagator read","done") = 0.397 secs
+#[invert_contract]  2-step sequential source momentum(2) = (0, 0, 1)
+# [invert_contract] reading light 2-step sequential propagator
+# [read_propagator] filename is twostep_sequential_light_light.230031.x04y00z05t07.px00py00pz00.kx00ky00kz01.lime
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+TIME(" propagator read","done") = 0.401 secs
+#[invert_contract_v2]  sequential source momentum(2) = (0, 0, 1)
+# [invert_contract] reading light sequential propagator
+# [read_propagator] filename is sequential_light_light.230031.x04y00z05t07.px00py00pz01.lime
+DML_partition_in times: read 0.07  send 0.01  total 0.08
+DML_partition_in times: read 0.08  send 0.00  total 0.09
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.02  send 0.00  total 0.02
+DML_partition_in times: read 0.02  send 0.00  total 0.02
+DML_partition_in times: read 0.02  send 0.00  total 0.03
+DML_partition_in times: read 0.02  send 0.00  total 0.02
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.02  send 0.00  total 0.02
+DML_partition_in times: read 0.02  send 0.00  total 0.02
+TIME(" propagator read","done") = 0.593 secs
+#[invert_contract]  2-step sequential source momentum(1) = (0, 0, 0)
+# [invert_contract] reading light 2-step sequential propagator
+# [read_propagator] filename is twostep_sequential_light_light.230031.x04y00z05t07.px00py00pz01.kx00ky00kz00.lime
+DML_partition_in times: read 0.08  send 0.00  total 0.09
+DML_partition_in times: read 0.05  send 0.01  total 0.06
+DML_partition_in times: read 0.06  send 0.01  total 0.07
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+DML_partition_in times: read 0.09  send 0.01  total 0.10
+DML_partition_in times: read 0.07  send 0.01  total 0.08
+DML_partition_in times: read 0.01  send 0.01  total 0.02
+DML_partition_in times: read 0.01  send 0.01  total 0.02
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+DML_partition_in times: read 0.02  send 0.01  total 0.03
+DML_partition_in times: read 0.01  send 0.01  total 0.02
+TIME(" propagator read","done") = 0.821 secs
+#[invert_contract]  2-step sequential source momentum(2) = (0, 0, 1)
+# [invert_contract] reading light 2-step sequential propagator
+# [read_propagator] filename is twostep_sequential_light_light.230031.x04y00z05t07.px00py00pz01.kx00ky00kz01.lime
+DML_partition_in times: read 0.01  send 0.01  total 0.03
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+TIME(" propagator read","done") = 0.363 secs
+# [invert_contract] number of stochastic source timeslices = 16
+# [invert_contract_v4] i_src = 1, i_prop = 1, t_src = 3, dt = 0, t_snk = 3, lookup table = 0
+# [invert_contract_v4] i_src = 1, i_prop = 1, t_src = 3, dt = 1, t_snk = 4, lookup table = 1
+# [invert_contract_v4] i_src = 1, i_prop = 1, t_src = 3, dt = 2, t_snk = 5, lookup table = 2
+# [invert_contract_v4] i_src = 1, i_prop = 1, t_src = 3, dt = 3, t_snk = 6, lookup table = 3
+# [invert_contract_v4] i_src = 1, i_prop = 1, t_src = 3, dt = 4, t_snk = 7, lookup table = 4
+# [invert_contract_v4] i_src = 1, i_prop = 1, t_src = 3, dt = 5, t_snk = 8, lookup table = 5
+# [invert_contract_v4] i_src = 1, i_prop = 1, t_src = 3, dt = 6, t_snk = 9, lookup table = 6
+# [invert_contract_v4] i_src = 1, i_prop = 1, t_src = 3, dt = 7, t_snk = 10, lookup table = 7
+# [invert_contract_v4] i_src = 1, i_prop = 1, t_src = 3, dt = 8, t_snk = 11, lookup table = 8
+# [invert_contract_v4] i_src = 1, i_prop = 1, t_src = 3, dt = 9, t_snk = 12, lookup table = 9
+# [invert_contract_v4] i_src = 1, i_prop = 1, t_src = 3, dt = 10, t_snk = 13, lookup table = 10
+# [invert_contract_v4] i_src = 1, i_prop = 1, t_src = 3, dt = 11, t_snk = 14, lookup table = 11
+# [invert_contract_v4] i_src = 1, i_prop = 1, t_src = 3, dt = 12, t_snk = 15, lookup table = 12
+# [invert_contract_v4] i_src = 1, i_prop = 1, t_src = 3, dt = 13, t_snk = 0, lookup table = 13
+# [invert_contract_v4] i_src = 1, i_prop = 1, t_src = 3, dt = 14, t_snk = 1, lookup table = 14
+# [invert_contract_v4] i_src = 1, i_prop = 1, t_src = 3, dt = 15, t_snk = 2, lookup table = 15
+# [invert_contract_v4] stochastic source timeslice no. 0 is t = 3
+# [invert_contract_v4] stochastic source timeslice no. 1 is t = 4
+# [invert_contract_v4] stochastic source timeslice no. 2 is t = 5
+# [invert_contract_v4] stochastic source timeslice no. 3 is t = 6
+# [invert_contract_v4] stochastic source timeslice no. 4 is t = 7
+# [invert_contract_v4] stochastic source timeslice no. 5 is t = 8
+# [invert_contract_v4] stochastic source timeslice no. 6 is t = 9
+# [invert_contract_v4] stochastic source timeslice no. 7 is t = 10
+# [invert_contract_v4] stochastic source timeslice no. 8 is t = 11
+# [invert_contract_v4] stochastic source timeslice no. 9 is t = 12
+# [invert_contract_v4] stochastic source timeslice no. 10 is t = 13
+# [invert_contract_v4] stochastic source timeslice no. 11 is t = 14
+# [invert_contract_v4] stochastic source timeslice no. 12 is t = 15
+# [invert_contract_v4] stochastic source timeslice no. 13 is t = 0
+# [invert_contract_v4] stochastic source timeslice no. 14 is t = 1
+# [invert_contract_v4] stochastic source timeslice no. 15 is t = 2
+# [read_fermion] filename is stochastic_source.230031.00000.lime
+DML_partition_in times: read 0.01  send 0.00  total 0.02
+TIME(" fermion read","done") = 0.062 secs
+reading stochastic propagator for sample 0# [read_fermion] filename is stochastic_propagator_light.230031.00000.lime
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+TIME(" fermion read","done") = 0.054 secs
+# [invert_contract_baryon] MB - MB contraction for source location[1 / 1] = (3, 0, 2) t=3
+# [invert_contract_meson_baryon_meson_baryon] MB - MB 2pt output file contract_meson_baryon_meson_baryon_2pt.230031.x03y00z02t03.00
+TIME("phi","done") = 0.076 secs
+TIME("mxm_mxm_2pt eta_xi","done") = 0.056 secs
+TIME("mxm_mxm_2pt f1_f2_combination","done") = 0.017 secs
+TIME("mxm_mxm_2pt f1_f2_combination","done") = 0.524 secs
+TIME("mxm_mxm_2pt f1_f2_combination","done") = 1.162 secs
+TIME("mxm_mxm_2pt f1_f2_combination","done") = 1.759 secs
+TIME("contract MB-MB","done") = 2.423 secs
+# [read_fermion] filename is stochastic_source.230031.00001.lime
+DML_partition_in times: read 0.01  send 0.01  total 0.03
+TIME(" fermion read","done") = 0.076 secs
+reading stochastic propagator for sample 1# [read_fermion] filename is stochastic_propagator_light.230031.00001.lime
+DML_partition_in times: read 0.01  send 0.01  total 0.03
+TIME(" fermion read","done") = 0.037 secs
+# [invert_contract_baryon] MB - MB contraction for source location[1 / 1] = (3, 0, 2) t=3
+# [invert_contract_meson_baryon_meson_baryon] MB - MB 2pt output file contract_meson_baryon_meson_baryon_2pt.230031.x03y00z02t03.01
+TIME("phi","done") = 0.062 secs
+TIME("mxm_mxm_2pt eta_xi","done") = 0.061 secs
+TIME("mxm_mxm_2pt f1_f2_combination","done") = 0.041 secs
+TIME("mxm_mxm_2pt f1_f2_combination","done") = 0.795 secs
+TIME("mxm_mxm_2pt f1_f2_combination","done") = 1.642 secs
+TIME("mxm_mxm_2pt f1_f2_combination","done") = 2.451 secs
+TIME("contract MB-MB","done") = 3.237 secs
+# [invert_contract_v4] i_src = 2, i_prop = 2, t_src = 5, dt = 0, t_snk = 5, lookup table = 2
+# [invert_contract_v4] i_src = 2, i_prop = 2, t_src = 5, dt = 1, t_snk = 6, lookup table = 3
+# [invert_contract_v4] i_src = 2, i_prop = 2, t_src = 5, dt = 2, t_snk = 7, lookup table = 4
+# [invert_contract_v4] i_src = 2, i_prop = 2, t_src = 5, dt = 3, t_snk = 8, lookup table = 5
+# [invert_contract_v4] i_src = 2, i_prop = 2, t_src = 5, dt = 4, t_snk = 9, lookup table = 6
+# [invert_contract_v4] i_src = 2, i_prop = 2, t_src = 5, dt = 5, t_snk = 10, lookup table = 7
+# [invert_contract_v4] i_src = 2, i_prop = 2, t_src = 5, dt = 6, t_snk = 11, lookup table = 8
+# [invert_contract_v4] i_src = 2, i_prop = 2, t_src = 5, dt = 7, t_snk = 12, lookup table = 9
+# [invert_contract_v4] i_src = 2, i_prop = 2, t_src = 5, dt = 8, t_snk = 13, lookup table = 10
+# [invert_contract_v4] i_src = 2, i_prop = 2, t_src = 5, dt = 9, t_snk = 14, lookup table = 11
+# [invert_contract_v4] i_src = 2, i_prop = 2, t_src = 5, dt = 10, t_snk = 15, lookup table = 12
+# [invert_contract_v4] i_src = 2, i_prop = 2, t_src = 5, dt = 11, t_snk = 0, lookup table = 13
+# [invert_contract_v4] i_src = 2, i_prop = 2, t_src = 5, dt = 12, t_snk = 1, lookup table = 14
+# [invert_contract_v4] i_src = 2, i_prop = 2, t_src = 5, dt = 13, t_snk = 2, lookup table = 15
+# [invert_contract_v4] i_src = 2, i_prop = 2, t_src = 5, dt = 14, t_snk = 3, lookup table = 0
+# [invert_contract_v4] i_src = 2, i_prop = 2, t_src = 5, dt = 15, t_snk = 4, lookup table = 1
+# [invert_contract_v4] stochastic source timeslice no. 0 is t = 3
+# [invert_contract_v4] stochastic source timeslice no. 1 is t = 4
+# [invert_contract_v4] stochastic source timeslice no. 2 is t = 5
+# [invert_contract_v4] stochastic source timeslice no. 3 is t = 6
+# [invert_contract_v4] stochastic source timeslice no. 4 is t = 7
+# [invert_contract_v4] stochastic source timeslice no. 5 is t = 8
+# [invert_contract_v4] stochastic source timeslice no. 6 is t = 9
+# [invert_contract_v4] stochastic source timeslice no. 7 is t = 10
+# [invert_contract_v4] stochastic source timeslice no. 8 is t = 11
+# [invert_contract_v4] stochastic source timeslice no. 9 is t = 12
+# [invert_contract_v4] stochastic source timeslice no. 10 is t = 13
+# [invert_contract_v4] stochastic source timeslice no. 11 is t = 14
+# [invert_contract_v4] stochastic source timeslice no. 12 is t = 15
+# [invert_contract_v4] stochastic source timeslice no. 13 is t = 0
+# [invert_contract_v4] stochastic source timeslice no. 14 is t = 1
+# [invert_contract_v4] stochastic source timeslice no. 15 is t = 2
+# [read_fermion] filename is stochastic_source.230031.00000.lime
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+TIME(" fermion read","done") = 0.017 secs
+reading stochastic propagator for sample 0# [read_fermion] filename is stochastic_propagator_light.230031.00000.lime
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+TIME(" fermion read","done") = 0.015 secs
+# [invert_contract_baryon] MB - MB contraction for source location[2 / 2] = (4, 6, 5) t=5
+# [invert_contract_meson_baryon_meson_baryon] MB - MB 2pt output file contract_meson_baryon_meson_baryon_2pt.230031.x04y06z05t05.00
+TIME("phi","done") = 0.053 secs
+TIME("mxm_mxm_2pt eta_xi","done") = 0.054 secs
+TIME("mxm_mxm_2pt f1_f2_combination","done") = 0.023 secs
+TIME("mxm_mxm_2pt f1_f2_combination","done") = 0.658 secs
+TIME("mxm_mxm_2pt f1_f2_combination","done") = 1.465 secs
+TIME("mxm_mxm_2pt f1_f2_combination","done") = 2.161 secs
+TIME("contract MB-MB","done") = 2.834 secs
+# [read_fermion] filename is stochastic_source.230031.00001.lime
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+TIME(" fermion read","done") = 0.018 secs
+reading stochastic propagator for sample 1# [read_fermion] filename is stochastic_propagator_light.230031.00001.lime
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+TIME(" fermion read","done") = 0.016 secs
+# [invert_contract_baryon] MB - MB contraction for source location[2 / 2] = (4, 6, 5) t=5
+# [invert_contract_meson_baryon_meson_baryon] MB - MB 2pt output file contract_meson_baryon_meson_baryon_2pt.230031.x04y06z05t05.01
+TIME("phi","done") = 0.059 secs
+TIME("mxm_mxm_2pt eta_xi","done") = 0.061 secs
+TIME("mxm_mxm_2pt f1_f2_combination","done") = 0.040 secs
+TIME("mxm_mxm_2pt f1_f2_combination","done") = 0.793 secs
+TIME("mxm_mxm_2pt f1_f2_combination","done") = 1.602 secs
+TIME("mxm_mxm_2pt f1_f2_combination","done") = 2.339 secs
+TIME("contract MB-MB","done") = 3.009 secs
+# [invert_contract_v4] i_src = 3, i_prop = 3, t_src = 1, dt = 0, t_snk = 1, lookup table = 14
+# [invert_contract_v4] i_src = 3, i_prop = 3, t_src = 1, dt = 1, t_snk = 2, lookup table = 15
+# [invert_contract_v4] i_src = 3, i_prop = 3, t_src = 1, dt = 2, t_snk = 3, lookup table = 0
+# [invert_contract_v4] i_src = 3, i_prop = 3, t_src = 1, dt = 3, t_snk = 4, lookup table = 1
+# [invert_contract_v4] i_src = 3, i_prop = 3, t_src = 1, dt = 4, t_snk = 5, lookup table = 2
+# [invert_contract_v4] i_src = 3, i_prop = 3, t_src = 1, dt = 5, t_snk = 6, lookup table = 3
+# [invert_contract_v4] i_src = 3, i_prop = 3, t_src = 1, dt = 6, t_snk = 7, lookup table = 4
+# [invert_contract_v4] i_src = 3, i_prop = 3, t_src = 1, dt = 7, t_snk = 8, lookup table = 5
+# [invert_contract_v4] i_src = 3, i_prop = 3, t_src = 1, dt = 8, t_snk = 9, lookup table = 6
+# [invert_contract_v4] i_src = 3, i_prop = 3, t_src = 1, dt = 9, t_snk = 10, lookup table = 7
+# [invert_contract_v4] i_src = 3, i_prop = 3, t_src = 1, dt = 10, t_snk = 11, lookup table = 8
+# [invert_contract_v4] i_src = 3, i_prop = 3, t_src = 1, dt = 11, t_snk = 12, lookup table = 9
+# [invert_contract_v4] i_src = 3, i_prop = 3, t_src = 1, dt = 12, t_snk = 13, lookup table = 10
+# [invert_contract_v4] i_src = 3, i_prop = 3, t_src = 1, dt = 13, t_snk = 14, lookup table = 11
+# [invert_contract_v4] i_src = 3, i_prop = 3, t_src = 1, dt = 14, t_snk = 15, lookup table = 12
+# [invert_contract_v4] i_src = 3, i_prop = 3, t_src = 1, dt = 15, t_snk = 0, lookup table = 13
+# [invert_contract_v4] stochastic source timeslice no. 0 is t = 3
+# [invert_contract_v4] stochastic source timeslice no. 1 is t = 4
+# [invert_contract_v4] stochastic source timeslice no. 2 is t = 5
+# [invert_contract_v4] stochastic source timeslice no. 3 is t = 6
+# [invert_contract_v4] stochastic source timeslice no. 4 is t = 7
+# [invert_contract_v4] stochastic source timeslice no. 5 is t = 8
+# [invert_contract_v4] stochastic source timeslice no. 6 is t = 9
+# [invert_contract_v4] stochastic source timeslice no. 7 is t = 10
+# [invert_contract_v4] stochastic source timeslice no. 8 is t = 11
+# [invert_contract_v4] stochastic source timeslice no. 9 is t = 12
+# [invert_contract_v4] stochastic source timeslice no. 10 is t = 13
+# [invert_contract_v4] stochastic source timeslice no. 11 is t = 14
+# [invert_contract_v4] stochastic source timeslice no. 12 is t = 15
+# [invert_contract_v4] stochastic source timeslice no. 13 is t = 0
+# [invert_contract_v4] stochastic source timeslice no. 14 is t = 1
+# [invert_contract_v4] stochastic source timeslice no. 15 is t = 2
+# [read_fermion] filename is stochastic_source.230031.00000.lime
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+TIME(" fermion read","done") = 0.016 secs
+reading stochastic propagator for sample 0# [read_fermion] filename is stochastic_propagator_light.230031.00000.lime
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+TIME(" fermion read","done") = 0.014 secs
+# [invert_contract_baryon] MB - MB contraction for source location[3 / 3] = (7, 3, 1) t=1
+# [invert_contract_meson_baryon_meson_baryon] MB - MB 2pt output file contract_meson_baryon_meson_baryon_2pt.230031.x07y03z01t01.00
+TIME("phi","done") = 0.058 secs
+TIME("mxm_mxm_2pt eta_xi","done") = 0.062 secs
+TIME("mxm_mxm_2pt f1_f2_combination","done") = 0.034 secs
+TIME("mxm_mxm_2pt f1_f2_combination","done") = 0.750 secs
+TIME("mxm_mxm_2pt f1_f2_combination","done") = 1.445 secs
+TIME("mxm_mxm_2pt f1_f2_combination","done") = 2.035 secs
+TIME("contract MB-MB","done") = 2.704 secs
+# [read_fermion] filename is stochastic_source.230031.00001.lime
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+TIME(" fermion read","done") = 0.016 secs
+reading stochastic propagator for sample 1# [read_fermion] filename is stochastic_propagator_light.230031.00001.lime
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+TIME(" fermion read","done") = 0.014 secs
+# [invert_contract_baryon] MB - MB contraction for source location[3 / 3] = (7, 3, 1) t=1
+# [invert_contract_meson_baryon_meson_baryon] MB - MB 2pt output file contract_meson_baryon_meson_baryon_2pt.230031.x07y03z01t01.01
+TIME("phi","done") = 0.053 secs
+TIME("mxm_mxm_2pt eta_xi","done") = 0.060 secs
+TIME("mxm_mxm_2pt f1_f2_combination","done") = 0.026 secs
+TIME("mxm_mxm_2pt f1_f2_combination","done") = 0.783 secs
+TIME("mxm_mxm_2pt f1_f2_combination","done") = 1.536 secs
+TIME("mxm_mxm_2pt f1_f2_combination","done") = 2.271 secs
+TIME("contract MB-MB","done") = 3.156 secs
+# [invert_contract_v4] i_src = 4, i_prop = 4, t_src = 6, dt = 0, t_snk = 6, lookup table = 3
+# [invert_contract_v4] i_src = 4, i_prop = 4, t_src = 6, dt = 1, t_snk = 7, lookup table = 4
+# [invert_contract_v4] i_src = 4, i_prop = 4, t_src = 6, dt = 2, t_snk = 8, lookup table = 5
+# [invert_contract_v4] i_src = 4, i_prop = 4, t_src = 6, dt = 3, t_snk = 9, lookup table = 6
+# [invert_contract_v4] i_src = 4, i_prop = 4, t_src = 6, dt = 4, t_snk = 10, lookup table = 7
+# [invert_contract_v4] i_src = 4, i_prop = 4, t_src = 6, dt = 5, t_snk = 11, lookup table = 8
+# [invert_contract_v4] i_src = 4, i_prop = 4, t_src = 6, dt = 6, t_snk = 12, lookup table = 9
+# [invert_contract_v4] i_src = 4, i_prop = 4, t_src = 6, dt = 7, t_snk = 13, lookup table = 10
+# [invert_contract_v4] i_src = 4, i_prop = 4, t_src = 6, dt = 8, t_snk = 14, lookup table = 11
+# [invert_contract_v4] i_src = 4, i_prop = 4, t_src = 6, dt = 9, t_snk = 15, lookup table = 12
+# [invert_contract_v4] i_src = 4, i_prop = 4, t_src = 6, dt = 10, t_snk = 0, lookup table = 13
+# [invert_contract_v4] i_src = 4, i_prop = 4, t_src = 6, dt = 11, t_snk = 1, lookup table = 14
+# [invert_contract_v4] i_src = 4, i_prop = 4, t_src = 6, dt = 12, t_snk = 2, lookup table = 15
+# [invert_contract_v4] i_src = 4, i_prop = 4, t_src = 6, dt = 13, t_snk = 3, lookup table = 0
+# [invert_contract_v4] i_src = 4, i_prop = 4, t_src = 6, dt = 14, t_snk = 4, lookup table = 1
+# [invert_contract_v4] i_src = 4, i_prop = 4, t_src = 6, dt = 15, t_snk = 5, lookup table = 2
+# [invert_contract_v4] stochastic source timeslice no. 0 is t = 3
+# [invert_contract_v4] stochastic source timeslice no. 1 is t = 4
+# [invert_contract_v4] stochastic source timeslice no. 2 is t = 5
+# [invert_contract_v4] stochastic source timeslice no. 3 is t = 6
+# [invert_contract_v4] stochastic source timeslice no. 4 is t = 7
+# [invert_contract_v4] stochastic source timeslice no. 5 is t = 8
+# [invert_contract_v4] stochastic source timeslice no. 6 is t = 9
+# [invert_contract_v4] stochastic source timeslice no. 7 is t = 10
+# [invert_contract_v4] stochastic source timeslice no. 8 is t = 11
+# [invert_contract_v4] stochastic source timeslice no. 9 is t = 12
+# [invert_contract_v4] stochastic source timeslice no. 10 is t = 13
+# [invert_contract_v4] stochastic source timeslice no. 11 is t = 14
+# [invert_contract_v4] stochastic source timeslice no. 12 is t = 15
+# [invert_contract_v4] stochastic source timeslice no. 13 is t = 0
+# [invert_contract_v4] stochastic source timeslice no. 14 is t = 1
+# [invert_contract_v4] stochastic source timeslice no. 15 is t = 2
+# [read_fermion] filename is stochastic_source.230031.00000.lime
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+TIME(" fermion read","done") = 0.018 secs
+reading stochastic propagator for sample 0# [read_fermion] filename is stochastic_propagator_light.230031.00000.lime
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+TIME(" fermion read","done") = 0.015 secs
+# [invert_contract_baryon] MB - MB contraction for source location[4 / 4] = (2, 1, 0) t=6
+# [invert_contract_meson_baryon_meson_baryon] MB - MB 2pt output file contract_meson_baryon_meson_baryon_2pt.230031.x02y01z00t06.00
+TIME("phi","done") = 0.060 secs
+TIME("mxm_mxm_2pt eta_xi","done") = 0.068 secs
+TIME("mxm_mxm_2pt f1_f2_combination","done") = 0.027 secs
+TIME("mxm_mxm_2pt f1_f2_combination","done") = 0.614 secs
+TIME("mxm_mxm_2pt f1_f2_combination","done") = 1.585 secs
+TIME("mxm_mxm_2pt f1_f2_combination","done") = 2.587 secs
+TIME("contract MB-MB","done") = 3.595 secs
+# [read_fermion] filename is stochastic_source.230031.00001.lime
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+TIME(" fermion read","done") = 0.019 secs
+reading stochastic propagator for sample 1# [read_fermion] filename is stochastic_propagator_light.230031.00001.lime
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+TIME(" fermion read","done") = 0.016 secs
+# [invert_contract_baryon] MB - MB contraction for source location[4 / 4] = (2, 1, 0) t=6
+# [invert_contract_meson_baryon_meson_baryon] MB - MB 2pt output file contract_meson_baryon_meson_baryon_2pt.230031.x02y01z00t06.01
+TIME("phi","done") = 0.052 secs
+TIME("mxm_mxm_2pt eta_xi","done") = 0.065 secs
+TIME("mxm_mxm_2pt f1_f2_combination","done") = 0.025 secs
+TIME("mxm_mxm_2pt f1_f2_combination","done") = 0.744 secs
+TIME("mxm_mxm_2pt f1_f2_combination","done") = 1.541 secs
+TIME("mxm_mxm_2pt f1_f2_combination","done") = 2.243 secs
+TIME("contract MB-MB","done") = 3.076 secs
+# [invert_contract_v4] i_src = 5, i_prop = 5, t_src = 7, dt = 0, t_snk = 7, lookup table = 4
+# [invert_contract_v4] i_src = 5, i_prop = 5, t_src = 7, dt = 1, t_snk = 8, lookup table = 5
+# [invert_contract_v4] i_src = 5, i_prop = 5, t_src = 7, dt = 2, t_snk = 9, lookup table = 6
+# [invert_contract_v4] i_src = 5, i_prop = 5, t_src = 7, dt = 3, t_snk = 10, lookup table = 7
+# [invert_contract_v4] i_src = 5, i_prop = 5, t_src = 7, dt = 4, t_snk = 11, lookup table = 8
+# [invert_contract_v4] i_src = 5, i_prop = 5, t_src = 7, dt = 5, t_snk = 12, lookup table = 9
+# [invert_contract_v4] i_src = 5, i_prop = 5, t_src = 7, dt = 6, t_snk = 13, lookup table = 10
+# [invert_contract_v4] i_src = 5, i_prop = 5, t_src = 7, dt = 7, t_snk = 14, lookup table = 11
+# [invert_contract_v4] i_src = 5, i_prop = 5, t_src = 7, dt = 8, t_snk = 15, lookup table = 12
+# [invert_contract_v4] i_src = 5, i_prop = 5, t_src = 7, dt = 9, t_snk = 0, lookup table = 13
+# [invert_contract_v4] i_src = 5, i_prop = 5, t_src = 7, dt = 10, t_snk = 1, lookup table = 14
+# [invert_contract_v4] i_src = 5, i_prop = 5, t_src = 7, dt = 11, t_snk = 2, lookup table = 15
+# [invert_contract_v4] i_src = 5, i_prop = 5, t_src = 7, dt = 12, t_snk = 3, lookup table = 0
+# [invert_contract_v4] i_src = 5, i_prop = 5, t_src = 7, dt = 13, t_snk = 4, lookup table = 1
+# [invert_contract_v4] i_src = 5, i_prop = 5, t_src = 7, dt = 14, t_snk = 5, lookup table = 2
+# [invert_contract_v4] i_src = 5, i_prop = 5, t_src = 7, dt = 15, t_snk = 6, lookup table = 3
+# [invert_contract_v4] stochastic source timeslice no. 0 is t = 3
+# [invert_contract_v4] stochastic source timeslice no. 1 is t = 4
+# [invert_contract_v4] stochastic source timeslice no. 2 is t = 5
+# [invert_contract_v4] stochastic source timeslice no. 3 is t = 6
+# [invert_contract_v4] stochastic source timeslice no. 4 is t = 7
+# [invert_contract_v4] stochastic source timeslice no. 5 is t = 8
+# [invert_contract_v4] stochastic source timeslice no. 6 is t = 9
+# [invert_contract_v4] stochastic source timeslice no. 7 is t = 10
+# [invert_contract_v4] stochastic source timeslice no. 8 is t = 11
+# [invert_contract_v4] stochastic source timeslice no. 9 is t = 12
+# [invert_contract_v4] stochastic source timeslice no. 10 is t = 13
+# [invert_contract_v4] stochastic source timeslice no. 11 is t = 14
+# [invert_contract_v4] stochastic source timeslice no. 12 is t = 15
+# [invert_contract_v4] stochastic source timeslice no. 13 is t = 0
+# [invert_contract_v4] stochastic source timeslice no. 14 is t = 1
+# [invert_contract_v4] stochastic source timeslice no. 15 is t = 2
+# [read_fermion] filename is stochastic_source.230031.00000.lime
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+TIME(" fermion read","done") = 0.019 secs
+reading stochastic propagator for sample 0# [read_fermion] filename is stochastic_propagator_light.230031.00000.lime
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+TIME(" fermion read","done") = 0.017 secs
+# [invert_contract_baryon] MB - MB contraction for source location[5 / 5] = (2, 7, 1) t=7
+# [invert_contract_meson_baryon_meson_baryon] MB - MB 2pt output file contract_meson_baryon_meson_baryon_2pt.230031.x02y07z01t07.00
+TIME("phi","done") = 0.057 secs
+TIME("mxm_mxm_2pt eta_xi","done") = 0.055 secs
+TIME("mxm_mxm_2pt f1_f2_combination","done") = 0.022 secs
+TIME("mxm_mxm_2pt f1_f2_combination","done") = 0.697 secs
+TIME("mxm_mxm_2pt f1_f2_combination","done") = 1.352 secs
+TIME("mxm_mxm_2pt f1_f2_combination","done") = 2.141 secs
+TIME("contract MB-MB","done") = 3.119 secs
+# [read_fermion] filename is stochastic_source.230031.00001.lime
+DML_partition_in times: read 0.00  send 0.01  total 0.02
+TIME(" fermion read","done") = 0.026 secs
+reading stochastic propagator for sample 1# [read_fermion] filename is stochastic_propagator_light.230031.00001.lime
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+TIME(" fermion read","done") = 0.020 secs
+# [invert_contract_baryon] MB - MB contraction for source location[5 / 5] = (2, 7, 1) t=7
+# [invert_contract_meson_baryon_meson_baryon] MB - MB 2pt output file contract_meson_baryon_meson_baryon_2pt.230031.x02y07z01t07.01
+TIME("phi","done") = 0.072 secs
+TIME("mxm_mxm_2pt eta_xi","done") = 0.068 secs
+TIME("mxm_mxm_2pt f1_f2_combination","done") = 0.025 secs
+TIME("mxm_mxm_2pt f1_f2_combination","done") = 0.914 secs
+TIME("mxm_mxm_2pt f1_f2_combination","done") = 1.669 secs
+TIME("mxm_mxm_2pt f1_f2_combination","done") = 2.246 secs
+TIME("contract MB-MB","done") = 3.026 secs
+# [invert_contract_v4] i_src = 6, i_prop = 6, t_src = 7, dt = 0, t_snk = 7, lookup table = 4
+# [invert_contract_v4] i_src = 6, i_prop = 6, t_src = 7, dt = 1, t_snk = 8, lookup table = 5
+# [invert_contract_v4] i_src = 6, i_prop = 6, t_src = 7, dt = 2, t_snk = 9, lookup table = 6
+# [invert_contract_v4] i_src = 6, i_prop = 6, t_src = 7, dt = 3, t_snk = 10, lookup table = 7
+# [invert_contract_v4] i_src = 6, i_prop = 6, t_src = 7, dt = 4, t_snk = 11, lookup table = 8
+# [invert_contract_v4] i_src = 6, i_prop = 6, t_src = 7, dt = 5, t_snk = 12, lookup table = 9
+# [invert_contract_v4] i_src = 6, i_prop = 6, t_src = 7, dt = 6, t_snk = 13, lookup table = 10
+# [invert_contract_v4] i_src = 6, i_prop = 6, t_src = 7, dt = 7, t_snk = 14, lookup table = 11
+# [invert_contract_v4] i_src = 6, i_prop = 6, t_src = 7, dt = 8, t_snk = 15, lookup table = 12
+# [invert_contract_v4] i_src = 6, i_prop = 6, t_src = 7, dt = 9, t_snk = 0, lookup table = 13
+# [invert_contract_v4] i_src = 6, i_prop = 6, t_src = 7, dt = 10, t_snk = 1, lookup table = 14
+# [invert_contract_v4] i_src = 6, i_prop = 6, t_src = 7, dt = 11, t_snk = 2, lookup table = 15
+# [invert_contract_v4] i_src = 6, i_prop = 6, t_src = 7, dt = 12, t_snk = 3, lookup table = 0
+# [invert_contract_v4] i_src = 6, i_prop = 6, t_src = 7, dt = 13, t_snk = 4, lookup table = 1
+# [invert_contract_v4] i_src = 6, i_prop = 6, t_src = 7, dt = 14, t_snk = 5, lookup table = 2
+# [invert_contract_v4] i_src = 6, i_prop = 6, t_src = 7, dt = 15, t_snk = 6, lookup table = 3
+# [invert_contract_v4] stochastic source timeslice no. 0 is t = 3
+# [invert_contract_v4] stochastic source timeslice no. 1 is t = 4
+# [invert_contract_v4] stochastic source timeslice no. 2 is t = 5
+# [invert_contract_v4] stochastic source timeslice no. 3 is t = 6
+# [invert_contract_v4] stochastic source timeslice no. 4 is t = 7
+# [invert_contract_v4] stochastic source timeslice no. 5 is t = 8
+# [invert_contract_v4] stochastic source timeslice no. 6 is t = 9
+# [invert_contract_v4] stochastic source timeslice no. 7 is t = 10
+# [invert_contract_v4] stochastic source timeslice no. 8 is t = 11
+# [invert_contract_v4] stochastic source timeslice no. 9 is t = 12
+# [invert_contract_v4] stochastic source timeslice no. 10 is t = 13
+# [invert_contract_v4] stochastic source timeslice no. 11 is t = 14
+# [invert_contract_v4] stochastic source timeslice no. 12 is t = 15
+# [invert_contract_v4] stochastic source timeslice no. 13 is t = 0
+# [invert_contract_v4] stochastic source timeslice no. 14 is t = 1
+# [invert_contract_v4] stochastic source timeslice no. 15 is t = 2
+# [read_fermion] filename is stochastic_source.230031.00000.lime
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+TIME(" fermion read","done") = 0.017 secs
+reading stochastic propagator for sample 0# [read_fermion] filename is stochastic_propagator_light.230031.00000.lime
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+TIME(" fermion read","done") = 0.016 secs
+# [invert_contract_baryon] MB - MB contraction for source location[6 / 6] = (1, 1, 6) t=7
+# [invert_contract_meson_baryon_meson_baryon] MB - MB 2pt output file contract_meson_baryon_meson_baryon_2pt.230031.x01y01z06t07.00
+TIME("phi","done") = 0.063 secs
+TIME("mxm_mxm_2pt eta_xi","done") = 0.062 secs
+TIME("mxm_mxm_2pt f1_f2_combination","done") = 0.040 secs
+TIME("mxm_mxm_2pt f1_f2_combination","done") = 0.766 secs
+TIME("mxm_mxm_2pt f1_f2_combination","done") = 1.488 secs
+TIME("mxm_mxm_2pt f1_f2_combination","done") = 2.188 secs
+TIME("contract MB-MB","done") = 2.846 secs
+# [read_fermion] filename is stochastic_source.230031.00001.lime
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+TIME(" fermion read","done") = 0.015 secs
+reading stochastic propagator for sample 1# [read_fermion] filename is stochastic_propagator_light.230031.00001.lime
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+TIME(" fermion read","done") = 0.015 secs
+# [invert_contract_baryon] MB - MB contraction for source location[6 / 6] = (1, 1, 6) t=7
+# [invert_contract_meson_baryon_meson_baryon] MB - MB 2pt output file contract_meson_baryon_meson_baryon_2pt.230031.x01y01z06t07.01
+TIME("phi","done") = 0.061 secs
+TIME("mxm_mxm_2pt eta_xi","done") = 0.064 secs
+TIME("mxm_mxm_2pt f1_f2_combination","done") = 0.039 secs
+TIME("mxm_mxm_2pt f1_f2_combination","done") = 0.829 secs
+TIME("mxm_mxm_2pt f1_f2_combination","done") = 1.631 secs
+TIME("mxm_mxm_2pt f1_f2_combination","done") = 2.385 secs
+TIME("contract MB-MB","done") = 3.175 secs
+# [invert_contract_v4] i_src = 7, i_prop = 7, t_src = 1, dt = 0, t_snk = 1, lookup table = 14
+# [invert_contract_v4] i_src = 7, i_prop = 7, t_src = 1, dt = 1, t_snk = 2, lookup table = 15
+# [invert_contract_v4] i_src = 7, i_prop = 7, t_src = 1, dt = 2, t_snk = 3, lookup table = 0
+# [invert_contract_v4] i_src = 7, i_prop = 7, t_src = 1, dt = 3, t_snk = 4, lookup table = 1
+# [invert_contract_v4] i_src = 7, i_prop = 7, t_src = 1, dt = 4, t_snk = 5, lookup table = 2
+# [invert_contract_v4] i_src = 7, i_prop = 7, t_src = 1, dt = 5, t_snk = 6, lookup table = 3
+# [invert_contract_v4] i_src = 7, i_prop = 7, t_src = 1, dt = 6, t_snk = 7, lookup table = 4
+# [invert_contract_v4] i_src = 7, i_prop = 7, t_src = 1, dt = 7, t_snk = 8, lookup table = 5
+# [invert_contract_v4] i_src = 7, i_prop = 7, t_src = 1, dt = 8, t_snk = 9, lookup table = 6
+# [invert_contract_v4] i_src = 7, i_prop = 7, t_src = 1, dt = 9, t_snk = 10, lookup table = 7
+# [invert_contract_v4] i_src = 7, i_prop = 7, t_src = 1, dt = 10, t_snk = 11, lookup table = 8
+# [invert_contract_v4] i_src = 7, i_prop = 7, t_src = 1, dt = 11, t_snk = 12, lookup table = 9
+# [invert_contract_v4] i_src = 7, i_prop = 7, t_src = 1, dt = 12, t_snk = 13, lookup table = 10
+# [invert_contract_v4] i_src = 7, i_prop = 7, t_src = 1, dt = 13, t_snk = 14, lookup table = 11
+# [invert_contract_v4] i_src = 7, i_prop = 7, t_src = 1, dt = 14, t_snk = 15, lookup table = 12
+# [invert_contract_v4] i_src = 7, i_prop = 7, t_src = 1, dt = 15, t_snk = 0, lookup table = 13
+# [invert_contract_v4] stochastic source timeslice no. 0 is t = 3
+# [invert_contract_v4] stochastic source timeslice no. 1 is t = 4
+# [invert_contract_v4] stochastic source timeslice no. 2 is t = 5
+# [invert_contract_v4] stochastic source timeslice no. 3 is t = 6
+# [invert_contract_v4] stochastic source timeslice no. 4 is t = 7
+# [invert_contract_v4] stochastic source timeslice no. 5 is t = 8
+# [invert_contract_v4] stochastic source timeslice no. 6 is t = 9
+# [invert_contract_v4] stochastic source timeslice no. 7 is t = 10
+# [invert_contract_v4] stochastic source timeslice no. 8 is t = 11
+# [invert_contract_v4] stochastic source timeslice no. 9 is t = 12
+# [invert_contract_v4] stochastic source timeslice no. 10 is t = 13
+# [invert_contract_v4] stochastic source timeslice no. 11 is t = 14
+# [invert_contract_v4] stochastic source timeslice no. 12 is t = 15
+# [invert_contract_v4] stochastic source timeslice no. 13 is t = 0
+# [invert_contract_v4] stochastic source timeslice no. 14 is t = 1
+# [invert_contract_v4] stochastic source timeslice no. 15 is t = 2
+# [read_fermion] filename is stochastic_source.230031.00000.lime
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+TIME(" fermion read","done") = 0.016 secs
+reading stochastic propagator for sample 0# [read_fermion] filename is stochastic_propagator_light.230031.00000.lime
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+TIME(" fermion read","done") = 0.014 secs
+# [invert_contract_baryon] MB - MB contraction for source location[7 / 7] = (1, 6, 1) t=1
+# [invert_contract_meson_baryon_meson_baryon] MB - MB 2pt output file contract_meson_baryon_meson_baryon_2pt.230031.x01y06z01t01.00
+TIME("phi","done") = 0.058 secs
+TIME("mxm_mxm_2pt eta_xi","done") = 0.055 secs
+TIME("mxm_mxm_2pt f1_f2_combination","done") = 0.022 secs
+TIME("mxm_mxm_2pt f1_f2_combination","done") = 0.728 secs
+TIME("mxm_mxm_2pt f1_f2_combination","done") = 1.467 secs
+TIME("mxm_mxm_2pt f1_f2_combination","done") = 2.275 secs
+TIME("contract MB-MB","done") = 3.028 secs
+# [read_fermion] filename is stochastic_source.230031.00001.lime
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+TIME(" fermion read","done") = 0.018 secs
+reading stochastic propagator for sample 1# [read_fermion] filename is stochastic_propagator_light.230031.00001.lime
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+TIME(" fermion read","done") = 0.015 secs
+# [invert_contract_baryon] MB - MB contraction for source location[7 / 7] = (1, 6, 1) t=1
+# [invert_contract_meson_baryon_meson_baryon] MB - MB 2pt output file contract_meson_baryon_meson_baryon_2pt.230031.x01y06z01t01.01
+TIME("phi","done") = 0.058 secs
+TIME("mxm_mxm_2pt eta_xi","done") = 0.067 secs
+TIME("mxm_mxm_2pt f1_f2_combination","done") = 0.021 secs
+TIME("mxm_mxm_2pt f1_f2_combination","done") = 0.687 secs
+TIME("mxm_mxm_2pt f1_f2_combination","done") = 1.466 secs
+TIME("mxm_mxm_2pt f1_f2_combination","done") = 2.084 secs
+TIME("contract MB-MB","done") = 2.857 secs
+# [invert_contract_v4] i_src = 8, i_prop = 8, t_src = 7, dt = 0, t_snk = 7, lookup table = 4
+# [invert_contract_v4] i_src = 8, i_prop = 8, t_src = 7, dt = 1, t_snk = 8, lookup table = 5
+# [invert_contract_v4] i_src = 8, i_prop = 8, t_src = 7, dt = 2, t_snk = 9, lookup table = 6
+# [invert_contract_v4] i_src = 8, i_prop = 8, t_src = 7, dt = 3, t_snk = 10, lookup table = 7
+# [invert_contract_v4] i_src = 8, i_prop = 8, t_src = 7, dt = 4, t_snk = 11, lookup table = 8
+# [invert_contract_v4] i_src = 8, i_prop = 8, t_src = 7, dt = 5, t_snk = 12, lookup table = 9
+# [invert_contract_v4] i_src = 8, i_prop = 8, t_src = 7, dt = 6, t_snk = 13, lookup table = 10
+# [invert_contract_v4] i_src = 8, i_prop = 8, t_src = 7, dt = 7, t_snk = 14, lookup table = 11
+# [invert_contract_v4] i_src = 8, i_prop = 8, t_src = 7, dt = 8, t_snk = 15, lookup table = 12
+# [invert_contract_v4] i_src = 8, i_prop = 8, t_src = 7, dt = 9, t_snk = 0, lookup table = 13
+# [invert_contract_v4] i_src = 8, i_prop = 8, t_src = 7, dt = 10, t_snk = 1, lookup table = 14
+# [invert_contract_v4] i_src = 8, i_prop = 8, t_src = 7, dt = 11, t_snk = 2, lookup table = 15
+# [invert_contract_v4] i_src = 8, i_prop = 8, t_src = 7, dt = 12, t_snk = 3, lookup table = 0
+# [invert_contract_v4] i_src = 8, i_prop = 8, t_src = 7, dt = 13, t_snk = 4, lookup table = 1
+# [invert_contract_v4] i_src = 8, i_prop = 8, t_src = 7, dt = 14, t_snk = 5, lookup table = 2
+# [invert_contract_v4] i_src = 8, i_prop = 8, t_src = 7, dt = 15, t_snk = 6, lookup table = 3
+# [invert_contract_v4] stochastic source timeslice no. 0 is t = 3
+# [invert_contract_v4] stochastic source timeslice no. 1 is t = 4
+# [invert_contract_v4] stochastic source timeslice no. 2 is t = 5
+# [invert_contract_v4] stochastic source timeslice no. 3 is t = 6
+# [invert_contract_v4] stochastic source timeslice no. 4 is t = 7
+# [invert_contract_v4] stochastic source timeslice no. 5 is t = 8
+# [invert_contract_v4] stochastic source timeslice no. 6 is t = 9
+# [invert_contract_v4] stochastic source timeslice no. 7 is t = 10
+# [invert_contract_v4] stochastic source timeslice no. 8 is t = 11
+# [invert_contract_v4] stochastic source timeslice no. 9 is t = 12
+# [invert_contract_v4] stochastic source timeslice no. 10 is t = 13
+# [invert_contract_v4] stochastic source timeslice no. 11 is t = 14
+# [invert_contract_v4] stochastic source timeslice no. 12 is t = 15
+# [invert_contract_v4] stochastic source timeslice no. 13 is t = 0
+# [invert_contract_v4] stochastic source timeslice no. 14 is t = 1
+# [invert_contract_v4] stochastic source timeslice no. 15 is t = 2
+# [read_fermion] filename is stochastic_source.230031.00000.lime
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+TIME(" fermion read","done") = 0.021 secs
+reading stochastic propagator for sample 0# [read_fermion] filename is stochastic_propagator_light.230031.00000.lime
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+TIME(" fermion read","done") = 0.016 secs
+# [invert_contract_baryon] MB - MB contraction for source location[8 / 8] = (4, 0, 5) t=7
+# [invert_contract_meson_baryon_meson_baryon] MB - MB 2pt output file contract_meson_baryon_meson_baryon_2pt.230031.x04y00z05t07.00
+TIME("phi","done") = 0.061 secs
+TIME("mxm_mxm_2pt eta_xi","done") = 0.061 secs
+TIME("mxm_mxm_2pt f1_f2_combination","done") = 0.039 secs
+TIME("mxm_mxm_2pt f1_f2_combination","done") = 0.786 secs
+TIME("mxm_mxm_2pt f1_f2_combination","done") = 1.538 secs
+TIME("mxm_mxm_2pt f1_f2_combination","done") = 2.233 secs
+TIME("contract MB-MB","done") = 2.958 secs
+# [read_fermion] filename is stochastic_source.230031.00001.lime
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+TIME(" fermion read","done") = 0.018 secs
+reading stochastic propagator for sample 1# [read_fermion] filename is stochastic_propagator_light.230031.00001.lime
+DML_partition_in times: read 0.00  send 0.01  total 0.01
+TIME(" fermion read","done") = 0.017 secs
+# [invert_contract_baryon] MB - MB contraction for source location[8 / 8] = (4, 0, 5) t=7
+# [invert_contract_meson_baryon_meson_baryon] MB - MB 2pt output file contract_meson_baryon_meson_baryon_2pt.230031.x04y00z05t07.01
+TIME("phi","done") = 0.076 secs
+TIME("mxm_mxm_2pt eta_xi","done") = 0.069 secs
+TIME("mxm_mxm_2pt f1_f2_combination","done") = 0.025 secs
+TIME("mxm_mxm_2pt f1_f2_combination","done") = 0.812 secs
+TIME("mxm_mxm_2pt f1_f2_combination","done") = 1.706 secs
+TIME("mxm_mxm_2pt f1_f2_combination","done") = 2.630 secs
+TIME("contract MB-MB","done") = 3.477 secs
+TIME("total time","done") = 89.203 secs
+# [sandbox] srun finished successfully for invert_contract.qlua, status was 0

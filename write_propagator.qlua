@@ -14,7 +14,12 @@ function write_propagator (v, param)
 
   if string.find(param.name, "forward") then
     filename = string.format("%s.%.4d.x%.2dy%.2dz%.2dt%.2d.h5", param.name, param.cfg, param.src_pos[1], param.src_pos[2], param.src_pos[3], param.src_t)
-  elseif string.find(param.name, "sequential") then
+  elseif string.find(param.name, "twostep_sequential") then
+    filename = string.format("%s.%.4d.x%.2dy%.2dz%.2dt%.2d.px%.2dpy%.2dpz%.2d.kx%.2dky%.2dkz%.2d.h5", param.name, param.cfg,
+        param.src_pos[1], param.src_pos[2], param.src_pos[3], param.src_t,
+        param.mom[1], param.mom[2], param.mom[3], param.twostepmom[1], param.twostepmom[2], param.twostepmom[3])
+  
+    elseif string.find(param.name, "sequential") then
     filename = string.format("%s.%.4d.x%.2dy%.2dz%.2dt%.2d.px%.2dpy%.2dpz%.2d.h5", param.name, param.cfg,
         param.src_pos[1], param.src_pos[2], param.src_pos[3], param.src_t,
         param.mom[1], param.mom[2], param.mom[3])
@@ -25,6 +30,7 @@ function write_propagator (v, param)
   elseif string.find(param.name, "stochastic_propagator") and string.find(param.name, "oet") then
     filename = string.format("%s.%.4d.t%.2d.%.5d.px%.2dpy%.2dpz%.2d.h5", param.name, param.cfg, param.src_t, param.sample,
         param.mom[1], param.mom[2], param.mom[3])
+
   else
     os.exit(1)
   end
@@ -76,6 +82,10 @@ function write_propagator_lime (v, param)
   
     if string.find(param.name, "forward") then
     filename = string.format("%s.%.4d.x%.2dy%.2dz%.2dt%.2d.lime", param.name, param.cfg, param.src_pos[1], param.src_pos[2], param.src_pos[3], param.src_t)
+  elseif string.find(param.name, "twostep_sequential") then
+    filename = string.format("%s.%.4d.x%.2dy%.2dz%.2dt%.2d.px%.2dpy%.2dpz%.2d.kx%.2dky%.2dkz%.2d.lime", param.name, param.cfg,
+        param.src_pos[1], param.src_pos[2], param.src_pos[3], param.src_t,
+        param.mom[1], param.mom[2], param.mom[3], param.twostepmom[1], param.twostepmom[2], param.twostepmom[3]) 
   elseif string.find(param.name, "sequential") then
     filename = string.format("%s.%.4d.x%.2dy%.2dz%.2dt%.2d.px%.2dpy%.2dpz%.2d.lime", param.name, param.cfg,
         param.src_pos[1], param.src_pos[2], param.src_pos[3], param.src_t,
@@ -83,14 +93,17 @@ function write_propagator_lime (v, param)
   elseif string.find(param.name, "stochastic_source") then
     filename = string.format("%s.%.4d.%.5d.lime", param.name, param.cfg, param.sample)
   elseif string.find(param.name, "stochastic_propagator") and not string.find(param.name, "oet") then
-    filename = string.format("%s.%.4d.t%.2d.%.5d.lime", param.name, param.cfg, param.src_t, param.sample)
+    filename = string.format("%s.%.4d.%.5d.lime", param.name, param.cfg, param.sample)
   elseif string.find(param.name, "stochastic_propagator") and string.find(param.name, "oet") then
     filename = string.format("%s.%.4d.t%.2d.%.5d.px%.2dpy%.2dpz%.2d.lime", param.name, param.cfg, param.src_t, param.sample,
         param.mom[1], param.mom[2], param.mom[3])
-  else
+
+  
+    else
     os.exit(1)
   end
-  
+ 
+  if not string.find(param.name, "stochastic") then  
   printf("# [write_propagator] filename is %s\n", filename)
     
   finfo = {["$tag"] = "DiracFermion", "QDP/C propagator test file"}                     
@@ -104,6 +117,14 @@ function write_propagator_lime (v, param)
    w:DiracFermion(v[{c=icol, d=ispin}], xml.unparse({["$tag"] = "Fermion"}))
                                                                                  
    end                                                                           
-   end                                                                           
-   w:close()                                                                     
+   end                                                    
+   w:close()                                              
+   else 
+   printf("# [write_fermion] filename is %s\n", filename)
+
+   finfo = {["$tag"] = "DiracFermion", "QDP/C propagator test file"}
+   w = qcd.qdpc.Writer(L, filename, xml.unparse(finfo))
+   w:DiracFermion(v, xml.unparse({["$tag"] = "Fermion"}))
+   w:close()
+   end
 end 

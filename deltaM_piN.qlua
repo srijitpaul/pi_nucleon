@@ -6,11 +6,11 @@ require "stdlib"
 
 -- delta-Meson--pi-Nucleon
 
-function deltaMpiN_3pt(seq, u, inp)
+function deltaMpiN_3pt(seq, u, out)
   --          g0            g2            gmu 
   corr_proj = {}
-  local Cgin = gamma{mu=3} * gamma{mu=1} * gamma{mu=inp}
-  local Cgout = gamma{mu=3} * gamma{mu=1} * gamma{mu=5}
+  local Cgin = gamma{mu=3} * gamma{mu=1} * gamma{mu=5} 
+  local Cgout = gamma{mu=3} * gamma{mu=1} * gamma{mu=out}
   --  local Pp =  (1 + gamma{mu=3}) / 4
   local bar_sign = vector.real(4)
   bar_sign[0] =  1  -- x
@@ -18,103 +18,76 @@ function deltaMpiN_3pt(seq, u, inp)
   bar_sign[2] =  1  -- z
   bar_sign[3] =  1  -- t
 
-  local a2 = u
-
+  local a2 = u 
+  printf("Sequential propagator norm: %12.10f\n",seq:spintrace():trace():real():norm2())
+  printf("Forward propagator norm:%12.10f\n", u:spintrace():trace():real():norm2())
   local a3 = qcd.quarkContract13( Cgout * seq * Cgin, u )
   local a4 = qcd.quarkContract13( seq * Cgin, Cgout * u )
-  local res = a2*((a3 + a4):spintrace())  + (a2 *( a3 + a4 ))
+  local res = a2 * (( a3 + a4 ):spintrace()) + (a2 * ( a3 + a4 ))
 
   a4 = seq * Cgin
   a3 = qcd.quarkContract13( Cgout * u, u )
   res = res + (a4 * (a3 + a3:spintranspose()))
-
+--  src = L:DiracPropagator()
+--  Nc = src:colors()
+--  for ic = 0, Nc - 1 do
+--   for is = 0, qcd.Ns - 1 do
+--      local dv = L:DiracFermion()
+--          dv[{0,0,0,0,c=ic,d=is}] = complex(1,0)
+--          src[{c=ic,d=is}] = dv
+--   end
+--  end
 
   for i=0, 15 do
 
-  local Pp =  gamma{n=i}
-  corr_proj[i] = (( Pp * res ):spintrace():trace()) * bar_sign[inp]
+  local Pp = gamma{n=i}
+    corr_proj[i] = ((Pp * res ):spintrace():trace()) * bar_sign[out]
   end
-
+--  print(corr_proj)
   return corr_proj
 
 
 end
 
---function antideltapp_2pt(d, u, mu, nu)
-  --  --          g0            g2            gmu 
-  --  local Cgmu = gamma{mu=3} * gamma{mu=1} * gamma{mu=mu}
-  --  local Cgnu = gamma{mu=3} * gamma{mu=1} * gamma{mu=nu}
-  --  local Pp =  (1 - gamma{mu=3}) / 4
---  local bar_sign = vector.real(4)
-  --  bar_sign[0] =  1  -- x
-  --  bar_sign[1] = -1  -- y
-  --  bar_sign[2] =  1  -- z
-  --  bar_sign[3] =  1  -- t
-  --
-  --  local a2 = Pp * u
-  --
-  --  local a3 = qcd.quarkContract13( Cgmu * u * Cgnu, u )
-  --  local a4 = qcd.quarkContract13( Cgmu * u, u * Cgnu )
---  local res = ( a2:spintrace() * (a3 + a4):spintrace() ):trace()
-                                                           --
-  --        a4 = a2 * Cgnu
-  --        a3 = qcd.quarkContract13( u, Cgmu * u )
-                                                   --        res = res + (a4 * a3):spintrace():trace()
-  --
-  --        a3 = qcd.quarkContract13( Cgmu * u, u )
-                                                   --        res = res + (a4 * a3):spintrace():trace()
-  --  
-  --        a3 = qcd.quarkContract13( u * Cgnu, Cgmu * u )
-  --        a4 = qcd.quarkContract13( Cgmu * u * Cgnu, u )
-                                                          --        res = res + (a2 * (a3 + a4)):spintrace():trace()
-                                                                                                             --
-                                                                                                             --  return res * bar_sign[nu]
-                                                                                                             --end
---function deltapion_3pt (d, u inp, cur, out)
-
-
-
---end                                                                                                             -- ********************************************************************
-                                                                                                             -- * run contractions
-  -- ********************************************************************
+-- ********************************************************************
+-- * run contractions
+-- ********************************************************************
 function contract_meson_baryon_3pt(L, seq, prop, src_loc, snk_momenta, seq_mom,  aff_out)
 
   -- boundary phase
-boundary_phase = vector.complex(L[3])
+  boundary_phase = vector.complex(L[3])
   for it = 0, src_loc[3] - 1 do
-  boundary_phase[it] = -1
+    boundary_phase[it] = -1
   end
   for it = src_loc[3], L[3]-1 do
-  boundary_phase[it] = 1
+    boundary_phase[it] = 1
   end
 
 
 -- delta 2-point
-  for imu = 0, 3 do
-  mu = (imu + 3) % 4
+  for mu = 0, 3 do
+   
  
 
   dNpiN3pt_fw = deltaMpiN_3pt(seq, prop, mu)
---dpp2pt_bw = antideltapp_2pt(prop, prop, mu, nu)
+
 
   for isnk, snk_mom in ipairs(snk_momenta) do
   local px = (2 * math.pi * snk_mom[1]) / L[0]
   local py = (2 * math.pi * snk_mom[2]) / L[1]
   local pz = (2 * math.pi * snk_mom[3]) / L[2]
-  local w = ( (L:Real(L:pcoord(0)) - src_loc[0]) * px +
-      (L:Real(L:pcoord(1)) - src_loc[1]) * py +
-      (L:Real(L:pcoord(2)) - src_loc[2]) * pz):expi()
+  local w = ((L:Real(L:pcoord(0)) - src_loc[0]) * px +
+             (L:Real(L:pcoord(1)) - src_loc[1]) * py +
+             (L:Real(L:pcoord(2)) - src_loc[2]) * pz):expi()
   for index = 0,15 do
   local w2 = (dNpiN3pt_fw[index] * w):sum(L:MultiSet(L[3], L:pcoord(3)))    
   local q2 = vector.complex(L[3])
-                                 --      local q3 = vector.complex(L[3])
+  
                                                                             
                                      for i = 0, #w2 - 1 do                       -- print 2pt values
                                      it = ( i + src_loc[3] ) % L[3]
                                      q2[i] = w2[it] * boundary_phase[it]
-                                     --printf("%12.10f\n",q2[i]:real())
-                                     --        q3[i] = w3[it] * boundary_phase[it]
-                                     -- printf("%3d%3d%3d%5d%3d%3d%16.7e%16.7e%16.7e%16.7e\n", snk_mom[1], snk_mom[2], snk_mom[3], imu, inu, i, q2:real(), q2:imag(), q3:real(), q3:imag())
+                                     --printf("%12.10f\n",w2[i]:real())
                                      end
 
                                      name = string.format("/deltaMpiN/fw/proj%.2d/in%dout%d/px%.2dpy%.2dpz%.2d/kx%.2dky%.2dkz%.2d/x%.2dy%.2dz%.2dt%.2d",
