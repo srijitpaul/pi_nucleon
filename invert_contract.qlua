@@ -850,7 +850,7 @@ local source_position = vector.int(4)
     --    printf("# [invert_contract_meson_baryon_meson_baryon] MB - MB 2pt output file %s\n", name)
 --    aw_mb_mb_2pt, am = qcd.aff.Writer(name)
     --    name = nil
-    local name = string.format("%s.%.4d.x%.2dy%.2dz%.2dt%.2d.%.2d", "contract_meson_baryon_meson_baryon_2pt", nconf, pos[1],pos[2],pos[3], t, i_sample)
+    local name = string.format("%s.%.4d.x%.2dy%.2dz%.2dt%.2d.%.2d", "W4_contract_meson_baryon_meson_baryon_2pt", nconf, pos[1],pos[2],pos[3], t, i_sample)
     printf("# [invert_contract_meson_baryon_meson_baryon] MB - MB 2pt output file %s\n", name)
 aw_mb_mb_2pt, am = qcd.aff.Writer(name)
     name = nil
