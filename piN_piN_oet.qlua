@@ -1,0 +1,200 @@
+require "stdlib"
+
+-- cvc  g0  g1  g2  g3 g5 id
+-- qlua g3  g0  g1  g2 g5 gamma[0]
+
+
+function oet_contract_meson_baryon_meson_baryon_2pt(L, prop, src_loc, oneseq_prop, xi, phi, aff_out)
+
+
+    --boundary phase
+    boundary_phase = vector.complex(L[3])
+    for it = 0, src_loc[3] - 1 do
+    boundary_phase[it] = -1
+    end
+    for it = src_loc[3], L[3]-1 do
+    boundary_phase[it] = 1
+    end
+
+    -- this becomes phi
+    local eta_phi = {}
+
+    local c_timer = timer("phi")
+    for i_pf1, pf1 in ipairs(pf1_list) do
+
+    eta_phi[i_pf1] = {}
+    local px = (2 * math.pi * pf1[1]) / L[0]
+    local py = (2 * math.pi * pf1[2]) / L[1]
+    local pz = (2 * math.pi * pf1[3]) / L[2]
+
+    local phase = ( L:Real(L:pcoord(0)) * px 
+            + L:Real(L:pcoord(1)) * py 
+            + L:Real(L:pcoord(2)) * pz)
+    :expi()
+     --local stoch = L:DiracPropagator()
+     --for ispin = 0, 3 do
+
+
+     --for icol = 0, 2 do
+     local c = L:DiracFermion()
+     c  = phase * phi 
+     eta_phi[i_pf1] = c
+     --end  -- end of loop on icol
+     --end  -- end of loop on ispin
+     --eta_phi[i_pf1] = stoch
+     end  -- end of loop on pf1 list
+     c_timer("done")
+
+     -- *********************************************************************************
+
+     local eta_xi = {}
+     local w_eta_xi = {}
+     w_timer = timer("w_eta_xi")
+     c_timer = timer("mxm_mxm_2pt eta_xi")
+     for i_pf2, pf2 in ipairs(pf2_list) do
+     eta_xi[i_pf2] = {}
+     w_eta_xi[i_pf2] = {}
+     local px = (2 * math.pi * pf2[1]) / L[0]
+     local py = (2 * math.pi * pf2[2]) / L[1]
+     local pz = (2 * math.pi * pf2[3]) / L[2]
+
+     local phase = ( L:Real(L:pcoord(0)) * px 
+             + L:Real(L:pcoord(1)) * py 
+             + L:Real(L:pcoord(2)) * pz)
+     :expi() 
+     for ispin = 0, 3 do
+            w_eta_xi[i_pf2][ispin] = {}
+
+            for icol = 0, 2 do
+                local c = L:DiracFermion()
+                c  = qcd.dot( xi, phase * ( gamma{mu=5} * prop[{c=icol, d=ispin}]) )
+                w_eta_xi[i_pf2][ispin][icol] = c:sum(L:MultiSet(L[3], L:pcoord(3)))                    
+            end  -- end of loop on icol
+        end  -- end of loop on ispin
+     
+
+
+      for i_pi2, pi2 in ipairs(pi2_list) do
+
+        eta_xi[i_pf2][i_pi2] = {}
+          for ispin = 0, 3 do
+            eta_xi[i_pf2][i_pi2][ispin] = {}
+
+            for icol = 0, 2 do
+                local c = L:DiracFermion()
+                c  = qcd.dot( xi, phase * ( gamma{mu=5} * oneseq_prop[i_pi2][{c=icol, d=ispin}]) )
+                eta_xi[i_pf2][i_pi2][ispin][icol] = c:sum(L:MultiSet(L[3], L:pcoord(3)))                    
+            end  -- end of loop on icol
+        end  -- end of loop on ispin
+     
+      end
+      end  -- end of loop on pf2 list
+      w_timer("done")
+      c_timer("done")
+      
+
+
+      
+      -- *********************************************************************************
+      --combotimer = timer("mxm_mxm_2pt f1_f2_combination")
+      local two_stoch_prop = {}
+      local one_stoch_prop = {}
+      for i_pf1, pf1 in ipairs(pf1_list) do
+      two_stoch_prop[i_pf1] = {}
+      one_stoch_prop[i_pf1] = {}
+      for i_pf2, pf2 in ipairs(pf2_list) do
+
+      two_stoch_prop[i_pf1][i_pf2] = {}
+      one_stoch_prop[i_pf1][i_pf2] = {}
+    --combotimer("done")
+    
+    local q1 = L:DiracFermion()
+    local one_stoch = L:DiracPropagator()
+    for it = 0, dt_source_sink_2pt do                                               
+        --local t = ( it + src_loc[3] ) % L[3]  
+      
+                local temp = L:DiracFermion()
+                L:Subset{axis=3, position=it}:where(function()
+                             temp:set(eta_phi[i_pf1])
+                               end)
+
+        for ispin = 0, 3 do                                                       
+            for icol = 0, 2 do
+                q1[{c=icol, d=ispin}] = temp[{c=icol, d=ispin}] * w_eta_xi[i_pf2][ispin][icol][it]
+                one_stoch[{c=icol, d=ispin}] = one_stoch[{c=icol, d=ispin}] + q1           
+             end
+        end
+    end
+    one_stoch_prop[i_pf1][i_pf2] = one_stoch
+
+
+    for i_pi2, pi2 in ipairs(pi2_list) do
+    --          g0            g2            g5
+
+    local q2 = L:DiracFermion()
+    local stoch = L:DiracPropagator()
+    for it = 0, dt_source_sink_2pt do                                               
+        --local t = ( it + src_loc[3] ) % L[3]  
+      
+                local temp = L:DiracFermion()
+                L:Subset{axis=3, position=it}:where(function()
+                             temp:set(eta_phi[i_pf1])
+                               end)
+
+        for ispin = 0, 3 do                                                       
+            for icol = 0, 2 do
+                q2[{c=icol, d=ispin}] = temp[{c=icol, d=ispin}] * eta_xi[i_pf2][i_pi2][ispin][icol][it]
+                stoch[{c=icol, d=ispin}] = stoch[{c=icol, d=ispin}] + q2           
+             end
+        end
+    end
+    two_stoch_prop[i_pf1][i_pf2][i_pi2] = stoch
+    local Cg5 = gamma{mu=2} * gamma{mu=0} 
+    local Pp =  (1 + gamma{mu=3}) / 4
+    local a2 = Pp * prop
+    local a3 = qcd.quarkContract13(Cg5 * two_stoch_prop[i_pf1][i_pf2][i_pi2] * Cg5, prop )
+    local a4 = qcd.quarkContract13( oneseq_prop[i_pi2] * Cg5, Cg5 * one_stoch_prop[i_pf1][i_pf2] )
+    --local res = a2*((a3):spintrace()) -- + (a2 *( a3 + a4 ))
+    --local res = a2 *(a4)
+
+    a4 = Pp * oneseq_prop[i_pi2] * Cg5
+    a3 = qcd.quarkContract13( Cg5 * one_stoch_prop[i_pf1][i_pf2], prop )
+    --local res = (a4 * (a3 ))--+ a3:spintranspose()))
+    local res = (a4 * a3:spintranspose())
+    res = res:spintrace():trace()
+    piNpiN2pt_fw  = res                   
+    
+    local snk_mom = vector.int(4) 
+    snk_mom[1] = -1*(pi2[1] + pf1[1] + pf2[1])
+    snk_mom[2] = -1*(pi2[2] + pf1[2] + pf2[2])
+    snk_mom[3] = -1*(pi2[3] + pf1[3] + pf2[3])
+    local px = (2 * math.pi * snk_mom[1]) / L[0]
+    local py = (2 * math.pi * snk_mom[2]) / L[1]
+    local pz = (2 * math.pi * snk_mom[3]) / L[2]
+    local w = ( (L:Real(L:pcoord(0)) - src_loc[0]) * px +
+            (L:Real(L:pcoord(1)) - src_loc[1]) * py +
+            (L:Real(L:pcoord(2)) - src_loc[2]) * pz):expi()
+    local w2 = (piNpiN2pt_fw * w):sum(L:MultiSet(L[3], L:pcoord(3)))    
+                                  local q2 = vector.complex(L[3])
+
+                                  for i = 0, #w2 - 1 do                       -- print 2pt values
+                                  it = ( i + src_loc[3] ) % L[3]
+                                  q2[i] = w2[it] * boundary_phase[it]
+                                  end
+
+                                  name = string.format("/piNpiN/fw/pi2x%.2dpi2y%.2dpi2z%.2d/pf2x%.2dpf2y%.2dpf2z%.2d/pf1x%.2dpf1y%.2dpf1z%.2d/x%.2dy%.2dz%.2dt%.2d",
+                                          pi2[1], pi2[2], pi2[3], pf1[1], pf1[2], pf1[3],
+                                          pf2[1], pf2[2], pf2[3], src_loc[0], src_loc[1], src_loc[2],src_loc[3])
+                                  aff_out:write(name, q2)
+                                  w2=nil
+                                  q2=nil
+                                  end  -- of loop on snk_momenta
+                              end
+                         end
+
+
+                                  boundary_phase = nil
+
+    end
+
+

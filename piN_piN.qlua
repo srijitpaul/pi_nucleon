@@ -154,13 +154,13 @@ function contract_meson_baryon_meson_baryon_2pt(L, prop, src_loc, oneseq_prop, x
     local a2 = Pp * prop
     local a3 = qcd.quarkContract13(Cg5 * two_stoch_prop[i_pf1][i_pf2][i_pi2] * Cg5, prop )
     local a4 = qcd.quarkContract13( oneseq_prop[i_pi2] * Cg5, Cg5 * one_stoch_prop[i_pf1][i_pf2] )
-    --local res = a2*((a3):spintrace()) -- + (a2 *( a3 + a4 ))
+    local res = a2*((a3):spintrace()) -- + (a2 *( a3 + a4 ))
     --local res = a2 *(a4)
 
     a4 = Pp * oneseq_prop[i_pi2] * Cg5
     a3 = qcd.quarkContract13( Cg5 * one_stoch_prop[i_pf1][i_pf2], prop )
     --local res = (a4 * (a3 ))--+ a3:spintranspose()))
-    local res = (a4 * a3:spintranspose())
+    --local res = (a4 * a3:spintranspose())
     res = res:spintrace():trace()
     piNpiN2pt_fw  = res                   
     
