@@ -8,7 +8,7 @@ ape_orthdir = 3
 
 
 wup_alpha = 3.0
-wup_n = 20
+wup_n = 0
 
 -- perform 4d-stout-smearing on-the-fly
 stout_smear = true
@@ -32,7 +32,7 @@ n_coherent_source = 1
 nconf = 
 
 nsample = 2
-
+nsample_oet = nsample
 -- conf	
 conf_name_prefix = "/home/srijit/Dropbox/spaul/Dina_Work/pion_nucleon/configs/lat_130110_"
 conf_name_input_suffix = ".nersc"
@@ -52,12 +52,13 @@ write_forward_propagator            = false
 write_sequential_propagator         = false
 read_sequential_propagator          = true
 write_twostep_sequential_propagator   = false
-read_twostep_sequential_propagator    = true
+read_twostep_sequential_propagator    = false
 write_stochastic_source             = false
 write_stochastic_propagator         = false
 read_stochastic_source              = true
 read_stochastic_propagator          = true
-
+read_propagator_oet                 = true
+write_stochastic_oet_propagator     = false
 
 -- light quarks
 mq_l = -0.0953
@@ -127,8 +128,8 @@ quark_bc = {1, 1, 1, 1}
 prop_volfmt = "single"
 
 sequential_source_momentum_list = {
-  { 0, 0, 0},
-  { 0, 0, 1}
+   { 0, 0, 0},
+   { 4, 1, 6}
 -- {0, 0, -1}
 }
 --[[
@@ -162,10 +163,10 @@ sequential_source_momentum_list = {
 
 sequential_source_gamma = {tag="g5", val=gamma{mu=5}}
 
-sink_momentum_list = sequential_source_momentum_list
+sink_momentum_list = {{0,0,0},{3,5,7}}
 
-pf1_list = sequential_source_momentum_list
-pf2_list = sequential_source_momentum_list
+pf1_list = sink_momentum_list
+pf2_list = {{0,0,0,0},{1,2,-3}}
 pi2_list = sequential_source_momentum_list
 twostep_sequential_source_momentum_list = sequential_source_momentum_list
 dt_source_sink_2pt = 15

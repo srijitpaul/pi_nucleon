@@ -98,8 +98,8 @@ function read_propagator_lime (L, param)
 
   elseif string.find(param.name, "stochastic_propagator") and string.find(param.name, "oet") then
 
-  filename = string.format("%s.%.4d.t%.2d.%.5d.px%.2dpy%.2dpz%.2d.lime", param.name, param.cfg, param.src_t, param.sample,
-      param.mom[1], param.mom[2], param.mom[3])
+  filename = string.format("%s.%.4d.t%.2d.%.5d.px%.2dpy%.2dpz%.2d.s%.2d.lime", param.name, param.cfg, param.src_t, param.sample,
+      param.mom[1], param.mom[2], param.mom[3],param.spin)
 
   else
 os.exit(1)
@@ -116,7 +116,7 @@ os.exit(1)
    for ispin = 0, 3 do
 
     prop[{c=icol, d=ispin}] = reader:DiracFermion()
-
+--    printf(" The norm of the Dirac Fermion with spin %d and color %d = %g\n",ispin, icol, prop[{c=icol, d=ispin}]:norm2()) 
    end
   end
   

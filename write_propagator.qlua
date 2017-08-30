@@ -95,8 +95,8 @@ function write_propagator_lime (v, param)
   elseif string.find(param.name, "stochastic_propagator") and not string.find(param.name, "oet") then
     filename = string.format("%s.%.4d.%.5d.lime", param.name, param.cfg, param.sample)
   elseif string.find(param.name, "stochastic_propagator") and string.find(param.name, "oet") then
-    filename = string.format("%s.%.4d.t%.2d.%.5d.px%.2dpy%.2dpz%.2d.lime", param.name, param.cfg, param.src_t, param.sample,
-        param.mom[1], param.mom[2], param.mom[3])
+    filename = string.format("%s.%.4d.t%.2d.%.5d.px%.2dpy%.2dpz%.2d.s%.2d.lime", param.name, param.cfg, param.src_t, param.sample,
+        param.mom[1], param.mom[2], param.mom[3],param.spin)
 
   
     else
