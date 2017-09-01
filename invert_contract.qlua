@@ -1,4 +1,5 @@
-package.path = '/home/srijit/Dropbox/spaul/softwares/build2/parts/qlua/tree/lhpc/?.qlua;/home/srijit/Dropbox/spaul/softwares/build2/parts/qlua/tree/qlib/?.qlua;' .. package.path
+--package.path = '/home/srijit/Dropbox/spaul/softwares/build2/parts/qlua/tree/lhpc/?.qlua;/home/srijit/Dropbox/spaul/softwares/build2/parts/qlua/tree/qlib/?.qlua;' .. package.path
+package.path = '/global/homes/s/srijitp/build/qlua_build_edison/build2/parts/qlua/tree/lhpc/?.qlua;/global/homes/s/srijitp/build/qlua_build_edison/build2/parts/qlua/tree/qlib/?.qlua;' .. package.path
 require "stdlib"
 require "gauge"
 require "ape-smear"

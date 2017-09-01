@@ -1,0 +1,10 @@
+/var/spool/slurmd/job7091727/slurm_script: line 36: /var/spool/slurmd/job7091727/slurm_script.log: Permission denied
+/var/spool/slurmd/job7091727/slurm_script: line 37: /var/spool/slurmd/job7091727/slurm_script.log: Permission denied
+/var/spool/slurmd/job7091727/slurm_script: line 40: /var/spool/slurmd/job7091727/slurm_script.log: Permission denied
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+slurmstepd: error: *** STEP 7091727.0 ON nid01315 CANCELLED AT 2017-09-01T06:51:32 DUE TO TIME LIMIT ***
+srun: got SIGCONT
+srun: forcing job termination
+srun: error: nid01428: tasks 552-569,571-575: Terminated
+srun: Terminating job step 7091727.0
+srun: error: nid01445: tasks 744-757,759-767: Terminated

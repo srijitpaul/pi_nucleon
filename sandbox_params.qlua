@@ -19,8 +19,8 @@ heavy_stout_rho = 0.08
 heavy_stout_n   = 10
 
 -- dimensions
-dims = {8, 8, 8, 16}
-network_dims={1, 1, 1, 2}
+dims = {24, 24, 24, 48}
+network_dims={4, 4, 4, 12}
 
 -- source locations
 source_locations = 
@@ -34,7 +34,7 @@ nconf =
 nsample = 2
 nsample_oet = nsample
 -- conf	
-conf_name_prefix = "/home/srijit/Dropbox/spaul/Dina_Work/pion_nucleon/configs/lat_130110_"
+conf_name_prefix = "/global/cscratch1/sd/smeinel/BMW/beta3.31_2hex_24c48_ml-0.09530_mh-0.04/lat_130110_"
 conf_name_input_suffix = ".nersc"
 conf_name_output_suffix = "_Stout_smeared.nersc"
 
