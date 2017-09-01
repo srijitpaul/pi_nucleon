@@ -8,7 +8,7 @@ ape_orthdir = 3
 
 
 wup_alpha = 3.0
-wup_n = 0
+wup_n = 20
 
 -- perform 4d-stout-smearing on-the-fly
 stout_smear = true
@@ -47,18 +47,18 @@ twostep_seq_propfile_prefix = "twostep_sequential_light_light"
 stochastic_propfile_prefix   = "stochastic_propagator"
 stochastic_sourcefile_prefix = "stochastic_source"
 
-read_forward_propagator             = true
-write_forward_propagator            = false
-write_sequential_propagator         = false
-read_sequential_propagator          = true
+read_forward_propagator             = false
+write_forward_propagator            = true
+write_sequential_propagator         = true
+read_sequential_propagator          = false
 write_twostep_sequential_propagator   = false
 read_twostep_sequential_propagator    = false
-write_stochastic_source             = false
-write_stochastic_propagator         = false
-read_stochastic_source              = true
-read_stochastic_propagator          = true
-read_propagator_oet                 = true
-write_stochastic_oet_propagator     = false
+write_stochastic_source             = true
+write_stochastic_propagator         = true
+read_stochastic_source              = false
+read_stochastic_propagator          = false
+read_propagator_oet                 = false
+write_stochastic_oet_propagator     = true
 
 -- light quarks
 mq_l = -0.0953
