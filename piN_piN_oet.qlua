@@ -95,18 +95,15 @@ function contract_mxb_mxb_oet (L, prop, phi_p, phi_0, pi2, src_loc, sample, aff_
                   (L:Real(L:pcoord(1)) * pf1y + src_loc[1] * pi1y ) +
                   (L:Real(L:pcoord(2)) * pf1z + src_loc[2] * pi1z ) ):expi()
 
-      --local w = ( (L:Real(L:pcoord(0)) * pf1x ) +
-      --            (L:Real(L:pcoord(1)) * pf1y ) +
-      --            (L:Real(L:pcoord(2)) * pf1z ) ):expi()
 
       local q2 = vector.complex( L[3] )
-      local w2 = (Z1 * w):sum(L:MultiSet(L[3], L:pcoord(3)))
+      local w2 = ((Z1+Z2+Z3+Z4) * w):sum(L:MultiSet(L[3], L:pcoord(3)))
       for i = 0, #w2 - 1 do
         it = ( i + src_loc[3] ) % L[3]
         q2[i] = -w2[it] * boundary_phase[it]
       end
 
-      name = string.format("/Z1/pi1x%.2dpi1y%.2dpi1z%.2d/pi2x%.2dpi2y%.2dpi2z%.2d/pf1x%.2dpf1y%.2dpf1z%.2d/pf2x%.2dpf2y%.2dpf2z%.2d/x%.2dy%.2dz%.2dt%.2d/s%d",
+      name = string.format("/pi1x%.2dpi1y%.2dpi1z%.2d/pi2x%.2dpi2y%.2dpi2z%.2d/pf1x%.2dpf1y%.2dpf1z%.2d/pf2x%.2dpf2y%.2dpf2z%.2d/x%.2dy%.2dz%.2dt%.2d/s%d",
           pi1[1], pi1[2], pi1[3],
           pi2[1], pi2[2], pi2[3],
           pf1[1], pf1[2], pf1[3],
@@ -114,50 +111,50 @@ function contract_mxb_mxb_oet (L, prop, phi_p, phi_0, pi2, src_loc, sample, aff_
           src_loc[0], src_loc[1], src_loc[2], src_loc[3], sample)
       aff_out:write(name, q2)
 
-      local q2 = vector.complex( L[3] )
-      local w2 = (Z2 * w):sum(L:MultiSet(L[3], L:pcoord(3)))
-      for i = 0, #w2 - 1 do
-        it = ( i + src_loc[3] ) % L[3]
-        q2[i] = -w2[it] * boundary_phase[it]
-      end
-
-      name = string.format("/Z2/pi1x%.2dpi1y%.2dpi1z%.2d/pi2x%.2dpi2y%.2dpi2z%.2d/pf1x%.2dpf1y%.2dpf1z%.2d/pf2x%.2dpf2y%.2dpf2z%.2d/x%.2dy%.2dz%.2dt%.2d/s%d",
-          pi1[1], pi1[2], pi1[3],
-          pi2[1], pi2[2], pi2[3],
-          pf1[1], pf1[2], pf1[3],
-          pf2[1], pf2[2], pf2[3],
-          src_loc[0], src_loc[1], src_loc[2], src_loc[3], sample)
-      aff_out:write(name, q2)
-
-      local q2 = vector.complex( L[3] )
-      local w2 = (Z3 * w):sum(L:MultiSet(L[3], L:pcoord(3)))
-      for i = 0, #w2 - 1 do
-        it = ( i + src_loc[3] ) % L[3]
-        q2[i] = -w2[it] * boundary_phase[it]
-      end
-
-      name = string.format("/Z3/pi1x%.2dpi1y%.2dpi1z%.2d/pi2x%.2dpi2y%.2dpi2z%.2d/pf1x%.2dpf1y%.2dpf1z%.2d/pf2x%.2dpf2y%.2dpf2z%.2d/x%.2dy%.2dz%.2dt%.2d/s%d",
-          pi1[1], pi1[2], pi1[3],
-          pi2[1], pi2[2], pi2[3],
-          pf1[1], pf1[2], pf1[3],
-          pf2[1], pf2[2], pf2[3],
-          src_loc[0], src_loc[1], src_loc[2], src_loc[3], sample)
-      aff_out:write(name, q2)
-
-      local q2 = vector.complex( L[3] )
-      local w2 = (Z4 * w):sum(L:MultiSet(L[3], L:pcoord(3)))
-      for i = 0, #w2 - 1 do
-        it = ( i + src_loc[3] ) % L[3]
-        q2[i] = -w2[it] * boundary_phase[it]
-      end
-
-      name = string.format("/Z4/pi1x%.2dpi1y%.2dpi1z%.2d/pi2x%.2dpi2y%.2dpi2z%.2d/pf1x%.2dpf1y%.2dpf1z%.2d/pf2x%.2dpf2y%.2dpf2z%.2d/x%.2dy%.2dz%.2dt%.2d/s%d",
-          pi1[1], pi1[2], pi1[3],
-          pi2[1], pi2[2], pi2[3],
-          pf1[1], pf1[2], pf1[3],
-          pf2[1], pf2[2], pf2[3],
-          src_loc[0], src_loc[1], src_loc[2], src_loc[3], sample)
-      aff_out:write(name, q2)
+--      local q2 = vector.complex( L[3] )
+--      local w2 = (Z2 * w):sum(L:MultiSet(L[3], L:pcoord(3)))
+--      for i = 0, #w2 - 1 do
+--        it = ( i + src_loc[3] ) % L[3]
+--        q2[i] = -w2[it] * boundary_phase[it]
+--      end
+--
+--      name = string.format("/Z2/pi1x%.2dpi1y%.2dpi1z%.2d/pi2x%.2dpi2y%.2dpi2z%.2d/pf1x%.2dpf1y%.2dpf1z%.2d/pf2x%.2dpf2y%.2dpf2z%.2d/x%.2dy%.2dz%.2dt%.2d/s%d",
+--          pi1[1], pi1[2], pi1[3],
+--          pi2[1], pi2[2], pi2[3],
+--          pf1[1], pf1[2], pf1[3],
+--          pf2[1], pf2[2], pf2[3],
+--          src_loc[0], src_loc[1], src_loc[2], src_loc[3], sample)
+--      aff_out:write(name, q2)
+--
+--      local q2 = vector.complex( L[3] )
+--      local w2 = (Z3 * w):sum(L:MultiSet(L[3], L:pcoord(3)))
+--      for i = 0, #w2 - 1 do
+--        it = ( i + src_loc[3] ) % L[3]
+--        q2[i] = -w2[it] * boundary_phase[it]
+--      end
+--
+--      name = string.format("/Z3/pi1x%.2dpi1y%.2dpi1z%.2d/pi2x%.2dpi2y%.2dpi2z%.2d/pf1x%.2dpf1y%.2dpf1z%.2d/pf2x%.2dpf2y%.2dpf2z%.2d/x%.2dy%.2dz%.2dt%.2d/s%d",
+--          pi1[1], pi1[2], pi1[3],
+--          pi2[1], pi2[2], pi2[3],
+--          pf1[1], pf1[2], pf1[3],
+--          pf2[1], pf2[2], pf2[3],
+--          src_loc[0], src_loc[1], src_loc[2], src_loc[3], sample)
+--      aff_out:write(name, q2)
+--
+--      local q2 = vector.complex( L[3] )
+--      local w2 = (Z4 * w):sum(L:MultiSet(L[3], L:pcoord(3)))
+--      for i = 0, #w2 - 1 do
+--        it = ( i + src_loc[3] ) % L[3]
+--        q2[i] = -w2[it] * boundary_phase[it]
+--      end
+--
+--      name = string.format("/Z4/pi1x%.2dpi1y%.2dpi1z%.2d/pi2x%.2dpi2y%.2dpi2z%.2d/pf1x%.2dpf1y%.2dpf1z%.2d/pf2x%.2dpf2y%.2dpf2z%.2d/x%.2dy%.2dz%.2dt%.2d/s%d",
+--          pi1[1], pi1[2], pi1[3],
+--          pi2[1], pi2[2], pi2[3],
+--          pf1[1], pf1[2], pf1[3],
+--          pf2[1], pf2[2], pf2[3],
+--          src_loc[0], src_loc[1], src_loc[2], src_loc[3], sample)
+--      aff_out:write(name, q2)
 
     end  -- of loop on total momenta momenta
 
