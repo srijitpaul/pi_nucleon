@@ -1,9 +1,9 @@
 #!/bin/bash -l
-#SBATCH -p debug
+#SBATCH -p regular
 #SBATCH -n 768
 #SBATCH -N 32
 
-#SBATCH -t 00:30:00
+#SBATCH -t 03:00:00
 #SBATCH --mail-type=BEGIN,END,FAIL
 #SBATCH --mail-user=s.paul@cyi.ac.cy
 
@@ -24,7 +24,7 @@ path_to_prog=$scripts
 TSize=48
 Thalf=$(($TSize / 2))
 
-params=sandbox_params.qlua
+params=params.qlua
 include="$scripts/plaquette.qlua  $scripts/timer.qlua $scripts/stout_smear.qlua $scripts/load_gauge_field.qlua $scripts/random_functions.qlua $scripts/gamma_perm_phase.qlua $scripts/gi_dcovi.qlua $scripts/make_mg_solver.qlua $scripts/write_propagator.qlua $scripts/read_propagator.qlua $scripts/deltapp_piN.qlua $scripts/deltaM_piN.qlua $scripts/piN_piN.qlua $scripts/piN_piN_oet.qlua"
 
 # gauge configuration number
@@ -43,7 +43,7 @@ echo "# [$MyName] source location string is \"$source_location_string\" "
 
 input="params.$g.qlua"
 
-cat $scripts/sandbox_params.qlua | awk '
+cat $scripts/params.qlua | awk '
   /^source_locations/ {print "'"$source_location_string"'"; next}
   /^nconf/ {print "nconf = ", '$g'; next}
   {print}' > $input

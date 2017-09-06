@@ -8,7 +8,7 @@ ape_orthdir = 3
 
 
 wup_alpha = 3.0
-wup_n = 20
+wup_n = 45
 
 -- perform 4d-stout-smearing on-the-fly
 stout_smear = true
@@ -32,7 +32,7 @@ n_coherent_source = 1
 nconf = 
 
 nsample = 2
-
+nsample_oet = nsample
 -- conf	
 conf_name_prefix = "/global/cscratch1/sd/smeinel/BMW/beta3.31_2hex_24c48_ml-0.09530_mh-0.04/lat_130110_"
 conf_name_input_suffix = ".nersc"
@@ -43,16 +43,22 @@ charm_propfile_prefix  = "forward_charm"
 bottom_propfile_prefix = "forward_bottom"
 
 seq_propfile_prefix = "sequential_light_light"
-
+twostep_seq_propfile_prefix = "twostep_sequential_light_light"
 stochastic_propfile_prefix   = "stochastic_propagator"
 stochastic_sourcefile_prefix = "stochastic_source"
 
-read_forward_propagator     = true
-write_forward_propagator    = false
-write_sequential_propagator = true
-write_stochastic_source     = false
-write_stochastic_propagator = false
-
+read_forward_propagator             = false
+write_forward_propagator            = true
+write_sequential_propagator         = true
+read_sequential_propagator          = false
+write_twostep_sequential_propagator   = false
+read_twostep_sequential_propagator    = false
+write_stochastic_source             = true
+write_stochastic_propagator         = true
+read_stochastic_source              = false
+read_stochastic_propagator          = false
+read_propagator_oet                 = false
+write_stochastic_oet_propagator     = true
 
 -- light quarks
 mq_l = -0.0953
@@ -122,8 +128,11 @@ quark_bc = {1, 1, 1, 1}
 prop_volfmt = "single"
 
 sequential_source_momentum_list = {
-  { 0, 0, 0},
- { 0, 0, 1}
+   { 0, 0, 0},
+   { 0, 0, 1},
+   { 0, 1, 1},
+   { 4, 1, 6}
+-- {0, 0, -1}
 }
 --[[
   { 0, 0,-1},
@@ -158,7 +167,11 @@ sequential_source_gamma = {tag="g5", val=gamma{mu=5}}
 
 sink_momentum_list = sequential_source_momentum_list
 
---dt_source_sink_2pt = 24
+pf1_list = sink_momentum_list
+pf2_list = pf1_list
+pi2_list = sequential_source_momentum_list
+twostep_sequential_source_momentum_list = sequential_source_momentum_list
+dt_source_sink_2pt = 15
 --dt_source_sink_3pt_list = {8, 10, 12}
 
 -- Multigrid solver parameters

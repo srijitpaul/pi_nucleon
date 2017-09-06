@@ -34,7 +34,7 @@ nconf =
 nsample = 2
 nsample_oet = nsample
 -- conf	
-conf_name_prefix = "/home/srijit/Dropbox/spaul/Dina_Work/pion_nucleon/configs/lat_130110_"
+conf_name_prefix = "lat_130110_"
 conf_name_input_suffix = ".nersc"
 conf_name_output_suffix = "_Stout_smeared.nersc"
 
