@@ -3,15 +3,27 @@ require "stdlib"
 -- cvc  g0  g1  g2  g3 g5 id
 -- qlua g3  g0  g1  g2 g5 gamma[0]
 
+--QLUA BINARY GAMMA INDEX CONVENTION
+-- Dirac_index      Binary Index
+--  g0 * g2          -g10
+--  g0                g08
+--  g5                g15
+--  g5 * g0           g07
+--  g1 * g0           g09
+--  g2 * g0           g10
+--  g3 * g0           g12
+--  g1                g01
+--  g2                g02
+--  g3                g04
+--  Id                g00 
 
 -- delta-Meson--pi-Nucleon
 
-function deltaMpiN_3pt(seq, u, out)
+function deltaMpiN_3pt(seq, u, inp, out)
   --          g0            g2            gmu 
   corr_proj = {}
-  local Cgin = gamma{mu=3} * gamma{mu=1} * gamma{mu=5} 
-  local Cgout = gamma{mu=3} * gamma{mu=1} * gamma{mu=out}
-  --  local Pp =  (1 + gamma{mu=3}) / 4
+  local Cgin = -1 * gamma{n=10} * gamma{n=inp} 
+  local Cgout = -1 * gamma{n=10} * gamma{n=out}
   local bar_sign = vector.real(4)
   bar_sign[0] =  1  -- x
   bar_sign[1] = -1  -- y
@@ -19,8 +31,8 @@ function deltaMpiN_3pt(seq, u, out)
   bar_sign[3] =  1  -- t
 
   local a2 = u 
-  printf("Sequential propagator norm: %12.10f\n",seq:spintrace():trace():real():norm2())
-  printf("Forward propagator norm:%12.10f\n", u:spintrace():trace():real():norm2())
+--  printf("Sequential propagator norm: %12.10f\n",seq:spintrace():trace():real():norm2())
+--  printf("Forward propagator norm:%12.10f\n", u:spintrace():trace():real():norm2())
   local a3 = qcd.quarkContract13( Cgout * seq * Cgin, u )
   local a4 = qcd.quarkContract13( seq * Cgin, Cgout * u )
   local res = a2 * (( a3 + a4 ):spintrace()) + (a2 * ( a3 + a4 ))
@@ -28,22 +40,13 @@ function deltaMpiN_3pt(seq, u, out)
   a4 = seq * Cgin
   a3 = qcd.quarkContract13( Cgout * u, u )
   res = res + (a4 * (a3 + a3:spintranspose()))
---  src = L:DiracPropagator()
---  Nc = src:colors()
---  for ic = 0, Nc - 1 do
---   for is = 0, qcd.Ns - 1 do
---      local dv = L:DiracFermion()
---          dv[{0,0,0,0,c=ic,d=is}] = complex(1,0)
---          src[{c=ic,d=is}] = dv
---   end
---  end
 
   for i=0, 15 do
 
-  local Pp = gamma{n=i}
+    local Pp = gamma{n=i}
     corr_proj[i] = ((Pp * res ):spintrace():trace()) * bar_sign[out]
   end
---  print(corr_proj)
+
   return corr_proj
 
 
@@ -63,50 +66,46 @@ function contract_meson_baryon_3pt(L, seq, prop, src_loc, snk_momenta, seq_mom, 
     boundary_phase[it] = 1
   end
 
-
+  local proton_gamma_index = {15, 0, 7, 8}
+  local delta_gamma_index = { 9, 10, 12, 1, 2, 4}
 -- delta 2-point
-  for mu = 0, 3 do
+  for input_gamma in proton_gamma_index do
+    for output_gamma in delta_gamma_index do 
+ 
+
+      dNpiN3pt_fw = deltaMpiN_3pt(seq, prop, input_gamma, output_gamma)
+
+
+      for isnk, snk_mom in ipairs(snk_momenta) do
+        local px = (2 * math.pi * snk_mom[1]) / L[0]
+        local py = (2 * math.pi * snk_mom[2]) / L[1]
+        local pz = (2 * math.pi * snk_mom[3]) / L[2]
+        local w = ((L:Real(L:pcoord(0)) - src_loc[0]) * px +
+                   (L:Real(L:pcoord(1)) - src_loc[1]) * py +
+                   (L:Real(L:pcoord(2)) - src_loc[2]) * pz):expi()
+        for index = 0,15 do
+          local w2 = (dNpiN3pt_fw[index] * w):sum(L:MultiSet(L[3], L:pcoord(3)))    
+          local q2 = vector.complex(L[3])
+          
+                                                                                    
+          for i = 0, #w2 - 1 do                       -- print 2pt values
+            it = ( i + src_loc[3] ) % L[3]
+            q2[i] = w2[it] * boundary_phase[it]
+            --printf("%12.10f\n",w2[i]:real())
+          end
+
+          name = string.format("/deltaMpiN/fw/proj%.2d/in%dout%d/px%.2dpy%.2dpz%.2d/kx%.2dky%.2dkz%.2d/x%.2dy%.2dz%.2dt%.2d",
+                                index, input_gamma, output_gamma,
+                                snk_mom[1], snk_mom[2], snk_mom[3], seq_mom[1], seq_mom[2], seq_mom[3], 
+                                src_loc[0], src_loc[1], src_loc[2],src_loc[3])
+          aff_out:write(name, q2)
+          w2=nil
+          q2=nil
+
+        end   -- of index of projectors
+      end  -- of loop on snk_momenta
    
- 
-
-  dNpiN3pt_fw = deltaMpiN_3pt(seq, prop, mu)
-
-
-  for isnk, snk_mom in ipairs(snk_momenta) do
-  local px = (2 * math.pi * snk_mom[1]) / L[0]
-  local py = (2 * math.pi * snk_mom[2]) / L[1]
-  local pz = (2 * math.pi * snk_mom[3]) / L[2]
-  local w = ((L:Real(L:pcoord(0)) - src_loc[0]) * px +
-             (L:Real(L:pcoord(1)) - src_loc[1]) * py +
-             (L:Real(L:pcoord(2)) - src_loc[2]) * pz):expi()
-  for index = 0,15 do
-  local w2 = (dNpiN3pt_fw[index] * w):sum(L:MultiSet(L[3], L:pcoord(3)))    
-  local q2 = vector.complex(L[3])
-  
-                                                                            
-                                     for i = 0, #w2 - 1 do                       -- print 2pt values
-                                     it = ( i + src_loc[3] ) % L[3]
-                                     q2[i] = w2[it] * boundary_phase[it]
-                                     --printf("%12.10f\n",w2[i]:real())
-                                     end
-
-                                     name = string.format("/deltaMpiN/fw/proj%.2d/in%dout%d/px%.2dpy%.2dpz%.2d/kx%.2dky%.2dkz%.2d/x%.2dy%.2dz%.2dt%.2d",
-                                         index, 5, mu,
-                                         snk_mom[1], snk_mom[2], snk_mom[3], seq_mom[1], seq_mom[2], seq_mom[3], src_loc[0], src_loc[1], src_loc[2],src_loc[3])
-  aff_out:write(name, q2)
-  --      name = string.format("/deltapp/bw/mu%dnu%d/px%.2dpy%.2dpz%.2d/x%.2dy%.2dz%.2dt%.2d",
-      --          imu, inu,
-      --          snk_mom[1], snk_mom[2], snk_mom[3], src_loc[0], src_loc[1], src_loc[2],src_loc[3])
---      aff_out:write(name, q3)
-
-  w2=nil
-  --      w3=nil
-  q2=nil
-  --      q3=nil
-  end   -- of index of projectors
-  end  -- of loop on snk_momenta
- 
-  end  -- of mu
-
+    end  -- of output_gamma
+  end -- of input_gamma
   boundary_phase = nil
-  end  -- contract_baryon_2pt
+end  -- contract_baryon_2pt

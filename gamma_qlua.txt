@@ -1,0 +1,13 @@
+--QLUA BINARY GAMMA INDEX CONVENTION
+-- Dirac_index      Binary Index
+--  g0 * g2          -g10
+--  g0                g08
+--  g5                g15
+--  g5 * g0           g07
+--  g1 * g0           g09
+--  g2 * g0           g10
+--  g3 * g0           g12
+--  g1                g01
+--  g2                g02
+--  g3                g04
+--  Id                g00

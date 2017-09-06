@@ -3,57 +3,63 @@ require "stdlib"
 -- cvc  g0  g1  g2  g3 g5 id
 -- qlua g3  g0  g1  g2 g5 gamma[0]
 
+--QLUA BINARY GAMMA INDEX CONVENTION
+-- Dirac_index      Binary Index
+--  g0 * g2          -g10
+--  g0                g08
+--  g5                g15
+--  g5 * g0           g07
+--  g1 * g0           g09
+--  g2 * g0           g10
+--  g3 * g0           g12
+--  g1                g01
+--  g2                g02
+--  g3                g04
+--  Id                g00 
+
+
+
 -- proton and antiproton
 
-function proton_2pt(d, u, inp2, out2)
+function proton_2pt(d, u, inp1, out1)
 
------------------------------------------------------
---  Selection of the gamma index for N-N contractions
---  gammas can vary from 
---  CVC                 QLUA                              IN/OUT
---  identity          = gamma{n   = 0}                    1
---  gamma_5           = gamma{mu  = 5}                    5
---  gamma_0           = gamma{mu  = 3}                    3
---  gamma_0 * gamma_5 = gamma{mu  = 3}  * gamma{mu = 5}   6
-----------------------------------------------------
-  local gamma_in2
-  if      inp2 == 6       then 
-    gamma_in2 = gamma{mu=5} * gamma{mu=3}  
-    gamma_in1 = gamma{n=0}  
-  elseif  inp2 == 1       then
-    gamma_in2 = gamma{n=0}
-    gamma_in1 = gamma{mu=5}
-  elseif  inp2 == 5       then
-    gamma_in2 = gamma{mu=in2}
-    gamma_in1 = gamma{n=0}
-  else
-    gamma_in2 = gamma{mu=in2}
-    gamma_in1 = gamma{mu=5}
-  end 
-
-
-  local gamma_out2 
-  if      out2 == 6       then
-    gamma_out2 = gamma{mu=5} * gamma{mu=3}
-    gamma_out1 = gammma{n=0}
-  elseif  out2 == 1       then
-    gamma_out2 = gamma{n=0}
-    gamma_out1 = gamma{mu=5}
-  elseif  out2 == 5       then
-    gamma_out2 = gamma{mu=out2}
-    gamma_out1 = gamma{n=0}
-  else
-    gamma_out2 = gamma{mu=out2}
-    gamma_out1 = gamma{mu=5}
+  local inp2
+  local out2
+  if inp1 == 15 then
+    inp2 == 0
+  elseif inp1 == 0 then
+    inp2 == 15 
+  elseif inp1 == 7 then
+    inp2 == 0
+  elseif inp1 == 8 then
+    inp2 == 15
   end
 
-  local Cgin  = gamma{mu=3} * gamma{mu=1} * gamma_in2
-  local Cgout = gamma{mu=3} * gamma{mu=1} * gamma_out2
-  local Pp =  (1 + gamma{mu=3}) / 2
-  local a2 = Pp * gamma_out1 * gamma_in1 * u
-  local a3 = qcd.quarkContract13(Cgout * d * Cgin, u )
 
-  return (a2:spintrace() * a3:spintrace() + (a2 * a3):spintrace()):trace()
+  if out1 == 15 then
+    out2 == 0
+  elseif out1 == 0 then
+    out2 == 15 
+  elseif out1 == 7 then
+    out2 == 0
+  elseif out1 == 8 then
+    out2 == 15
+  end
+
+
+
+  local Cgin  = -1 * gamma{n=10} * gamma{n=inp1}
+  local Cgout = -1 * gamma{n=10} * gamma{n=out1}  
+  corr_proj = {}
+  local a2    = gamma{n=out2} * gamma{n=inp2} * u
+  local a3    = qcd.quarkContract13(Cgout * d * Cgin, u )
+  local res   = (a2 * a3:spintrace()) + (a2 * a3)
+  
+  for i=0, 15 do
+    local Pp =  gamma{n=i}
+    corr_proj[i] = (Pp * res): spintrace():trace()
+  end
+  return corr_proj
 end
 
 
@@ -62,8 +68,8 @@ end
 function deltapp_2pt( u, inp, out)
   --          g0            g2            gmu 
   corr_proj = {}
-  local Cgin = gamma{mu=3} * gamma{mu=1} * gamma{mu=inp}
-  local Cgout = gamma{mu=3} * gamma{mu=1} * gamma{mu=out}
+  local Cgin = -1 * gamma{n=10} * gamma{n=inp}
+  local Cgout = -1 * gamma{n=10}* gamma{n=out}
   --  local Pp =  (1 + gamma{mu=3}) / 4
   local bar_sign = vector.real(4)
   bar_sign[0] =  1  -- x
@@ -105,10 +111,10 @@ function contract_baryon_2pt(L, prop, src_loc, snk_momenta, aff_out)
     boundary_phase[it] = 1
   end
 
-  index = {1, 5, 3, 6}
+  local proton_gamma_index = {15, 0, 7, 8}
   -- proton
-  for input_gamma in index do
-    for output_gamma in index do
+  for input_gamma in proton_gamma_index do
+    for output_gamma in proton_gamma_index do
 
       p2pt_fw = proton_2pt(prop, prop, input_gamma, output_gamma)
 
@@ -120,34 +126,38 @@ function contract_baryon_2pt(L, prop, src_loc, snk_momenta, aff_out)
         local w = ( (L:Real(L:pcoord(0)) - src_loc[0]) * px +
                     (L:Real(L:pcoord(1)) - src_loc[1]) * py +
                     (L:Real(L:pcoord(2)) - src_loc[2]) * pz):expi()
-        local w2 = (p2pt_fw * w):sum(L:MultiSet(L[3], L:pcoord(3)))    
-        local q2 = vector.complex(L[3])
-        for i = 0, #w2 - 1 do                       -- print 2pt values
-          it = ( i + src_loc[3] ) % L[3]
-          q2[i] = w2[it] * boundary_phase[it]
-                  
-        end
+
+        for index = 0, 15 do
+
+          local w2 = (p2pt_fw[index] * w):sum(L:MultiSet(L[3], L:pcoord(3)))    
+          local q2 = vector.complex(L[3])
+          for i = 0, #w2 - 1 do                       -- print 2pt values
+            it = ( i + src_loc[3] ) % L[3]
+            q2[i] = w2[it] * boundary_phase[it]
+                    
+          end
+          
+          name = string.format("/proton/fw/proj%.2d/in%.2dout%.2d/px%.2dpy%.2dpz%.2d/x%.2dy%.2dz%.2dt%.2d", index, input_gamma, output_gamma,
+                                 snk_mom[1], snk_mom[2], snk_mom[3], src_loc[0], src_loc[1], src_loc[2],src_loc[3])
+          aff_out:write(name, q2)
+                           
+              
+          w2=nil
+                    
+          q2=nil
         
-        name = string.format("/proton/fw/in%.2d/out%.2d/px%.2dpy%.2dpz%.2d/x%.2dy%.2dz%.2dt%.2d",input_gamma, output_gamma,
-                               snk_mom[1], snk_mom[2], snk_mom[3], src_loc[0], src_loc[1], src_loc[2],src_loc[3])
-        aff_out:write(name, q2)
-                         
-            
-        w2=nil
-                  
-        q2=nil
-                
+        end        
       end  -- of loop on snk_momenta
     end
   end
   
   -- delta 2-point
-  for imu = 0, 3 do
-    mu = (imu + 3) % 4
-    for inu = 0, 3 do
-      nu = (inu + 3) % 4
 
-      dpp2pt_fw = deltapp_2pt(prop, mu, nu)
+  local delta_gamma_index = { 9, 10, 12, 1, 2, 4}
+  for input_gamma in delta_gamma_index do
+    for output_gamma in delta_gamma_index do
+
+      dpp2pt_fw = deltapp_2pt(prop, input_gamma, output_gamma)
 
 
       for isnk, snk_mom in ipairs(snk_momenta) do
@@ -173,7 +183,7 @@ function contract_baryon_2pt(L, prop, src_loc, snk_momenta, aff_out)
           end
 
           name = string.format("/deltapp/fw/proj%.2d/in%dout%d/px%.2dpy%.2dpz%.2d/x%.2dy%.2dz%.2dt%.2d",
-                                index, mu, nu,
+                                index, input_gamma, output_gamma,
                                 snk_mom[1], snk_mom[2], snk_mom[3], src_loc[0], src_loc[1], src_loc[2],src_loc[3])
           aff_out:write(name, q2)
 

@@ -1,0 +1,126 @@
+g01
+  [     complex(0, 0)     complex(0, 1)     complex(0, 0)     complex(0, 0)]
+  [     complex(0, 1)     complex(0, 0)     complex(0, 0)     complex(0, 0)]
+  [     complex(0, 0)     complex(0, 0)     complex(0, 0)    complex(0, -1)]
+  [     complex(0, 0)     complex(0, 0)    complex(0, -1)     complex(0, 0)]
+g02
+  [     complex(0, 0)    complex(-1, 0)     complex(0, 0)     complex(0, 0)]
+  [     complex(1, 0)     complex(0, 0)     complex(0, 0)     complex(0, 0)]
+  [     complex(0, 0)     complex(0, 0)     complex(0, 0)     complex(1, 0)]
+  [     complex(0, 0)     complex(0, 0)    complex(-1, 0)     complex(0, 0)]
+g03
+  [     complex(0, 1)     complex(0, 0)     complex(0, 0)     complex(0, 0)]
+  [     complex(0, 0)    complex(0, -1)     complex(0, 0)     complex(0, 0)]
+  [     complex(0, 0)     complex(0, 0)    complex(0, -1)     complex(0, 0)]
+  [     complex(0, 0)     complex(0, 0)     complex(0, 0)     complex(0, 1)]
+g1
+  [     complex(0, 0)     complex(0, 0)     complex(0, 0)     complex(0, 1)]
+  [     complex(0, 0)     complex(0, 0)     complex(0, 1)     complex(0, 0)]
+  [     complex(0, 0)    complex(0, -1)     complex(0, 0)     complex(0, 0)]
+  [    complex(0, -1)     complex(0, 0)     complex(0, 0)     complex(0, 0)]
+g2
+  [     complex(0, 0)     complex(0, 0)     complex(0, 0)    complex(-1, 0)]
+  [     complex(0, 0)     complex(0, 0)     complex(1, 0)     complex(0, 0)]
+  [     complex(0, 0)     complex(1, 0)     complex(0, 0)     complex(0, 0)]
+  [    complex(-1, 0)     complex(0, 0)     complex(0, 0)     complex(0, 0)]
+g3
+  [     complex(0, 0)     complex(0, 0)     complex(0, 1)     complex(0, 0)]
+  [     complex(0, 0)     complex(0, 0)     complex(0, 0)    complex(0, -1)]
+  [    complex(0, -1)     complex(0, 0)     complex(0, 0)     complex(0, 0)]
+  [     complex(0, 0)     complex(0, 1)     complex(0, 0)     complex(0, 0)]
+
+00
+  [     complex(1, 0)     complex(0, 0)     complex(0, 0)     complex(0, 0)]
+  [     complex(0, 0)     complex(1, 0)     complex(0, 0)     complex(0, 0)]
+  [     complex(0, 0)     complex(0, 0)     complex(1, 0)     complex(0, 0)]
+  [     complex(0, 0)     complex(0, 0)     complex(0, 0)     complex(1, 0)]
+
+01
+  [     complex(0, 0)     complex(0, 0)     complex(0, 0)     complex(0, 1)]
+  [     complex(0, 0)     complex(0, 0)     complex(0, 1)     complex(0, 0)]
+  [     complex(0, 0)    complex(0, -1)     complex(0, 0)     complex(0, 0)]
+  [    complex(0, -1)     complex(0, 0)     complex(0, 0)     complex(0, 0)]
+
+02
+  [     complex(0, 0)     complex(0, 0)     complex(0, 0)    complex(-1, 0)]
+  [     complex(0, 0)     complex(0, 0)     complex(1, 0)     complex(0, 0)]
+  [     complex(0, 0)     complex(1, 0)     complex(0, 0)     complex(0, 0)]
+  [    complex(-1, 0)     complex(0, 0)     complex(0, 0)     complex(0, 0)]
+
+03
+  [    complex(0, -1)     complex(0, 0)     complex(0, 0)     complex(0, 0)]
+  [     complex(0, 0)     complex(0, 1)     complex(0, 0)     complex(0, 0)]
+  [     complex(0, 0)     complex(0, 0)    complex(0, -1)     complex(0, 0)]
+  [     complex(0, 0)     complex(0, 0)     complex(0, 0)     complex(0, 1)]
+
+04
+  [     complex(0, 0)     complex(0, 0)     complex(0, 1)     complex(0, 0)]
+  [     complex(0, 0)     complex(0, 0)     complex(0, 0)    complex(0, -1)]
+  [    complex(0, -1)     complex(0, 0)     complex(0, 0)     complex(0, 0)]
+  [     complex(0, 0)     complex(0, 1)     complex(0, 0)     complex(0, 0)]
+
+05
+  [     complex(0, 0)    complex(-1, 0)     complex(0, 0)     complex(0, 0)]
+  [     complex(1, 0)     complex(0, 0)     complex(0, 0)     complex(0, 0)]
+  [     complex(0, 0)     complex(0, 0)     complex(0, 0)    complex(-1, 0)]
+  [     complex(0, 0)     complex(0, 0)     complex(1, 0)     complex(0, 0)]
+
+06
+  [     complex(0, 0)    complex(0, -1)     complex(0, 0)     complex(0, 0)]
+  [    complex(0, -1)     complex(0, 0)     complex(0, 0)     complex(0, 0)]
+  [     complex(0, 0)     complex(0, 0)     complex(0, 0)    complex(0, -1)]
+  [     complex(0, 0)     complex(0, 0)    complex(0, -1)     complex(0, 0)]
+
+07
+  [     complex(0, 0)     complex(0, 0)     complex(1, 0)     complex(0, 0)]
+  [     complex(0, 0)     complex(0, 0)     complex(0, 0)     complex(1, 0)]
+  [    complex(-1, 0)     complex(0, 0)     complex(0, 0)     complex(0, 0)]
+  [     complex(0, 0)    complex(-1, 0)     complex(0, 0)     complex(0, 0)]
+
+08
+  [     complex(0, 0)     complex(0, 0)     complex(1, 0)     complex(0, 0)]
+  [     complex(0, 0)     complex(0, 0)     complex(0, 0)     complex(1, 0)]
+  [     complex(1, 0)     complex(0, 0)     complex(0, 0)     complex(0, 0)]
+  [     complex(0, 0)     complex(1, 0)     complex(0, 0)     complex(0, 0)]
+
+09
+  [     complex(0, 0)     complex(0, 1)     complex(0, 0)     complex(0, 0)]
+  [     complex(0, 1)     complex(0, 0)     complex(0, 0)     complex(0, 0)]
+  [     complex(0, 0)     complex(0, 0)     complex(0, 0)    complex(0, -1)]
+  [     complex(0, 0)     complex(0, 0)    complex(0, -1)     complex(0, 0)]
+
+10
+  [     complex(0, 0)    complex(-1, 0)     complex(0, 0)     complex(0, 0)]
+  [     complex(1, 0)     complex(0, 0)     complex(0, 0)     complex(0, 0)]
+  [     complex(0, 0)     complex(0, 0)     complex(0, 0)     complex(1, 0)]
+  [     complex(0, 0)     complex(0, 0)    complex(-1, 0)     complex(0, 0)]
+
+11
+  [     complex(0, 0)     complex(0, 0)    complex(0, -1)     complex(0, 0)]
+  [     complex(0, 0)     complex(0, 0)     complex(0, 0)     complex(0, 1)]
+  [    complex(0, -1)     complex(0, 0)     complex(0, 0)     complex(0, 0)]
+  [     complex(0, 0)     complex(0, 1)     complex(0, 0)     complex(0, 0)]
+
+12
+  [     complex(0, 1)     complex(0, 0)     complex(0, 0)     complex(0, 0)]
+  [     complex(0, 0)    complex(0, -1)     complex(0, 0)     complex(0, 0)]
+  [     complex(0, 0)     complex(0, 0)    complex(0, -1)     complex(0, 0)]
+  [     complex(0, 0)     complex(0, 0)     complex(0, 0)     complex(0, 1)]
+
+13
+  [     complex(0, 0)     complex(0, 0)     complex(0, 0)    complex(-1, 0)]
+  [     complex(0, 0)     complex(0, 0)     complex(1, 0)     complex(0, 0)]
+  [     complex(0, 0)    complex(-1, 0)     complex(0, 0)     complex(0, 0)]
+  [     complex(1, 0)     complex(0, 0)     complex(0, 0)     complex(0, 0)]
+
+14
+  [     complex(0, 0)     complex(0, 0)     complex(0, 0)    complex(0, -1)]
+  [     complex(0, 0)     complex(0, 0)    complex(0, -1)     complex(0, 0)]
+  [     complex(0, 0)    complex(0, -1)     complex(0, 0)     complex(0, 0)]
+  [    complex(0, -1)     complex(0, 0)     complex(0, 0)     complex(0, 0)]
+
+15
+  [     complex(1, 0)     complex(0, 0)     complex(0, 0)     complex(0, 0)]
+  [     complex(0, 0)     complex(1, 0)     complex(0, 0)     complex(0, 0)]
+  [     complex(0, 0)     complex(0, 0)    complex(-1, 0)     complex(0, 0)]
+  [     complex(0, 0)     complex(0, 0)     complex(0, 0)    complex(-1, 0)]
