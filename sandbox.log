@@ -1,4 +1,4 @@
-# [sandbox] source location string is "source_locations = { {t=0, pos={0, 0, 0}}, }" 
+# [sandbox] source location string is "source_locations = { {t=7, pos={1, 1, 6}}, }" 
 # [invert_contract_v3] Dimensions                = 8 8 8 16
 # [invert_contract_v3] prefix to conf name       = /home/srijit/Dropbox/spaul/Dina_Work/pion_nucleon/configs/lat_130110_
 # [invert_contract_v3] suffix to conf name       = .nersc
@@ -33,11 +33,13 @@
 	LINK_TRACE = 0.77375675
 	FLOATING_POINT = IEEE32BIG
 # END of "/home/srijit/Dropbox/spaul/Dina_Work/pion_nucleon/configs/lat_130110_230031.nersc" HEADER
-TIME("u load","done") = 0.034 secs
+TIME("u load","done") = 0.035 secs
 # [invert_contract] Plaquette (original) = 0.3575256072
 # [invert_contract] Stout-smearing gauge field
 # [invert_contract] Plaquette (smeared) = 0.7688143294
-TIME("stout smear","done") = 0.118 secs
+TIME("stout smear","done") = 0.131 secs
+# [invert_contract] Plaquette after (light quark) APE smearing = 0.9038500078
+# [invert_contract] Plaquette after (heavy quark) stout smearing = 0.7379452771
 init_level 0
 init_level 1
 creating MG level 0
@@ -49,9 +51,9 @@ nsquares = 1 1 1 2
 
 creating block
 local = 1
+0x4a540d 0x4a540d
 creating args
 creating null vecs
-0x4a540d 0x4a540d
 0x4a540d 0x4a540d
 0   7   18     0.0532429   0.056135    0.0830922   0.174498    0.320072    0.552987  
 1   2   6      0.0982698   0.125588  
@@ -150,7 +152,7 @@ setup its = 194
 21   128         73.2225     0.756341  
 22   128         77.6943     0.779094  
 23   128         100.955     0.888093  
-get_nullvecs: 5.15106 secs
+get_nullvecs: 6.28675 secs
 vcomp 0  ( 3054.93 3054.93 )  2.61608e-10 / 12219.7 = 2.14087e-14
 vcomp 1  ( 2858.54 2858.54 )  1.80414e-10 / 11434.1 = 1.57785e-14
 vcomp 0  ( 3054.93 3054.93 )  3.13123e-10 / 12219.7 = 2.56244e-14
@@ -172,7 +174,7 @@ vcomp 0  ( 1.244 1.244 )  2.92762e-15 / 4.97602 = 5.88347e-16
 vcomp 1  ( 0.161867 0.161867 )  1.38501e-14 / 0.647468 = 2.13912e-14
 vcomp 0  ( 0.10323 0.10323 )  2.22824e-15 / 0.41292 = 5.39631e-15
 vcomp 1  ( 0.0224176 0.0224176 )  1.12698e-15 / 0.0896706 = 1.25681e-14
-QOP_F_mgCloneOp: 7.9372 secs
+QOP_F_mgCloneOp: 8.53634 secs
 creating MG level 1
 creating lattice: 1 1 1 4
 ndim = 4
@@ -307,7 +309,7 @@ setup its = 128
 27   8           10.643      1.15342   
 28   8           10.2737     1.13323   
 29   8           9.80838     1.10727   
-get_nullvecs: 0.424937 secs
+get_nullvecs: 0.706977 secs
 vcomp 0  ( 234.145 234.145 )  2.56261e-11 / 936.58 = 2.73613e-14
 vcomp 1  ( 267.241 267.241 )  2.27985e-11 / 1068.96 = 2.13276e-14
 vcomp 0  ( 234.145 234.145 )  3.04105e-11 / 936.58 = 3.24697e-14
@@ -326,12 +328,11 @@ vcomp 0  ( 1.54334 1.54334 )  4.15913e-14 / 6.17335 = 6.73723e-15
 vcomp 1  ( 0.498282 0.498282 )  5.27785e-14 / 1.99313 = 2.64803e-14
 vcomp 0  ( 0.185014 0.185014 )  2.93893e-15 / 0.740054 = 3.97124e-15
 vcomp 1  ( 0.0662564 0.0662564 )  3.15518e-15 / 0.265026 = 1.19052e-14
-QOP_F_mgCloneOp: 0.263125 secs
-TIME("set up mg solver","done") = 13.916 secs
-# [invert_contract_v3] src[1] = (0, 0, 0, t = 0
-# [invert_contract_v3] base source location[1] = (0, 0, 0) t=0
+QOP_F_mgCloneOp: 0.370938 secs
+TIME("set up mg solver","done") = 16.131 secs
+# [invert_contract_v3] base source location[1] = (1, 1, 6) t=7
 # [invert_contract_v3] setting forward propagator no. 1
-# [invert_contract_baryon] MB - MB contraction for source location[1 / 1] = (0, 0, 0) t=0
+# [invert_contract_baryon] MB - MB contraction for source location[1 / 1] = (1, 1, 6) t=7
 # [invert_contract_v3] setting / smearing point source  1 / 1 - (c= 0, s= 0)
 # [invert_contract_v3] setting / smearing point source  1 / 1 - (c= 0, s= 1)
 # [invert_contract_v3] setting / smearing point source  1 / 1 - (c= 0, s= 2)
@@ -345,530 +346,444 @@ TIME("set up mg solver","done") = 13.916 secs
 # [invert_contract_v3] setting / smearing point source  1 / 1 - (c= 2, s= 2)
 # [invert_contract_v3] setting / smearing point source  1 / 1 - (c= 2, s= 3)
 L[3] = 16
-iters =    9  secs = 0.545479  rsq = 1.13382e-16
-level 0 count 9 tpre 0.00 tcoarse 0.12 tpost 0.34 trest 0.03 tprol 0.03
-level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.03 trest 0.00 tprol 0.00
-iters =    9  secs = 0.545929  rsq = 1.12888e-16
-level 0 count 9 tpre 0.00 tcoarse 0.13 tpost 0.32 trest 0.04 tprol 0.03
-level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.04 trest 0.00 tprol 0.00
-iters =    9  secs = 0.549963  rsq = 1.01264e-16
-level 0 count 9 tpre 0.00 tcoarse 0.12 tpost 0.34 trest 0.03 tprol 0.03
-level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.03 trest 0.00 tprol 0.00
-iters =    9  secs = 0.566768  rsq = 1.13092e-16
-level 0 count 9 tpre 0.00 tcoarse 0.12 tpost 0.36 trest 0.03 tprol 0.03
-level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.03 trest 0.00 tprol 0.00
-iters =    9  secs = 0.550836  rsq = 1.15841e-16
-level 0 count 9 tpre 0.00 tcoarse 0.13 tpost 0.32 trest 0.03 tprol 0.03
-level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.04 trest 0.00 tprol 0.00
-iters =    9  secs = 0.561681  rsq = 1.03613e-16
-level 0 count 9 tpre 0.00 tcoarse 0.11 tpost 0.36 trest 0.03 tprol 0.03
-level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.03 trest 0.00 tprol 0.00
-iters =    9  secs = 0.551200  rsq = 9.87542e-17
-level 0 count 9 tpre 0.00 tcoarse 0.13 tpost 0.33 trest 0.03 tprol 0.04
-level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.04 trest 0.00 tprol 0.00
-iters =    9  secs = 0.541214  rsq = 1.50969e-16
-level 0 count 9 tpre 0.00 tcoarse 0.12 tpost 0.33 trest 0.03 tprol 0.03
-level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.03 trest 0.00 tprol 0.00
-iters =    9  secs = 0.575395  rsq = 9.54133e-17
-level 0 count 9 tpre 0.00 tcoarse 0.12 tpost 0.36 trest 0.03 tprol 0.03
-level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.03 trest 0.00 tprol 0.00
-iters =    9  secs = 0.553375  rsq = 1.14196e-16
-level 0 count 9 tpre 0.00 tcoarse 0.13 tpost 0.33 trest 0.04 tprol 0.03
-level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.04 trest 0.00 tprol 0.00
-iters =    9  secs = 0.597567  rsq = 1.30971e-16
-level 0 count 9 tpre 0.00 tcoarse 0.12 tpost 0.37 trest 0.03 tprol 0.03
-level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.03 trest 0.00 tprol 0.00
-iters =    9  secs = 0.575760  rsq = 7.91124e-17
-level 0 count 9 tpre 0.00 tcoarse 0.13 tpost 0.35 trest 0.04 tprol 0.04
-level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.03 trest 0.00 tprol 0.00
-TIME("light forward inversion","done") = 7.184 secs
-# [write_propagator] filename is forward_light.230031.x00y00z00t00.h5
-TIME("write forward_light","done") = 0.149 secs
-#[invert_contract_v2]  sequential source momentum(1) = (0, 0, 0)
-# [invert_contract_v2] adding source timeslice 0 to sequential source list from propagator number 1
-# [invert_contract_v2] setting gamma x momentum 1 / 1 - (c= 0, s= 0)
-seq_source = 1.26426
-# [invert_contract_v2] setting gamma x momentum 1 / 1 - (c= 0, s= 1)
-seq_source = 1.26086
-# [invert_contract_v2] setting gamma x momentum 1 / 1 - (c= 0, s= 2)
-seq_source = 1.15465
-# [invert_contract_v2] setting gamma x momentum 1 / 1 - (c= 0, s= 3)
-seq_source = 1.3268
-# [invert_contract_v2] setting gamma x momentum 1 / 1 - (c= 1, s= 0)
-seq_source = 1.26661
-# [invert_contract_v2] setting gamma x momentum 1 / 1 - (c= 1, s= 1)
-seq_source = 1.26035
-# [invert_contract_v2] setting gamma x momentum 1 / 1 - (c= 1, s= 2)
-seq_source = 1.19409
-# [invert_contract_v2] setting gamma x momentum 1 / 1 - (c= 1, s= 3)
-seq_source = 1.29783
-# [invert_contract_v2] setting gamma x momentum 1 / 1 - (c= 2, s= 0)
-seq_source = 1.25677
-# [invert_contract_v2] setting gamma x momentum 1 / 1 - (c= 2, s= 1)
-seq_source = 1.24925
-# [invert_contract_v2] setting gamma x momentum 1 / 1 - (c= 2, s= 2)
-seq_source = 1.42472
-# [invert_contract_v2] setting gamma x momentum 1 / 1 - (c= 2, s= 3)
-seq_source = 1.11948
-TIME("seq_source_mom","done") = 0.068 secs
-L[3] = 16
-iters =    9  secs = 0.528164  rsq = 4.50968e-16
-level 0 count 9 tpre 0.00 tcoarse 0.12 tpost 0.32 trest 0.03 tprol 0.03
-level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.03 trest 0.00 tprol 0.00
-iters =    9  secs = 0.580809  rsq = 4.55387e-16
-level 0 count 9 tpre 0.00 tcoarse 0.12 tpost 0.37 trest 0.03 tprol 0.03
-level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.03 trest 0.00 tprol 0.00
-iters =    9  secs = 0.617629  rsq = 4.23762e-16
-level 0 count 9 tpre 0.00 tcoarse 0.13 tpost 0.39 trest 0.03 tprol 0.03
-level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.03 trest 0.00 tprol 0.00
-iters =    9  secs = 0.522587  rsq = 4.01107e-16
-level 0 count 9 tpre 0.00 tcoarse 0.12 tpost 0.31 trest 0.04 tprol 0.03
-level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.03 trest 0.00 tprol 0.00
-iters =    9  secs = 0.525237  rsq = 4.5266e-16
-level 0 count 9 tpre 0.00 tcoarse 0.12 tpost 0.32 trest 0.03 tprol 0.03
-level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.03 trest 0.00 tprol 0.00
-iters =    9  secs = 0.538191  rsq = 4.32764e-16
-level 0 count 9 tpre 0.00 tcoarse 0.13 tpost 0.31 trest 0.04 tprol 0.03
-level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.03 trest 0.00 tprol 0.00
-iters =    9  secs = 0.524898  rsq = 4.3269e-16
-level 0 count 9 tpre 0.00 tcoarse 0.13 tpost 0.30 trest 0.03 tprol 0.03
-level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.04 trest 0.00 tprol 0.00
-iters =    9  secs = 0.520649  rsq = 5.42889e-16
-level 0 count 9 tpre 0.00 tcoarse 0.12 tpost 0.31 trest 0.03 tprol 0.03
-level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.03 trest 0.00 tprol 0.00
-iters =    9  secs = 0.537920  rsq = 3.93221e-16
-level 0 count 9 tpre 0.00 tcoarse 0.12 tpost 0.32 trest 0.03 tprol 0.03
-level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.03 trest 0.00 tprol 0.00
-iters =    9  secs = 0.572905  rsq = 4.84142e-16
-level 0 count 9 tpre 0.00 tcoarse 0.12 tpost 0.34 trest 0.04 tprol 0.03
-level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.03 trest 0.00 tprol 0.00
-iters =    9  secs = 0.599221  rsq = 5.02073e-16
-level 0 count 9 tpre 0.00 tcoarse 0.13 tpost 0.38 trest 0.04 tprol 0.03
-level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.03 trest 0.00 tprol 0.00
-iters =    9  secs = 0.666626  rsq = 3.65705e-16
-level 0 count 9 tpre 0.00 tcoarse 0.14 tpost 0.42 trest 0.04 tprol 0.04
-level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.04 trest 0.00 tprol 0.00
-TIME("light sequential inversion","done") = 7.123 secs
-# [write_propagator] filename is sequential_light_light.230031.x00y00z00t00.px00py00pz00.lime
-#[invert_contract]  2-step sequential source momentum(1) = (0, 0, 0)
-# [invert_contract] adding sink timeslice 15 to sequential source list from propagator number 1 and 1-step sequential momentum(1) = (0, 0, 0)
-# [invert_contract] setting gamma x momentum 1 / 1 - (c= 0, s= 0)
-seq_source = 3.1647
-# [invert_contract] setting gamma x momentum 1 / 1 - (c= 0, s= 1)
-seq_source = 3.19433
-# [invert_contract] setting gamma x momentum 1 / 1 - (c= 0, s= 2)
-seq_source = 2.53115
-# [invert_contract] setting gamma x momentum 1 / 1 - (c= 0, s= 3)
-seq_source = 3.40198
-# [invert_contract] setting gamma x momentum 1 / 1 - (c= 1, s= 0)
-seq_source = 3.25132
-# [invert_contract] setting gamma x momentum 1 / 1 - (c= 1, s= 1)
-seq_source = 3.16947
-# [invert_contract] setting gamma x momentum 1 / 1 - (c= 1, s= 2)
-seq_source = 2.79608
-# [invert_contract] setting gamma x momentum 1 / 1 - (c= 1, s= 3)
-seq_source = 3.26211
-# [invert_contract] setting gamma x momentum 1 / 1 - (c= 2, s= 0)
-seq_source = 3.11258
-# [invert_contract] setting gamma x momentum 1 / 1 - (c= 2, s= 1)
-seq_source = 3.0442
-# [invert_contract] setting gamma x momentum 1 / 1 - (c= 2, s= 2)
-seq_source = 4.12543
-# [invert_contract] setting gamma x momentum 1 / 1 - (c= 2, s= 3)
-seq_source = 2.48246
-TIME("2-step seq_source_mom","done") = 0.071 secs
-L[3] = 16
-iters =    9  secs = 0.726060  rsq = 9.4541e-16
-level 0 count 9 tpre 0.00 tcoarse 0.15 tpost 0.46 trest 0.04 tprol 0.04
-level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.04 trest 0.00 tprol 0.00
-iters =    9  secs = 0.657885  rsq = 9.02915e-16
-level 0 count 9 tpre 0.00 tcoarse 0.15 tpost 0.40 trest 0.04 tprol 0.04
-level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.04 trest 0.00 tprol 0.00
-iters =    9  secs = 0.638671  rsq = 9.7558e-16
-level 0 count 9 tpre 0.00 tcoarse 0.13 tpost 0.41 trest 0.04 tprol 0.04
-level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.03 trest 0.00 tprol 0.00
-iters =    9  secs = 0.649485  rsq = 8.30553e-16
-level 0 count 9 tpre 0.00 tcoarse 0.14 tpost 0.40 trest 0.04 tprol 0.04
-level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.04 trest 0.00 tprol 0.00
-iters =    9  secs = 0.679492  rsq = 9.64136e-16
-level 0 count 9 tpre 0.00 tcoarse 0.15 tpost 0.43 trest 0.04 tprol 0.04
-level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.04 trest 0.00 tprol 0.00
-iters =    9  secs = 0.660534  rsq = 9.34862e-16
-level 0 count 9 tpre 0.00 tcoarse 0.13 tpost 0.43 trest 0.04 tprol 0.04
-level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.03 trest 0.00 tprol 0.00
-iters =    9  secs = 0.644442  rsq = 8.04858e-16
-level 0 count 9 tpre 0.00 tcoarse 0.14 tpost 0.40 trest 0.04 tprol 0.04
-level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.04 trest 0.00 tprol 0.00
-iters =   10  secs = 0.772371  rsq = 2.41462e-17
-level 0 count 10 tpre 0.00 tcoarse 0.16 tpost 0.48 trest 0.04 tprol 0.04
-level 1 count 10 tpre 0.00 tcoarse 0.00 tpost 0.04 trest 0.00 tprol 0.00
-iters =    9  secs = 0.643396  rsq = 8.18118e-16
-level 0 count 9 tpre 0.00 tcoarse 0.14 tpost 0.39 trest 0.04 tprol 0.04
-level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.04 trest 0.00 tprol 0.00
-iters =    9  secs = 0.665814  rsq = 9.69367e-16
-level 0 count 9 tpre 0.00 tcoarse 0.14 tpost 0.41 trest 0.04 tprol 0.04
-level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.04 trest 0.00 tprol 0.00
-iters =   10  secs = 0.798298  rsq = 2.38759e-17
-level 0 count 10 tpre 0.00 tcoarse 0.17 tpost 0.48 trest 0.05 tprol 0.04
-level 1 count 10 tpre 0.00 tcoarse 0.00 tpost 0.05 trest 0.00 tprol 0.00
-iters =    9  secs = 0.634469  rsq = 8.85013e-16
-level 0 count 9 tpre 0.00 tcoarse 0.13 tpost 0.40 trest 0.04 tprol 0.04
-level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.04 trest 0.00 tprol 0.00
-TIME("light 2-step sequential inversion","done") = 8.602 secs
-# [write_propagator] filename is twostep_sequential_light_light.230031.x00y00z00t00.px00py00pz00.kx00ky00kz00.lime
-#[invert_contract]  2-step sequential source momentum(2) = (0, 0, 1)
-# [invert_contract] adding sink timeslice 15 to sequential source list from propagator number 1 and 1-step sequential momentum(1) = (0, 0, 0)
-# [invert_contract] setting gamma x momentum 1 / 2 - (c= 0, s= 0)
-seq_source = 3.1647
-# [invert_contract] setting gamma x momentum 1 / 2 - (c= 0, s= 1)
-seq_source = 3.19433
-# [invert_contract] setting gamma x momentum 1 / 2 - (c= 0, s= 2)
-seq_source = 2.53115
-# [invert_contract] setting gamma x momentum 1 / 2 - (c= 0, s= 3)
-seq_source = 3.40198
-# [invert_contract] setting gamma x momentum 1 / 2 - (c= 1, s= 0)
-seq_source = 3.25132
-# [invert_contract] setting gamma x momentum 1 / 2 - (c= 1, s= 1)
-seq_source = 3.16947
-# [invert_contract] setting gamma x momentum 1 / 2 - (c= 1, s= 2)
-seq_source = 2.79608
-# [invert_contract] setting gamma x momentum 1 / 2 - (c= 1, s= 3)
-seq_source = 3.26211
-# [invert_contract] setting gamma x momentum 1 / 2 - (c= 2, s= 0)
-seq_source = 3.11258
-# [invert_contract] setting gamma x momentum 1 / 2 - (c= 2, s= 1)
-seq_source = 3.0442
-# [invert_contract] setting gamma x momentum 1 / 2 - (c= 2, s= 2)
-seq_source = 4.12543
-# [invert_contract] setting gamma x momentum 1 / 2 - (c= 2, s= 3)
-seq_source = 2.48246
-TIME("2-step seq_source_mom","done") = 0.063 secs
-L[3] = 16
-iters =    9  secs = 0.646054  rsq = 9.98494e-16
-level 0 count 9 tpre 0.00 tcoarse 0.15 tpost 0.39 trest 0.04 tprol 0.04
-level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.04 trest 0.00 tprol 0.00
-iters =   10  secs = 0.735888  rsq = 2.34375e-17
-level 0 count 10 tpre 0.00 tcoarse 0.16 tpost 0.46 trest 0.04 tprol 0.04
-level 1 count 10 tpre 0.00 tcoarse 0.00 tpost 0.04 trest 0.00 tprol 0.00
-iters =    9  secs = 0.677329  rsq = 9.22621e-16
-level 0 count 9 tpre 0.00 tcoarse 0.13 tpost 0.43 trest 0.04 tprol 0.04
-level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.03 trest 0.00 tprol 0.00
-iters =    9  secs = 0.703775  rsq = 9.50448e-16
-level 0 count 9 tpre 0.00 tcoarse 0.16 tpost 0.44 trest 0.04 tprol 0.04
-level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.04 trest 0.00 tprol 0.00
-iters =   10  secs = 0.720463  rsq = 2.7213e-17
-level 0 count 10 tpre 0.00 tcoarse 0.15 tpost 0.45 trest 0.04 tprol 0.04
-level 1 count 10 tpre 0.00 tcoarse 0.00 tpost 0.04 trest 0.00 tprol 0.00
-iters =    9  secs = 0.702890  rsq = 9.72246e-16
-level 0 count 9 tpre 0.00 tcoarse 0.14 tpost 0.46 trest 0.04 tprol 0.04
-level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.04 trest 0.00 tprol 0.00
-iters =    9  secs = 0.641250  rsq = 8.92094e-16
-level 0 count 9 tpre 0.00 tcoarse 0.14 tpost 0.39 trest 0.04 tprol 0.04
-level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.04 trest 0.00 tprol 0.00
-iters =    9  secs = 0.649687  rsq = 9.4689e-16
-level 0 count 9 tpre 0.00 tcoarse 0.15 tpost 0.40 trest 0.04 tprol 0.04
-level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.04 trest 0.00 tprol 0.00
-iters =    9  secs = 0.706891  rsq = 9.01845e-16
-level 0 count 9 tpre 0.00 tcoarse 0.14 tpost 0.45 trest 0.04 tprol 0.04
-level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.04 trest 0.00 tprol 0.00
-iters =    9  secs = 0.643121  rsq = 9.08075e-16
-level 0 count 9 tpre 0.00 tcoarse 0.14 tpost 0.39 trest 0.04 tprol 0.04
-level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.04 trest 0.00 tprol 0.00
-iters =   10  secs = 0.773188  rsq = 2.74773e-17
-level 0 count 10 tpre 0.00 tcoarse 0.15 tpost 0.50 trest 0.04 tprol 0.04
-level 1 count 10 tpre 0.00 tcoarse 0.00 tpost 0.04 trest 0.00 tprol 0.00
-iters =    9  secs = 0.699438  rsq = 8.92737e-16
+iters =    9  secs = 0.712792  rsq = 6.52204e-16
 level 0 count 9 tpre 0.00 tcoarse 0.15 tpost 0.44 trest 0.04 tprol 0.04
 level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.04 trest 0.00 tprol 0.00
-TIME("light 2-step sequential inversion","done") = 8.738 secs
-# [write_propagator] filename is twostep_sequential_light_light.230031.x00y00z00t00.px00py00pz00.kx00ky00kz01.lime
-#[invert_contract_v2]  sequential source momentum(2) = (0, 0, 1)
-# [invert_contract_v2] adding source timeslice 0 to sequential source list from propagator number 1
-# [invert_contract_v2] setting gamma x momentum 1 / 2 - (c= 0, s= 0)
-seq_source = 1.26426
-# [invert_contract_v2] setting gamma x momentum 1 / 2 - (c= 0, s= 1)
-seq_source = 1.26086
-# [invert_contract_v2] setting gamma x momentum 1 / 2 - (c= 0, s= 2)
-seq_source = 1.15465
-# [invert_contract_v2] setting gamma x momentum 1 / 2 - (c= 0, s= 3)
-seq_source = 1.3268
-# [invert_contract_v2] setting gamma x momentum 1 / 2 - (c= 1, s= 0)
-seq_source = 1.26661
-# [invert_contract_v2] setting gamma x momentum 1 / 2 - (c= 1, s= 1)
-seq_source = 1.26035
-# [invert_contract_v2] setting gamma x momentum 1 / 2 - (c= 1, s= 2)
-seq_source = 1.19409
-# [invert_contract_v2] setting gamma x momentum 1 / 2 - (c= 1, s= 3)
-seq_source = 1.29783
-# [invert_contract_v2] setting gamma x momentum 1 / 2 - (c= 2, s= 0)
-seq_source = 1.25677
-# [invert_contract_v2] setting gamma x momentum 1 / 2 - (c= 2, s= 1)
-seq_source = 1.24925
-# [invert_contract_v2] setting gamma x momentum 1 / 2 - (c= 2, s= 2)
-seq_source = 1.42472
-# [invert_contract_v2] setting gamma x momentum 1 / 2 - (c= 2, s= 3)
-seq_source = 1.11948
-TIME("seq_source_mom","done") = 0.063 secs
-L[3] = 16
-iters =    9  secs = 0.658182  rsq = 4.41744e-16
-level 0 count 9 tpre 0.00 tcoarse 0.14 tpost 0.41 trest 0.04 tprol 0.04
-level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.04 trest 0.00 tprol 0.00
-iters =    9  secs = 0.642428  rsq = 4.12524e-16
-level 0 count 9 tpre 0.00 tcoarse 0.14 tpost 0.40 trest 0.04 tprol 0.04
-level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.04 trest 0.00 tprol 0.00
-iters =    9  secs = 0.665454  rsq = 3.23721e-16
-level 0 count 9 tpre 0.00 tcoarse 0.14 tpost 0.43 trest 0.04 tprol 0.04
-level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.04 trest 0.00 tprol 0.00
-iters =    9  secs = 0.695757  rsq = 3.85807e-16
-level 0 count 9 tpre 0.00 tcoarse 0.15 tpost 0.44 trest 0.04 tprol 0.04
-level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.04 trest 0.00 tprol 0.00
-iters =    9  secs = 0.653114  rsq = 4.45393e-16
-level 0 count 9 tpre 0.00 tcoarse 0.14 tpost 0.40 trest 0.04 tprol 0.04
-level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.04 trest 0.00 tprol 0.00
-iters =    9  secs = 0.622055  rsq = 4.55895e-16
-level 0 count 9 tpre 0.00 tcoarse 0.14 tpost 0.37 trest 0.04 tprol 0.04
-level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.04 trest 0.00 tprol 0.00
-iters =    9  secs = 0.644770  rsq = 3.93677e-16
-level 0 count 9 tpre 0.00 tcoarse 0.15 tpost 0.39 trest 0.04 tprol 0.04
-level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.04 trest 0.00 tprol 0.00
-iters =    9  secs = 0.755689  rsq = 4.54978e-16
-level 0 count 9 tpre 0.00 tcoarse 0.15 tpost 0.49 trest 0.04 tprol 0.03
-level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.04 trest 0.00 tprol 0.00
-iters =    9  secs = 0.687779  rsq = 3.40008e-16
-level 0 count 9 tpre 0.00 tcoarse 0.15 tpost 0.42 trest 0.04 tprol 0.04
-level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.04 trest 0.00 tprol 0.00
-iters =    9  secs = 0.632183  rsq = 3.63023e-16
-level 0 count 9 tpre 0.00 tcoarse 0.14 tpost 0.39 trest 0.04 tprol 0.04
-level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.04 trest 0.00 tprol 0.00
-iters =    9  secs = 0.634808  rsq = 4.52877e-16
-level 0 count 9 tpre 0.00 tcoarse 0.14 tpost 0.38 trest 0.04 tprol 0.04
-level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.04 trest 0.00 tprol 0.00
-iters =    9  secs = 0.670305  rsq = 3.40983e-16
-level 0 count 9 tpre 0.00 tcoarse 0.14 tpost 0.41 trest 0.04 tprol 0.04
-level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.04 trest 0.00 tprol 0.00
-TIME("light sequential inversion","done") = 8.424 secs
-# [write_propagator] filename is sequential_light_light.230031.x00y00z00t00.px00py00pz01.lime
-#[invert_contract]  2-step sequential source momentum(1) = (0, 0, 0)
-# [invert_contract] adding sink timeslice 15 to sequential source list from propagator number 1 and 1-step sequential momentum(2) = (0, 0, 1)
-# [invert_contract] setting gamma x momentum 1 / 1 - (c= 0, s= 0)
-seq_source = 2.73678
-# [invert_contract] setting gamma x momentum 1 / 1 - (c= 0, s= 1)
-seq_source = 2.79036
-# [invert_contract] setting gamma x momentum 1 / 1 - (c= 0, s= 2)
-seq_source = 2.24756
-# [invert_contract] setting gamma x momentum 1 / 1 - (c= 0, s= 3)
-seq_source = 2.94606
-# [invert_contract] setting gamma x momentum 1 / 1 - (c= 1, s= 0)
-seq_source = 2.84894
-# [invert_contract] setting gamma x momentum 1 / 1 - (c= 1, s= 1)
-seq_source = 2.82992
-# [invert_contract] setting gamma x momentum 1 / 1 - (c= 1, s= 2)
-seq_source = 2.49609
-# [invert_contract] setting gamma x momentum 1 / 1 - (c= 1, s= 3)
-seq_source = 2.9107
-# [invert_contract] setting gamma x momentum 1 / 1 - (c= 2, s= 0)
-seq_source = 2.74664
-# [invert_contract] setting gamma x momentum 1 / 1 - (c= 2, s= 1)
-seq_source = 2.64093
-# [invert_contract] setting gamma x momentum 1 / 1 - (c= 2, s= 2)
-seq_source = 3.54028
-# [invert_contract] setting gamma x momentum 1 / 1 - (c= 2, s= 3)
-seq_source = 2.19173
-TIME("2-step seq_source_mom","done") = 0.071 secs
-L[3] = 16
-iters =    9  secs = 0.652844  rsq = 8.76233e-16
-level 0 count 9 tpre 0.00 tcoarse 0.14 tpost 0.40 trest 0.04 tprol 0.04
-level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.04 trest 0.00 tprol 0.00
-iters =   10  secs = 0.741878  rsq = 2.43926e-17
-level 0 count 10 tpre 0.00 tcoarse 0.15 tpost 0.46 trest 0.04 tprol 0.04
-level 1 count 10 tpre 0.00 tcoarse 0.00 tpost 0.04 trest 0.00 tprol 0.00
-iters =   10  secs = 0.706024  rsq = 2.37995e-17
-level 0 count 10 tpre 0.00 tcoarse 0.15 tpost 0.44 trest 0.04 tprol 0.04
-level 1 count 10 tpre 0.00 tcoarse 0.00 tpost 0.04 trest 0.00 tprol 0.00
-iters =    9  secs = 0.666670  rsq = 8.73508e-16
-level 0 count 9 tpre 0.00 tcoarse 0.15 tpost 0.41 trest 0.04 tprol 0.04
-level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.05 trest 0.00 tprol 0.00
-iters =    9  secs = 0.642085  rsq = 9.72131e-16
-level 0 count 9 tpre 0.00 tcoarse 0.14 tpost 0.40 trest 0.04 tprol 0.04
-level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.04 trest 0.00 tprol 0.00
-iters =    9  secs = 0.633292  rsq = 8.74536e-16
-level 0 count 9 tpre 0.00 tcoarse 0.14 tpost 0.39 trest 0.04 tprol 0.04
-level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.04 trest 0.00 tprol 0.00
-iters =    9  secs = 0.799719  rsq = 9.48361e-16
+iters =    9  secs = 1.082352  rsq = 4.43477e-16
+level 0 count 9 tpre 0.00 tcoarse 0.20 tpost 0.70 trest 0.05 tprol 0.04
+level 1 count 9 tpre 0.00 tcoarse 0.01 tpost 0.07 trest 0.00 tprol 0.00
+iters =    9  secs = 0.790086  rsq = 5.98059e-16
 level 0 count 9 tpre 0.00 tcoarse 0.16 tpost 0.51 trest 0.04 tprol 0.04
 level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.05 trest 0.00 tprol 0.00
-iters =   10  secs = 0.827654  rsq = 2.35498e-17
-level 0 count 10 tpre 0.00 tcoarse 0.18 tpost 0.51 trest 0.05 tprol 0.04
-level 1 count 10 tpre 0.00 tcoarse 0.00 tpost 0.05 trest 0.00 tprol 0.00
-iters =    9  secs = 0.673921  rsq = 8.84508e-16
-level 0 count 9 tpre 0.00 tcoarse 0.14 tpost 0.43 trest 0.04 tprol 0.04
-level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.04 trest 0.00 tprol 0.00
-iters =   10  secs = 0.714874  rsq = 2.35022e-17
-level 0 count 10 tpre 0.00 tcoarse 0.15 tpost 0.46 trest 0.04 tprol 0.04
-level 1 count 10 tpre 0.00 tcoarse 0.00 tpost 0.04 trest 0.00 tprol 0.00
-iters =   10  secs = 0.726491  rsq = 2.6473e-17
-level 0 count 10 tpre 0.00 tcoarse 0.16 tpost 0.45 trest 0.04 tprol 0.04
-level 1 count 10 tpre 0.00 tcoarse 0.00 tpost 0.04 trest 0.00 tprol 0.00
-iters =    9  secs = 0.653520  rsq = 7.39592e-16
-level 0 count 9 tpre 0.00 tcoarse 0.14 tpost 0.41 trest 0.04 tprol 0.04
-level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.04 trest 0.00 tprol 0.00
-TIME("light 2-step sequential inversion","done") = 8.878 secs
-# [write_propagator] filename is twostep_sequential_light_light.230031.x00y00z00t00.px00py00pz01.kx00ky00kz00.lime
-#[invert_contract]  2-step sequential source momentum(2) = (0, 0, 1)
-# [invert_contract] adding sink timeslice 15 to sequential source list from propagator number 1 and 1-step sequential momentum(2) = (0, 0, 1)
-# [invert_contract] setting gamma x momentum 1 / 2 - (c= 0, s= 0)
-seq_source = 2.73678
-# [invert_contract] setting gamma x momentum 1 / 2 - (c= 0, s= 1)
-seq_source = 2.79036
-# [invert_contract] setting gamma x momentum 1 / 2 - (c= 0, s= 2)
-seq_source = 2.24756
-# [invert_contract] setting gamma x momentum 1 / 2 - (c= 0, s= 3)
-seq_source = 2.94606
-# [invert_contract] setting gamma x momentum 1 / 2 - (c= 1, s= 0)
-seq_source = 2.84894
-# [invert_contract] setting gamma x momentum 1 / 2 - (c= 1, s= 1)
-seq_source = 2.82992
-# [invert_contract] setting gamma x momentum 1 / 2 - (c= 1, s= 2)
-seq_source = 2.49609
-# [invert_contract] setting gamma x momentum 1 / 2 - (c= 1, s= 3)
-seq_source = 2.9107
-# [invert_contract] setting gamma x momentum 1 / 2 - (c= 2, s= 0)
-seq_source = 2.74664
-# [invert_contract] setting gamma x momentum 1 / 2 - (c= 2, s= 1)
-seq_source = 2.64093
-# [invert_contract] setting gamma x momentum 1 / 2 - (c= 2, s= 2)
-seq_source = 3.54028
-# [invert_contract] setting gamma x momentum 1 / 2 - (c= 2, s= 3)
-seq_source = 2.19173
-TIME("2-step seq_source_mom","done") = 0.071 secs
-L[3] = 16
-iters =    9  secs = 0.644927  rsq = 6.20363e-16
-level 0 count 9 tpre 0.00 tcoarse 0.13 tpost 0.41 trest 0.04 tprol 0.04
-level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.03 trest 0.00 tprol 0.00
-iters =    9  secs = 0.658988  rsq = 6.66483e-16
-level 0 count 9 tpre 0.00 tcoarse 0.14 tpost 0.41 trest 0.04 tprol 0.04
-level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.04 trest 0.00 tprol 0.00
-iters =    9  secs = 0.680306  rsq = 5.95047e-16
-level 0 count 9 tpre 0.00 tcoarse 0.15 tpost 0.43 trest 0.04 tprol 0.04
-level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.04 trest 0.00 tprol 0.00
-iters =    9  secs = 0.734579  rsq = 5.73812e-16
-level 0 count 9 tpre 0.00 tcoarse 0.15 tpost 0.47 trest 0.04 tprol 0.04
-level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.04 trest 0.00 tprol 0.00
-iters =    9  secs = 0.669964  rsq = 7.87676e-16
-level 0 count 9 tpre 0.00 tcoarse 0.15 tpost 0.41 trest 0.04 tprol 0.04
-level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.04 trest 0.00 tprol 0.00
-iters =    9  secs = 0.658748  rsq = 6.26915e-16
-level 0 count 9 tpre 0.00 tcoarse 0.15 tpost 0.40 trest 0.04 tprol 0.04
-level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.04 trest 0.00 tprol 0.00
-iters =    9  secs = 0.728703  rsq = 6.59201e-16
-level 0 count 9 tpre 0.00 tcoarse 0.15 tpost 0.46 trest 0.04 tprol 0.04
-level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.04 trest 0.00 tprol 0.00
-iters =    9  secs = 0.722631  rsq = 7.34314e-16
-level 0 count 9 tpre 0.00 tcoarse 0.15 tpost 0.44 trest 0.04 tprol 0.04
-level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.04 trest 0.00 tprol 0.00
-iters =    9  secs = 0.678184  rsq = 6.08175e-16
-level 0 count 9 tpre 0.00 tcoarse 0.15 tpost 0.42 trest 0.04 tprol 0.04
-level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.04 trest 0.00 tprol 0.00
-iters =    9  secs = 0.680883  rsq = 6.09189e-16
-level 0 count 9 tpre 0.00 tcoarse 0.15 tpost 0.42 trest 0.04 tprol 0.04
-level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.04 trest 0.00 tprol 0.00
-iters =    9  secs = 0.714900  rsq = 7.27e-16
-level 0 count 9 tpre 0.00 tcoarse 0.15 tpost 0.45 trest 0.04 tprol 0.04
+iters =    9  secs = 1.083460  rsq = 3.78655e-16
+level 0 count 9 tpre 0.00 tcoarse 0.20 tpost 0.71 trest 0.05 tprol 0.04
+level 1 count 9 tpre 0.00 tcoarse 0.01 tpost 0.07 trest 0.00 tprol 0.00
+iters =    9  secs = 0.823836  rsq = 4.30095e-16
+level 0 count 9 tpre 0.00 tcoarse 0.17 tpost 0.52 trest 0.04 tprol 0.04
 level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.05 trest 0.00 tprol 0.00
-iters =    9  secs = 0.659043  rsq = 5.34819e-16
-level 0 count 9 tpre 0.00 tcoarse 0.14 tpost 0.42 trest 0.04 tprol 0.03
-level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.04 trest 0.00 tprol 0.00
-TIME("light 2-step sequential inversion","done") = 8.689 secs
-# [write_propagator] filename is twostep_sequential_light_light.230031.x00y00z00t00.px00py00pz01.kx00ky00kz01.lime
-# [invert_contract] number of stochastic source timeslices = 16
-# [invert_contract_v4] i_src = 1, i_prop = 1, t_src = 0, dt = 0, t_snk = 0, lookup table = 0
-# [invert_contract_v4] i_src = 1, i_prop = 1, t_src = 0, dt = 1, t_snk = 1, lookup table = 1
-# [invert_contract_v4] i_src = 1, i_prop = 1, t_src = 0, dt = 2, t_snk = 2, lookup table = 2
-# [invert_contract_v4] i_src = 1, i_prop = 1, t_src = 0, dt = 3, t_snk = 3, lookup table = 3
-# [invert_contract_v4] i_src = 1, i_prop = 1, t_src = 0, dt = 4, t_snk = 4, lookup table = 4
-# [invert_contract_v4] i_src = 1, i_prop = 1, t_src = 0, dt = 5, t_snk = 5, lookup table = 5
-# [invert_contract_v4] i_src = 1, i_prop = 1, t_src = 0, dt = 6, t_snk = 6, lookup table = 6
-# [invert_contract_v4] i_src = 1, i_prop = 1, t_src = 0, dt = 7, t_snk = 7, lookup table = 7
-# [invert_contract_v4] i_src = 1, i_prop = 1, t_src = 0, dt = 8, t_snk = 8, lookup table = 8
-# [invert_contract_v4] i_src = 1, i_prop = 1, t_src = 0, dt = 9, t_snk = 9, lookup table = 9
-# [invert_contract_v4] i_src = 1, i_prop = 1, t_src = 0, dt = 10, t_snk = 10, lookup table = 10
-# [invert_contract_v4] i_src = 1, i_prop = 1, t_src = 0, dt = 11, t_snk = 11, lookup table = 11
-# [invert_contract_v4] i_src = 1, i_prop = 1, t_src = 0, dt = 12, t_snk = 12, lookup table = 12
-# [invert_contract_v4] i_src = 1, i_prop = 1, t_src = 0, dt = 13, t_snk = 13, lookup table = 13
-# [invert_contract_v4] i_src = 1, i_prop = 1, t_src = 0, dt = 14, t_snk = 14, lookup table = 14
-# [invert_contract_v4] i_src = 1, i_prop = 1, t_src = 0, dt = 15, t_snk = 15, lookup table = 15
-# [invert_contract_v4] stochastic source timeslice no. 0 is t = 0
-# [invert_contract_v4] stochastic source timeslice no. 1 is t = 1
-# [invert_contract_v4] stochastic source timeslice no. 2 is t = 2
-# [invert_contract_v4] stochastic source timeslice no. 3 is t = 3
-# [invert_contract_v4] stochastic source timeslice no. 4 is t = 4
-# [invert_contract_v4] stochastic source timeslice no. 5 is t = 5
-# [invert_contract_v4] stochastic source timeslice no. 6 is t = 6
-# [invert_contract_v4] stochastic source timeslice no. 7 is t = 7
-# [invert_contract_v4] stochastic source timeslice no. 8 is t = 8
-# [invert_contract_v4] stochastic source timeslice no. 9 is t = 9
-# [invert_contract_v4] stochastic source timeslice no. 10 is t = 10
-# [invert_contract_v4] stochastic source timeslice no. 11 is t = 11
-# [invert_contract_v4] stochastic source timeslice no. 12 is t = 12
-# [invert_contract_v4] stochastic source timeslice no. 13 is t = 13
-# [invert_contract_v4] stochastic source timeslice no. 14 is t = 14
-# [invert_contract_v4] stochastic source timeslice no. 15 is t = 15
-# [write_fermion] filename is stochastic_source.230031.00000.lime
-Writing stochastic propagator# [invert_contract_v4] current stochastic source timeslice (0) t=0
-# [invert_contract_v4] current stochastic source timeslice (1) t=1
-# [invert_contract_v4] current stochastic source timeslice (2) t=2
-# [invert_contract_v4] current stochastic source timeslice (3) t=3
-# [invert_contract_v4] current stochastic source timeslice (4) t=4
-# [invert_contract_v4] current stochastic source timeslice (5) t=5
-# [invert_contract_v4] current stochastic source timeslice (6) t=6
-# [invert_contract_v4] current stochastic source timeslice (7) t=7
-# [invert_contract_v4] current stochastic source timeslice (8) t=8
-# [invert_contract_v4] current stochastic source timeslice (9) t=9
-# [invert_contract_v4] current stochastic source timeslice (10) t=10
-# [invert_contract_v4] current stochastic source timeslice (11) t=11
-# [invert_contract_v4] current stochastic source timeslice (12) t=12
-# [invert_contract_v4] current stochastic source timeslice (13) t=13
-# [invert_contract_v4] current stochastic source timeslice (14) t=14
-# [invert_contract_v4] current stochastic source timeslice (15) t=15
-iters =    9  secs = 0.699520  rsq = 7.67383e-17
+iters =    9  secs = 1.024496  rsq = 3.91558e-16
+level 0 count 9 tpre 0.00 tcoarse 0.20 tpost 0.67 trest 0.04 tprol 0.04
+level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.07 trest 0.00 tprol 0.00
+iters =    9  secs = 0.772479  rsq = 4.86075e-16
+level 0 count 9 tpre 0.00 tcoarse 0.17 tpost 0.49 trest 0.04 tprol 0.04
+level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.05 trest 0.00 tprol 0.00
+iters =    9  secs = 1.055154  rsq = 4.57837e-16
+level 0 count 9 tpre 0.00 tcoarse 0.20 tpost 0.68 trest 0.04 tprol 0.04
+level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.07 trest 0.00 tprol 0.00
+iters =    9  secs = 0.713910  rsq = 4.27265e-16
 level 0 count 9 tpre 0.00 tcoarse 0.16 tpost 0.44 trest 0.04 tprol 0.04
 level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.05 trest 0.00 tprol 0.00
-TIME("light stochastic propagator","done") = 0.753 secs
+iters =    9  secs = 1.043587  rsq = 4.64023e-16
+level 0 count 9 tpre 0.00 tcoarse 0.20 tpost 0.67 trest 0.04 tprol 0.04
+level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.07 trest 0.00 tprol 0.00
+iters =    9  secs = 0.673638  rsq = 5.25819e-16
+level 0 count 9 tpre 0.00 tcoarse 0.16 tpost 0.41 trest 0.04 tprol 0.04
+level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.04 trest 0.00 tprol 0.00
+iters =    9  secs = 1.010353  rsq = 6.33906e-16
+level 0 count 9 tpre 0.00 tcoarse 0.19 tpost 0.65 trest 0.04 tprol 0.04
+level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.06 trest 0.00 tprol 0.00
+TIME("light forward inversion","done") = 11.542 secs
+# [write_propagator] filename is forward_light.230031.x01y01z06t07.lime
+# [invert_contract_baryon] B - B contraction for source location[1 / 1] = (1, 1, 6) t=7
+# [invert_contract_baryon] B - B 2pt output file contract_baryon_2pt.230031.x01y01z06t07
+TIME("contract B-B","done") = 26.132 secs
+#[invert_contract]  sequential source momentum(1) = (0, 0, 0)
+# [invert_contract] adding source timeslice 7 to sequential source list from propagator number 1
+# [invert_contract_v2] smearing source + setting gamma x moentum + smearing source 1 / 1 - (c= 0, s= 0)
+# [invert_contract_v2] smearing source + setting gamma x moentum + smearing source 1 / 1 - (c= 0, s= 1)
+# [invert_contract_v2] smearing source + setting gamma x moentum + smearing source 1 / 1 - (c= 0, s= 2)
+# [invert_contract_v2] smearing source + setting gamma x moentum + smearing source 1 / 1 - (c= 0, s= 3)
+# [invert_contract_v2] smearing source + setting gamma x moentum + smearing source 1 / 1 - (c= 1, s= 0)
+# [invert_contract_v2] smearing source + setting gamma x moentum + smearing source 1 / 1 - (c= 1, s= 1)
+# [invert_contract_v2] smearing source + setting gamma x moentum + smearing source 1 / 1 - (c= 1, s= 2)
+# [invert_contract_v2] smearing source + setting gamma x moentum + smearing source 1 / 1 - (c= 1, s= 3)
+# [invert_contract_v2] smearing source + setting gamma x moentum + smearing source 1 / 1 - (c= 2, s= 0)
+# [invert_contract_v2] smearing source + setting gamma x moentum + smearing source 1 / 1 - (c= 2, s= 1)
+# [invert_contract_v2] smearing source + setting gamma x moentum + smearing source 1 / 1 - (c= 2, s= 2)
+# [invert_contract_v2] smearing source + setting gamma x moentum + smearing source 1 / 1 - (c= 2, s= 3)
+TIME("seq_source_mom","done") = 5.012 secs
+L[3] = 16
+iters =    9  secs = 1.007879  rsq = 6.61739e-16
+level 0 count 9 tpre 0.00 tcoarse 0.19 tpost 0.65 trest 0.05 tprol 0.04
+level 1 count 9 tpre 0.00 tcoarse 0.01 tpost 0.06 trest 0.00 tprol 0.00
+iters =    9  secs = 0.887193  rsq = 4.4664e-16
+level 0 count 9 tpre 0.00 tcoarse 0.18 tpost 0.56 trest 0.05 tprol 0.04
+level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.06 trest 0.00 tprol 0.00
+iters =    9  secs = 0.929075  rsq = 6.0007e-16
+level 0 count 9 tpre 0.00 tcoarse 0.18 tpost 0.59 trest 0.05 tprol 0.04
+level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.06 trest 0.00 tprol 0.00
+iters =    9  secs = 0.980800  rsq = 3.7533e-16
+level 0 count 9 tpre 0.00 tcoarse 0.19 tpost 0.64 trest 0.05 tprol 0.04
+level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.06 trest 0.00 tprol 0.00
+iters =    9  secs = 0.912740  rsq = 4.04795e-16
+level 0 count 9 tpre 0.00 tcoarse 0.18 tpost 0.57 trest 0.04 tprol 0.04
+level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.05 trest 0.00 tprol 0.00
+iters =    9  secs = 0.882568  rsq = 3.98951e-16
+level 0 count 9 tpre 0.00 tcoarse 0.18 tpost 0.56 trest 0.05 tprol 0.04
+level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.06 trest 0.00 tprol 0.00
+iters =    9  secs = 0.835331  rsq = 5.00857e-16
+level 0 count 9 tpre 0.00 tcoarse 0.16 tpost 0.53 trest 0.04 tprol 0.03
+level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.05 trest 0.00 tprol 0.00
+iters =    9  secs = 0.977123  rsq = 4.74398e-16
+level 0 count 9 tpre 0.00 tcoarse 0.19 tpost 0.64 trest 0.05 tprol 0.04
+level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.06 trest 0.00 tprol 0.00
+iters =    9  secs = 0.763458  rsq = 4.25425e-16
+level 0 count 9 tpre 0.00 tcoarse 0.15 tpost 0.48 trest 0.05 tprol 0.03
+level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.04 trest 0.00 tprol 0.00
+iters =    9  secs = 1.018509  rsq = 4.76553e-16
+level 0 count 9 tpre 0.00 tcoarse 0.19 tpost 0.66 trest 0.05 tprol 0.04
+level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.06 trest 0.00 tprol 0.00
+iters =    9  secs = 0.751517  rsq = 5.11725e-16
+level 0 count 9 tpre 0.00 tcoarse 0.16 tpost 0.47 trest 0.05 tprol 0.03
+level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.05 trest 0.00 tprol 0.00
+iters =    9  secs = 1.007522  rsq = 6.24857e-16
+level 0 count 9 tpre 0.00 tcoarse 0.19 tpost 0.65 trest 0.05 tprol 0.04
+level 1 count 9 tpre 0.00 tcoarse 0.01 tpost 0.06 trest 0.00 tprol 0.00
+TIME("light sequential inversion","done") = 11.545 secs
+# [write_propagator] filename is sequential_light_light.230031.x01y01z06t07.px00py00pz00.lime
+# [invert_contract] smearing sequential propagator 1 / 1 - (c= 0, s= 0)
+# [invert_contract] smearing sequential propagator 1 / 1 - (c= 0, s= 1)
+# [invert_contract] smearing sequential propagator 1 / 1 - (c= 0, s= 2)
+# [invert_contract] smearing sequential propagator 1 / 1 - (c= 0, s= 3)
+# [invert_contract] smearing sequential propagator 1 / 1 - (c= 1, s= 0)
+# [invert_contract] smearing sequential propagator 1 / 1 - (c= 1, s= 1)
+# [invert_contract] smearing sequential propagator 1 / 1 - (c= 1, s= 2)
+# [invert_contract] smearing sequential propagator 1 / 1 - (c= 1, s= 3)
+# [invert_contract] smearing sequential propagator 1 / 1 - (c= 2, s= 0)
+# [invert_contract] smearing sequential propagator 1 / 1 - (c= 2, s= 1)
+# [invert_contract] smearing sequential propagator 1 / 1 - (c= 2, s= 2)
+# [invert_contract] smearing sequential propagator 1 / 1 - (c= 2, s= 3)
+#[invert_contract]  sequential source momentum(2) = (4, 1, 6)
+# [invert_contract] adding source timeslice 7 to sequential source list from propagator number 1
+# [invert_contract_v2] smearing source + setting gamma x moentum + smearing source 1 / 2 - (c= 0, s= 0)
+# [invert_contract_v2] smearing source + setting gamma x moentum + smearing source 1 / 2 - (c= 0, s= 1)
+# [invert_contract_v2] smearing source + setting gamma x moentum + smearing source 1 / 2 - (c= 0, s= 2)
+# [invert_contract_v2] smearing source + setting gamma x moentum + smearing source 1 / 2 - (c= 0, s= 3)
+# [invert_contract_v2] smearing source + setting gamma x moentum + smearing source 1 / 2 - (c= 1, s= 0)
+# [invert_contract_v2] smearing source + setting gamma x moentum + smearing source 1 / 2 - (c= 1, s= 1)
+# [invert_contract_v2] smearing source + setting gamma x moentum + smearing source 1 / 2 - (c= 1, s= 2)
+# [invert_contract_v2] smearing source + setting gamma x moentum + smearing source 1 / 2 - (c= 1, s= 3)
+# [invert_contract_v2] smearing source + setting gamma x moentum + smearing source 1 / 2 - (c= 2, s= 0)
+# [invert_contract_v2] smearing source + setting gamma x moentum + smearing source 1 / 2 - (c= 2, s= 1)
+# [invert_contract_v2] smearing source + setting gamma x moentum + smearing source 1 / 2 - (c= 2, s= 2)
+# [invert_contract_v2] smearing source + setting gamma x moentum + smearing source 1 / 2 - (c= 2, s= 3)
+TIME("seq_source_mom","done") = 6.434 secs
+L[3] = 16
+iters =    9  secs = 1.040459  rsq = 3.47547e-16
+level 0 count 9 tpre 0.00 tcoarse 0.20 tpost 0.68 trest 0.05 tprol 0.04
+level 1 count 9 tpre 0.00 tcoarse 0.01 tpost 0.06 trest 0.00 tprol 0.00
+iters =    9  secs = 0.684552  rsq = 3.2302e-16
+level 0 count 9 tpre 0.00 tcoarse 0.15 tpost 0.43 trest 0.04 tprol 0.03
+level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.04 trest 0.00 tprol 0.00
+iters =    9  secs = 1.048677  rsq = 4.52461e-16
+level 0 count 9 tpre 0.00 tcoarse 0.19 tpost 0.69 trest 0.05 tprol 0.04
+level 1 count 9 tpre 0.00 tcoarse 0.01 tpost 0.06 trest 0.00 tprol 0.00
+iters =    9  secs = 0.745927  rsq = 4.20584e-16
+level 0 count 9 tpre 0.00 tcoarse 0.16 tpost 0.48 trest 0.04 tprol 0.03
+level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.05 trest 0.00 tprol 0.00
+iters =    9  secs = 0.999637  rsq = 2.98662e-16
+level 0 count 9 tpre 0.00 tcoarse 0.19 tpost 0.65 trest 0.05 tprol 0.04
+level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.06 trest 0.00 tprol 0.00
+iters =    9  secs = 1.023726  rsq = 2.74373e-16
+level 0 count 9 tpre 0.00 tcoarse 0.20 tpost 0.66 trest 0.05 tprol 0.04
+level 1 count 9 tpre 0.00 tcoarse 0.01 tpost 0.06 trest 0.00 tprol 0.00
+iters =    9  secs = 0.907490  rsq = 3.68284e-16
+level 0 count 9 tpre 0.00 tcoarse 0.18 tpost 0.60 trest 0.05 tprol 0.04
+level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.06 trest 0.00 tprol 0.00
+iters =    9  secs = 0.842858  rsq = 3.21116e-16
+level 0 count 9 tpre 0.00 tcoarse 0.16 tpost 0.53 trest 0.05 tprol 0.03
+level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.05 trest 0.00 tprol 0.00
+iters =    9  secs = 0.917854  rsq = 2.00634e-16
+level 0 count 9 tpre 0.00 tcoarse 0.19 tpost 0.58 trest 0.05 tprol 0.04
+level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.06 trest 0.00 tprol 0.00
+iters =    9  secs = 0.733476  rsq = 2.3889e-16
+level 0 count 9 tpre 0.00 tcoarse 0.16 tpost 0.46 trest 0.05 tprol 0.03
+level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.05 trest 0.00 tprol 0.00
+iters =    9  secs = 1.040400  rsq = 2.52375e-16
+level 0 count 9 tpre 0.00 tcoarse 0.20 tpost 0.67 trest 0.05 tprol 0.04
+level 1 count 9 tpre 0.00 tcoarse 0.01 tpost 0.06 trest 0.00 tprol 0.00
+iters =    9  secs = 0.652621  rsq = 2.50881e-16
+level 0 count 9 tpre 0.00 tcoarse 0.15 tpost 0.40 trest 0.04 tprol 0.04
+level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.04 trest 0.00 tprol 0.00
+TIME("light sequential inversion","done") = 11.286 secs
+# [write_propagator] filename is sequential_light_light.230031.x01y01z06t07.px04py01pz06.lime
+# [invert_contract] smearing sequential propagator 1 / 2 - (c= 0, s= 0)
+# [invert_contract] smearing sequential propagator 1 / 2 - (c= 0, s= 1)
+# [invert_contract] smearing sequential propagator 1 / 2 - (c= 0, s= 2)
+# [invert_contract] smearing sequential propagator 1 / 2 - (c= 0, s= 3)
+# [invert_contract] smearing sequential propagator 1 / 2 - (c= 1, s= 0)
+# [invert_contract] smearing sequential propagator 1 / 2 - (c= 1, s= 1)
+# [invert_contract] smearing sequential propagator 1 / 2 - (c= 1, s= 2)
+# [invert_contract] smearing sequential propagator 1 / 2 - (c= 1, s= 3)
+# [invert_contract] smearing sequential propagator 1 / 2 - (c= 2, s= 0)
+# [invert_contract] smearing sequential propagator 1 / 2 - (c= 2, s= 1)
+# [invert_contract] smearing sequential propagator 1 / 2 - (c= 2, s= 2)
+# [invert_contract] smearing sequential propagator 1 / 2 - (c= 2, s= 3)
+# [invert_contract_baryon] B - B/B - M - B contraction for source location[1 / 1] = (1, 1, 6) t=7
+# [invert_contract_baryon] B - M - B 3pt output file contract_meson_baryon_2pt.230031.x01y01z06t07
+# [invert_contract] contract B-M-B for sequential source momentum(1) = (0, 0, 0)
+# [invert_contract] contract B-M-B for sequential source momentum(2) = (4, 1, 6)
+TIME("contract B-M-B","done") = 28.340 secs
+# [write_fermion] filename is stochastic_source.230031.00000.lime
+Writing stochastic propagatoriters =    9  secs = 0.834491  rsq = 7.73537e-17
+level 0 count 9 tpre 0.00 tcoarse 0.18 tpost 0.52 trest 0.04 tprol 0.05
+level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.05 trest 0.00 tprol 0.00
+TIME("light stochastic propagator","done") = 0.879 secs
+iters =    9  secs = 1.041446  rsq = 7.0669e-17
+level 0 count 9 tpre 0.00 tcoarse 0.21 tpost 0.66 trest 0.05 tprol 0.05
+level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.06 trest 0.00 tprol 0.00
+TIME("light stochastic propagator","done") = 1.088 secs
+iters =    9  secs = 0.782744  rsq = 8.83103e-17
+level 0 count 9 tpre 0.00 tcoarse 0.17 tpost 0.48 trest 0.04 tprol 0.04
+level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.05 trest 0.00 tprol 0.00
+TIME("light stochastic propagator","done") = 0.833 secs
+iters =    9  secs = 0.977557  rsq = 9.13295e-17
+level 0 count 9 tpre 0.00 tcoarse 0.20 tpost 0.62 trest 0.05 tprol 0.05
+level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.06 trest 0.00 tprol 0.00
+TIME("light stochastic propagator","done") = 1.057 secs
+iters =    9  secs = 1.029939  rsq = 6.9512e-17
+level 0 count 9 tpre 0.00 tcoarse 0.21 tpost 0.65 trest 0.06 tprol 0.05
+level 1 count 9 tpre 0.00 tcoarse 0.01 tpost 0.07 trest 0.00 tprol 0.00
+TIME("light stochastic propagator","done") = 1.090 secs
+iters =    9  secs = 1.049041  rsq = 8.58967e-17
+level 0 count 9 tpre 0.00 tcoarse 0.21 tpost 0.67 trest 0.05 tprol 0.05
+level 1 count 9 tpre 0.00 tcoarse 0.01 tpost 0.06 trest 0.00 tprol 0.00
+TIME("light stochastic propagator","done") = 1.104 secs
+iters =    9  secs = 1.186832  rsq = 6.93065e-17
+level 0 count 9 tpre 0.00 tcoarse 0.23 tpost 0.77 trest 0.05 tprol 0.04
+level 1 count 9 tpre 0.00 tcoarse 0.01 tpost 0.08 trest 0.00 tprol 0.00
+TIME("light stochastic propagator","done") = 1.247 secs
+iters =    9  secs = 1.172670  rsq = 8.89521e-17
+level 0 count 9 tpre 0.00 tcoarse 0.22 tpost 0.75 trest 0.05 tprol 0.04
+level 1 count 9 tpre 0.00 tcoarse 0.01 tpost 0.07 trest 0.00 tprol 0.00
+TIME("light stochastic propagator","done") = 1.220 secs
+iters =    9  secs = 0.714666  rsq = 8.64971e-17
+level 0 count 9 tpre 0.00 tcoarse 0.16 tpost 0.43 trest 0.04 tprol 0.04
+level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.05 trest 0.00 tprol 0.00
+TIME("light stochastic propagator","done") = 0.766 secs
+iters =    9  secs = 0.763828  rsq = 8.01434e-17
+level 0 count 9 tpre 0.00 tcoarse 0.16 tpost 0.49 trest 0.04 tprol 0.04
+level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.04 trest 0.00 tprol 0.00
+TIME("light stochastic propagator","done") = 0.799 secs
+iters =    9  secs = 0.740894  rsq = 8.60417e-17
+level 0 count 9 tpre 0.00 tcoarse 0.15 tpost 0.48 trest 0.04 tprol 0.04
+level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.04 trest 0.00 tprol 0.00
+TIME("light stochastic propagator","done") = 0.788 secs
+iters =    9  secs = 1.092244  rsq = 8.29083e-17
+level 0 count 9 tpre 0.00 tcoarse 0.20 tpost 0.72 trest 0.05 tprol 0.04
+level 1 count 9 tpre 0.00 tcoarse 0.01 tpost 0.07 trest 0.00 tprol 0.00
+TIME("light stochastic propagator","done") = 1.150 secs
+iters =    9  secs = 0.802390  rsq = 8.13339e-17
+level 0 count 9 tpre 0.00 tcoarse 0.17 tpost 0.51 trest 0.05 tprol 0.04
+level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.05 trest 0.00 tprol 0.00
+TIME("light stochastic propagator","done") = 0.856 secs
+iters =    9  secs = 1.054620  rsq = 8.76552e-17
+level 0 count 9 tpre 0.00 tcoarse 0.20 tpost 0.69 trest 0.06 tprol 0.04
+level 1 count 9 tpre 0.00 tcoarse 0.01 tpost 0.06 trest 0.00 tprol 0.00
+TIME("light stochastic propagator","done") = 1.111 secs
+iters =    9  secs = 1.076410  rsq = 7.36499e-17
+level 0 count 9 tpre 0.00 tcoarse 0.20 tpost 0.67 trest 0.05 tprol 0.05
+level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.06 trest 0.00 tprol 0.00
+TIME("light stochastic propagator","done") = 1.134 secs
+iters =    9  secs = 0.956381  rsq = 7.3942e-17
+level 0 count 9 tpre 0.00 tcoarse 0.20 tpost 0.61 trest 0.05 tprol 0.05
+level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.07 trest 0.00 tprol 0.00
+TIME("light stochastic propagator","done") = 1.000 secs
 Writing stochastic propagator# [write_fermion] filename is stochastic_propagator_light.230031.00000.lime
-# [invert_contract_baryon] MB - MB contraction for source location[1 / 1] = (0, 0, 0) t=0
-# [invert_contract_meson_baryon_meson_baryon] MB - MB 2pt output file B2_contract_meson_baryon_meson_baryon_2pt.230031.x00y00z00t00.00
-TIME("phi","done") = 0.009 secs
-TIME("w_eta_xi","done") = 0.307 secs
-TIME("mxm_mxm_2pt eta_xi","done") = 0.307 secs
-TIME("contract MB-MB","done") = 10.442 secs
+# [invert_contract_baryon] MB - MB contraction for source location[1 / 1] = (1, 1, 6) t=7
+# [invert_contract_meson_baryon_meson_baryon] MB - MB 2pt output file contract_meson_baryon_meson_baryon_2pt.230031.x01y01z06t07.00
+TIME("w_eta_xi","done") = 0.410 secs
+TIME("mxm_mxm_2pt eta_xi","done") = 0.410 secs
+TIME("contract MB-MB","done") = 38.324 secs
 # [write_fermion] filename is stochastic_source.230031.00001.lime
-Writing stochastic propagator# [invert_contract_v4] current stochastic source timeslice (0) t=0
-# [invert_contract_v4] current stochastic source timeslice (1) t=1
-# [invert_contract_v4] current stochastic source timeslice (2) t=2
-# [invert_contract_v4] current stochastic source timeslice (3) t=3
-# [invert_contract_v4] current stochastic source timeslice (4) t=4
-# [invert_contract_v4] current stochastic source timeslice (5) t=5
-# [invert_contract_v4] current stochastic source timeslice (6) t=6
-# [invert_contract_v4] current stochastic source timeslice (7) t=7
-# [invert_contract_v4] current stochastic source timeslice (8) t=8
-# [invert_contract_v4] current stochastic source timeslice (9) t=9
-# [invert_contract_v4] current stochastic source timeslice (10) t=10
-# [invert_contract_v4] current stochastic source timeslice (11) t=11
-# [invert_contract_v4] current stochastic source timeslice (12) t=12
-# [invert_contract_v4] current stochastic source timeslice (13) t=13
-# [invert_contract_v4] current stochastic source timeslice (14) t=14
-# [invert_contract_v4] current stochastic source timeslice (15) t=15
-iters =    9  secs = 0.712447  rsq = 8.06068e-17
+Writing stochastic propagatoriters =    9  secs = 0.934596  rsq = 7.63267e-17
+level 0 count 9 tpre 0.00 tcoarse 0.17 tpost 0.60 trest 0.05 tprol 0.04
+level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.06 trest 0.00 tprol 0.00
+TIME("light stochastic propagator","done") = 0.979 secs
+iters =    9  secs = 0.920686  rsq = 7.84147e-17
+level 0 count 9 tpre 0.00 tcoarse 0.18 tpost 0.58 trest 0.05 tprol 0.04
+level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.06 trest 0.00 tprol 0.00
+TIME("light stochastic propagator","done") = 0.964 secs
+iters =    9  secs = 0.612640  rsq = 7.84151e-17
+level 0 count 9 tpre 0.00 tcoarse 0.14 tpost 0.37 trest 0.04 tprol 0.03
+level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.04 trest 0.00 tprol 0.00
+TIME("light stochastic propagator","done") = 0.644 secs
+iters =    9  secs = 0.826181  rsq = 8.38096e-17
+level 0 count 9 tpre 0.00 tcoarse 0.16 tpost 0.53 trest 0.04 tprol 0.04
+level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.05 trest 0.00 tprol 0.00
+TIME("light stochastic propagator","done") = 0.870 secs
+iters =    9  secs = 0.983070  rsq = 6.9593e-17
+level 0 count 9 tpre 0.00 tcoarse 0.18 tpost 0.65 trest 0.04 tprol 0.04
+level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.06 trest 0.00 tprol 0.00
+TIME("light stochastic propagator","done") = 1.024 secs
+iters =    9  secs = 0.858206  rsq = 7.92947e-17
+level 0 count 9 tpre 0.00 tcoarse 0.17 tpost 0.54 trest 0.05 tprol 0.04
+level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.05 trest 0.00 tprol 0.00
+TIME("light stochastic propagator","done") = 0.903 secs
+iters =    9  secs = 1.210954  rsq = 6.73366e-17
+level 0 count 9 tpre 0.00 tcoarse 0.22 tpost 0.77 trest 0.06 tprol 0.05
+level 1 count 9 tpre 0.00 tcoarse 0.01 tpost 0.07 trest 0.00 tprol 0.00
+TIME("light stochastic propagator","done") = 1.292 secs
+iters =    9  secs = 1.763880  rsq = 8.5091e-17
+level 0 count 9 tpre 0.00 tcoarse 0.30 tpost 1.21 trest 0.06 tprol 0.05
+level 1 count 9 tpre 0.00 tcoarse 0.01 tpost 0.11 trest 0.00 tprol 0.00
+TIME("light stochastic propagator","done") = 1.857 secs
+iters =    9  secs = 0.919222  rsq = 9.94571e-17
+level 0 count 9 tpre 0.00 tcoarse 0.21 tpost 0.56 trest 0.06 tprol 0.04
+level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.05 trest 0.00 tprol 0.00
+TIME("light stochastic propagator","done") = 0.981 secs
+iters =    9  secs = 1.059771  rsq = 7.60535e-17
+level 0 count 9 tpre 0.00 tcoarse 0.21 tpost 0.67 trest 0.06 tprol 0.04
+level 1 count 9 tpre 0.00 tcoarse 0.01 tpost 0.07 trest 0.00 tprol 0.00
+TIME("light stochastic propagator","done") = 1.116 secs
+iters =    9  secs = 0.790716  rsq = 8.00677e-17
+level 0 count 9 tpre 0.00 tcoarse 0.18 tpost 0.48 trest 0.05 tprol 0.04
+level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.05 trest 0.00 tprol 0.00
+TIME("light stochastic propagator","done") = 0.856 secs
+iters =    9  secs = 1.207327  rsq = 5.83427e-17
+level 0 count 9 tpre 0.00 tcoarse 0.23 tpost 0.79 trest 0.05 tprol 0.04
+level 1 count 9 tpre 0.00 tcoarse 0.01 tpost 0.08 trest 0.00 tprol 0.00
+TIME("light stochastic propagator","done") = 1.275 secs
+iters =    9  secs = 1.280777  rsq = 7.19923e-17
+level 0 count 9 tpre 0.00 tcoarse 0.26 tpost 0.83 trest 0.05 tprol 0.05
+level 1 count 9 tpre 0.00 tcoarse 0.01 tpost 0.10 trest 0.00 tprol 0.00
+TIME("light stochastic propagator","done") = 1.341 secs
+iters =    9  secs = 0.819982  rsq = 7.3022e-17
+level 0 count 9 tpre 0.00 tcoarse 0.18 tpost 0.51 trest 0.05 tprol 0.04
+level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.05 trest 0.00 tprol 0.00
+TIME("light stochastic propagator","done") = 0.862 secs
+iters =    9  secs = 0.971365  rsq = 8.69465e-17
+level 0 count 9 tpre 0.00 tcoarse 0.18 tpost 0.63 trest 0.04 tprol 0.04
+level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.06 trest 0.00 tprol 0.00
+TIME("light stochastic propagator","done") = 1.011 secs
+iters =    9  secs = 0.817955  rsq = 7.68693e-17
+level 0 count 9 tpre 0.00 tcoarse 0.16 tpost 0.53 trest 0.04 tprol 0.04
+level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.05 trest 0.00 tprol 0.00
+TIME("light stochastic propagator","done") = 0.860 secs
+Writing stochastic propagator# [write_fermion] filename is stochastic_propagator_light.230031.00001.lime
+# [invert_contract_baryon] MB - MB contraction for source location[1 / 1] = (1, 1, 6) t=7
+# [invert_contract_meson_baryon_meson_baryon] MB - MB 2pt output file contract_meson_baryon_meson_baryon_2pt.230031.x01y01z06t07.01
+TIME("w_eta_xi","done") = 0.418 secs
+TIME("mxm_mxm_2pt eta_xi","done") = 0.418 secs
+TIME("contract MB-MB","done") = 37.602 secs
+# [] M - M 2pt output file contract_baryon_2pt.230031.tsrc07.aff
+# [invert_contract_oet] momentum(1) = (0,0, 0)
+# [invert_contract_oet] spin component 0
+# [invert_contract_oet] t = 7, spin component 0
+iters =    9  secs = 0.630223  rsq = 6.39526e-17
+level 0 count 9 tpre 0.00 tcoarse 0.13 tpost 0.39 trest 0.04 tprol 0.03
+level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.04 trest 0.00 tprol 0.00
+TIME("invert","done") = 0.683 secs
+# [write_fermion] filename is stochastic_propagator_oet.230031.t07.00000.px00py00pz00.s00.lime
+# [invert_contract_oet] spin component 1
+# [invert_contract_oet] t = 7, spin component 1
+iters =    9  secs = 1.047367  rsq = 6.73866e-17
+level 0 count 9 tpre 0.00 tcoarse 0.21 tpost 0.67 trest 0.05 tprol 0.04
+level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.06 trest 0.00 tprol 0.00
+TIME("invert","done") = 1.108 secs
+# [write_fermion] filename is stochastic_propagator_oet.230031.t07.00000.px00py00pz00.s01.lime
+# [invert_contract_oet] spin component 2
+# [invert_contract_oet] t = 7, spin component 2
+iters =    9  secs = 0.708058  rsq = 7.15288e-17
 level 0 count 9 tpre 0.00 tcoarse 0.15 tpost 0.45 trest 0.04 tprol 0.04
 level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.04 trest 0.00 tprol 0.00
-TIME("light stochastic propagator","done") = 0.752 secs
-Writing stochastic propagator# [write_fermion] filename is stochastic_propagator_light.230031.00001.lime
-# [invert_contract_baryon] MB - MB contraction for source location[1 / 1] = (0, 0, 0) t=0
-# [invert_contract_meson_baryon_meson_baryon] MB - MB 2pt output file B2_contract_meson_baryon_meson_baryon_2pt.230031.x00y00z00t00.01
-TIME("phi","done") = 0.009 secs
-TIME("w_eta_xi","done") = 0.293 secs
-TIME("mxm_mxm_2pt eta_xi","done") = 0.293 secs
-TIME("contract MB-MB","done") = 9.838 secs
-TIME("total time","done") = 95.378 secs
-# A
+TIME("invert","done") = 0.754 secs
+# [write_fermion] filename is stochastic_propagator_oet.230031.t07.00000.px00py00pz00.s02.lime
+# [invert_contract_oet] spin component 3
+# [invert_contract_oet] t = 7, spin component 3
+iters =    9  secs = 0.628555  rsq = 7.11015e-17
+level 0 count 9 tpre 0.00 tcoarse 0.14 tpost 0.39 trest 0.04 tprol 0.04
+level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.03 trest 0.00 tprol 0.00
+TIME("invert","done") = 0.669 secs
+# [write_fermion] filename is stochastic_propagator_oet.230031.t07.00000.px00py00pz00.s03.lime
+# [invert_contract_oet] setting zero momentum stochastic propagator
+# [invert_contract_oet] momentum(2) = (4,1, 6)
+# [invert_contract_oet] spin component 0
+# [invert_contract_oet] t = 7, spin component 0
+iters =    9  secs = 1.099456  rsq = 7.0808e-17
+level 0 count 9 tpre 0.00 tcoarse 0.23 tpost 0.70 trest 0.05 tprol 0.05
+level 1 count 9 tpre 0.00 tcoarse 0.01 tpost 0.08 trest 0.00 tprol 0.00
+TIME("invert","done") = 1.142 secs
+# [write_fermion] filename is stochastic_propagator_oet.230031.t07.00000.px04py01pz06.s00.lime
+# [invert_contract_oet] spin component 1
+# [invert_contract_oet] t = 7, spin component 1
+iters =    9  secs = 0.753765  rsq = 6.65337e-17
+level 0 count 9 tpre 0.00 tcoarse 0.15 tpost 0.47 trest 0.04 tprol 0.04
+level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.04 trest 0.00 tprol 0.00
+TIME("invert","done") = 0.807 secs
+# [write_fermion] filename is stochastic_propagator_oet.230031.t07.00000.px04py01pz06.s01.lime
+# [invert_contract_oet] spin component 2
+# [invert_contract_oet] t = 7, spin component 2
+iters =    9  secs = 0.776359  rsq = 6.06222e-17
+level 0 count 9 tpre 0.00 tcoarse 0.16 tpost 0.49 trest 0.05 tprol 0.04
+level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.05 trest 0.00 tprol 0.00
+TIME("invert","done") = 0.820 secs
+# [write_fermion] filename is stochastic_propagator_oet.230031.t07.00000.px04py01pz06.s02.lime
+# [invert_contract_oet] spin component 3
+# [invert_contract_oet] t = 7, spin component 3
+iters =    9  secs = 0.689964  rsq = 6.57228e-17
+level 0 count 9 tpre 0.00 tcoarse 0.14 tpost 0.43 trest 0.04 tprol 0.03
+level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.04 trest 0.00 tprol 0.00
+TIME("invert","done") = 0.724 secs
+# [write_fermion] filename is stochastic_propagator_oet.230031.t07.00000.px04py01pz06.s03.lime
+# [invert_contract_oet] momentum(1) = (0,0, 0)
+# [invert_contract_oet] spin component 0
+# [invert_contract_oet] t = 7, spin component 0
+iters =    9  secs = 1.043543  rsq = 6.54576e-17
+level 0 count 9 tpre 0.00 tcoarse 0.20 tpost 0.68 trest 0.05 tprol 0.03
+level 1 count 9 tpre 0.00 tcoarse 0.01 tpost 0.07 trest 0.00 tprol 0.00
+TIME("invert","done") = 1.100 secs
+# [write_fermion] filename is stochastic_propagator_oet.230031.t07.00001.px00py00pz00.s00.lime
+# [invert_contract_oet] spin component 1
+# [invert_contract_oet] t = 7, spin component 1
+iters =    9  secs = 0.672040  rsq = 7.91164e-17
+level 0 count 9 tpre 0.00 tcoarse 0.15 tpost 0.41 trest 0.04 tprol 0.04
+level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.04 trest 0.00 tprol 0.00
+TIME("invert","done") = 0.715 secs
+# [write_fermion] filename is stochastic_propagator_oet.230031.t07.00001.px00py00pz00.s01.lime
+# [invert_contract_oet] spin component 2
+# [invert_contract_oet] t = 7, spin component 2
+iters =    9  secs = 1.011530  rsq = 6.47009e-17
+level 0 count 9 tpre 0.00 tcoarse 0.19 tpost 0.62 trest 0.05 tprol 0.04
+level 1 count 9 tpre 0.00 tcoarse 0.01 tpost 0.06 trest 0.00 tprol 0.00
+TIME("invert","done") = 1.102 secs
+# [write_fermion] filename is stochastic_propagator_oet.230031.t07.00001.px00py00pz00.s02.lime
+# [invert_contract_oet] spin component 3
+# [invert_contract_oet] t = 7, spin component 3
+iters =    9  secs = 0.932598  rsq = 6.74026e-17
+level 0 count 9 tpre 0.00 tcoarse 0.19 tpost 0.59 trest 0.05 tprol 0.04
+level 1 count 9 tpre 0.00 tcoarse 0.01 tpost 0.06 trest 0.00 tprol 0.00
+TIME("invert","done") = 0.991 secs
+# [write_fermion] filename is stochastic_propagator_oet.230031.t07.00001.px00py00pz00.s03.lime
+# [invert_contract_oet] setting zero momentum stochastic propagator
+# [invert_contract_oet] momentum(2) = (4,1, 6)
+# [invert_contract_oet] spin component 0
+# [invert_contract_oet] t = 7, spin component 0
+iters =    9  secs = 0.648396  rsq = 8.98745e-17
+level 0 count 9 tpre 0.00 tcoarse 0.15 tpost 0.39 trest 0.04 tprol 0.04
+level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.04 trest 0.00 tprol 0.00
+TIME("invert","done") = 0.694 secs
+# [write_fermion] filename is stochastic_propagator_oet.230031.t07.00001.px04py01pz06.s00.lime
+# [invert_contract_oet] spin component 1
+# [invert_contract_oet] t = 7, spin component 1
+iters =    9  secs = 1.046055  rsq = 8.13026e-17
+level 0 count 9 tpre 0.00 tcoarse 0.20 tpost 0.68 trest 0.04 tprol 0.04
+level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.06 trest 0.00 tprol 0.00
+TIME("invert","done") = 1.104 secs
+# [write_fermion] filename is stochastic_propagator_oet.230031.t07.00001.px04py01pz06.s01.lime
+# [invert_contract_oet] spin component 2
+# [invert_contract_oet] t = 7, spin component 2
+iters =    9  secs = 1.003792  rsq = 6.97862e-17
+level 0 count 9 tpre 0.00 tcoarse 0.20 tpost 0.64 trest 0.05 tprol 0.05
+level 1 count 9 tpre 0.00 tcoarse 0.01 tpost 0.06 trest 0.00 tprol 0.00
+TIME("invert","done") = 1.064 secs
+# [write_fermion] filename is stochastic_propagator_oet.230031.t07.00001.px04py01pz06.s02.lime
+# [invert_contract_oet] spin component 3
+# [invert_contract_oet] t = 7, spin component 3
+iters =    9  secs = 0.961660  rsq = 7.50614e-17
+level 0 count 9 tpre 0.00 tcoarse 0.19 tpost 0.63 trest 0.04 tprol 0.04
+level 1 count 9 tpre 0.00 tcoarse 0.00 tpost 0.07 trest 0.00 tprol 0.00
+TIME("invert","done") = 1.010 secs
+# [write_fermion] filename is stochastic_propagator_oet.230031.t07.00001.px04py01pz06.s03.lime
+TIME("total time","done") = 336.017 secs
 # [sandbox] srun finished successfully for invert_contract.qlua, status was 0
