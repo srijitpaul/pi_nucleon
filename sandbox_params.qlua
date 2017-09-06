@@ -8,7 +8,7 @@ ape_orthdir = 3
 
 
 wup_alpha = 3.0
-wup_n = 20
+wup_n = 45
 
 -- perform 4d-stout-smearing on-the-fly
 stout_smear = true
@@ -163,10 +163,10 @@ sequential_source_momentum_list = {
 
 sequential_source_gamma = {tag="g5", val=gamma{mu=5}}
 
-sink_momentum_list = {{0,0,0},{3,5,7}}
+sink_momentum_list = sequential_source_momentum_list
 
 pf1_list = sink_momentum_list
-pf2_list = {{0,0,0,0},{1,2,-3}}
+pf2_list = pf1_list
 pi2_list = sequential_source_momentum_list
 twostep_sequential_source_momentum_list = sequential_source_momentum_list
 dt_source_sink_2pt = 15

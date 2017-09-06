@@ -1,14 +1,14 @@
 #!/bin/bash -l
-#SBATCH -p regular
+#SBATCH -p debug
 #SBATCH -n 768
 #SBATCH -N 32
 
-#SBATCH -t 02:00:00
+#SBATCH -t 00:30:00
 #SBATCH --mail-type=BEGIN,END,FAIL
 #SBATCH --mail-user=s.paul@cyi.ac.cy
 
-#SBATCH -e edison.err
-
+#SBATCH -e edison_debug.err
+#SBATCH -o edison_debug.out
 
 
 MyName=`echo $0 | awk -F\/ '{sub(/^\.\//,"",$0); sub(/\.sh$/,"",$0); print $0}'`
