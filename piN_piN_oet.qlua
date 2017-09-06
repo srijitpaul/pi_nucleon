@@ -49,7 +49,7 @@ function contract_mbmb_oet(prop, pfifi, inp, out)
 
   local a1 = qcd.quarkContract13(Cgout * prop * Cgin, prop)
   local a2 = qcd.quarkContract13(Cgout * prop * Cgin, pfifi)
-  local res = pfifi * (a1 + a1:spintrace()) + prop * (a2 + a2:spintrace())
+  local res = (pfifi * a1 + pfifi * a1:spintrace()) + (prop * a2 + prop * a2:spintrace())
 
   corr_proj = {}
   for i = 0, 15 do
@@ -72,16 +72,16 @@ function contract_mxb_mxb_oet (L, prop, phi_p, phi_0, pi2, src_loc, sample, aff_
   end
 
 
-  proton_gamma_index =  = {15, 0, 7, 8}
+  proton_gamma_index = {15, 0, 7, 8}
   for ipf2, pf2 in ipairs ( pf2_list ) do 
 
     local pfifi = prepare_seq2_propagator_oet (L, prop, phi_p, phi_0, pf2, 15, 15 )
     
     
-    for input_gamma in proton_gamma_index do
-      for output_gamma in proton_gamma_index do 
+    for input_gamma = 1, #proton_gamma_index do
+      for output_gamma = 1, #proton_gamma_index do 
 
-        piNpiN2pt_oet = contract_mbmb_oet(prop, pfifi, input_gamma, output_gamma)
+        piNpiN2pt_oet = contract_mbmb_oet(prop, pfifi, proton_gamma_index[input_gamma], proton_gamma_index[output_gamma])
 
         for ipf1, pf1 in ipairs( pf1_list ) do
 
@@ -110,7 +110,8 @@ function contract_mxb_mxb_oet (L, prop, phi_p, phi_0, pi2, src_loc, sample, aff_
             end
 
             name = string.format(
-                  "/piNpiN/oet/proj%.2d/in%.2dout%.2d/pi1x%.2dpi1y%.2dpi1z%.2d/pi2x%.2dpi2y%.2dpi2z%.2d/pf1x%.2dpf1y%.2dpf1z%.2d/pf2x%.2dpf2y%.2dpf2z%.2d/x%.2dy%.2dz%.2dt%.2d/s%d",index, input_gamma, output_gamma,
+                  "/piNpiN/oet/proj%.2d/in%.2dout%.2d/pi1x%.2dpi1y%.2dpi1z%.2d/pi2x%.2dpi2y%.2dpi2z%.2d/pf1x%.2dpf1y%.2dpf1z%.2d/pf2x%.2dpf2y%.2dpf2z%.2d/x%.2dy%.2dz%.2dt%.2d/s%d",
+                  index, proton_gamma_index[input_gamma], proton_gamma_index[output_gamma],
                 pi1[1], pi1[2], pi1[3],
                 pi2[1], pi2[2], pi2[3],
                 pf1[1], pf1[2], pf1[3],

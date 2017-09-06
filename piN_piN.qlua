@@ -22,13 +22,13 @@ function contract_mbmb(prop, two_stoch_prop, oneseq_prop, one_stoch_prop, inp, o
   local Cgin = -1 * gamma{n=10} * gamma{n=inp}
   local Cgout = -1 * gamma{n=10} * gamma{n=out} 
   local a2 = prop
-  local a3 = qcd.quarkContract13(Cg5 * two_stoch_prop[i_pf2][i_pi2] * Cg5, prop )
-  local a4 = qcd.quarkContract13( oneseq_prop[i_pi2] * Cg5, Cg5 * one_stoch_prop[i_pf2] )
+  local a3 = qcd.quarkContract13(Cgout * two_stoch_prop * Cgin, prop )
+  local a4 = qcd.quarkContract13( oneseq_prop * Cgout, Cgin * one_stoch_prop )
   local res = a2*((a3 + a4):spintrace()) + (a2 *( a3 + a4 ))
   --local res = a2 *(a4)
 
-  a4 = Pp * oneseq_prop[i_pi2] * Cg5
-  a3 = qcd.quarkContract13( Cg5 * one_stoch_prop[i_pf2], prop )
+  a4 = oneseq_prop * Cgout
+  a3 = qcd.quarkContract13( Cgin * one_stoch_prop, prop )
   res = res + a4 * (a3 + (a3:spintranspose()))
   corr_proj = {}
   
@@ -152,10 +152,11 @@ function contract_meson_baryon_meson_baryon_2pt(L, prop, src_loc, oneseq_prop, x
       end
       two_stoch_prop[i_pf2][i_pi2] = stoch
       local proton_gamma_index = {15, 0, 7, 8}
-      for input_gamma in proton_gamma_index do
-        for output_gamma in proton_gamma_index do
+      for input_gamma = 1, #proton_gamma_index do
+        for output_gamma = 1, #proton_gamma_index do
           
-          piNpiN2pt_fw = contract_mbmb(prop, two_stoch_prop[i_pf2][i_pi2], oneseq_prop[i_pi2], one_stoch_prop[i_pf2], input_gamma, output_gamma)
+          piNpiN2pt_fw = contract_mbmb(prop, two_stoch_prop[i_pf2][i_pi2], oneseq_prop[i_pi2], one_stoch_prop[i_pf2], 
+                                        proton_gamma_index[input_gamma], proton_gamma_index[output_gamma])
           for i_pf1, pf1 in ipairs(pf1_list) do
   
 
@@ -189,7 +190,7 @@ function contract_meson_baryon_meson_baryon_2pt(L, prop, src_loc, oneseq_prop, x
 
               name = string.format(
                     "/piNpiN/fw/proj%.2d/in%.2dout%.2d/pi2x%.2dpi2y%.2dpi2z%.2d/pf1x%.2dpf1y%.2dpf1z%.2d/pf2x%.2dpf2y%.2dpf2z%.2d/x%.2dy%.2dz%.2dt%.2d",
-                    index, input_gamma, output_gamma, pi2[1], pi2[2], pi2[3], pf1[1], pf1[2], pf1[3],
+                    index, proton_gamma_index[input_gamma], proton_gamma_index[output_gamma], pi2[1], pi2[2], pi2[3], pf1[1], pf1[2], pf1[3],
                     pf2[1], pf2[2], pf2[3], src_loc[0], src_loc[1], src_loc[2],src_loc[3])
               aff_out:write(name, q2)
               w2=nil

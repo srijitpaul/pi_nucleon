@@ -4,7 +4,7 @@ top_level_dir=/home/srijit/Dropbox/spaul/Dina_Work/pion_nucleon/propagators
 log=$MyName.log
 
 
-scripts=/home/srijit/Dropbox/spaul/Dina_Work/pion_nucleon_scripts/pi_nucleon
+scripts=/home/srijit/Dropbox/spaul/Dina_Work/pion_nucleon_scripts/edison/pi_nucleon
 
 path_to_prog=$scripts
 
