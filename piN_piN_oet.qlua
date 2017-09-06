@@ -42,6 +42,22 @@ function prepare_seq2_propagator_oet (L, prop, phi_p, phi_0, pvec, gi2, gf2 )
   return K
 end
 -- contract
+function contract_mbmb_oet(prop, pfifi, inp, out)
+
+  local Cgin  = -1 * gamma{n=10} * gamma{n=inp}
+  local Cgout = -1 * gamma{n=10} * gamma{n=out}
+
+  local a1 = qcd.quarkContract13(Cgout * prop * Cgin, prop)
+  local a2 = qcd.quarkContract13(Cgout * prop * Cgin, pfifi)
+  local res = pfifi * (a1 + a1:spintrace()) + prop * (a2 + a2:spintrace())
+
+  corr_proj = {}
+  for i = 0, 15 do
+    local Pp = gamma{n=i}
+    corr_proj[i] = ((Pp * res):spintrace()):trace()
+  end
+  return corr_proj
+end
 
 
 function contract_mxb_mxb_oet (L, prop, phi_p, phi_0, pi2, src_loc, sample, aff_out ) 
@@ -55,109 +71,62 @@ function contract_mxb_mxb_oet (L, prop, phi_p, phi_0, pi2, src_loc, sample, aff_
     boundary_phase[it] = 1
   end
 
-  local Gamma1 = gamma{mu=3} * gamma{mu=1} * gamma{mu=5}
-  local Gamma2 = Gamma1
-  local Pp =  (1 + gamma{mu=3}) / 2
 
+  proton_gamma_index =  = {15, 0, 7, 8}
   for ipf2, pf2 in ipairs ( pf2_list ) do 
 
     local pfifi = prepare_seq2_propagator_oet (L, prop, phi_p, phi_0, pf2, 15, 15 )
+    
+    
+    for input_gamma in proton_gamma_index do
+      for output_gamma in proton_gamma_index do 
 
-    local a2 = Gamma1 * ( prop * Gamma2 )
+        piNpiN2pt_oet = contract_mbmb_oet(prop, pfifi, input_gamma, output_gamma)
 
-    local a3 = qcd.quarkContract13 ( a2 , prop  )
+        for ipf1, pf1 in ipairs( pf1_list ) do
 
-    local Z1 = ( ( (Pp * pfifi ) * a3 ):spintrace() ):trace()
+          pi1 = { -( pf1[1] + pf2[1] + pi2[1] ),
+                  -( pf1[2] + pf2[2] + pi2[2] ),
+                  -( pf1[3] + pf2[3] + pi2[3] ) }
 
-    local Z2 = ( (Pp * pfifi ):spintrace() * a3:spintrace() ):trace()
+          local pi1x = pi1[1] * 2 * math.pi / L[0]
+          local pi1y = pi1[2] * 2 * math.pi / L[1]
+          local pi1z = pi1[3] * 2 * math.pi / L[2]
 
-    local a3 = qcd.quarkContract13 ( a2 , pfifi  )
+          local pf1x = (2 * math.pi * pf1[1]) / L[0]
+          local pf1y = (2 * math.pi * pf1[2]) / L[1]
+          local pf1z = (2 * math.pi * pf1[3]) / L[2]
 
-    local Z3 = ( ( (Pp * prop ) * a3 ):spintrace() ):trace()
+          local w = ( (L:Real(L:pcoord(0)) * pf1x + src_loc[0] * pi1x ) +
+                      (L:Real(L:pcoord(1)) * pf1y + src_loc[1] * pi1y ) +
+                      (L:Real(L:pcoord(2)) * pf1z + src_loc[2] * pi1z ) ):expi()
 
-    local Z4 = ( (Pp * prop ):spintrace() * a3:spintrace() ):trace()
+          for index = 0, 15 do
+            local q2 = vector.complex( L[3] )
+            local w2 = (piNpiN2pt_oet[index] * w):sum(L:MultiSet(L[3], L:pcoord(3)))
+            for i = 0, #w2 - 1 do
+              it = ( i + src_loc[3] ) % L[3]
+              q2[i] = -w2[it] * boundary_phase[it]
+            end
 
-    for ipf1, pf1 in ipairs( pf1_list ) do
+            name = string.format(
+                  "/piNpiN/oet/proj%.2d/in%.2dout%.2d/pi1x%.2dpi1y%.2dpi1z%.2d/pi2x%.2dpi2y%.2dpi2z%.2d/pf1x%.2dpf1y%.2dpf1z%.2d/pf2x%.2dpf2y%.2dpf2z%.2d/x%.2dy%.2dz%.2dt%.2d/s%d",index, input_gamma, output_gamma,
+                pi1[1], pi1[2], pi1[3],
+                pi2[1], pi2[2], pi2[3],
+                pf1[1], pf1[2], pf1[3],
+                pf2[1], pf2[2], pf2[3],
+                src_loc[0], src_loc[1], src_loc[2], src_loc[3], sample)
+            aff_out:write(name, q2)
+            
+            q2 = nil
+            w2 = nil          
 
-      pi1 = { -( pf1[1] + pf2[1] + pi2[1] ),
-              -( pf1[2] + pf2[2] + pi2[2] ),
-              -( pf1[3] + pf2[3] + pi2[3] ) }
-
-      local pi1x = pi1[1] * 2 * math.pi / L[0]
-      local pi1y = pi1[2] * 2 * math.pi / L[1]
-      local pi1z = pi1[3] * 2 * math.pi / L[2]
-
-      local pf1x = (2 * math.pi * pf1[1]) / L[0]
-      local pf1y = (2 * math.pi * pf1[2]) / L[1]
-      local pf1z = (2 * math.pi * pf1[3]) / L[2]
-
-      local w = ( (L:Real(L:pcoord(0)) * pf1x + src_loc[0] * pi1x ) +
-                  (L:Real(L:pcoord(1)) * pf1y + src_loc[1] * pi1y ) +
-                  (L:Real(L:pcoord(2)) * pf1z + src_loc[2] * pi1z ) ):expi()
-
-
-      local q2 = vector.complex( L[3] )
-      local w2 = ((Z1+Z2+Z3+Z4) * w):sum(L:MultiSet(L[3], L:pcoord(3)))
-      for i = 0, #w2 - 1 do
-        it = ( i + src_loc[3] ) % L[3]
-        q2[i] = -w2[it] * boundary_phase[it]
-      end
-
-      name = string.format("/pi1x%.2dpi1y%.2dpi1z%.2d/pi2x%.2dpi2y%.2dpi2z%.2d/pf1x%.2dpf1y%.2dpf1z%.2d/pf2x%.2dpf2y%.2dpf2z%.2d/x%.2dy%.2dz%.2dt%.2d/s%d",
-          pi1[1], pi1[2], pi1[3],
-          pi2[1], pi2[2], pi2[3],
-          pf1[1], pf1[2], pf1[3],
-          pf2[1], pf2[2], pf2[3],
-          src_loc[0], src_loc[1], src_loc[2], src_loc[3], sample)
-      aff_out:write(name, q2)
-
---      local q2 = vector.complex( L[3] )
---      local w2 = (Z2 * w):sum(L:MultiSet(L[3], L:pcoord(3)))
---      for i = 0, #w2 - 1 do
---        it = ( i + src_loc[3] ) % L[3]
---        q2[i] = -w2[it] * boundary_phase[it]
---      end
---
---      name = string.format("/Z2/pi1x%.2dpi1y%.2dpi1z%.2d/pi2x%.2dpi2y%.2dpi2z%.2d/pf1x%.2dpf1y%.2dpf1z%.2d/pf2x%.2dpf2y%.2dpf2z%.2d/x%.2dy%.2dz%.2dt%.2d/s%d",
---          pi1[1], pi1[2], pi1[3],
---          pi2[1], pi2[2], pi2[3],
---          pf1[1], pf1[2], pf1[3],
---          pf2[1], pf2[2], pf2[3],
---          src_loc[0], src_loc[1], src_loc[2], src_loc[3], sample)
---      aff_out:write(name, q2)
---
---      local q2 = vector.complex( L[3] )
---      local w2 = (Z3 * w):sum(L:MultiSet(L[3], L:pcoord(3)))
---      for i = 0, #w2 - 1 do
---        it = ( i + src_loc[3] ) % L[3]
---        q2[i] = -w2[it] * boundary_phase[it]
---      end
---
---      name = string.format("/Z3/pi1x%.2dpi1y%.2dpi1z%.2d/pi2x%.2dpi2y%.2dpi2z%.2d/pf1x%.2dpf1y%.2dpf1z%.2d/pf2x%.2dpf2y%.2dpf2z%.2d/x%.2dy%.2dz%.2dt%.2d/s%d",
---          pi1[1], pi1[2], pi1[3],
---          pi2[1], pi2[2], pi2[3],
---          pf1[1], pf1[2], pf1[3],
---          pf2[1], pf2[2], pf2[3],
---          src_loc[0], src_loc[1], src_loc[2], src_loc[3], sample)
---      aff_out:write(name, q2)
---
---      local q2 = vector.complex( L[3] )
---      local w2 = (Z4 * w):sum(L:MultiSet(L[3], L:pcoord(3)))
---      for i = 0, #w2 - 1 do
---        it = ( i + src_loc[3] ) % L[3]
---        q2[i] = -w2[it] * boundary_phase[it]
---      end
---
---      name = string.format("/Z4/pi1x%.2dpi1y%.2dpi1z%.2d/pi2x%.2dpi2y%.2dpi2z%.2d/pf1x%.2dpf1y%.2dpf1z%.2d/pf2x%.2dpf2y%.2dpf2z%.2d/x%.2dy%.2dz%.2dt%.2d/s%d",
---          pi1[1], pi1[2], pi1[3],
---          pi2[1], pi2[2], pi2[3],
---          pf1[1], pf1[2], pf1[3],
---          pf2[1], pf2[2], pf2[3],
---          src_loc[0], src_loc[1], src_loc[2], src_loc[3], sample)
---      aff_out:write(name, q2)
-
-    end  -- of loop on total momenta momenta
-
-  end
-
+  
+          end  -- of loop of projections
+        end -- of loop of momenta
+      end -- of loop of output gamma
+    end -- of loop of input gamma
+  end -- of loop of momenta
+  boundary_phase = nil
 end
+  
