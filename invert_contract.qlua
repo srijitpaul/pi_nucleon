@@ -1,5 +1,5 @@
---package.path = '/home/srijit/Dropbox/spaul/softwares/build2/parts/qlua/tree/lhpc/?.qlua;/home/srijit/Dropbox/spaul/softwares/build2/parts/qlua/tree/qlib/?.qlua;' .. package.path
-package.path = '/global/homes/s/srijitp/build/qlua_build_edison/build2/parts/qlua/tree/lhpc/?.qlua;/global/homes/s/srijitp/build/qlua_build_edison/build2/parts/qlua/tree/qlib/?.qlua;' .. package.path
+package.path = '/home/srijit/Dropbox/spaul/softwares/build2/parts/qlua/tree/lhpc/?.qlua;/home/srijit/Dropbox/spaul/softwares/build2/parts/qlua/tree/qlib/?.qlua;' .. package.path
+--package.path = '/global/homes/s/srijitp/build/qlua_build_edison/build2/parts/qlua/tree/lhpc/?.qlua;/global/homes/s/srijitp/build/qlua_build_edison/build2/parts/qlua/tree/qlib/?.qlua;' .. package.path
 require "stdlib"
 require "gauge"
 require "ape-smear"
@@ -129,11 +129,14 @@ end
 
 -- APE-smear the configuration
 if ape_n > 0 then
+    ape_timer = timer("APE smearing")
     uape = APE_smear(ustout, ape_alpha, ape_n, ape_accu, ape_maxiter, ape_orthdir)
+    ape_timer("done")
     printf("# [invert_contract] Plaquette after (light quark) APE smearing = %12.10f\n", plaquette_full(uape))
 end
-
+heavy_stout_timer = timer("heavy stout smear")
 ustout_heavy = stout_smear_full(uorig, heavy_stout_rho, heavy_stout_n, 3)
+heavy_stout_timer("done")
     -- TEST
     -- ustout_heavy = uorig
 printf("# [invert_contract] Plaquette after (heavy quark) stout smearing = %12.10f\n", plaquette_full(ustout_heavy))
@@ -237,13 +240,15 @@ for i_src, v_src in ipairs(source_locations) do
     -- sink smearing of the light forward propagator                          
     light_propagator_smeared_list[i_prop] = {}
     local temp = L:DiracPropagator()
-    if wup_n > 0 then                                                         
+    if wup_n > 0 then 
+        wup_smear = timer("wuppertal smearing")
         for icol  = 0, 2 do                                                     
             for ispin = 0, 3 do                                                     
                 local dv = light_propagator_list[i_prop][{c=icol,d=ispin}]            
                 temp[{c=icol, d=ispin}] = wuppertal_smear(uape, wup_alpha, wup_n, dv, 3)
             end                                                                     
         end                            
+        wup_smear("done")
         light_propagator_smeared_list[i_prop] = temp
     else                                                                      
         light_propagator_smeared_list[i_prop]  = light_propagator_list[i_prop]               
@@ -581,7 +586,7 @@ for i_src, v_src in ipairs(source_locations) do
     printf("# [] M - M 2pt output file %s\n", name)                               
     aw_2pt, am = qcd.aff.Writer(name)  
 
-
+    oet_timer = timer("stochastic oet contraction timer")
     for i_sample = 0, nsample_oet - 1 do
 
         --local light_stochastic_propagator_list = {}
@@ -699,5 +704,6 @@ for i_src, v_src in ipairs(source_locations) do
     --    inversion_time("done")
         end
     end
+    oet_timer("done")
 end
 total_timer("done")

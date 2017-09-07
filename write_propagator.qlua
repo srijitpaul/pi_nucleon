@@ -105,7 +105,7 @@ function write_propagator_lime (v, param)
  
   if not string.find(param.name, "stochastic") then  
   printf("# [write_propagator] filename is %s\n", filename)
-    
+  w_timer = timer("writing propagator")    
   finfo = {["$tag"] = "DiracFermion", "QDP/C propagator test file"}                     
                                                                                  
   w = qcd.qdpc.Writer(L, filename, xml.unparse(finfo))
@@ -118,13 +118,15 @@ function write_propagator_lime (v, param)
                                                                                  
    end                                                                           
    end                                                    
-   w:close()                                              
+   w:close()                         
+   w_timer("done")
    else 
    printf("# [write_fermion] filename is %s\n", filename)
-
+   w_timer = timer("writing propagator")
    finfo = {["$tag"] = "DiracFermion", "QDP/C propagator test file"}
    w = qcd.qdpc.Writer(L, filename, xml.unparse(finfo))
    w:DiracFermion(v, xml.unparse({["$tag"] = "Fermion"}))
    w:close()
+   w_timer("done")
    end
 end 

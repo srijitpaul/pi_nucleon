@@ -31,10 +31,10 @@ n_coherent_source = 1
 -- number of configuration
 nconf = 
 
-nsample = 2
+nsample = 12
 nsample_oet = nsample
 -- conf	
-conf_name_prefix = "lat_130110_"
+conf_name_prefix = "/home/srijit/Dropbox/spaul/Dina_Work/pion_nucleon/configs/lat_130110_"
 conf_name_input_suffix = ".nersc"
 conf_name_output_suffix = "_Stout_smeared.nersc"
 
@@ -128,11 +128,11 @@ quark_bc = {1, 1, 1, 1}
 prop_volfmt = "single"
 
 sequential_source_momentum_list = {
-   { 0, 0, 0},
-   { 4, 1, 6}
+--   { 0, 0, 0},
+--   { 4, 1, 6}
 -- {0, 0, -1}
-}
---[[
+--}
+--
   { 0, 0,-1},
   { 0, 1, 0},
   { 0,-1, 0},
