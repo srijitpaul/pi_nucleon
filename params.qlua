@@ -31,7 +31,7 @@ n_coherent_source = 1
 -- number of configuration
 nconf = 
 
-nsample = 2
+nsample = 8
 nsample_oet = nsample
 -- conf	
 conf_name_prefix = "/global/cscratch1/sd/smeinel/BMW/beta3.31_2hex_24c48_ml-0.09530_mh-0.04/lat_130110_"
@@ -128,13 +128,13 @@ quark_bc = {1, 1, 1, 1}
 prop_volfmt = "single"
 
 sequential_source_momentum_list = {
-   { 0, 0, 0},
-   { 0, 0, 1},
-   { 0, 1, 1},
-   { 4, 1, 6}
+--   { 0, 0, 0},
+--   { 0, 0, 1},
+--   { 0, 1, 1},
+--   { 4, 1, 6}
 -- {0, 0, -1}
-}
---[[
+--}
+--
   { 0, 0,-1},
   { 0, 1, 0},
   { 0,-1, 0},

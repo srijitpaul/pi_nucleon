@@ -1,5 +1,5 @@
-package.path = '/home/srijit/Dropbox/spaul/softwares/build2/parts/qlua/tree/lhpc/?.qlua;/home/srijit/Dropbox/spaul/softwares/build2/parts/qlua/tree/qlib/?.qlua;' .. package.path
---package.path = '/global/homes/s/srijitp/build/qlua_build_edison/build2/parts/qlua/tree/lhpc/?.qlua;/global/homes/s/srijitp/build/qlua_build_edison/build2/parts/qlua/tree/qlib/?.qlua;' .. package.path
+--package.path = '/home/srijit/Dropbox/spaul/softwares/build2/parts/qlua/tree/lhpc/?.qlua;/home/srijit/Dropbox/spaul/softwares/build2/parts/qlua/tree/qlib/?.qlua;' .. package.path
+package.path = '/global/homes/s/srijitp/build/qlua_build_edison/build2/parts/qlua/tree/lhpc/?.qlua;/global/homes/s/srijitp/build/qlua_build_edison/build2/parts/qlua/tree/qlib/?.qlua;' .. package.path
 require "stdlib"
 require "gauge"
 require "ape-smear"
@@ -254,6 +254,7 @@ for i_src, v_src in ipairs(source_locations) do
         light_propagator_smeared_list[i_prop]  = light_propagator_list[i_prop]               
     end 
     temp = nil
+--end
     --************************************************************************************
     --* CONTRACTIONS 
     --************************************************************************************
@@ -566,144 +567,144 @@ for i_sample = 0, nsample - 1 do
         aw_mb_mb_2pt:close()
     end
 end
--- ****************************************************************************
--- * INVERSION FOR OET STOCHASTIC TIMESLICES SLOURCES WITH ONE-END TRICK          *
--- ****************************************************************************
- 
-for i_src, v_src in ipairs(source_locations) do
-    local t = v_src["t"]
-    local pos = v_src["pos"]
-    local i_prop = i_src
-    
-    local source_position = vector.int(4)
-    source_position[0] = pos[1]
-    source_position[1] = pos[2]
-    source_position[2] = pos[3]
-    source_position[3] = t
-   
-    -- open output files                                                          
-    local name = string.format("%s.%.4d.tsrc%.2d.aff", "contract_baryon_2pt", nconf, t) 
-    printf("# [] M - M 2pt output file %s\n", name)                               
-    aw_2pt, am = qcd.aff.Writer(name)  
-
-    oet_timer = timer("stochastic oet contraction timer")
-    for i_sample = 0, nsample_oet - 1 do
-
-        --local light_stochastic_propagator_list = {}
-        --local charm_stochastic_propagator_list = {}
-        --local bottom_stochastic_propagator_list = {}
-
-        local light_stochastic_oet_source = Z2_SpinComponent_DiracFermion(S, 0)
-        
-        local light_stochastic_propagator_oet_list = {}
-     
-        local light_stochastic_propagator_oet_list_smeared = {}
-        local phi_0 = L:DiracPropagator()
-        for i_mom, mom in ipairs(pi2_list) do
-            
-        
-        
-            if not read_propagator_oet then
-                
-                printf("# [invert_contract_oet] momentum(%d) = (%d,%d, %d)\n", i_mom, mom[1], mom[2], mom[3])
-        
-                local px = (2 * math.pi * mom[1]) / L[0]
-                local py = (2 * math.pi * mom[2]) / L[1]
-                local pz = (2 * math.pi * mom[3]) / L[2]
-        
-
-                local phase = ( (L:Real(L:pcoord(0)) ) * px +
-                                (L:Real(L:pcoord(1)) ) * py +
-                                (L:Real(L:pcoord(2)) ) * pz):expi()
-        
-                local dv = L:DiracFermion()
-        
-                --selcet stochastic source timeslice t from volume souce, multiply with phase
-                L:Subset{axis=3, position = t}:where(
-                        function()
-                        dv:set( phase * light_stochastic_oet_source )
-                        end)
-                
-                momentum_source = dv
-                --momentum_source = wuppertal_smear(uape, wup_alpha, wup_n, dv, 3)
-
-                for kspin = 0, 3 do
-
-                    light_stochastic_propagator_oet_list[kspin] = {}
-                    printf("# [invert_contract_oet] spin component %d\n", kspin)
-
-                    local dv = L:DiracFermion()
-                    dv[{d= kspin}] = momentum_source[{d=0}]
-
-                    printf("# [invert_contract_oet] t = %d, spin component %d\n", t, kspin)
-
-                    local i_timer = timer("invert")
-                    light_stochastic_propagator_oet_list[kspin] = solver_light(dv)
-                    i_timer("done")
-
-                    dv = nil
-                
-
-                    if  write_stochastic_oet_propagator then
-                        write_param["name"] = string.format("%s_oet", stochastic_propfile_prefix)
-                        write_param["src_t"] = t
-                        write_param["mom"] = mom
-                        write_param["sample"] = i_sample
-                        write_param["spin"] = kspin 
-                        write_propagator_lime(light_stochastic_propagator_oet_list[kspin], write_param)
-                    end
-                end
-            else
-            -- read a stochastic source from disk
-                printf("Reading stochastic propagator\n")
-                for kspin = 0, 3 do
-                    write_param["name"]     = string.format("%s_oet", stochastic_propfile_prefix)
-                    write_param["path"]     = stochastic_sourcefile_path
-                    write_param["src_t"]    = t
-                    write_param["mom"]      = mom
-                    write_param["spin"]     = kspin
-                    write_param["sample"]   = i_sample 
-                    light_stochastic_propagator_oet_list[kspin] = read_propagator_lime(L, write_param)
-                end
-            end
-            
-            if  wup_n > 0 then                                                         
-                for kspin = 0, 3 do                                                     
-                    local dv = light_stochastic_propagator_oet_list[kspin]                    
-                    light_stochastic_propagator_oet_list_smeared[kspin] = wuppertal_smear(uape, wup_alpha, wup_n, dv, 3) 
-                end                                                                     
-            else                                                                      
-                light_stochastic_propagator_oet_list_smeared = light_stochastic_propagator_oet_list 
-            end
-
-
-            if  i_mom == 1 then
-                if  mom[1] == 0 and mom[2] == 0 and mom[3] == 0 then
-                    printf("# [invert_contract_oet] setting zero momentum stochastic propagator\n")    
-                    -- set phi_0 only on color component c = 0                            
-                    phi_0[{c=0, d=0}] = light_stochastic_propagator_oet_list_smeared[0]       
-                    phi_0[{c=0, d=1}] = light_stochastic_propagator_oet_list_smeared[1]       
-                    phi_0[{c=0, d=2}] = light_stochastic_propagator_oet_list_smeared[2]       
-                    phi_0[{c=0, d=3}] = light_stochastic_propagator_oet_list_smeared[3] 
-
-                else
-                    printf("[invert_contract_oet] Error, first momentum should be zero momentum\n")
-                    os.exit(2)
-                end
-            end
-            contract_mxb_mxb_oet (L, light_propagator_list[i_prop], light_stochastic_propagator_oet_list_smeared, phi_0, mom,
-                                 source_position, i_sample, aw_2pt )
-    --    -- charm quark
-    --    inversion_time = timer("charm stochastic propagator")
-    --    charm_stochastic_propagator_list[i_stoch]  = solver_heavy(source, "charm")
-    --    inversion_time("done")
-    --
-    --    -- bottom quark
-    --    inversion_time = timer("bottom stochastic propagator")
-    --    bottom_stochastic_propagator_list[i_stoch] = solver_heavy(source, "bottom")
-    --    inversion_time("done")
-        end
-    end
-    oet_timer("done")
-end
+---- ****************************************************************************
+---- * INVERSION FOR OET STOCHASTIC TIMESLICES SLOURCES WITH ONE-END TRICK          *
+---- ****************************************************************************
+-- 
+--for i_src, v_src in ipairs(source_locations) do
+--    local t = v_src["t"]
+--    local pos = v_src["pos"]
+--    local i_prop = i_src
+--    
+--    local source_position = vector.int(4)
+--    source_position[0] = pos[1]
+--    source_position[1] = pos[2]
+--    source_position[2] = pos[3]
+--    source_position[3] = t
+--   
+--    -- open output files                                                          
+--    local name = string.format("%s.%.4d.tsrc%.2d.aff", "contract_baryon_2pt", nconf, t) 
+--    printf("# [] M - M 2pt output file %s\n", name)                               
+--    aw_2pt, am = qcd.aff.Writer(name)  
+--
+--    oet_timer = timer("stochastic oet contraction timer")
+--    for i_sample = 0, nsample_oet - 1 do
+--
+--        --local light_stochastic_propagator_list = {}
+--        --local charm_stochastic_propagator_list = {}
+--        --local bottom_stochastic_propagator_list = {}
+--
+--        local light_stochastic_oet_source = Z2_SpinComponent_DiracFermion(S, 0)
+--        
+--        local light_stochastic_propagator_oet_list = {}
+--     
+--        local light_stochastic_propagator_oet_list_smeared = {}
+--        local phi_0 = L:DiracPropagator()
+--        for i_mom, mom in ipairs(pi2_list) do
+--            
+--        
+--        
+--            if not read_propagator_oet then
+--                
+--                printf("# [invert_contract_oet] momentum(%d) = (%d,%d, %d)\n", i_mom, mom[1], mom[2], mom[3])
+--        
+--                local px = (2 * math.pi * mom[1]) / L[0]
+--                local py = (2 * math.pi * mom[2]) / L[1]
+--                local pz = (2 * math.pi * mom[3]) / L[2]
+--        
+--
+--                local phase = ( (L:Real(L:pcoord(0)) ) * px +
+--                                (L:Real(L:pcoord(1)) ) * py +
+--                                (L:Real(L:pcoord(2)) ) * pz):expi()
+--        
+--                local dv = L:DiracFermion()
+--        
+--                --selcet stochastic source timeslice t from volume souce, multiply with phase
+--                L:Subset{axis=3, position = t}:where(
+--                        function()
+--                        dv:set( phase * light_stochastic_oet_source )
+--                        end)
+--                
+--                momentum_source = dv
+--                --momentum_source = wuppertal_smear(uape, wup_alpha, wup_n, dv, 3)
+--
+--                for kspin = 0, 3 do
+--
+--                    light_stochastic_propagator_oet_list[kspin] = {}
+--                    printf("# [invert_contract_oet] spin component %d\n", kspin)
+--
+--                    local dv = L:DiracFermion()
+--                    dv[{d= kspin}] = momentum_source[{d=0}]
+--
+--                    printf("# [invert_contract_oet] t = %d, spin component %d\n", t, kspin)
+--
+--                    local i_timer = timer("invert")
+--                    light_stochastic_propagator_oet_list[kspin] = solver_light(dv)
+--                    i_timer("done")
+--
+--                    dv = nil
+--                
+--
+--                    if  write_stochastic_oet_propagator then
+--                        write_param["name"] = string.format("%s_oet", stochastic_propfile_prefix)
+--                        write_param["src_t"] = t
+--                        write_param["mom"] = mom
+--                        write_param["sample"] = i_sample
+--                        write_param["spin"] = kspin 
+--                        write_propagator_lime(light_stochastic_propagator_oet_list[kspin], write_param)
+--                    end
+--                end
+--            else
+--            -- read a stochastic source from disk
+--                printf("Reading stochastic propagator\n")
+--                for kspin = 0, 3 do
+--                    write_param["name"]     = string.format("%s_oet", stochastic_propfile_prefix)
+--                    write_param["path"]     = stochastic_sourcefile_path
+--                    write_param["src_t"]    = t
+--                    write_param["mom"]      = mom
+--                    write_param["spin"]     = kspin
+--                    write_param["sample"]   = i_sample 
+--                    light_stochastic_propagator_oet_list[kspin] = read_propagator_lime(L, write_param)
+--                end
+--            end
+--            
+--            if  wup_n > 0 then                                                         
+--                for kspin = 0, 3 do                                                     
+--                    local dv = light_stochastic_propagator_oet_list[kspin]                    
+--                    light_stochastic_propagator_oet_list_smeared[kspin] = wuppertal_smear(uape, wup_alpha, wup_n, dv, 3) 
+--                end                                                                     
+--            else                                                                      
+--                light_stochastic_propagator_oet_list_smeared = light_stochastic_propagator_oet_list 
+--            end
+--
+--
+--            if  i_mom == 1 then
+--                if  mom[1] == 0 and mom[2] == 0 and mom[3] == 0 then
+--                    printf("# [invert_contract_oet] setting zero momentum stochastic propagator\n")    
+--                    -- set phi_0 only on color component c = 0                            
+--                    phi_0[{c=0, d=0}] = light_stochastic_propagator_oet_list_smeared[0]       
+--                    phi_0[{c=0, d=1}] = light_stochastic_propagator_oet_list_smeared[1]       
+--                    phi_0[{c=0, d=2}] = light_stochastic_propagator_oet_list_smeared[2]       
+--                    phi_0[{c=0, d=3}] = light_stochastic_propagator_oet_list_smeared[3] 
+--
+--                else
+--                    printf("[invert_contract_oet] Error, first momentum should be zero momentum\n")
+--                    os.exit(2)
+--                end
+--            end
+--            contract_mxb_mxb_oet (L, light_propagator_list[i_prop], light_stochastic_propagator_oet_list_smeared, phi_0, mom,
+--                                 source_position, i_sample, aw_2pt )
+--    --    -- charm quark
+--    --    inversion_time = timer("charm stochastic propagator")
+--    --    charm_stochastic_propagator_list[i_stoch]  = solver_heavy(source, "charm")
+--    --    inversion_time("done")
+--    --
+--    --    -- bottom quark
+--    --    inversion_time = timer("bottom stochastic propagator")
+--    --    bottom_stochastic_propagator_list[i_stoch] = solver_heavy(source, "bottom")
+--    --    inversion_time("done")
+--        end
+--    end
+--    oet_timer("done")
+--end
 total_timer("done")

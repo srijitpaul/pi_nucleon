@@ -3,7 +3,7 @@
 #SBATCH -n 768
 #SBATCH -N 32
 
-#SBATCH -t 03:00:00
+#SBATCH -t 24:00:00
 #SBATCH --mail-type=BEGIN,END,FAIL
 #SBATCH --mail-user=s.paul@cyi.ac.cy
 
