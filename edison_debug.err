@@ -1,4 +1,3 @@
-/var/spool/slurmd/job7113296/slurm_script: line 35: /var/spool/slurmd/job7113296/slurm_script.log: Permission denied
-/var/spool/slurmd/job7113296/slurm_script: line 36: /var/spool/slurmd/job7113296/slurm_script.log: Permission denied
-/var/spool/slurmd/job7113296/slurm_script: line 39: /var/spool/slurmd/job7113296/slurm_script.log: Permission denied
-/var/spool/slurmd/job7113296/slurm_script: line 74: /var/spool/slurmd/job7113296/slurm_script.log: Permission denied
+/var/spool/slurmd/job7151341/slurm_script: line 35: /var/spool/slurmd/job7151341/slurm_script.log: Permission denied
+/var/spool/slurmd/job7151341/slurm_script: line 36: /var/spool/slurmd/job7151341/slurm_script.log: Permission denied
+/var/spool/slurmd/job7151341/slurm_script: line 39: /var/spool/slurmd/job7151341/slurm_script.log: Permission denied
