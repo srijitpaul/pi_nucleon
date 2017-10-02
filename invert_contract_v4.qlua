@@ -1,0 +1,1025 @@
+require "stdlib"
+require "gauge"
+require "ape-smear"
+require "wuppertal-smear"
+require "stout-smear"
+require "qdpc_io"
+
+function show_mem(name)
+  printf("# Memory usage at %s:\n", name);
+  for i,v in pairs(qcd.memory_usage()) do
+    printf("   %-20s %d\n", i, v)
+  end
+end
+
+function point_source (Lat, x,y,z,t)
+  G = Lat:DiracPropagator()
+  for icol  = 0, 2 do
+  for ispin = 0, 3 do
+    local dv = Lat:DiracFermion()
+    dv[{x, y, z, t, c=icol, d=ispin}] = complex(1, 0)
+    G[{c=icol,d=ispin}] = dv   
+  end
+  end
+  return G
+end
+
+write_param = {
+  ["m_q"]         = mq_l,
+  ["c_sw"]        = csw,
+  ["ferm_bc"]     = quark_bc,
+  ["ensemble"]    = ensemble_name,
+  ["cfg"]         = nconf,
+  ["ape_alpha"]   = ape_alpha,
+  ["ape_n"]       = ape_n,
+  ["ape_accu"]    = ape_accu,
+  ["ape_maxiter"] = ape_maxiter,
+  ["wup_alpha"]   = wup_alpha,
+  ["wup_n"]       = wup_n,
+  ["action_type"] = "NA",
+  ["stout_rho"]   = stout_rho,
+  ["stout_n"]     = stout_n,
+  ["solver_eps"]  = mg_max_relerr,
+  ["src_pos"]     = {-1, -1, -1},
+  ["src_t"]       = -1
+}
+
+
+-- ************************************************************************************
+-- *
+-- ************************************************************************************
+
+total_timer = timer("total time")
+
+-- print parameters
+printf("# [invert_contract_v4] Dimensions                = %d %d %d %d\n", dims[1], dims[2], dims[3], dims[4])
+printf("# [invert_contract_v4] Clover Inverter\n")
+printf("#\t light quark mass               = %g\n", mq_l)
+printf("#\t light quark kappa              = %g\n", kappa_l)
+printf("#\t strange quark mass             = %g\n", mq_s)
+printf("#\t strange quark kappa            = %g\n", kappa_s)
+printf("#\t Boundary condition = %d, %d, %d, %d\n", quark_bc[1], quark_bc[2], quark_bc[3], quark_bc[4])
+
+-- initialize the lattice
+L = qcd.lattice(dims, {network=network_dims})
+
+Nd = #L
+
+volume = 1
+for i = 0, #L - 1 do
+  volume = volume * L[i]
+end
+printf("# [invert_contract_v4] lattice volume = %d\n", volume)
+
+-- * read and stout-smear the gauge configuration
+
+if stout_smear then
+  -- read configuration
+  conf_name = string.format("%s%d%s", conf_name_prefix, nconf, conf_name_input_suffix)
+  -- conf_name = string.format("%s.%.4d", conf_name_prefix, nconf )
+  printf("# [invert_contract_v4] reading original gauge configuration from file %s\n", conf_name)
+
+  u_load_timer = timer("u load")
+  uorig = load_ildg(L, conf_name)
+  u_load_timer("done")
+  printf("# [invert_contract_v4] Plaquette (original) = %12.10f\n", plaquette_full(uorig))
+
+  -- smear the gauge configuration
+  stout_timer = timer("stout smear")
+  printf("# [invert_contract_v4] Stout-smearing gauge field\n")
+  ustout = stout_smear_4d(uorig, stout_rho, stout_n)
+  printf("# [invert_contract_v4] Plaquette (smeared) = %12.10f\n", plaquette_full(ustout))
+  stout_timer("done")
+else
+  printf("[invert_contract_v4] Error, need original gauge configuration for heavy quark sector\n")
+  os.exit(2)
+end
+
+
+-- TEST
+--[[
+ustout = {}
+for i = 0, #L - 1 do
+  ustout[i+1] = L:ColorMatrix(complex(1,0))
+end
+uorig = ustout
+--]]
+
+-- APE-smear the configuration
+if ape_n > 0 then
+  uape = APE_smear(ustout, ape_alpha, ape_n, ape_accu, ape_maxiter, ape_orthdir)
+  printf("# [invert_contract_v4] Plaquette after (light quark) APE smearing = %12.10f\n", plaquette_full(uape))
+end
+
+ustout_heavy = stout_smear_full(uorig, heavy_stout_rho, heavy_stout_n, 3)
+-- TEST
+-- ustout_heavy = uorig
+printf("# [invert_contract_v4] Plaquette after (heavy quark) stout smearing = %12.10f\n", plaquette_full(ustout_heavy))
+
+mg_solver    = make_mg_solver (L, ustout, mg_block, mg_max_abserr, mg_max_relerr, quark_bc, kappa_l, csw )
+
+-- TEST
+--[[
+function mg_solver (v, kappa)
+  L = v.lattice
+  s = tostring(v)
+  if string.find(s, "^QDP:DiracFermion") then
+    dv = L:DiracFermion() 
+  elseif string.find(s, "^QDP:DiracPropagator") then
+    dv = L:DiracPropagator() 
+  else
+    printf("# [mg_solver] Bad argument to solver: %s\n", s)
+    os.exit(1)
+  end
+  dv:set(v)
+  return dv
+end
+--]]
+
+solver_heavy = make_aicl_solver(L, uorig, charm, bottom)
+
+-- TEST
+--[[
+function solver_heavy(v, flavor)
+  L = v.lattice
+  s = tostring(v)
+  if string.find(s, "^QDP:DiracFermion") then
+    dv = L:DiracFermion() 
+  elseif string.find(s, "^QDP:DiracPropagator") then
+    dv = L:DiracPropagator() 
+  else
+    printf("# [solver_heavy] Bad argument to solver: %s\n", s)
+    os.exit(1)
+  end
+  dv:set(v)
+  return dv
+end
+--]]
+
+uorig = nil
+
+-- ************************************************************************************
+-- * random number generator state
+-- ************************************************************************************
+S = random_state(L)
+
+-- ************************************************************************************
+-- * determine all stochastic source timeslices needed; make a source timeslice list
+-- ************************************************************************************
+stochastic_source_timeslice_lookup_table = {}
+stochastic_source_timeslice_list = {}
+
+local ttimer = timer("stochastic source timeslices")
+local tmp_list = {}
+for t = 0, L[3]-1 do
+  tmp_list[t] = -1
+end
+
+local i_snk = 0
+for i_src, v_src in ipairs(source_locations) do
+  
+  local t = v_src["t"]
+
+  for i_coherent = 0, n_coherent_source - 1 do
+
+    local i_prop = (i_src - 1 ) * n_coherent_source + i_coherent + 1
+    local t_coherent = ( t + i_coherent * (L[3] / n_coherent_source) ) % L[3]
+
+    stochastic_source_timeslice_lookup_table[i_prop] = {}
+
+    for dt = 0, dt_source_sink_2pt do
+      t_snk = ( t_coherent + dt ) % L[3]
+      if tmp_list[t_snk] == -1 then
+        tmp_list[t_snk] = i_snk
+        stochastic_source_timeslice_list[ i_snk ] = t_snk
+        i_snk = i_snk + 1
+      end
+      stochastic_source_timeslice_lookup_table[i_prop][dt] = tmp_list[t_snk]
+    end
+
+  end  -- of loop on coherent source timeslices
+end    -- of loop on base source timeslices
+
+stochastic_source_timeslice_number = i_snk
+printf("# [invert_contract_v4] number of stochastic source timeslices = %d\n", stochastic_source_timeslice_number)
+
+tmp_list = nil
+i_snk = nil
+
+-- TEST
+for i_src, v_src in ipairs(source_locations) do
+  local t = v_src["t"]
+
+  for i_coherent = 0, n_coherent_source - 1 do
+
+    local i_prop = (i_src - 1 ) * n_coherent_source + i_coherent + 1
+    local t_coherent = ( t + i_coherent * (L[3] / n_coherent_source) ) % L[3]
+
+    for dt = 0, dt_source_sink_2pt do
+      printf("# [invert_contract_v4] i_src = %d, i_prop = %d, t_src = %d, dt = %d, t_snk = %d, lookup table = %d\n", i_src, i_prop, t_coherent, dt, 
+          stochastic_source_timeslice_list[ stochastic_source_timeslice_lookup_table[i_prop][dt] ],
+          stochastic_source_timeslice_lookup_table[i_prop][dt])
+    end
+
+  end
+end
+
+-- TEST
+for i_stoch =0, stochastic_source_timeslice_number - 1 do
+  printf("# [invert_contract_v4] stochastic source timeslice no. %d is t = %d\n", i_stoch, stochastic_source_timeslice_list[i_stoch])
+end
+ttimer("done")
+
+
+-- ************************************************************************************
+-- * forward propagator lists
+-- *   these are kept till the end
+-- ************************************************************************************
+local light_propagator_list   = {}
+
+-- ************************************************************************************
+-- * make nsample sources with Z2 x Z2 noise
+-- ************************************************************************************
+local light_stochastic_source_list = {}
+for i_sample = 0, nsample - 1 do
+  light_stochastic_source_list[i_sample] = Z2_SpinComponent_DiracFermion(S, {0,1,2,3})
+  write_param["name"]   = "stochastic_source"
+  write_param["sample"] = i_sample
+  write_param["path"]   = "."
+  write_propagator( light_stochastic_source_list[i_sample], write_param)
+  -- light_stochastic_source_list[i_sample] = read_propagator(L, write_param)
+end
+
+-- ************************************************************************************
+-- * smear the stochastic sources
+-- *
+-- * light / strange smearing
+-- ************************************************************************************
+ttimer = timer("light stochastic source smearing")
+light_stochastic_source_list_smeared = {}
+for i_sample = 0, nsample - 1 do
+  light_stochastic_source_list_smeared[i_sample] = wuppertal_smear(uape, wup_alpha, wup_n, light_stochastic_source_list[i_sample], 3)
+end
+ttimer("done")
+  
+show_mem("# checkpoint 1")
+
+-- ************************************************************************************
+-- * INVERSIONS FOR FWD PROPAGATORS AND SEQUENTIAL PROPAGATORS;
+-- * CONTRACTIONS FOR 2-POINT AND 3-POINT FUNCTIONS USING ONLY FWD AND SEQ
+-- *
+-- * loop on base source locations
+-- ************************************************************************************
+for i_src, v_src in ipairs(source_locations) do
+
+  local t   = v_src["t"]
+  local pos = v_src["pos"]
+  printf("# [invert_contract_v4] base source location[%d] = (%d, %d, %d) t=%d\n", i_src, pos[1], pos[2], pos[3], t)
+
+  -- open output files
+  local name = string.format("%s.%.4d.tsrc%.2d.aff", "contract_mb_factors_xi", nconf, t)
+  printf("# [invert_contract_v4] output file %s\n", name)
+  aw, am = qcd.aff.Writer(name)
+
+  -- * loop on coherent source locations
+  for i_coherent = 0, n_coherent_source - 1 do
+
+    local i_prop = ( i_src - 1) * n_coherent_source + i_coherent + 1
+    printf("# [invert_contract_v4] setting forward propagator no. %d\n", i_prop)
+
+    -- * set original (i_coherent = 0) or coherent source location (i_coherent > 0)
+   
+    local t_coherent = ( t + i_coherent * (L[3]/n_coherent_source) ) % L[3]
+
+    -- * set the shifted, coherent source location
+    local pos_coherent = {}
+    pos_coherent[1] = ( pos[1]  + i_coherent * (L[0] / n_coherent_source) ) % L[0]
+    pos_coherent[2] = ( pos[2]  + i_coherent * (L[1] / n_coherent_source) ) % L[1]
+    pos_coherent[3] = ( pos[3]  + i_coherent * (L[2] / n_coherent_source) ) % L[2]
+
+    local source_timeslice = t_coherent
+    printf("# [invert_contract_v4] coherent source timeslice = %d\n", source_timeslice)
+
+    local source_position = vector.int(4)
+    source_position[0] = pos_coherent[1]
+    source_position[1] = pos_coherent[2]
+    source_position[2] = pos_coherent[3]
+    source_position[3] = t_coherent
+
+
+    -- ************************************************************************************
+    -- * point-to-all forward propagator
+    -- ************************************************************************************
+
+    -- * set a point source and smear the source
+    local ttimer = timer("light forward source smearing")
+    local dv = point_source (L, pos_coherent[1], pos_coherent[2], pos_coherent[3], t_coherent )
+    printf( "# [invert_contract_v4] norm2 before smearing = %e\n",dv:norm2() )
+    local source = wuppertal_smear(uape, wup_alpha, wup_n, dv, 3)
+    -- printf( "# [invert_contract_v4] norm2 after  smearing = %e\n",source:norm2() )
+    ttimer("done")
+
+    -- light forward propagator
+    ttimer = timer("light forward inversion")
+    light_propagator_list[i_prop] = mg_solver(source, kappa_l)
+    ttimer("done")
+
+    -- * sink smearing for light forward propagator
+    ttimer = timer("light forward sink smearing")
+    local light_propagator_smeared = wuppertal_smear(uape, wup_alpha, wup_n, light_propagator_list[i_prop], 3)
+    ttimer("done")
+
+    -- ************************************************************************************
+    -- * contractions for m - m 2-point functions
+    -- ************************************************************************************
+
+-- (1.1) strange - light M - M 2-point function
+
+    ttimer = timer("contract fl-gi-fl-gf")
+    contract_vector_meson_2pt(L, light_propagator_smeared, light_propagator_smeared, source_position, vsp_gamma_list, sink_momentum_list, aw_m_m_2pt, "fl-fl")
+    ttimer("done")
+
+    -- ************************************************************************************
+    -- *
+    -- ************************************************************************************
+    
+    local gf2 = { {tag="g5", gamma={15, 1, 1}}, {tag="id", gamma={0, 1, 1}} } -- Gamma_f2 = g5, 1
+
+    -- * loop on samples
+    for i_sample = 0, nsample - 1 do
+
+      -- ******************************************************
+      -- * V3: xi^+ G_f2 fl
+      -- ******************************************************
+      local tag = string.format("%s/tsrc%.2d/sample%.2d", "xil-gf2-fl", t_coherent, i_sample)
+      ttimer = timer("contract xil-fl")
+      contract_v3_ft_write (L, light_propagator_smeared, light_stochastic_source_list_smeared[i_sample], gf2, sequential_source_momentum_list, aw, tag)
+      ttimer("done")
+
+      -- ******************************************************
+      -- * V3: xi^+ G_c fl
+      -- ******************************************************
+      tag = string.format("%s/tsrc%.2d/sample%.2d", "xil-gc-fl", t_coherent, i_sample)
+      ttimer = timer("contract xil-gc-fl")
+      contract_v3_ft_write (L, light_propagator_list[i_prop], light_stochastic_source_list[i_sample], va_current_gamma_list, sequential_source_momentum_list, aw, tag)
+      ttimer("done")
+
+      -- ******************************************************
+      -- * V2/V1: xi^t G_f1 fl
+      -- ******************************************************
+      tag = string.format("%s/tsrc%.2d/sample%.2d", "xil-gf1-fl-fl", t_coherent, i_sample)
+      ttimer = timer("contract xil-gf1-fl-fl")
+      contract_v2_ft_write (L, light_stochastic_source_list_smeared[i_sample], light_propagator_smeared, light_propagator_smeared, baryon_vertex_list, sink_momentum_list, aw, tag)
+      ttimer("done")
+
+    end  -- of loop on samples
+
+    -- * delete sink-smeared light and strange forward propagator
+    light_propagator_smeared   = nil
+
+    show_mem("# checkpoint 2")
+  end  -- of loop on coherent source locations
+
+  show_mem("# checkpoint 5")
+
+
+  -- ************************************************************************************
+  -- * inversion on sequential source
+  -- *  - light after light
+  -- *  - for given base source location
+  -- *
+  -- * contractions using sequential propagator
+  -- *   - for each coherent source locations
+  -- *
+  -- *
+  -- * make the list of smeared strange fwd propagators for
+  -- *  all coherent source locations given the base source location
+  -- ************************************************************************************
+  local light_propagator_smeared = {}
+
+  -- * loop on coherent source locations
+  for i_coherent = 0, n_coherent_source - 1 do
+    local i_prop = ( i_src - 1) * n_coherent_source + i_coherent + 1
+    ttimer = timer("light forward sink smearing")
+    light_propagator_smeared[i_coherent] = wuppertal_smear(uape, wup_alpha, wup_n, light_propagator_list[i_prop], 3)
+    ttimer("done")
+  end  -- of loop on coherent source locations
+
+  -- * loop on sequential source momenta
+  for i_seq_mom, seq_mom in ipairs(sequential_source_momentum_list) do
+
+    local seq_source_mom_timer = timer("seq_source_mom")
+    printf("#[invert_contract_v4]  sequential source momentum(%d) = (%d, %d, %d)\n", i_seq_mom, seq_mom[1], seq_mom[2], seq_mom[3])
+
+    local seq_source_mom = L:DiracPropagator()
+
+    -- * local field exp(i p x)
+    -- *   p = seq_mom sequential source momentum
+    -- *   x = sink of light propagator
+    local px = (2 * math.pi * seq_mom[1]) / L[0]
+    local py = (2 * math.pi * seq_mom[2]) / L[1]
+    local pz = (2 * math.pi * seq_mom[3]) / L[2]
+    local phase = ( (L:Real(L:pcoord(0)) ) * px +
+                    (L:Real(L:pcoord(1)) ) * py +
+                    (L:Real(L:pcoord(2)) ) * pz):expi()
+            
+    -- * Dirac gamma matrix at sequential vertex, is always g5 (binary gamma id 15)
+    local seq_gamma = sequential_source_gamma["val"]
+          
+    -- * sequential source at t = propagator at t
+    for i_coherent = 0, n_coherent_source - 1 do
+      local i_prop = ( i_src - 1) * n_coherent_source + i_coherent + 1
+      local t_coherent = ( t + i_coherent * (L[3]/n_coherent_source) ) % L[3]
+      printf("# [invert_contract_v4] adding source timeslice %d to sequential source list from propagator number %d\n", t_coherent, i_prop)
+      L:Subset{axis=3, position = t_coherent}:where(function()
+        seq_source_mom:set( light_propagator_list[i_prop] )
+      end)
+    end
+      
+    printf("# [invert_contract_v4] smearing source + setting gamma x moentum + smearing source %d / %d\n", i_src, i_seq_mom)
+    -- * seq_source_mom <- J seq_source_mom
+    seq_source_mom = wuppertal_smear(uape, wup_alpha, wup_n, seq_source_mom, 3)
+    -- * seq_source_mom <- exp(i p x) g5 J seq_source_mom
+    seq_source_mom = phase * ( seq_gamma * seq_source_mom )
+    -- * seq_source_mom <- J exp(i p x) g5 J seq_source_mom
+    seq_source_mom = wuppertal_smear(uape, wup_alpha, wup_n, seq_source_mom, 3)
+
+    seq_source_mom_timer("done")
+      
+    -- * invert on the sequential momentum source
+    local ttimer = timer("light sequential inversion")
+    light_sequential_propagator = mg_solver(seq_source_mom, kappa_l)
+    ttimer("done")
+
+    seq_source_mom = nil
+
+    -- * sink smearing of sequential propagator
+    -- *   can be smeared at this point, since for 2-point and 3-point functions we
+    -- *   always use the sequential propagator smeared at source and sink
+    ttimer = timer("light sequential sink smearing")
+    light_sequential_propagator_smeared = wuppertal_smear(uape, wup_alpha, wup_n, light_sequential_propagator, 3)
+    ttimer("done")
+
+    show_mem("# checkpoint 6")
+
+
+    local gf2 = { {tag="g5", gamma={15, 1, 1}}, {tag="id", gamma={0, 1, 1}} } -- Gamma_f2 = g5, 1
+    for i_sample = 0, nsample - 1 do
+
+    -- ******************************************************
+    -- * V3: xi^+ G_f2 sll
+    -- ******************************************************
+      local tag = string.format("%s/pi2x%.2dpi2y%.2dpi2z%.2d/sample%.2d", "xil-gf2-sll", seq_mom[1], seq_mom[2], seq_mom[3], i_sample)
+      local contract_timer = timer("contract xil-gf2-sll")
+      contract_v3_ft_write(L, light_sequential_propagator_smeared, light_stochastic_source_list_smeared[i_sample], gf2, sequential_source_momentum_list, aw, tag)
+      contract_timer("done")
+
+    -- ******************************************************
+    -- * V3: xi^+ G_c sll
+    -- ******************************************************
+      tag = string.format("%s/pi2x%.2dpi2y%.2dpi2z%.2d/sample%.2d", "xil-gc-sll", seq_mom[1], seq_mom[2], seq_mom[3], i_sample)
+      contract_timer = timer("contract xil-gc-sll")
+      contract_v3_ft_write(L, light_sequential_propagator, light_stochastic_source_list[i_sample], va_current_gamma_list, sequential_source_momentum_list, aw, tag)
+      contract_timer("done")
+
+    -- ******************************************************
+    -- * V2/V1: xi^+ g5 G_f1 fl sll
+    -- ******************************************************
+      tag = string.format("%s/pi2x%.2dpi2y%.2dpi2z%.2d/sample%.2d", "xil-gf1-fl-sll", seq_mom[1], seq_mom[2], seq_mom[3], i_sample)
+      contract_timer = timer("contract xil-gf1-fl-sll")
+      contract_v2_ft_write (L, light_stochastic_source_list_smeared[i_sample], light_propagator_smeared[i_coherent], light_sequential_propagator_smeared, baryon_vertex_list, sink_momentum_list, aw, tag)
+      contract_timer("done")
+
+    -- ******************************************************
+    -- * V2/V1: xi^+ g5 G_f1 sll fl
+    -- ******************************************************
+      tag = string.format("%s/pi2x%.2dpi2y%.2dpi2z%.2d/sample%.2d", "xil-gf1-sll-fl", seq_mom[1], seq_mom[2], seq_mom[3], i_sample)
+      contract_timer = timer("contract xil-gf1-sll-fl")
+      contract_v2_ft_write (L, light_stochastic_source_list_smeared[i_sample], light_sequential_propagator_smeared, light_propagator_smeared[i_coherent], baryon_vertex_list, sink_momentum_list, aw, tag)
+      contract_timer("done")
+    end
+
+    light_sequential_propagator = nil
+    light_sequential_propagator_smeared = nil
+    show_mem("# checkpoint 7")
+  end      -- end of loop on sequential source momenta
+
+  light_propagator_smeared = nil
+  show_mem("# checkpoint 10")
+
+  -- close the output file
+  aw:close()
+end  -- end of loop on base source locations
+
+show_mem("# checkpoint 11")
+
+-- ************************************************************************************
+-- * INVERSIONS AND CONTRACTIONS USING STOCHASTIC TIMESLICE PROPAGATORS
+-- *
+-- *   remaining par of mxm-mxm 2-pt box
+-- *   upper part of m - j - mxm and m - j - m 3-pt
+-- *
+-- ************************************************************************************
+
+-- ******************************
+-- * loop on samples
+-- ******************************
+for i_sample = 0, nsample - 1 do
+
+  local light_stochastic_propagator_list  = {}
+
+  -- *****************************************************
+  -- * inversions on stochastic timeslice sources
+  -- *
+  -- * loop on stochastic timeslices
+  -- *****************************************************
+  for i_stoch = 0, stochastic_source_timeslice_number - 1 do
+
+    local t = stochastic_source_timeslice_list[i_stoch]
+    printf("# [invert_contract_v4] current stochastic source timeslice (%d) t=%d\n", i_stoch, t)
+
+    local source = L:DiracFermion()
+    -- select stochastic source timeslice t from volume source
+    L:Subset{axis=3, position=t}:where( function()
+        source:set( light_stochastic_source_list[i_sample] )
+      end)
+  
+    -- invert on the stochastic timeslice source
+    -- light quark
+    local inversion_time = timer("light stochastic propagator")
+    light_stochastic_propagator_list[i_stoch] = mg_solver(source, kappa_l)
+    inversion_time("done")
+  
+    source = nil
+      
+  end  -- end of loop on stochastic timeslice list
+
+  show_mem("# checkpoint 11")
+
+  -- ************************************************************************************
+  -- *
+  -- ************************************************************************************
+    
+  
+  local light_stochastic_propagator_allsink = L:DiracFermion()
+
+  local ttimer = timer("light stochastic propagator allsink")
+
+  -- * loop on stochastic timeslices
+  -- * set a stochastic propagator with all available sink timeslices
+  for i_stoch = 0, stochastic_source_timeslice_number - 1 do
+
+    local t_tmp = stochastic_source_timeslice_list[i_stoch]
+    printf("# [invert_contract_v4] current stochastic source timeslice (%d) t_tmp = %d\n", i_stoch, t_tmp)
+
+    -- * WE FILL IN THE TIMESLICE OF THE PROPAGATOR AT CURRENT SINK TIME
+    -- *   remember, that we only evaluate the stochastic timeslice source
+    -- *   and propagator at sink times t_f1 = t_f2
+
+    L:Subset{axis=3, position = t_tmp}:where( function()
+      light_stochastic_propagator_allsink:set( light_stochastic_propagator_list[i_stoch] )
+    end)
+  end
+
+  -- * sink smearing of the light stochastic timeslice propagator allsink
+  local light_stochastic_propagator_smeared_allsink = wuppertal_smear(uape, wup_alpha, wup_n, light_stochastic_propagator_allsink, 3)
+  ttimer("done")
+
+  show_mem("# checkpoint 12")
+
+  -- ************************************************************************************
+  -- * contractions for mxb - mxb
+  -- *
+  -- * loop on base source locations
+  -- ************************************************************************************
+  for i_src, v_src in ipairs(source_locations) do
+
+    local t   = v_src["t"]
+    local pos = v_src["pos"]
+    printf("# [invert_contract_v4] base source location[%d] = (%d, %d, %d) t=%d\n", i_src, pos[1], pos[2], pos[3], t)
+
+    -- * open output files
+    local name = string.format("%s.%.4d.%.2d.%.5d.aff", "contract_mb_factors_phi", nconf, t, i_sample)
+    printf("# [invert_contract_v4] MxB - MxB phi output file %s\n", name)
+    local aw, am = qcd.aff.Writer(name)
+    name = nil
+
+    -- * loop on coherent source locations
+    for i_coherent = 0, n_coherent_source - 1 do
+
+      local i_prop = ( i_src - 1) * n_coherent_source + i_coherent + 1
+
+      -- * set original (i_coherent = 0) or coherent source location (i_coherent > 0)
+           
+      local t_coherent = ( t + i_coherent * (L[3]/n_coherent_source) ) % L[3]
+           
+      -- * set the shifted, coherent source location
+      local pos_coherent = {}
+      pos_coherent[1] = ( pos[1]  + i_coherent * (L[0] / n_coherent_source) ) % L[0]
+      pos_coherent[2] = ( pos[2]  + i_coherent * (L[1] / n_coherent_source) ) % L[1]
+      pos_coherent[3] = ( pos[3]  + i_coherent * (L[2] / n_coherent_source) ) % L[2]
+           
+      -- * FOR THE 2-POINT FUNCTIONS WE NEED THE SMEARED LIGHT STOCHASTIC PROPAGATOR AND THE SMEARED STRANGE FORWARD PROPAGATOR
+      -- *   since the strange_propagator_list and light_stochastic_propagator_list are NOT smeared
+      -- *   at sink, we have to do that here
+      local ttimer = timer("light forward sink smearing")
+      local light_propagator_smeared = wuppertal_smear(uape, wup_alpha, wup_n, light_propagator_list[i_prop], 3)
+      ttimer("done")
+
+      show_mem("# checkpoint 13")
+
+      -- ******************************************************************************
+      -- * V3: phi^+ G_f2 fl
+      -- ******************************************************************************
+      local gf2 = { {tag="g5", gamma={15, 1, 1}}, {tag="id", gamma={0, 1, 1}} } -- Gamma_f2 = g5, 1
+      local tag = string.format("%s/sample%.2d", "phil-gf2-fl", i_sample)
+      contract_timer = timer("contract phil-gf2-fl")
+      contract_v3_ft_write(L, light_propagator_smeared, light_stochastic_propagator_smeared_allsink, gf2, sequential_source_momentum_list, aw, tag)
+      contract_timer("done")
+
+      -- ******************************************************************************
+      -- * V3: phi^+ G_c fl
+      -- ******************************************************************************
+      tag = string.format("%s/sample%.2d", "phil-gc-fl", i_sample)
+      contract_timer = timer("contract phil-gc-fl")
+      contract_v3_ft_write(L, light_propagator_list[i_prop], light_stochastic_propagator_allsink, va_current_list, sequential_source_momentum_list, aw, tag)
+      contract_timer("done")
+
+      -- ******************************************************************************
+      -- * V2/V1: phi^t G_f1 fl fl
+      -- ******************************************************************************
+      tag = string.format("%s/sample%.2d", "phil-gf1-fl-fl", i_sample)
+      contract_timer = timer("contract phil-gf1-fl-fl")
+      contract_v2_ft_write (L, light_stochastic_propagator_smeared_allsink, light_propagator_smeared, light_propagator_smeared, baryon_vertex_list, sink_momentum_list, aw, tag)
+      contract_timer("done")
+
+      ttimer("done")
+
+      show_mem("# checkpoint 14")
+    end  -- of loop on  coherent source locations
+
+    show_mem("# checkpoint 15")
+
+  end  -- of loop on base source locations
+
+  show_mem("# checkpoint 16")
+
+  -- ******************************************************************************
+  -- * contractions for mxb-J-m
+  -- *
+  -- * for a given source-sink time separation, contract all base+coherent sources
+  -- * in one step
+  -- *
+  -- *
+  -- * loop on source-sink time separations
+  -- ******************************************************************************
+
+  for i_dt, dt in ipairs(dt_source_sink_3pt_list) do
+
+    show_mem("# checkpoint 17")
+
+    -- * loop on base source location
+    for i_src, v_src in ipairs(source_locations) do
+
+      -- * prepare propagators for all sink times
+      local ttimer = timer("l propagator allsink")
+
+      local t   = v_src["t"]
+      local pos = v_src["pos"]
+
+      -- ******************************************************************************
+      -- * propagator lists
+      -- *
+      -- *   the stochastic propagators remain UNSMEARED at sink
+      -- ******************************************************************************
+      local light_propagator_allsink            = L:DiracPropagator()
+      local light_stochastic_propagator_allsink = L:DiracFermion()
+
+      -- * loop on coherent source location
+      for i_coherent = 0, n_coherent_source - 1 do
+
+        local i_prop     = ( i_src - 1) * n_coherent_source + i_coherent + 1
+        local t_coherent = ( t + i_coherent * (L[3]/n_coherent_source) ) % L[3]
+           
+        -- * prepare the unsmeared light and strange forward propagator at all sink times
+        for dt_tmp = 0, dt - 1 do
+          
+          local t_tmp = ( t_coherent + dt_tmp + 1 ) % L[3]
+          printf("# [invert_contract_cc_light] setting light_propagator_allsink for i_prop =%d, t_coherent = %d, dt_tmp = %d, t_tmp = %d\n", i_prop, t_coherent, dt_tmp, t_tmp)
+
+          -- * light
+          L:Subset{axis=3, position = t_tmp}:where( function()
+            light_propagator_allsink:set( light_propagator_list[i_prop] )
+          end)
+
+        end
+
+        -- * prepare the unsmeared light / charm/ bottom stochastic propagator at all sink times
+        local i_stoch = stochastic_source_timeslice_lookup_table[i_prop][dt]
+
+        for dt_tmp = 0, dt - 1 do
+          
+          local t_tmp = ( t_coherent + dt_tmp + 1 ) % L[3]
+          printf("# [invert_contract_cc_light] setting light stochastic propagator_allsink for i_prop =%d / i_stoch = %d, t_coherent = %d, dt_tmp = %d, t_tmp = %d\n",
+              i_prop, i_stoch, t_coherent, dt_tmp, t_tmp)
+
+          L:Subset{axis=3, position = t_tmp}:where( function()
+            light_stochastic_propagator_allsink:set( light_stochastic_propagator_list[i_stoch] )
+          end)
+
+        end  -- of loop on intermediate times dt
+      end    -- of loop on coherent source timeslices
+
+      ttimer("done")
+
+      show_mem("# checkpoint 17")
+
+      -- ******************************************************************************
+      -- * V3:  phi^+ G_c fl
+      -- ******************************************************************************
+      local tag  = string.format("phil-gc-fl/tbase%.2d", t )
+      ttimer = timer("contract phil-gc-fl")
+      contract_v3_ft_write(L, light_propagator_allsink, light_stochastic_propagator_allsink, va_current_list, sequential_source_momentum_list, aw, tag)
+      ttimer("done")
+
+      light_propagator_allsink            = nil
+      light_stochastic_propagator_allsink = nil
+
+      -- ******************************************************************************
+      -- * propagator lists
+      -- *
+      -- *   the stochastic propagators remain UNSMEARED at sink
+      -- ******************************************************************************
+      local light_propagator_allsink            = L:DiracPropagator()
+      local light_stochastic_propagator_allsink = L:DiracFermion()
+
+      -- * loop on coherent source location
+      for i_coherent = 0, n_coherent_source - 1 do
+
+        local i_prop     = ( i_src - 1) * n_coherent_source + i_coherent + 1
+        local t_coherent = ( t + i_coherent * (L[3]/n_coherent_source) ) % L[3]
+           
+        -- * prepare the unsmeared light and strange forward propagator at all sink times
+        for dt_tmp = 0, dt - 1 do
+          
+          local t_tmp = ( t_coherent + dt_tmp + 1 ) % L[3]
+          printf("# [invert_contract_cc_light] setting light_propagator_allsink for i_prop =%d, t_coherent = %d, dt_tmp = %d, t_tmp = %d\n", i_prop, t_coherent, dt_tmp, t_tmp)
+
+          -- * light
+          L:Subset{axis=3, position = t_tmp}:where( function()
+            light_propagator_allsink:set( light_propagator_list[i_prop] )
+          end)
+
+        end
+
+        -- * prepare the unsmeared light stochastic propagator at all sink times
+
+        local t_tmp = ( t_coherent + dt ) % L[3]
+        for dt_tmp = 0, dt - 1 do
+          local i_stoch = stochastic_source_timeslice_lookup_table[i_prop][ (dt_tmp+1)%L[3]]
+          printf("# [] setting light stochastic propagator_allsink for i_prop =%d / i_stoch = %d, t_coherent = %d, dt_tmp = %d, t_tmp = %d\n",
+              i_prop, i_stoch, t_coherent, dt_tmp, t_tmp)
+
+          L:Subset{axis=3, position = t_tmp}:where( function()
+            light_stochastic_propagator_allsink:set( light_stochastic_propagator_list[t_tmp] )
+          end)
+
+        end  -- of loop on intermediate times dt
+      end    -- of loop on coherent source timeslices
+
+      local light_propagator_allsink_smeared = wuppertal_smear(uape, wup_alpha, wup_n, light_propagator_allsink, 3)
+      local light_stochastic_propagator_allsink_smeared = wuppertal_smear(uape, wup_alpha, wup_n, light_stochastic_propagator_allsink, 3)
+
+      ttimer("done")
+
+      show_mem("# checkpoint 17")
+
+      -- ******************************************************************************
+      -- * V2/V1 phi^t G_gf1 fl fl
+      -- ******************************************************************************
+      local tag  = string.format("phil-gf1-fl-fl/tbase%.2d", t )
+      ttimer = timer("contract phil-gf1-fl-fl")
+      contract_v2_ft_write (L, light_stochastic_propagator_allsink_smeared, light_propagator_allsink_smeared, light_propagator_allsink_smeared, baryon_vertex_list, sink_momentum_list, aw, tag)
+      ttimer("done")
+
+      light_propagator_allsink                    = nil
+      light_propagator_allsink_smeared            = nil
+      light_stochastic_propagator_allsink         = nil
+      light_stochastic_propagator_allsink_smeared = nil
+
+      show_mem("# checkpoint 18")
+
+    end      -- of loop on base timeslices
+
+
+  end   -- of loop on source - sink time separations
+
+  light_stochastic_propagator_list  = nil
+
+  show_mem("# checkpoint 19")
+
+  -- * close the output file
+  aw:close()
+end  -- of loop on stochastic samples
+
+show_mem("# checkpoint 20")
+
+
+-- ***************************************************************************************
+-- * CONTRACTIONS WITH ONE-END-TRICK
+-- * use from part above:
+-- * - light forward propagator list
+-- *
+-- ***************************************************************************************
+
+-- * only one sample
+local i_sample = 0
+
+-- ***************************************************************************************
+-- * construct a volume source with Z2 x Z2 noise in spin component 0
+-- ***************************************************************************************
+local source_timer = timer("Z2xZ2 noise source")
+local light_stochastic_source = Z2_SpinComponent_DiracFermion(S,0)
+write_param["name"]   = string.format("%s_oet", "stochastic_source")
+write_param["sample"] = i_sample
+write_propagator( light_stochastic_source_list[i_sample], write_param)
+-- local light_stochastic_source = read_propagator(L, write_param)
+
+source_timer("done")
+
+-- * loop on source locations
+-- *   we only need the source timeslice for the stochastic timeslice sources
+for i_src, v_src in ipairs(source_locations) do
+
+  local t   = v_src["t"]
+  local pos = v_src["pos"]
+  printf("# [invert_contract_v4] current base source location[%d] = (%d, %d, %d) t=%d\n", i_src, pos[1], pos[2], pos[3], t)
+ 
+  -- * loop on coherent source locations
+  for i_coherent = 0, n_coherent_source - 1 do
+
+    local i_prop = ( i_src - 1) * n_coherent_source + i_coherent + 1
+
+    -- * set original (i_coherent = 0) or coherent source location (i_coherent > 0)
+    local t_coherent = ( t + i_coherent * (L[3]/n_coherent_source) ) % L[3]
+                   
+    -- * set the shifted, coherent source location
+    local pos_coherent = {}
+    pos_coherent[1] = ( pos[1]  + i_coherent * (L[0] / n_coherent_source) ) % L[0]
+    pos_coherent[2] = ( pos[2]  + i_coherent * (L[1] / n_coherent_source) ) % L[1]
+    pos_coherent[3] = ( pos[3]  + i_coherent * (L[2] / n_coherent_source) ) % L[2]
+                  
+    printf("# [invert_contract_v4] current coherent source location[%d / %d] = (%d, %d, %d) t=%d\n", i_src, i_prop, pos_coherent[1], pos_coherent[2], pos_coherent[3], t_coherent)
+
+    local source_position = vector.int(4)
+    source_position[0] = pos_coherent[1]
+    source_position[1] = pos_coherent[2]
+    source_position[2] = pos_coherent[3]
+    source_position[3] = t_coherent
+
+    -- * open output files
+    local name = string.format("%s.%.4d.%.2d.%.5d.aff", "contract_factors_oet", nconf, t_coherent, i_sample)
+    printf("# [invert_contract_v4] MxB - J - M output file %s\n", name)
+    aw, am = qcd.aff.Writer(name)
+
+    -- * sink smearing for light fwd propagator
+    local ttimer = timer("light forward sink smearing")
+    local light_propagator = light_propagator_list[i_prop]
+    local light_propagator_smeared = wuppertal_smear(uape, wup_alpha, wup_n, light_propagator, 3)
+    ttimer("done")
+
+    local phi_0 = L:DiracPropagator()
+
+    -- * loop on momenta pi2
+    for i_mom, mom in ipairs(sequential_source_momentum_list) do
+
+      printf("# [invert_contract_v4] momentum(%d) = (%d, %d, %d)\n", i_mom, mom[1], mom[2], mom[3])
+
+      local light_stochastic_propagator_list = {}
+      local light_stochastic_propagator_list_smeared = {}
+
+     -- local field exp(i p x)
+      local px = (2 * math.pi * mom[1]) / L[0]
+      local py = (2 * math.pi * mom[2]) / L[1]
+      local pz = (2 * math.pi * mom[3]) / L[2]
+      local phase = ( (L:Real(L:pcoord(0)) ) * px +
+                      (L:Real(L:pcoord(1)) ) * py +
+                      (L:Real(L:pcoord(2)) ) * pz):expi()
+           
+      local dv = L:DiracFermion()
+      -- * select stochastic source timeslice t from volume source, multiply with phase
+      L:Subset{axis=3, position = t_coherent}:where(
+        function()
+          dv:set( phase * light_stochastic_source )
+        end
+      )
+      momentum_source = wuppertal_smear(uape, wup_alpha, wup_n, dv, 3)
+
+      -- * loop on spin components for one-end trick
+      for kspin = 0, 3 do
+ 
+        printf("# [invert_contract_v4] spin component %d\n", kspin)
+
+        local dv = L:DiracFermion()
+        dv[{d=kspin}] = momentum_source[{d=0}]
+ 
+        printf("# [invert_contract_v4] t = %d, spin component %d\n", t_coherent, kspin)
+
+        -- * invert
+        local i_timer = timer("invert")
+        light_stochastic_propagator_list[kspin] = mg_solver(dv, kappa_l)
+        i_timer("done")
+
+        dv = nil
+      end  -- end of loop on spin component
+
+
+      -- * smear the stochastic timeslice propagator
+      local ttimer = timer("light stochastic sink smearing")
+      for kspin = 0, 3 do
+        light_stochastic_propagator_list_smeared[kspin] = wuppertal_smear(uape, wup_alpha, wup_n, light_stochastic_propagator_list[kspin], 3)
+      end
+      ttimer("done")
+ 
+
+      if i_mom == 1 then
+        if mom[1] == 0 and mom[2] == 0 and mom[3] == 0 then
+          printf("# [invert_contract_v4] setting zero momentum stochastic propagator\n")
+  
+          -- * set phi_0 only on color component c = 0
+          phi_0[{c=0, d=0}] = light_stochastic_propagator_list_smeared[0]
+          phi_0[{c=0, d=1}] = light_stochastic_propagator_list_smeared[1]
+          phi_0[{c=0, d=2}] = light_stochastic_propagator_list_smeared[2]
+          phi_0[{c=0, d=3}] = light_stochastic_propagator_list_smeared[3]
+
+          -- ***************************************************************************
+          -- * phi(0)^t G_c fl 
+          -- ***************************************************************************
+          for kspin = 0, 3 do
+            local tag = string.format("%s/pi2x%.2dpi2y%.2dpi2z%.2d/d%.2d", "phil-gc-fl", mom[1], mom[2], mom[3], kspin)
+            local c_timer = timer("contract phil-gc-fl-oet")
+            contract_v3_ft_write(L, light_propagator, light_stochastic_propagator_list[kspin], va_current_list, sequential_source_momentum_list, aw, tag)
+            c_timer("done")
+          end
+
+        else
+          printf("[invert_contract_v4] Error, first momentum should be zero momentum\n")
+          os.exit(2)
+        end
+      end
+
+      local phi_p = L:DiracPropagator()
+                            
+      -- * set phi_p only on color component c = 0
+      phi_p[{c=0, d=0}] = light_stochastic_propagator_list_smeared[0]
+      phi_p[{c=0, d=1}] = light_stochastic_propagator_list_smeared[1]
+      phi_p[{c=0, d=2}] = light_stochastic_propagator_list_smeared[2]
+      phi_p[{c=0, d=3}] = light_stochastic_propagator_list_smeared[3]
+           
+      show_mem("# checkpoint 21")
+
+      -- * contraction
+      local c_timer = timer("contract fl-fl oet stochastic")
+      contract_vector_meson_2pt_stochastic(L, phi_0, phi_p, 0, t_coherent, vsp_gamma_list, sink_momentum_list, mom, aw)
+      c_timer("done")
+
+      -- ***************************************************************************
+      -- * phi(p)^t G_f1 fl fl
+      -- ***************************************************************************
+      for kspin = 0, 3 do
+        local gf1 = { {tag="g5", gamma={15, 1, 1}}, {tag="id", gamma={0, 1, 1}} } -- Gamma_f1 = g5, 1
+        local tag = string.format("%s/pi2x%.2dpi2y%.2dpi2z%.2d/d%.2d", "phil-gf1-fl-fl", mom[1], mom[2], mom[3], kspin)
+        c_timer = timer("contract phil-gf1-fl-fl-oet")
+        contract_v2_ft_write (L, light_stochastic_propagator_list_smeared[kspin], light_propagator_smeared, light_propagator_smeared, gf1, sink_momentum_list, aw, tag)
+        c_timer("done")
+      end
+
+      -- ***************************************************************************
+      -- * phi(p)^+ G_f2 fl
+      -- ***************************************************************************
+      for kspin = 0, 3 do
+        local gf2 = { {tag="g5", gamma={15, 1, 1}}, {tag="id", gamma={ 0, 1, 1}}, } -- Gamma_f2 = g5, id
+        local tag = string.format("%s/pi2x%.2dpi2y%.2dpi2z%.2d/d%.2d", "fl-gc-phil", -mom[1], -mom[2], -mom[3], kspin)
+        local c_timer = timer("contract fl-gc-phil oet")
+        contract_v3_ft_write(L, light_propagator_smeared, light_stochastic_propagator_list_smeared[kspin], gf2, sequential_source_momentum_list, aw, tag)
+        c_timer("done")
+      end
+
+      light_stochastic_propagator_list = nil
+      light_stochastic_propagator_list_smeared = nil
+      phi_p = nil
+    end  -- end of loop on sink momentum list
+
+    -- close the contraction output file
+    aw:close()
+  end  -- end of loop on coherent sources
+
+  show_mem("# checkpoint 22")
+
+end  -- end of loop on source locations
+
+light_propagator_list   = nil
+
+show_mem("# checkpoint 23")
+
+total_timer("done")

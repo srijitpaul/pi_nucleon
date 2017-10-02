@@ -1,3 +1,10 @@
+package.path = '/home/srijit/Dropbox/spaul/softwares/local-20170922/qlua/lib/qlua/?.qlua;/home/srijit/Dropbox/spaul/softwares/local-20170922/qlua/lib/qlua/lhpc/?.qlua;' .. package.path
+--require 'strict'                                                                
+require 'stdlib'                                                                
+require 'setup_util'                                                            
+require 'hadspec'                                                               
+require 'lhpc-std' 
+
 -- Smear parameters
 ape_alpha = 2.5
 ape_n = 25
@@ -47,18 +54,18 @@ twostep_seq_propfile_prefix = "twostep_sequential_light_light"
 stochastic_propfile_prefix   = "stochastic_propagator"
 stochastic_sourcefile_prefix = "stochastic_source"
 
-read_forward_propagator             = false
-write_forward_propagator            = true
-write_sequential_propagator         = true
-read_sequential_propagator          = false
+read_forward_propagator             = true
+write_forward_propagator            = false
+write_sequential_propagator         = false
+read_sequential_propagator          = true
 write_twostep_sequential_propagator   = false
 read_twostep_sequential_propagator    = false
-write_stochastic_source             = true
-write_stochastic_propagator         = true
-read_stochastic_source              = false
-read_stochastic_propagator          = false
-read_propagator_oet                 = false
-write_stochastic_oet_propagator     = true
+write_stochastic_source             = false
+write_stochastic_propagator         = false
+read_stochastic_source              = true
+read_stochastic_propagator          = true
+read_propagator_oet                 = true
+write_stochastic_oet_propagator     = false
 
 -- light quarks
 mq_l = -0.0953
@@ -128,10 +135,17 @@ quark_bc = {1, 1, 1, 1}
 prop_volfmt = "single"
 
 sequential_source_momentum_list = {
-   { 0, 0, 0},
-   { 4, 1, 6}
--- {0, 0, -1}
+   { -1, 0, 0},
+   { 0, -1, 0},
+   { 0, 0, -1},
+   { 0, 0, 0 },
+   { 0, 0, 1 },
+   { 0, 1, 0 },
+   { 1, 0, 0 }
 }
+--   { 0, 1, 1},
+-- {0, 0, -1}
+--}
 --[[
   { 0, 0,-1},
   { 0, 1, 0},
@@ -161,6 +175,7 @@ sequential_source_momentum_list = {
 }
 --]]
 
+seq_src_mom_list = make_mom_list(1)
 sequential_source_gamma = {tag="g5", val=gamma{mu=5}}
 
 sink_momentum_list = sequential_source_momentum_list
@@ -178,6 +193,6 @@ mg_block = {
   {3,3,3,2},
   {2,2,2,2}}
 
-mg_max_abserr = 1.e-15
+mg_max_abserr = 1.e-22
 mg_max_relerr = 1.e-22
 

@@ -143,4 +143,7 @@ os.exit(1)
   end  
   
 --return prop
-end 
+end
+
+function read_factors_lime (L, param)
+

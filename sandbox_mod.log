@@ -1,0 +1,610 @@
+# [sandbox] source location string is "source_locations = { {t=7, pos={1, 1, 6}}, {t=6, pos={2, 7, 2}}, }" 
+# [invert_contract_v3] Dimensions                = 8 8 8 16
+# [invert_contract_v3] prefix to conf name       = /home/srijit/Dropbox/spaul/Dina_Work/pion_nucleon/configs/lat_130110_
+# [invert_contract_v3] suffix to conf name       = .nersc
+# [invert_contract_v3] suffix to conf name       = _Stout_smeared.nersc
+# [invert_contract_v3] Clover Inverter
+#	 light quark mass               = -0.0953
+#	 light quark kappa              = 0.128051
+#	 strange quark mass               = -0.04
+#	 strange quark kappa              = 0.126263
+#	 Boundary condition = 1, 1, 1, 1
+# [invert_contract] lattice volume = 8192
+# [invert_contract] reading original gauge configuration from file /home/srijit/Dropbox/spaul/Dina_Work/pion_nucleon/configs/lat_130110_230031.nersc
+# HEADER of "/home/srijit/Dropbox/spaul/Dina_Work/pion_nucleon/configs/lat_130110_230031.nersc" BEGIN
+	HDR_VERSION = 1.0
+	DIMENSION_3 = 8
+	BOUNDARY_3 = PERIODIC
+	ENSEMBLE_ID = 0
+	BOUNDARY_2 = PERIODIC
+	DIMENSION_4 = 16
+	CREATION_DATE = 05:14:22 24/06/2017
+	CHECKSUM = 1528009501
+	DIMENSION_1 = 8
+	unitarity = 1.4353746336e-07
+	DIMENSION_2 = 8
+	CREATOR = cori05
+	BOUNDARY_4 = PERIODIC
+	STORAGE_FORMAT = 1.0
+	DATATYPE = 4D_SU3_GAUGE
+	SEQUENCE_NUMBER = 1
+	BOUNDARY_1 = PERIODIC
+	PLAQUETTE = 0.35752561
+	LINK_TRACE = 0.77375675
+	FLOATING_POINT = IEEE32BIG
+# END of "/home/srijit/Dropbox/spaul/Dina_Work/pion_nucleon/configs/lat_130110_230031.nersc" HEADER
+TIME("u load","done") = 0.013 secs
+WARNING: 'plaquette' has been renamed 'gauge_plaquette'
+WARNING: 'plaquette' has been renamed 'gauge_plaquette'
+WARNING: 'plaquette' has been renamed 'gauge_plaquette'
+WARNING: 'plaquette' has been renamed 'gauge_plaquette'
+WARNING: 'plaquette' has been renamed 'gauge_plaquette'
+WARNING: 'plaquette' has been renamed 'gauge_plaquette'
+# [invert_contract] Plaquette (original) = 0.3575256072
+# [invert_contract] Stout-smearing gauge field
+WARNING: 'plaquette' has been renamed 'gauge_plaquette'
+WARNING: 'plaquette' has been renamed 'gauge_plaquette'
+WARNING: 'plaquette' has been renamed 'gauge_plaquette'
+WARNING: 'plaquette' has been renamed 'gauge_plaquette'
+WARNING: 'plaquette' has been renamed 'gauge_plaquette'
+WARNING: 'plaquette' has been renamed 'gauge_plaquette'
+# [invert_contract] Plaquette (smeared) = 0.7688143294
+TIME("stout smear","done") = 0.148 secs
+TIME("APE smearing","done") = 3.464 secs
+WARNING: 'plaquette' has been renamed 'gauge_plaquette'
+WARNING: 'plaquette' has been renamed 'gauge_plaquette'
+WARNING: 'plaquette' has been renamed 'gauge_plaquette'
+WARNING: 'plaquette' has been renamed 'gauge_plaquette'
+WARNING: 'plaquette' has been renamed 'gauge_plaquette'
+WARNING: 'plaquette' has been renamed 'gauge_plaquette'
+# [invert_contract] Plaquette after (light quark) APE smearing = 0.9038500078
+TIME("heavy stout smear","done") = 0.523 secs
+WARNING: 'plaquette' has been renamed 'gauge_plaquette'
+WARNING: 'plaquette' has been renamed 'gauge_plaquette'
+WARNING: 'plaquette' has been renamed 'gauge_plaquette'
+WARNING: 'plaquette' has been renamed 'gauge_plaquette'
+WARNING: 'plaquette' has been renamed 'gauge_plaquette'
+WARNING: 'plaquette' has been renamed 'gauge_plaquette'
+# [invert_contract] Plaquette after (heavy quark) stout smearing = 0.7379452771
+# [invert_contract_v3] base source location[1] = (1, 1, 6) t=7
+# [invert_contract_v3] setting forward propagator no. 1
+# [invert_contract_v3] reading light forward propagator
+# [read_propagator] filename is forward_light.230031.x01y01z06t07.lime
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+TIME(" propagator read","done") = 0.086 secs
+TIME("wuppertal smearing","done") = 2.280 secs
+#[invert_contract]  sequential source momentum(1) = (-1, 0, 0)
+# [invert_contract] reading light sequential propagator
+# [read_propagator] filename is sequential_light_light.230031.x01y01z06t07.px-01py00pz00.lime
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+TIME(" propagator read","done") = 0.084 secs
+# [invert_contract] smearing sequential propagator 1 / 1 - (c= 0, s= 0)
+# [invert_contract] smearing sequential propagator 1 / 1 - (c= 0, s= 1)
+# [invert_contract] smearing sequential propagator 1 / 1 - (c= 0, s= 2)
+# [invert_contract] smearing sequential propagator 1 / 1 - (c= 0, s= 3)
+# [invert_contract] smearing sequential propagator 1 / 1 - (c= 1, s= 0)
+# [invert_contract] smearing sequential propagator 1 / 1 - (c= 1, s= 1)
+# [invert_contract] smearing sequential propagator 1 / 1 - (c= 1, s= 2)
+# [invert_contract] smearing sequential propagator 1 / 1 - (c= 1, s= 3)
+# [invert_contract] smearing sequential propagator 1 / 1 - (c= 2, s= 0)
+# [invert_contract] smearing sequential propagator 1 / 1 - (c= 2, s= 1)
+# [invert_contract] smearing sequential propagator 1 / 1 - (c= 2, s= 2)
+# [invert_contract] smearing sequential propagator 1 / 1 - (c= 2, s= 3)
+#[invert_contract]  sequential source momentum(2) = (0, -1, 0)
+# [invert_contract] reading light sequential propagator
+# [read_propagator] filename is sequential_light_light.230031.x01y01z06t07.px00py-01pz00.lime
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+TIME(" propagator read","done") = 0.083 secs
+# [invert_contract] smearing sequential propagator 1 / 2 - (c= 0, s= 0)
+# [invert_contract] smearing sequential propagator 1 / 2 - (c= 0, s= 1)
+# [invert_contract] smearing sequential propagator 1 / 2 - (c= 0, s= 2)
+# [invert_contract] smearing sequential propagator 1 / 2 - (c= 0, s= 3)
+# [invert_contract] smearing sequential propagator 1 / 2 - (c= 1, s= 0)
+# [invert_contract] smearing sequential propagator 1 / 2 - (c= 1, s= 1)
+# [invert_contract] smearing sequential propagator 1 / 2 - (c= 1, s= 2)
+# [invert_contract] smearing sequential propagator 1 / 2 - (c= 1, s= 3)
+# [invert_contract] smearing sequential propagator 1 / 2 - (c= 2, s= 0)
+# [invert_contract] smearing sequential propagator 1 / 2 - (c= 2, s= 1)
+# [invert_contract] smearing sequential propagator 1 / 2 - (c= 2, s= 2)
+# [invert_contract] smearing sequential propagator 1 / 2 - (c= 2, s= 3)
+#[invert_contract]  sequential source momentum(3) = (0, 0, -1)
+# [invert_contract] reading light sequential propagator
+# [read_propagator] filename is sequential_light_light.230031.x01y01z06t07.px00py00pz-01.lime
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+TIME(" propagator read","done") = 0.085 secs
+# [invert_contract] smearing sequential propagator 1 / 3 - (c= 0, s= 0)
+# [invert_contract] smearing sequential propagator 1 / 3 - (c= 0, s= 1)
+# [invert_contract] smearing sequential propagator 1 / 3 - (c= 0, s= 2)
+# [invert_contract] smearing sequential propagator 1 / 3 - (c= 0, s= 3)
+# [invert_contract] smearing sequential propagator 1 / 3 - (c= 1, s= 0)
+# [invert_contract] smearing sequential propagator 1 / 3 - (c= 1, s= 1)
+# [invert_contract] smearing sequential propagator 1 / 3 - (c= 1, s= 2)
+# [invert_contract] smearing sequential propagator 1 / 3 - (c= 1, s= 3)
+# [invert_contract] smearing sequential propagator 1 / 3 - (c= 2, s= 0)
+# [invert_contract] smearing sequential propagator 1 / 3 - (c= 2, s= 1)
+# [invert_contract] smearing sequential propagator 1 / 3 - (c= 2, s= 2)
+# [invert_contract] smearing sequential propagator 1 / 3 - (c= 2, s= 3)
+#[invert_contract]  sequential source momentum(4) = (0, 0, 0)
+# [invert_contract] reading light sequential propagator
+# [read_propagator] filename is sequential_light_light.230031.x01y01z06t07.px00py00pz00.lime
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+TIME(" propagator read","done") = 0.080 secs
+# [invert_contract] smearing sequential propagator 1 / 4 - (c= 0, s= 0)
+# [invert_contract] smearing sequential propagator 1 / 4 - (c= 0, s= 1)
+# [invert_contract] smearing sequential propagator 1 / 4 - (c= 0, s= 2)
+# [invert_contract] smearing sequential propagator 1 / 4 - (c= 0, s= 3)
+# [invert_contract] smearing sequential propagator 1 / 4 - (c= 1, s= 0)
+# [invert_contract] smearing sequential propagator 1 / 4 - (c= 1, s= 1)
+# [invert_contract] smearing sequential propagator 1 / 4 - (c= 1, s= 2)
+# [invert_contract] smearing sequential propagator 1 / 4 - (c= 1, s= 3)
+# [invert_contract] smearing sequential propagator 1 / 4 - (c= 2, s= 0)
+# [invert_contract] smearing sequential propagator 1 / 4 - (c= 2, s= 1)
+# [invert_contract] smearing sequential propagator 1 / 4 - (c= 2, s= 2)
+# [invert_contract] smearing sequential propagator 1 / 4 - (c= 2, s= 3)
+#[invert_contract]  sequential source momentum(5) = (0, 0, 1)
+# [invert_contract] reading light sequential propagator
+# [read_propagator] filename is sequential_light_light.230031.x01y01z06t07.px00py00pz01.lime
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+TIME(" propagator read","done") = 0.076 secs
+# [invert_contract] smearing sequential propagator 1 / 5 - (c= 0, s= 0)
+# [invert_contract] smearing sequential propagator 1 / 5 - (c= 0, s= 1)
+# [invert_contract] smearing sequential propagator 1 / 5 - (c= 0, s= 2)
+# [invert_contract] smearing sequential propagator 1 / 5 - (c= 0, s= 3)
+# [invert_contract] smearing sequential propagator 1 / 5 - (c= 1, s= 0)
+# [invert_contract] smearing sequential propagator 1 / 5 - (c= 1, s= 1)
+# [invert_contract] smearing sequential propagator 1 / 5 - (c= 1, s= 2)
+# [invert_contract] smearing sequential propagator 1 / 5 - (c= 1, s= 3)
+# [invert_contract] smearing sequential propagator 1 / 5 - (c= 2, s= 0)
+# [invert_contract] smearing sequential propagator 1 / 5 - (c= 2, s= 1)
+# [invert_contract] smearing sequential propagator 1 / 5 - (c= 2, s= 2)
+# [invert_contract] smearing sequential propagator 1 / 5 - (c= 2, s= 3)
+#[invert_contract]  sequential source momentum(6) = (0, 1, 0)
+# [invert_contract] reading light sequential propagator
+# [read_propagator] filename is sequential_light_light.230031.x01y01z06t07.px00py01pz00.lime
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+TIME(" propagator read","done") = 0.079 secs
+# [invert_contract] smearing sequential propagator 1 / 6 - (c= 0, s= 0)
+# [invert_contract] smearing sequential propagator 1 / 6 - (c= 0, s= 1)
+# [invert_contract] smearing sequential propagator 1 / 6 - (c= 0, s= 2)
+# [invert_contract] smearing sequential propagator 1 / 6 - (c= 0, s= 3)
+# [invert_contract] smearing sequential propagator 1 / 6 - (c= 1, s= 0)
+# [invert_contract] smearing sequential propagator 1 / 6 - (c= 1, s= 1)
+# [invert_contract] smearing sequential propagator 1 / 6 - (c= 1, s= 2)
+# [invert_contract] smearing sequential propagator 1 / 6 - (c= 1, s= 3)
+# [invert_contract] smearing sequential propagator 1 / 6 - (c= 2, s= 0)
+# [invert_contract] smearing sequential propagator 1 / 6 - (c= 2, s= 1)
+# [invert_contract] smearing sequential propagator 1 / 6 - (c= 2, s= 2)
+# [invert_contract] smearing sequential propagator 1 / 6 - (c= 2, s= 3)
+#[invert_contract]  sequential source momentum(7) = (1, 0, 0)
+# [invert_contract] reading light sequential propagator
+# [read_propagator] filename is sequential_light_light.230031.x01y01z06t07.px01py00pz00.lime
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+TIME(" propagator read","done") = 0.081 secs
+# [invert_contract] smearing sequential propagator 1 / 7 - (c= 0, s= 0)
+# [invert_contract] smearing sequential propagator 1 / 7 - (c= 0, s= 1)
+# [invert_contract] smearing sequential propagator 1 / 7 - (c= 0, s= 2)
+# [invert_contract] smearing sequential propagator 1 / 7 - (c= 0, s= 3)
+# [invert_contract] smearing sequential propagator 1 / 7 - (c= 1, s= 0)
+# [invert_contract] smearing sequential propagator 1 / 7 - (c= 1, s= 1)
+# [invert_contract] smearing sequential propagator 1 / 7 - (c= 1, s= 2)
+# [invert_contract] smearing sequential propagator 1 / 7 - (c= 1, s= 3)
+# [invert_contract] smearing sequential propagator 1 / 7 - (c= 2, s= 0)
+# [invert_contract] smearing sequential propagator 1 / 7 - (c= 2, s= 1)
+# [invert_contract] smearing sequential propagator 1 / 7 - (c= 2, s= 2)
+# [invert_contract] smearing sequential propagator 1 / 7 - (c= 2, s= 3)
+# [invert_contract_v3] base source location[2] = (2, 7, 2) t=6
+# [invert_contract_v3] setting forward propagator no. 2
+# [invert_contract_v3] reading light forward propagator
+# [read_propagator] filename is forward_light.230031.x02y07z02t06.lime
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+TIME(" propagator read","done") = 0.092 secs
+TIME("wuppertal smearing","done") = 2.559 secs
+#[invert_contract]  sequential source momentum(1) = (-1, 0, 0)
+# [invert_contract] reading light sequential propagator
+# [read_propagator] filename is sequential_light_light.230031.x02y07z02t06.px-01py00pz00.lime
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+TIME(" propagator read","done") = 0.117 secs
+# [invert_contract] smearing sequential propagator 2 / 1 - (c= 0, s= 0)
+# [invert_contract] smearing sequential propagator 2 / 1 - (c= 0, s= 1)
+# [invert_contract] smearing sequential propagator 2 / 1 - (c= 0, s= 2)
+# [invert_contract] smearing sequential propagator 2 / 1 - (c= 0, s= 3)
+# [invert_contract] smearing sequential propagator 2 / 1 - (c= 1, s= 0)
+# [invert_contract] smearing sequential propagator 2 / 1 - (c= 1, s= 1)
+# [invert_contract] smearing sequential propagator 2 / 1 - (c= 1, s= 2)
+# [invert_contract] smearing sequential propagator 2 / 1 - (c= 1, s= 3)
+# [invert_contract] smearing sequential propagator 2 / 1 - (c= 2, s= 0)
+# [invert_contract] smearing sequential propagator 2 / 1 - (c= 2, s= 1)
+# [invert_contract] smearing sequential propagator 2 / 1 - (c= 2, s= 2)
+# [invert_contract] smearing sequential propagator 2 / 1 - (c= 2, s= 3)
+#[invert_contract]  sequential source momentum(2) = (0, -1, 0)
+# [invert_contract] reading light sequential propagator
+# [read_propagator] filename is sequential_light_light.230031.x02y07z02t06.px00py-01pz00.lime
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+TIME(" propagator read","done") = 0.104 secs
+# [invert_contract] smearing sequential propagator 2 / 2 - (c= 0, s= 0)
+# [invert_contract] smearing sequential propagator 2 / 2 - (c= 0, s= 1)
+# [invert_contract] smearing sequential propagator 2 / 2 - (c= 0, s= 2)
+# [invert_contract] smearing sequential propagator 2 / 2 - (c= 0, s= 3)
+# [invert_contract] smearing sequential propagator 2 / 2 - (c= 1, s= 0)
+# [invert_contract] smearing sequential propagator 2 / 2 - (c= 1, s= 1)
+# [invert_contract] smearing sequential propagator 2 / 2 - (c= 1, s= 2)
+# [invert_contract] smearing sequential propagator 2 / 2 - (c= 1, s= 3)
+# [invert_contract] smearing sequential propagator 2 / 2 - (c= 2, s= 0)
+# [invert_contract] smearing sequential propagator 2 / 2 - (c= 2, s= 1)
+# [invert_contract] smearing sequential propagator 2 / 2 - (c= 2, s= 2)
+# [invert_contract] smearing sequential propagator 2 / 2 - (c= 2, s= 3)
+#[invert_contract]  sequential source momentum(3) = (0, 0, -1)
+# [invert_contract] reading light sequential propagator
+# [read_propagator] filename is sequential_light_light.230031.x02y07z02t06.px00py00pz-01.lime
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.02
+DML_partition_in times: read 0.00  send 0.00  total 0.02
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+TIME(" propagator read","done") = 0.191 secs
+# [invert_contract] smearing sequential propagator 2 / 3 - (c= 0, s= 0)
+# [invert_contract] smearing sequential propagator 2 / 3 - (c= 0, s= 1)
+# [invert_contract] smearing sequential propagator 2 / 3 - (c= 0, s= 2)
+# [invert_contract] smearing sequential propagator 2 / 3 - (c= 0, s= 3)
+# [invert_contract] smearing sequential propagator 2 / 3 - (c= 1, s= 0)
+# [invert_contract] smearing sequential propagator 2 / 3 - (c= 1, s= 1)
+# [invert_contract] smearing sequential propagator 2 / 3 - (c= 1, s= 2)
+# [invert_contract] smearing sequential propagator 2 / 3 - (c= 1, s= 3)
+# [invert_contract] smearing sequential propagator 2 / 3 - (c= 2, s= 0)
+# [invert_contract] smearing sequential propagator 2 / 3 - (c= 2, s= 1)
+# [invert_contract] smearing sequential propagator 2 / 3 - (c= 2, s= 2)
+# [invert_contract] smearing sequential propagator 2 / 3 - (c= 2, s= 3)
+#[invert_contract]  sequential source momentum(4) = (0, 0, 0)
+# [invert_contract] reading light sequential propagator
+# [read_propagator] filename is sequential_light_light.230031.x02y07z02t06.px00py00pz00.lime
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+TIME(" propagator read","done") = 0.152 secs
+# [invert_contract] smearing sequential propagator 2 / 4 - (c= 0, s= 0)
+# [invert_contract] smearing sequential propagator 2 / 4 - (c= 0, s= 1)
+# [invert_contract] smearing sequential propagator 2 / 4 - (c= 0, s= 2)
+# [invert_contract] smearing sequential propagator 2 / 4 - (c= 0, s= 3)
+# [invert_contract] smearing sequential propagator 2 / 4 - (c= 1, s= 0)
+# [invert_contract] smearing sequential propagator 2 / 4 - (c= 1, s= 1)
+# [invert_contract] smearing sequential propagator 2 / 4 - (c= 1, s= 2)
+# [invert_contract] smearing sequential propagator 2 / 4 - (c= 1, s= 3)
+# [invert_contract] smearing sequential propagator 2 / 4 - (c= 2, s= 0)
+# [invert_contract] smearing sequential propagator 2 / 4 - (c= 2, s= 1)
+# [invert_contract] smearing sequential propagator 2 / 4 - (c= 2, s= 2)
+# [invert_contract] smearing sequential propagator 2 / 4 - (c= 2, s= 3)
+#[invert_contract]  sequential source momentum(5) = (0, 0, 1)
+# [invert_contract] reading light sequential propagator
+# [read_propagator] filename is sequential_light_light.230031.x02y07z02t06.px00py00pz01.lime
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+TIME(" propagator read","done") = 0.088 secs
+# [invert_contract] smearing sequential propagator 2 / 5 - (c= 0, s= 0)
+# [invert_contract] smearing sequential propagator 2 / 5 - (c= 0, s= 1)
+# [invert_contract] smearing sequential propagator 2 / 5 - (c= 0, s= 2)
+# [invert_contract] smearing sequential propagator 2 / 5 - (c= 0, s= 3)
+# [invert_contract] smearing sequential propagator 2 / 5 - (c= 1, s= 0)
+# [invert_contract] smearing sequential propagator 2 / 5 - (c= 1, s= 1)
+# [invert_contract] smearing sequential propagator 2 / 5 - (c= 1, s= 2)
+# [invert_contract] smearing sequential propagator 2 / 5 - (c= 1, s= 3)
+# [invert_contract] smearing sequential propagator 2 / 5 - (c= 2, s= 0)
+# [invert_contract] smearing sequential propagator 2 / 5 - (c= 2, s= 1)
+# [invert_contract] smearing sequential propagator 2 / 5 - (c= 2, s= 2)
+# [invert_contract] smearing sequential propagator 2 / 5 - (c= 2, s= 3)
+#[invert_contract]  sequential source momentum(6) = (0, 1, 0)
+# [invert_contract] reading light sequential propagator
+# [read_propagator] filename is sequential_light_light.230031.x02y07z02t06.px00py01pz00.lime
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+TIME(" propagator read","done") = 0.126 secs
+# [invert_contract] smearing sequential propagator 2 / 6 - (c= 0, s= 0)
+# [invert_contract] smearing sequential propagator 2 / 6 - (c= 0, s= 1)
+# [invert_contract] smearing sequential propagator 2 / 6 - (c= 0, s= 2)
+# [invert_contract] smearing sequential propagator 2 / 6 - (c= 0, s= 3)
+# [invert_contract] smearing sequential propagator 2 / 6 - (c= 1, s= 0)
+# [invert_contract] smearing sequential propagator 2 / 6 - (c= 1, s= 1)
+# [invert_contract] smearing sequential propagator 2 / 6 - (c= 1, s= 2)
+# [invert_contract] smearing sequential propagator 2 / 6 - (c= 1, s= 3)
+# [invert_contract] smearing sequential propagator 2 / 6 - (c= 2, s= 0)
+# [invert_contract] smearing sequential propagator 2 / 6 - (c= 2, s= 1)
+# [invert_contract] smearing sequential propagator 2 / 6 - (c= 2, s= 2)
+# [invert_contract] smearing sequential propagator 2 / 6 - (c= 2, s= 3)
+#[invert_contract]  sequential source momentum(7) = (1, 0, 0)
+# [invert_contract] reading light sequential propagator
+# [read_propagator] filename is sequential_light_light.230031.x02y07z02t06.px01py00pz00.lime
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.01
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+TIME(" propagator read","done") = 0.128 secs
+# [invert_contract] smearing sequential propagator 2 / 7 - (c= 0, s= 0)
+# [invert_contract] smearing sequential propagator 2 / 7 - (c= 0, s= 1)
+# [invert_contract] smearing sequential propagator 2 / 7 - (c= 0, s= 2)
+# [invert_contract] smearing sequential propagator 2 / 7 - (c= 0, s= 3)
+# [invert_contract] smearing sequential propagator 2 / 7 - (c= 1, s= 0)
+# [invert_contract] smearing sequential propagator 2 / 7 - (c= 1, s= 1)
+# [invert_contract] smearing sequential propagator 2 / 7 - (c= 1, s= 2)
+# [invert_contract] smearing sequential propagator 2 / 7 - (c= 1, s= 3)
+# [invert_contract] smearing sequential propagator 2 / 7 - (c= 2, s= 0)
+# [invert_contract] smearing sequential propagator 2 / 7 - (c= 2, s= 1)
+# [invert_contract] smearing sequential propagator 2 / 7 - (c= 2, s= 2)
+# [invert_contract] smearing sequential propagator 2 / 7 - (c= 2, s= 3)
+Reading stochastic source# [read_fermion] filename is stochastic_source.230031.00000.lime
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+TIME(" fermion read","done") = 0.011 secs
+reading stochastic propagator for sample 0# [read_fermion] filename is stochastic_propagator_light.230031.00000.lime
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+TIME(" fermion read","done") = 0.013 secs
+# [invert_contract_baryon] MB - MB contraction for source location[1 / 1] = (1, 1, 6) t=7
+# [invert_contract_v4] base source location[1] = (1, 1, 6) t=7
+# [invert_contract_v4] MxB - MxB phi output file contract_mb_factors_phi.230031.07.00000.aff
+# [invert_contract_v4] MxB - MxB phi output file mod_contract_mb_factors_phi.230031.07.00000.aff
+TIME("contract xil-gf2-sll","done") = 0.419 secs
+TIME("contract xil-gc-sll","done") = 1.597 secs
+TIME("fast_contract xil-gc-sll","done") = 0.133 secs
+TIME("contract xil-gf2-sll","done") = 0.448 secs
+TIME("contract xil-gc-sll","done") = 1.513 secs
+TIME("fast_contract xil-gc-sll","done") = 0.163 secs
+TIME("contract xil-gf2-sll","done") = 0.460 secs
+TIME("contract xil-gc-sll","done") = 1.491 secs
+TIME("fast_contract xil-gc-sll","done") = 0.171 secs
+TIME("contract xil-gf2-sll","done") = 0.462 secs
+TIME("contract xil-gc-sll","done") = 1.507 secs
+TIME("fast_contract xil-gc-sll","done") = 0.178 secs
+TIME("contract xil-gf2-sll","done") = 0.465 secs
+TIME("contract xil-gc-sll","done") = 1.441 secs
+TIME("fast_contract xil-gc-sll","done") = 0.173 secs
+TIME("contract xil-gf2-sll","done") = 0.465 secs
+TIME("contract xil-gc-sll","done") = 1.326 secs
+TIME("fast_contract xil-gc-sll","done") = 0.134 secs
+TIME("contract xil-gf2-sll","done") = 0.388 secs
+TIME("contract xil-gc-sll","done") = 1.581 secs
+TIME("fast_contract xil-gc-sll","done") = 0.132 secs
+# [invert_contract_baryon] MB - MB contraction for source location[2 / 2] = (2, 7, 2) t=6
+# [invert_contract_v4] base source location[2] = (2, 7, 2) t=6
+# [invert_contract_v4] MxB - MxB phi output file contract_mb_factors_phi.230031.06.00000.aff
+# [invert_contract_v4] MxB - MxB phi output file mod_contract_mb_factors_phi.230031.06.00000.aff
+TIME("contract xil-gf2-sll","done") = 0.433 secs
+TIME("contract xil-gc-sll","done") = 1.546 secs
+TIME("fast_contract xil-gc-sll","done") = 0.149 secs
+TIME("contract xil-gf2-sll","done") = 0.447 secs
+TIME("contract xil-gc-sll","done") = 1.500 secs
+TIME("fast_contract xil-gc-sll","done") = 0.133 secs
+TIME("contract xil-gf2-sll","done") = 0.450 secs
+TIME("contract xil-gc-sll","done") = 1.697 secs
+TIME("fast_contract xil-gc-sll","done") = 0.171 secs
+TIME("contract xil-gf2-sll","done") = 0.459 secs
+TIME("contract xil-gc-sll","done") = 1.490 secs
+TIME("fast_contract xil-gc-sll","done") = 0.176 secs
+TIME("contract xil-gf2-sll","done") = 0.426 secs
+TIME("contract xil-gc-sll","done") = 1.208 secs
+TIME("fast_contract xil-gc-sll","done") = 0.133 secs
+TIME("contract xil-gf2-sll","done") = 0.327 secs
+TIME("contract xil-gc-sll","done") = 1.570 secs
+TIME("fast_contract xil-gc-sll","done") = 0.164 secs
+TIME("contract xil-gf2-sll","done") = 0.357 secs
+TIME("contract xil-gc-sll","done") = 1.519 secs
+TIME("fast_contract xil-gc-sll","done") = 0.170 secs
+Reading stochastic source# [read_fermion] filename is stochastic_source.230031.00001.lime
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+TIME(" fermion read","done") = 0.008 secs
+reading stochastic propagator for sample 1# [read_fermion] filename is stochastic_propagator_light.230031.00001.lime
+DML_partition_in times: read 0.00  send 0.00  total 0.00
+TIME(" fermion read","done") = 0.008 secs
+# [invert_contract_baryon] MB - MB contraction for source location[1 / 1] = (1, 1, 6) t=7
+# [invert_contract_v4] base source location[1] = (1, 1, 6) t=7
+# [invert_contract_v4] MxB - MxB phi output file contract_mb_factors_phi.230031.07.00001.aff
+# [invert_contract_v4] MxB - MxB phi output file mod_contract_mb_factors_phi.230031.07.00001.aff
+TIME("contract xil-gf2-sll","done") = 0.329 secs
+TIME("contract xil-gc-sll","done") = 1.594 secs
+TIME("fast_contract xil-gc-sll","done") = 0.135 secs
+TIME("contract xil-gf2-sll","done") = 0.326 secs
+TIME("contract xil-gc-sll","done") = 1.697 secs
+TIME("fast_contract xil-gc-sll","done") = 0.174 secs
+TIME("contract xil-gf2-sll","done") = 0.508 secs
+TIME("contract xil-gc-sll","done") = 1.858 secs
+TIME("fast_contract xil-gc-sll","done") = 0.260 secs
+TIME("contract xil-gf2-sll","done") = 0.966 secs
+TIME("contract xil-gc-sll","done") = 2.972 secs
+TIME("fast_contract xil-gc-sll","done") = 0.191 secs
+TIME("contract xil-gf2-sll","done") = 0.608 secs
+TIME("contract xil-gc-sll","done") = 2.768 secs
+TIME("fast_contract xil-gc-sll","done") = 0.313 secs
+TIME("contract xil-gf2-sll","done") = 0.730 secs
+TIME("contract xil-gc-sll","done") = 2.108 secs
+TIME("fast_contract xil-gc-sll","done") = 0.136 secs
+TIME("contract xil-gf2-sll","done") = 0.365 secs
+TIME("contract xil-gc-sll","done") = 1.610 secs
+TIME("fast_contract xil-gc-sll","done") = 0.136 secs
+# [invert_contract_baryon] MB - MB contraction for source location[2 / 2] = (2, 7, 2) t=6
+# [invert_contract_v4] base source location[2] = (2, 7, 2) t=6
+# [invert_contract_v4] MxB - MxB phi output file contract_mb_factors_phi.230031.06.00001.aff
+# [invert_contract_v4] MxB - MxB phi output file mod_contract_mb_factors_phi.230031.06.00001.aff
+TIME("contract xil-gf2-sll","done") = 0.449 secs
+TIME("contract xil-gc-sll","done") = 1.523 secs
+TIME("fast_contract xil-gc-sll","done") = 0.164 secs
+TIME("contract xil-gf2-sll","done") = 0.439 secs
+TIME("contract xil-gc-sll","done") = 1.754 secs
+TIME("fast_contract xil-gc-sll","done") = 0.141 secs
+TIME("contract xil-gf2-sll","done") = 0.469 secs
+TIME("contract xil-gc-sll","done") = 1.735 secs
+TIME("fast_contract xil-gc-sll","done") = 0.176 secs
+TIME("contract xil-gf2-sll","done") = 0.462 secs
+TIME("contract xil-gc-sll","done") = 1.545 secs
+TIME("fast_contract xil-gc-sll","done") = 0.178 secs
+TIME("contract xil-gf2-sll","done") = 0.468 secs
+TIME("contract xil-gc-sll","done") = 1.482 secs
+TIME("fast_contract xil-gc-sll","done") = 0.177 secs
+TIME("contract xil-gf2-sll","done") = 0.468 secs
+TIME("contract xil-gc-sll","done") = 1.484 secs
+TIME("fast_contract xil-gc-sll","done") = 0.184 secs
+TIME("contract xil-gf2-sll","done") = 0.476 secs
+TIME("contract xil-gc-sll","done") = 1.485 secs
+TIME("fast_contract xil-gc-sll","done") = 0.185 secs
+TIME("total time","done") = 115.452 secs
+# [sandbox] srun finished successfully for invert_contract.qlua, status was 0

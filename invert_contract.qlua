@@ -185,8 +185,6 @@ for i_src, v_src in ipairs(source_locations) do
     source_position[1] = pos[2]
     source_position[2] = pos[3]
     source_position[3] = t
-    printf("# [invert_contract_baryon] MB - MB contraction for source location[%d / %d] = (%d, %d, %d) t=%d\n", i_src, i_prop, 
-            source_position[0], source_position[1], source_position[2], source_position[3]) 
 
 
 
@@ -232,7 +230,6 @@ for i_src, v_src in ipairs(source_locations) do
     else
         printf("# [invert_contract_v3] reading light forward propagator\n")
         write_param["name"]    = light_propfile_prefix
-        write_param["path"]    = light_propfile_path
         write_param["src_pos"] = pos
         write_param["src_t"]   = t
         light_propagator_list[i_prop] = read_propagator_lime (L, write_param)
@@ -258,18 +255,18 @@ for i_src, v_src in ipairs(source_locations) do
     --************************************************************************************
     --* CONTRACTIONS 
     --************************************************************************************
-    printf("# [invert_contract_baryon] B - B contraction for source location[%d / %d] = (%d, %d, %d) t=%d\n", i_src, i_prop, 
-            source_position[0], source_position[1], source_position[2], source_position[3]) 
-  
-    local name = string.format("%s.%.4d.x%.2dy%.2dz%.2dt%.2d", "contract_baryon_2pt", nconf, pos[1],pos[2],pos[3], t)
-    printf("# [invert_contract_baryon] B - B 2pt output file %s\n", name)
-    aw_b_b_2pt, am = qcd.aff.Writer(name)
-    name = nil
-    local ctimer = timer("contract B-B")
-    contract_baryon_2pt(L, light_propagator_smeared_list[i_prop], source_position, sink_momentum_list, aw_b_b_2pt)
-    ctimer("done")
-  
-    aw_b_b_2pt:close()
+--    printf("# [invert_contract_baryon] B - B contraction for source location[%d / %d] = (%d, %d, %d) t=%d\n", i_src, i_prop, 
+--            source_position[0], source_position[1], source_position[2], source_position[3]) 
+--  
+--    local name = string.format("%s.%.4d.x%.2dy%.2dz%.2dt%.2d", "contract_baryon_2pt", nconf, pos[1],pos[2],pos[3], t)
+--    printf("# [invert_contract_baryon] B - B 2pt output file %s\n", name)
+--    aw_b_b_2pt, am = qcd.aff.Writer(name)
+--    name = nil
+--    local ctimer = timer("contract B-B")
+--    contract_baryon_2pt(L, light_propagator_smeared_list[i_prop], source_position, sink_momentum_list, aw_b_b_2pt)
+--    ctimer("done")
+--  
+--    aw_b_b_2pt:close()
   
    
     -- end  -- of loop on coherent source locations
@@ -384,25 +381,27 @@ for i_src, v_src in ipairs(source_locations) do
     --************************************************************************************
     --* CONTRACTIONS 
     --************************************************************************************
-    printf("# [invert_contract_baryon] B - B/B - M - B contraction for source location[%d / %d] = (%d, %d, %d) t=%d\n", i_src, i_prop, 
-            source_position[0], source_position[1], source_position[2], source_position[3]) 
+--    printf("# [invert_contract_baryon] B - B/B - M - B contraction for source location[%d / %d] = (%d, %d, %d) t=%d\n", i_src, i_prop, 
+--            source_position[0], source_position[1], source_position[2], source_position[3]) 
+--  
+--    local name = string.format("%s.%.4d.x%.2dy%.2dz%.2dt%.2d", "contract_meson_baryon_2pt", nconf, pos[1],pos[2],pos[3], t)
+--    printf("# [invert_contract_baryon] B - M - B 3pt output file %s\n", name)
+--    aw_b_m_b_3pt, am = qcd.aff.Writer(name)
+--    name = nil
+--    local ctimer = timer("contract B-M-B")
+--    for i_seq_mom, seq_mom in ipairs(sequential_source_momentum_list) do
+--        printf("# [invert_contract] contract B-M-B for sequential source momentum(%d) = (%d, %d, %d)\n", i_seq_mom, seq_mom[1], seq_mom[2], seq_mom[3])
+--        -- (2) light B-M-B - M 3-point function
+--        contract_meson_baryon_3pt(L, light_sequential_propagator_list[i_src][i_seq_mom], light_propagator_smeared_list[i_prop], 
+--                                  source_position, sink_momentum_list, seq_mom,  aw_b_m_b_3pt)
+----        aw_b_m_b_3pt:close()
+--    end
+--    ctimer("done")
+--    
+--    aw_b_m_b_3pt:close()
   
-    local name = string.format("%s.%.4d.x%.2dy%.2dz%.2dt%.2d", "contract_meson_baryon_2pt", nconf, pos[1],pos[2],pos[3], t)
-    printf("# [invert_contract_baryon] B - M - B 3pt output file %s\n", name)
-    aw_b_m_b_3pt, am = qcd.aff.Writer(name)
-    name = nil
-    local ctimer = timer("contract B-M-B")
-    for i_seq_mom, seq_mom in ipairs(sequential_source_momentum_list) do
-        printf("# [invert_contract] contract B-M-B for sequential source momentum(%d) = (%d, %d, %d)\n", i_seq_mom, seq_mom[1], seq_mom[2], seq_mom[3])
-        -- (2) light B-M-B - M 3-point function
-        contract_meson_baryon_3pt(L, light_sequential_propagator_list[i_src][i_seq_mom], light_propagator_smeared_list[i_prop], 
-                                  source_position, sink_momentum_list, seq_mom,  aw_b_m_b_3pt)
---        aw_b_m_b_3pt:close()
-    end
-    ctimer("done")
-    
-    aw_b_m_b_3pt:close()
-  
+
+
   
 end  -- of loop on base source locations
 
@@ -553,20 +552,118 @@ for i_sample = 0, nsample - 1 do
 
         printf("# [invert_contract_baryon] MB - MB contraction for source location[%d / %d] = (%d, %d, %d) t=%d\n", i_src, i_prop, 
                 pos[1], pos[2], pos[3], t) 
-        local name = string.format("%s.%.4d.x%.2dy%.2dz%.2dt%.2d.%.2d", "contract_meson_baryon_meson_baryon_2pt", nconf, pos[1],pos[2],pos[3], t, i_sample)
-        printf("# [invert_contract_meson_baryon_meson_baryon] MB - MB 2pt output file %s\n", name)
-        aw_mb_mb_2pt, am = qcd.aff.Writer(name)
-        name = nil
+--        local name = string.format("%s.%.4d.x%.2dy%.2dz%.2dt%.2d.%.2d", "contract_meson_baryon_meson_baryon_2pt", nconf, pos[1],pos[2],pos[3], t, i_sample)
+--        printf("# [invert_contract_meson_baryon_meson_baryon] MB - MB 2pt output file %s\n", name)
+--        aw_mb_mb_2pt, am = qcd.aff.Writer(name)
+--        name = nil
 
-        local ctimer = timer("contract MB-MB")
-             contract_meson_baryon_meson_baryon_2pt(L, light_propagator_smeared_list[i_prop], source_position, 
-            light_sequential_propagator_list[i_src], light_stochastic_source_smeared, light_stochastic_propagator_smeared_allsink, 
-             aw_mb_mb_2pt)
-        ctimer("done")
+--        local ctimer = timer("contract MB-MB")
+--             contract_meson_baryon_meson_baryon_2pt(L, light_propagator_smeared_list[i_prop], source_position, 
+--            light_sequential_propagator_list[i_src], light_stochastic_source_smeared, light_stochastic_propagator_smeared_allsink, 
+--             aw_mb_mb_2pt)
+--        ctimer("done")
 
-        aw_mb_mb_2pt:close()
+--        aw_mb_mb_2pt:close()
+   
+    printf("# [invert_contract_v4] base source location[%d] = (%d, %d, %d) t=%d\n", i_src, pos[1], pos[2], pos[3], t)
+
+    -- * open output files
+    local name = string.format("%s.%.4d.%.2d.%.5d.aff", "contract_mb_factors_phi", nconf, t, i_sample)
+    printf("# [invert_contract_v4] MxB - MxB phi output file %s\n", name)
+    local aw, am = qcd.aff.Writer(name)
+    name = nil
+    local mod_name = string.format("%s.%.4d.%.2d.%.5d.aff", "mod_contract_mb_factors_phi", nconf, t, i_sample)
+    printf("# [invert_contract_v4] MxB - MxB phi output file %s\n", mod_name)
+    local mod_aw, mod_am = qcd.aff.Writer(mod_name)
+    mod_name = nil
+
+    
+    for i_seq_mom, seq_mom in ipairs(sequential_source_momentum_list) do
+        
+        local gf2 = { {tag="g5", gamma={15, 1, 1}}, {tag="id", gamma={0, 1, 1}} } -- Gamma_f2 = g5, 1
+
+        -- ******************************************************
+        -- * V3: xi^+ G_f2 sll
+        -- ******************************************************
+          local tag = string.format("%s/pi2x%.2dpi2y%.2dpi2z%.2d/sample%.2d", "xil-gf2-sll", seq_mom[1], seq_mom[2], seq_mom[3], i_sample)
+          local contract_timer = timer("contract xil-gf2-sll")
+          contract_v3_ft_write(L, light_sequential_propagator_list[i_src][i_seq_mom], light_stochastic_source_smeared, gf2, 
+                  sequential_source_momentum_list, aw, tag)
+          contract_timer("done")
+
+        -- ******************************************************
+        -- * V3: xi^+ G_c sll
+        -- ******************************************************
+          tag = string.format("%s/pi2x%.2dpi2y%.2dpi2z%.2d/sample%.2d", "xil-gc-sll", seq_mom[1], seq_mom[2], seq_mom[3], i_sample)
+          contract_timer = timer("contract xil-gc-sll")
+          contract_v3_ft_write(L, light_sequential_propagator_list[i_src][i_seq_mom], light_stochastic_source_smeared, 
+                  va_current_gamma_list, seq_src_mom_list, aw, tag)
+          contract_timer("done")
+        -- ******************************************************
+        -- * mod_V3: xi^+ G_c sll
+        -- ******************************************************
+          tag = string.format("%s/pi2x%.2dpi2y%.2dpi2z%.2d/sample%.2d", "fast_xil-gf2-sll", seq_mom[1], seq_mom[2], seq_mom[3], i_sample)
+          t_axis = #dims -1
+          contract_timer = timer("fast_contract xil-gf2-sll")
+          contract_v3_modft_write(L, light_sequential_propagator_list[i_src][i_seq_mom], light_stochastic_source_smeared, 
+                  gf2, seq_src_mom_list, mod_aw, t_axis, tag)
+          contract_timer("done")
+
+      -- ******************************************************
+      -- * V2/V1: xi^+ g5 G_f1 fl sll
+      -- ******************************************************
+          tag = string.format("%s/pi2x%.2dpi2y%.2dpi2z%.2d/sample%.2d", "xil-gf1-fl-sll", seq_mom[1], seq_mom[2], seq_mom[3], i_sample)
+          contract_timer = timer("contract xil-gf1-fl-sll")
+          contract_v2_ft_write (L, light_stochastic_source_smeared, 
+                  light_propagator_smeared_list[i_src], light_sequential_propagator_list[i_src][i_seq_mom], baryon_vertex_list, sink_momentum_list, aw, tag)
+          contract_timer("done")
+
+      -- ******************************************************
+      -- * V2/V1: xi^+ g5 G_f1 sll fl
+      -- ******************************************************
+          tag = string.format("%s/pi2x%.2dpi2y%.2dpi2z%.2d/sample%.2d", "xil-gf1-sll-fl", seq_mom[1], seq_mom[2], seq_mom[3], i_sample)
+          contract_timer = timer("contract xil-gf1-sll-fl")
+          contract_v2_ft_write (L, light_stochastic_source_smeared, 
+                  light_sequential_propagator_list[i_src][i_seq_mom], light_propagator_smeared_list[i_src], baryon_vertex_list, sink_momentum_list, aw, tag)
+          contract_timer("done")
+        -- ******************************************************
+        -- * mod_V3: xi^+ G_c sll
+        -- ******************************************************
+          tag = string.format("%s/pi2x%.2dpi2y%.2dpi2z%.2d/sample%.2d", "fast_xil-gc-sll", seq_mom[1], seq_mom[2], seq_mom[3], i_sample)
+          t_axis = #dims -1
+          contract_timer = timer("fast_contract xil-gc-sll")
+          contract_v3_modft_write(L, light_sequential_propagator_list[i_src][i_seq_mom], light_stochastic_source_smeared, 
+                  va_current_gamma_list, seq_src_mom_list, mod_aw, t_axis, tag)
+          contract_timer("done")
+      -- ******************************************************
+      -- * V2/V1: xi^+ g5 G_f1 fl sll
+      -- ******************************************************
+          tag = string.format("%s/pi2x%.2dpi2y%.2dpi2z%.2d/sample%.2d", "fast_xil-gf1-fl-sll", seq_mom[1], seq_mom[2], seq_mom[3], i_sample)
+          contract_timer = timer("fast xil-gf1-fl-sll")
+          contract_v2_modft_write (L, light_stochastic_source_smeared, 
+                  light_propagator_smeared_list[i_src], light_sequential_propagator_list[i_src][i_seq_mom], baryon_vertex_list, 
+                  seq_src_mom_list, mod_aw, t_axis, tag)
+          contract_timer("done")
+      -- ******************************************************
+      -- * V2/V1: xi^+ g5 G_f1 sll fl
+      -- ******************************************************
+          tag = string.format("%s/pi2x%.2dpi2y%.2dpi2z%.2d/sample%.2d", "fast_xil-gf1-sll-fl", seq_mom[1], seq_mom[2], seq_mom[3], i_sample)
+          contract_timer = timer("fast xil-gf1-sll-fl")
+          contract_v2_modft_write (L, light_stochastic_source_smeared, 
+                  light_sequential_propagator_list[i_src][i_seq_mom], light_propagator_smeared_list[i_src], baryon_vertex_list, 
+                  seq_src_mom_list, mod_aw, t_axis, tag)
+          contract_timer("done")
+
+         
+
+        end
+        aw:close()
+        mod_aw:close()
+    --    show_mem("# checkpoint 7")
     end
+
 end
+
 ---- ****************************************************************************
 ---- * INVERSION FOR OET STOCHASTIC TIMESLICES SLOURCES WITH ONE-END TRICK          *
 ---- ****************************************************************************
@@ -707,4 +804,5 @@ end
 --    end
 --    oet_timer("done")
 --end
+
 total_timer("done")
