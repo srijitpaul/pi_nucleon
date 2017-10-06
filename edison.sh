@@ -1,9 +1,9 @@
 #!/bin/bash -l
-#SBATCH -p regular
-#SBATCH -n 768
-#SBATCH -N 32
+#SBATCH -p debug
+#SBATCH -n 1536
+#SBATCH -N 64
 
-#SBATCH -t 24:00:00
+#SBATCH -t 00:30:00
 #SBATCH --mail-type=BEGIN,END,FAIL
 #SBATCH --mail-user=s.paul@cyi.ac.cy
 
@@ -49,9 +49,12 @@ cat $scripts/params.qlua | awk '
   {print}' > $input
 
 
-QLUA_SCRIPT=invert_contract.qlua
-srun -n $nproc $path_to_qlua/qlua $include $input $path_to_prog/$QLUA_SCRIPT
-
+QLUA_SCRIPT=inversions.qlua
+for i in 1 2 
+do
+  srun -n 768 -N 32 -c2 --cpu_bind=cores $path_to_qlua/qlua $include $input $path_to_prog/$QLUA_SCRIPT &
+done
+wait
 exitStatus=$?
 if [ $exitStatus -ne 0 ]; then
     echo "[$MyName] Error from srun for $QLUA_SCRIPT, status was $exitStatus"

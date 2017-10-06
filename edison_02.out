@@ -1,0 +1,20 @@
+Starting for config 0009
+# [] source location string is "{t=16,pos={20,21,12}};{t=0,pos={13,0,18}};{t=43,pos={7,5,6}};{t=30,pos={15,18,12}};{t=42,pos={14,5,7}};{t=18,pos={3,7,17}};{t=29,pos={17,10,18}};{t=12,pos={10,22,4}};" 
+source location is {{t=16,pos={20,21,12}}} with iterator number 1
+{{t=16,pos={20,21,12}}}
+source location is {{t=0,pos={13,0,18}}} with iterator number 2
+{{t=0,pos={13,0,18}}}
+source location is {{t=43,pos={7,5,6}}} with iterator number 3
+{{t=43,pos={7,5,6}}}
+source location is {{t=30,pos={15,18,12}}} with iterator number 4
+{{t=30,pos={15,18,12}}}
+source location is {{t=42,pos={14,5,7}}} with iterator number 5
+{{t=42,pos={14,5,7}}}
+source location is {{t=18,pos={3,7,17}}} with iterator number 6
+{{t=18,pos={3,7,17}}}
+source location is {{t=29,pos={17,10,18}}} with iterator number 7
+{{t=29,pos={17,10,18}}}
+source location is {{t=12,pos={10,22,4}}} with iterator number 8
+{{t=12,pos={10,22,4}}}
+Forward and Sequential Inversions over, starting stochastic inversions
+# [] srun finished successfully for inversions.qlua, status was 0

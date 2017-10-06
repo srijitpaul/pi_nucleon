@@ -1,0 +1,74 @@
+Starting for config 0031
+# [/var/spool/slurmd/job7245539/slurm_script] source location string is "{t=2,pos={8,18,20}};{t=5,pos={17,9,21}};{t=39,pos={4,12,19}};{t=25,pos={4,8,11}};{t=27,pos={10,16,13}};{t=2,pos={9,4,20}};{t=28,pos={4,16,23}};{t=45,pos={10,15,0}};" 
+source location is {{t=2,pos={8,18,20}}} with iterator number 1
+{{t=2,pos={8,18,20}}}
+source location is {{t=5,pos={17,9,21}}} with iterator number 2
+{{t=5,pos={17,9,21}}}
+source location is {{t=39,pos={4,12,19}}} with iterator number 3
+{{t=39,pos={4,12,19}}}
+source location is {{t=25,pos={4,8,11}}} with iterator number 4
+{{t=25,pos={4,8,11}}}
+source location is {{t=27,pos={10,16,13}}} with iterator number 5
+{{t=27,pos={10,16,13}}}
+source location is {{t=2,pos={9,4,20}}} with iterator number 6
+{{t=2,pos={9,4,20}}}
+source location is {{t=28,pos={4,16,23}}} with iterator number 7
+{{t=28,pos={4,16,23}}}
+source location is {{t=45,pos={10,15,0}}} with iterator number 8
+{{t=45,pos={10,15,0}}}
+Starting for config 0032
+# [/var/spool/slurmd/job7245539/slurm_script] source location string is "{t=21,pos={9,17,3}};{t=43,pos={19,17,21}};{t=26,pos={12,18,7}};{t=20,pos={1,2,23}};{t=35,pos={1,8,15}};{t=20,pos={0,2,8}};{t=13,pos={10,14,7}};{t=39,pos={14,17,1}};" 
+source location is {{t=21,pos={9,17,3}}} with iterator number 1
+{{t=21,pos={9,17,3}}}
+source location is {{t=43,pos={19,17,21}}} with iterator number 2
+{{t=43,pos={19,17,21}}}
+source location is {{t=26,pos={12,18,7}}} with iterator number 3
+{{t=26,pos={12,18,7}}}
+source location is {{t=20,pos={1,2,23}}} with iterator number 4
+{{t=20,pos={1,2,23}}}
+source location is {{t=35,pos={1,8,15}}} with iterator number 5
+{{t=35,pos={1,8,15}}}
+source location is {{t=20,pos={0,2,8}}} with iterator number 6
+{{t=20,pos={0,2,8}}}
+source location is {{t=13,pos={10,14,7}}} with iterator number 7
+{{t=13,pos={10,14,7}}}
+source location is {{t=39,pos={14,17,1}}} with iterator number 8
+{{t=39,pos={14,17,1}}}
+Starting for config 0040
+# [/var/spool/slurmd/job7245539/slurm_script] source location string is "{t=26,pos={23,8,9}};{t=23,pos={0,23,7}};{t=0,pos={22,12,22}};{t=25,pos={5,20,5}};{t=19,pos={16,12,13}};{t=0,pos={21,3,3}};{t=30,pos={7,21,7}};{t=46,pos={12,8,14}};" 
+source location is {{t=26,pos={23,8,9}}} with iterator number 1
+{{t=26,pos={23,8,9}}}
+source location is {{t=23,pos={0,23,7}}} with iterator number 2
+{{t=23,pos={0,23,7}}}
+source location is {{t=0,pos={22,12,22}}} with iterator number 3
+{{t=0,pos={22,12,22}}}
+source location is {{t=25,pos={5,20,5}}} with iterator number 4
+{{t=25,pos={5,20,5}}}
+source location is {{t=19,pos={16,12,13}}} with iterator number 5
+{{t=19,pos={16,12,13}}}
+source location is {{t=0,pos={21,3,3}}} with iterator number 6
+{{t=0,pos={21,3,3}}}
+source location is {{t=30,pos={7,21,7}}} with iterator number 7
+{{t=30,pos={7,21,7}}}
+source location is {{t=46,pos={12,8,14}}} with iterator number 8
+{{t=46,pos={12,8,14}}}
+Starting for config 0043
+# [/var/spool/slurmd/job7245539/slurm_script] source location string is "{t=23,pos={8,7,19}};{t=47,pos={2,6,19}};{t=21,pos={5,5,21}};{t=25,pos={21,18,23}};{t=12,pos={12,9,19}};{t=15,pos={19,10,3}};{t=45,pos={17,3,17}};{t=41,pos={5,0,19}};" 
+source location is {{t=23,pos={8,7,19}}} with iterator number 1
+{{t=23,pos={8,7,19}}}
+source location is {{t=47,pos={2,6,19}}} with iterator number 2
+{{t=47,pos={2,6,19}}}
+source location is {{t=21,pos={5,5,21}}} with iterator number 3
+{{t=21,pos={5,5,21}}}
+source location is {{t=25,pos={21,18,23}}} with iterator number 4
+{{t=25,pos={21,18,23}}}
+source location is {{t=12,pos={12,9,19}}} with iterator number 5
+{{t=12,pos={12,9,19}}}
+source location is {{t=15,pos={19,10,3}}} with iterator number 6
+{{t=15,pos={19,10,3}}}
+source location is {{t=45,pos={17,3,17}}} with iterator number 7
+{{t=45,pos={17,3,17}}}
+source location is {{t=41,pos={5,0,19}}} with iterator number 8
+{{t=41,pos={5,0,19}}}
+Forward and Sequential Inversions over, starting stochastic inversions
+# [/var/spool/slurmd/job7245539/slurm_script] srun finished successfully for inversions.qlua, status was 0

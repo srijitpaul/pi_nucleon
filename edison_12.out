@@ -1,0 +1,74 @@
+Starting for config 0049
+# [/var/spool/slurmd/job7244292/slurm_script] source location string is "{t=24,pos={0,18,1}};{t=13,pos={7,11,5}};{t=6,pos={0,8,10}};{t=41,pos={11,13,10}};{t=11,pos={8,18,9}};{t=29,pos={18,8,16}};{t=36,pos={13,18,13}};{t=2,pos={5,5,5}};" 
+source location is {{t=24,pos={0,18,1}}} with iterator number 1
+{{t=24,pos={0,18,1}}}
+source location is {{t=13,pos={7,11,5}}} with iterator number 2
+{{t=13,pos={7,11,5}}}
+source location is {{t=6,pos={0,8,10}}} with iterator number 3
+{{t=6,pos={0,8,10}}}
+source location is {{t=41,pos={11,13,10}}} with iterator number 4
+{{t=41,pos={11,13,10}}}
+source location is {{t=11,pos={8,18,9}}} with iterator number 5
+{{t=11,pos={8,18,9}}}
+source location is {{t=29,pos={18,8,16}}} with iterator number 6
+{{t=29,pos={18,8,16}}}
+source location is {{t=36,pos={13,18,13}}} with iterator number 7
+{{t=36,pos={13,18,13}}}
+source location is {{t=2,pos={5,5,5}}} with iterator number 8
+{{t=2,pos={5,5,5}}}
+Starting for config 0050
+# [/var/spool/slurmd/job7244292/slurm_script] source location string is "{t=40,pos={17,22,15}};{t=42,pos={19,4,12}};{t=41,pos={0,17,20}};{t=42,pos={12,16,2}};{t=23,pos={4,23,19}};{t=15,pos={20,13,22}};{t=13,pos={19,1,5}};{t=33,pos={20,3,7}};" 
+source location is {{t=40,pos={17,22,15}}} with iterator number 1
+{{t=40,pos={17,22,15}}}
+source location is {{t=42,pos={19,4,12}}} with iterator number 2
+{{t=42,pos={19,4,12}}}
+source location is {{t=41,pos={0,17,20}}} with iterator number 3
+{{t=41,pos={0,17,20}}}
+source location is {{t=42,pos={12,16,2}}} with iterator number 4
+{{t=42,pos={12,16,2}}}
+source location is {{t=23,pos={4,23,19}}} with iterator number 5
+{{t=23,pos={4,23,19}}}
+source location is {{t=15,pos={20,13,22}}} with iterator number 6
+{{t=15,pos={20,13,22}}}
+source location is {{t=13,pos={19,1,5}}} with iterator number 7
+{{t=13,pos={19,1,5}}}
+source location is {{t=33,pos={20,3,7}}} with iterator number 8
+{{t=33,pos={20,3,7}}}
+Starting for config 0051
+# [/var/spool/slurmd/job7244292/slurm_script] source location string is "{t=27,pos={20,11,18}};{t=15,pos={3,8,9}};{t=36,pos={12,19,14}};{t=2,pos={0,5,20}};{t=36,pos={6,15,13}};{t=0,pos={4,22,3}};{t=6,pos={9,9,20}};{t=8,pos={19,3,23}};" 
+source location is {{t=27,pos={20,11,18}}} with iterator number 1
+{{t=27,pos={20,11,18}}}
+source location is {{t=15,pos={3,8,9}}} with iterator number 2
+{{t=15,pos={3,8,9}}}
+source location is {{t=36,pos={12,19,14}}} with iterator number 3
+{{t=36,pos={12,19,14}}}
+source location is {{t=2,pos={0,5,20}}} with iterator number 4
+{{t=2,pos={0,5,20}}}
+source location is {{t=36,pos={6,15,13}}} with iterator number 5
+{{t=36,pos={6,15,13}}}
+source location is {{t=0,pos={4,22,3}}} with iterator number 6
+{{t=0,pos={4,22,3}}}
+source location is {{t=6,pos={9,9,20}}} with iterator number 7
+{{t=6,pos={9,9,20}}}
+source location is {{t=8,pos={19,3,23}}} with iterator number 8
+{{t=8,pos={19,3,23}}}
+Starting for config 0052
+# [/var/spool/slurmd/job7244292/slurm_script] source location string is "{t=31,pos={9,1,21}};{t=36,pos={18,19,13}};{t=13,pos={5,2,18}};{t=1,pos={20,23,19}};{t=14,pos={23,0,14}};{t=7,pos={0,17,8}};{t=34,pos={13,6,12}};{t=6,pos={2,6,15}};" 
+source location is {{t=31,pos={9,1,21}}} with iterator number 1
+{{t=31,pos={9,1,21}}}
+source location is {{t=36,pos={18,19,13}}} with iterator number 2
+{{t=36,pos={18,19,13}}}
+source location is {{t=13,pos={5,2,18}}} with iterator number 3
+{{t=13,pos={5,2,18}}}
+source location is {{t=1,pos={20,23,19}}} with iterator number 4
+{{t=1,pos={20,23,19}}}
+source location is {{t=14,pos={23,0,14}}} with iterator number 5
+{{t=14,pos={23,0,14}}}
+source location is {{t=7,pos={0,17,8}}} with iterator number 6
+{{t=7,pos={0,17,8}}}
+source location is {{t=34,pos={13,6,12}}} with iterator number 7
+{{t=34,pos={13,6,12}}}
+source location is {{t=6,pos={2,6,15}}} with iterator number 8
+{{t=6,pos={2,6,15}}}
+Forward and Sequential Inversions over, starting stochastic inversions
+# [/var/spool/slurmd/job7244292/slurm_script] srun finished successfully for inversions.qlua, status was 0

@@ -31,10 +31,10 @@ n_coherent_source = 1
 -- number of configuration
 nconf = 
 
-nsample = 8
-nsample_oet = nsample
+nsample = 12
+nsample_oet = 1
 -- conf	
-conf_name_prefix = "/global/cscratch1/sd/smeinel/BMW/beta3.31_2hex_24c48_ml-0.09530_mh-0.04/lat_130110_"
+conf_name_prefix ="/scratch2/scratchdirs/srijitp/beta3.31_2hex_24c48_ml-0.09530_mh-0.04/configs/lat_"
 conf_name_input_suffix = ".nersc"
 conf_name_output_suffix = "_Stout_smeared.nersc"
 
@@ -128,8 +128,8 @@ quark_bc = {1, 1, 1, 1}
 prop_volfmt = "single"
 
 sequential_source_momentum_list = {
---   { 0, 0, 0},
---   { 0, 0, 1},
+   { 0, 0, 0},
+   { 0, 0, 1},
 --   { 0, 1, 1},
 --   { 4, 1, 6}
 -- {0, 0, -1}
@@ -180,6 +180,6 @@ mg_block = {
   {3,3,3,2},
   {2,2,2,2}}
 
-mg_max_abserr = 1.e-15
+mg_max_abserr = 1.e-22
 mg_max_relerr = 1.e-22
 

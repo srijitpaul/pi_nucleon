@@ -105,42 +105,42 @@ function read_propagator_lime (L, param)
 os.exit(1)
   end
   if not string.find(param.name, "stochastic") then
-  printf("# [read_propagator] filename is %s\n", filename)
-  r_timer = timer(" propagator read")
+    printf("# [read_propagator] filename is %s\n", filename)
+    r_timer = timer(" propagator read")
 
-  local reader, rinfo = qcd.qdpc.Reader(L, filename)
+    local nonstoch_reader, rinfo = qcd.qdpc.Reader(L, filename)
 
-  local prop = L:DiracPropagator()
-  local prop_info 
-  for icol  = 0, 2 do
-   for ispin = 0, 3 do
+    local prop = L:DiracPropagator()
+    local prop_info 
+    for icol  = 0, 2 do
+      for ispin = 0, 3 do
 
-    prop[{c=icol, d=ispin}] = reader:DiracFermion()
---    printf(" The norm of the Dirac Fermion with spin %d and color %d = %g\n",ispin, icol, prop[{c=icol, d=ispin}]:norm2()) 
-   end
-  end
+        prop[{c=icol, d=ispin}] = nonstoch_reader:DiracFermion()
+  --    printf(" The norm of the Dirac Fermion with spin %d and color %d = %g\n",ispin, icol, prop[{c=icol, d=ispin}]:norm2()) 
+      end
+    end
   
-  reader:close()
+    nonstoch_reader:close()
   
-  r_timer("done")
+    r_timer("done")
 
-  return prop
+    return prop
   else
-  printf("# [read_fermion] filename is %s\n", filename)
-  r_timer = timer(" fermion read")
+    printf("# [read_fermion] filename is %s\n", filename)
+    prop_timer = timer(" fermion read")
 
-  local reader, rinfo = qcd.qdpc.Reader(L, filename)
+    local reader, rinfo = qcd.qdpc.Reader(L, filename)
 
-  local prop = L:DiracFermion()
-  local prop_info 
+    local prop = L:DiracFermion()
+    local prop_info 
+    print()
+    prop = reader:DiracFermion()
+    print()
+    reader:close()
 
-  prop = reader:DiracFermion()
-    
-  reader:close()
-
-  r_timer("done")
-  return prop
+    prop_timer("done")
+    return prop
   end  
-  
+  print()
 --return prop
 end 

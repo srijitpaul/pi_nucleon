@@ -19,24 +19,24 @@ require "stdlib"
 
 function contract_mbmb(prop, two_stoch_prop, oneseq_prop, one_stoch_prop, inp, out)
 
-  local Cgin = -1 * gamma{n=10} * gamma{n=inp}
-  local Cgout = -1 * gamma{n=10} * gamma{n=out} 
-  local a2 = prop
-  local a3 = qcd.quarkContract13(Cgout * two_stoch_prop * Cgin, prop )
-  local a4 = qcd.quarkContract13( oneseq_prop * Cgout, Cgin * one_stoch_prop )
-  local res = a2*((a3 + a4):spintrace()) + (a2 *( a3 + a4 ))
-  --local res = a2 *(a4)
+    local Cgin = -1 * gamma{n=10} * gamma{n=inp}
+    local Cgout = -1 * gamma{n=10} * gamma{n=out} 
+    local a2 = prop
+    local a3 = qcd.quarkContract13(Cgout * two_stoch_prop * Cgin, prop )
+    local a4 = qcd.quarkContract13( oneseq_prop * Cgout, Cgin * one_stoch_prop )
+    local res = a2*((a3 + a4):spintrace()) + (a2 *( a3 + a4 ))
+    --local res = a2 *(a4)
 
-  a4 = oneseq_prop * Cgout
-  a3 = qcd.quarkContract13( Cgin * one_stoch_prop, prop )
-  res = res + a4 * (a3 + (a3:spintranspose()))
-  corr_proj = {}
+    a4 = oneseq_prop * Cgout
+    a3 = qcd.quarkContract13( Cgin * one_stoch_prop, prop )
+    res = res + a4 * (a3 + (a3:spintranspose()))
+    corr_proj = {}
   
-  for i = 0, 15 do
-    local Pp = gamma{n=i}
-    corr_proj[i] = (Pp * res):spintrace():trace()
-  end
-  return corr_proj
+    for i = 0, 15 do
+        local Pp = gamma{n=i}
+        corr_proj[i] = (Pp * res):spintrace():trace()
+    end
+    return corr_proj
 end
 
 function contract_meson_baryon_meson_baryon_2pt(L, prop, src_loc, oneseq_prop, xi, phi, aff_out)
