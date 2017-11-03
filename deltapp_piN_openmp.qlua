@@ -174,7 +174,7 @@ function contract_baryon_2pt(L, prop, src_loc, snk_momenta, aff_out)
       end   -- of index of projectors
       t_axis = #dims - 1
       src0 = {src_loc[0], src_loc[1], src_loc[2], src_loc[3]}
-      qcd.save_momproj(aff_out, '', dpp2pt_fw_index, src0, snk_momenta, t_axis, -1, {ft_sign=1})              
+      qcd.save_momproj(aff_out, '', dpp2pt_fw_index, src0, snk_momenta, t_axis, 1, {ft_sign=1})              
   
 
     end  -- of nu

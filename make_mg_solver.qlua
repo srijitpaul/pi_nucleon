@@ -2,11 +2,6 @@ package.path = '/home/srijit/Dropbox/spaul/softwares/build2/parts/qlua/tree/lhpc
 require "stdlib"
 require "gauge"
 
--- mg_block = {{4,4,4,4}, {2,2,2,2}}
--- mg_max_error = 1.e-22
--- mg_ferm_bc = {1,1,1,-1}
--- mg_kappa = kappa_l = 1. / (8 + 2 * m_l); m_l     = -0.2850
--- mg_csw = c_sw = 1.24930970916466
 
 function make_mg_solver (
     L,
@@ -87,9 +82,9 @@ function make_mg_solver (
         },
         { lattice = lattice_2,
           -- verbose
-          nvecs            =  30,
+          nvecs            =  20,
           npre             =   0,
-          npost            =   3,
+          npost            =   4,
           scale            =   1,
           cres             = 0.2,
           itmax            =  50,

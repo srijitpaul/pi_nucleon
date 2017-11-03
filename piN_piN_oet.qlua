@@ -51,12 +51,36 @@ function contract_mbmb_oet(prop, pfifi, inp, out)
   local a2 = qcd.quarkContract13(Cgout * prop * Cgin, pfifi)
   local res = (pfifi * a1 + pfifi * a1:spintrace()) + (prop * a2 + prop * a2:spintrace())
 
-  corr_proj = {}
-  for i = 0, 15 do
-    local Pp = gamma{n=i}
-    corr_proj[i] = ((Pp * res):spintrace()):trace()
-  end
-  return corr_proj
+--  corr_proj = {}
+--  for i = 0, 15 do
+--    local Pp = gamma{n=i}
+--    corr_proj[i] = ((Pp * res):spintrace()):trace()
+--  end
+--  return corr_proj
+
+--Extracting each spin projection of the result dirac propagator
+  local spin_proj = {}
+  
+  for ispin1 = 0, 3 do
+    
+    spin_proj[ispin1] = {}
+    for ispin2 = 0, 3 do
+        local dv = L:DiracFermion()
+        local corr = L:Complex()
+        for icol1 = 0, 2 do
+                
+            dv = res[{c=icol1, d=ispin2}]
+            corr = corr + dv[{c=icol1, d=ispin1}]
+            spin_proj[ispin1][ispin2]  =  corr
+
+            
+        end
+        corr = nil
+        dv = nil
+     end
+   end
+
+  return spin_proj
 end
 
 
@@ -101,28 +125,29 @@ function contract_mxb_mxb_oet (L, prop, phi_p, phi_0, pi2, src_loc, sample, aff_
                       (L:Real(L:pcoord(1)) * pf1y + src_loc[1] * pi1y ) +
                       (L:Real(L:pcoord(2)) * pf1z + src_loc[2] * pi1z ) ):expi()
 
-          for index = 0, 15 do
-            local q2 = vector.complex( L[3] )
-            local w2 = (piNpiN2pt_oet[index] * w):sum(L:MultiSet(L[3], L:pcoord(3)))
-            for i = 0, #w2 - 1 do
-              it = ( i + src_loc[3] ) % L[3]
-              q2[i] = -w2[it] * boundary_phase[it]
+          for index1 = 0, 3 do
+            for index2 = 0, 3 do
+              local q2 = vector.complex( L[3] )
+              local w2 = (piNpiN2pt_oet[index1][index2] * w):sum(L:MultiSet(L[3], L:pcoord(3)))
+              for i = 0, #w2 - 1 do
+                it = ( i + src_loc[3] ) % L[3]
+                q2[i] = -w2[it] * boundary_phase[it]
+              end
+
+              name = string.format(
+                    "/piNpiN/oet/s1%.2d/s2%.2d/in%.2dout%.2d/pi1x%.2dpi1y%.2dpi1z%.2d/pi2x%.2dpi2y%.2dpi2z%.2d/pf1x%.2dpf1y%.2dpf1z%.2d/pf2x%.2dpf2y%.2dpf2z%.2d/x%.2dy%.2dz%.2dt%.2d/s%d",
+                    index1, index2, proton_gamma_index[input_gamma], proton_gamma_index[output_gamma],
+                  pi1[1], pi1[2], pi1[3],
+                  pi2[1], pi2[2], pi2[3],
+                  pf1[1], pf1[2], pf1[3],
+                  pf2[1], pf2[2], pf2[3],
+                  src_loc[0], src_loc[1], src_loc[2], src_loc[3], sample)
+              aff_out:write(name, q2)
+              
+              q2 = nil
+              w2 = nil          
+
             end
-
-            name = string.format(
-                  "/piNpiN/oet/proj%.2d/in%.2dout%.2d/pi1x%.2dpi1y%.2dpi1z%.2d/pi2x%.2dpi2y%.2dpi2z%.2d/pf1x%.2dpf1y%.2dpf1z%.2d/pf2x%.2dpf2y%.2dpf2z%.2d/x%.2dy%.2dz%.2dt%.2d/s%d",
-                  index, proton_gamma_index[input_gamma], proton_gamma_index[output_gamma],
-                pi1[1], pi1[2], pi1[3],
-                pi2[1], pi2[2], pi2[3],
-                pf1[1], pf1[2], pf1[3],
-                pf2[1], pf2[2], pf2[3],
-                src_loc[0], src_loc[1], src_loc[2], src_loc[3], sample)
-            aff_out:write(name, q2)
-            
-            q2 = nil
-            w2 = nil          
-
-  
           end  -- of loop of projections
         end -- of loop of momenta
       end -- of loop of output gamma

@@ -1,0 +1,9 @@
+srun: error: nid02137: tasks 94-95: Exited with exit code 1
+srun: Terminating job step 7496097.3
+slurmstepd: error: *** STEP 7496097.3 ON nid02134 CANCELLED AT 2017-11-01T00:53:35 ***
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+srun: error: nid02136: tasks 48-71: Killed
+srun: error: nid02137: tasks 72-93: Killed
+srun: error: nid02135: tasks 24-47: Killed
+srun: error: nid02134: tasks 0-23: Killed
+srun: error: Unable to create job step: Job/step already completing or completed

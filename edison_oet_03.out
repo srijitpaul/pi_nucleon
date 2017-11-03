@@ -1,0 +1,154 @@
+Configuration number 0025
+Starting for config 0025
+# [] source location string is "{t=2,pos={6,22,5}};{t=39,pos={2,16,6}};{t=20,pos={20,14,21}};{t=28,pos={9,19,19}};{t=3,pos={3,3,16}};{t=37,pos={13,2,3}};{t=25,pos={6,9,12}};{t=36,pos={22,22,3}};" 
+source location is {{t=2,pos={6,22,5}}} with iterator number 1
+{{t=2,pos={6,22,5}}}
+source location is {{t=39,pos={2,16,6}}} with iterator number 2
+{{t=39,pos={2,16,6}}}
+source location is {{t=20,pos={20,14,21}}} with iterator number 3
+{{t=20,pos={20,14,21}}}
+source location is {{t=28,pos={9,19,19}}} with iterator number 4
+{{t=28,pos={9,19,19}}}
+source location is {{t=3,pos={3,3,16}}} with iterator number 5
+{{t=3,pos={3,3,16}}}
+source location is {{t=37,pos={13,2,3}}} with iterator number 6
+{{t=37,pos={13,2,3}}}
+source location is {{t=25,pos={6,9,12}}} with iterator number 7
+{{t=25,pos={6,9,12}}}
+source location is {{t=36,pos={22,22,3}}} with iterator number 8
+{{t=36,pos={22,22,3}}}
+Configuration number 0026
+Starting for config 0026
+# [] source location string is "{t=26,pos={7,4,9}};{t=41,pos={23,5,16}};{t=47,pos={12,3,20}};{t=25,pos={12,13,3}};{t=27,pos={6,4,1}};{t=42,pos={23,6,7}};{t=24,pos={10,4,2}};{t=34,pos={15,10,13}};" 
+source location is {{t=26,pos={7,4,9}}} with iterator number 1
+{{t=26,pos={7,4,9}}}
+source location is {{t=41,pos={23,5,16}}} with iterator number 2
+{{t=41,pos={23,5,16}}}
+source location is {{t=47,pos={12,3,20}}} with iterator number 3
+{{t=47,pos={12,3,20}}}
+source location is {{t=25,pos={12,13,3}}} with iterator number 4
+{{t=25,pos={12,13,3}}}
+source location is {{t=27,pos={6,4,1}}} with iterator number 5
+{{t=27,pos={6,4,1}}}
+source location is {{t=42,pos={23,6,7}}} with iterator number 6
+{{t=42,pos={23,6,7}}}
+source location is {{t=24,pos={10,4,2}}} with iterator number 7
+{{t=24,pos={10,4,2}}}
+source location is {{t=34,pos={15,10,13}}} with iterator number 8
+{{t=34,pos={15,10,13}}}
+Configuration number 0027
+Starting for config 0027
+# [] source location string is "{t=18,pos={11,2,7}};{t=14,pos={6,21,15}};{t=8,pos={9,20,5}};{t=3,pos={12,19,20}};{t=47,pos={5,19,18}};{t=0,pos={18,14,8}};{t=36,pos={15,16,17}};{t=35,pos={19,8,3}};" 
+source location is {{t=18,pos={11,2,7}}} with iterator number 1
+{{t=18,pos={11,2,7}}}
+source location is {{t=14,pos={6,21,15}}} with iterator number 2
+{{t=14,pos={6,21,15}}}
+source location is {{t=8,pos={9,20,5}}} with iterator number 3
+{{t=8,pos={9,20,5}}}
+source location is {{t=3,pos={12,19,20}}} with iterator number 4
+{{t=3,pos={12,19,20}}}
+source location is {{t=47,pos={5,19,18}}} with iterator number 5
+{{t=47,pos={5,19,18}}}
+source location is {{t=0,pos={18,14,8}}} with iterator number 6
+{{t=0,pos={18,14,8}}}
+source location is {{t=36,pos={15,16,17}}} with iterator number 7
+{{t=36,pos={15,16,17}}}
+source location is {{t=35,pos={19,8,3}}} with iterator number 8
+{{t=35,pos={19,8,3}}}
+Configuration number 0028
+Starting for config 0028
+# [] source location string is "{t=1,pos={22,14,9}};{t=16,pos={20,20,9}};{t=36,pos={18,15,5}};{t=34,pos={13,1,7}};{t=1,pos={14,1,2}};{t=15,pos={8,8,10}};{t=4,pos={20,0,5}};{t=9,pos={17,8,17}};" 
+source location is {{t=1,pos={22,14,9}}} with iterator number 1
+{{t=1,pos={22,14,9}}}
+source location is {{t=16,pos={20,20,9}}} with iterator number 2
+{{t=16,pos={20,20,9}}}
+source location is {{t=36,pos={18,15,5}}} with iterator number 3
+{{t=36,pos={18,15,5}}}
+source location is {{t=34,pos={13,1,7}}} with iterator number 4
+{{t=34,pos={13,1,7}}}
+source location is {{t=1,pos={14,1,2}}} with iterator number 5
+{{t=1,pos={14,1,2}}}
+source location is {{t=15,pos={8,8,10}}} with iterator number 6
+{{t=15,pos={8,8,10}}}
+source location is {{t=4,pos={20,0,5}}} with iterator number 7
+{{t=4,pos={20,0,5}}}
+source location is {{t=9,pos={17,8,17}}} with iterator number 8
+{{t=9,pos={17,8,17}}}
+Configuration number 0029
+Starting for config 0029
+# [] source location string is "{t=42,pos={17,20,13}};{t=39,pos={17,4,1}};{t=47,pos={9,19,14}};{t=32,pos={18,1,0}};{t=11,pos={20,12,21}};{t=41,pos={16,5,5}};{t=3,pos={20,12,13}};{t=3,pos={4,3,10}};" 
+source location is {{t=42,pos={17,20,13}}} with iterator number 1
+{{t=42,pos={17,20,13}}}
+source location is {{t=39,pos={17,4,1}}} with iterator number 2
+{{t=39,pos={17,4,1}}}
+source location is {{t=47,pos={9,19,14}}} with iterator number 3
+{{t=47,pos={9,19,14}}}
+source location is {{t=32,pos={18,1,0}}} with iterator number 4
+{{t=32,pos={18,1,0}}}
+source location is {{t=11,pos={20,12,21}}} with iterator number 5
+{{t=11,pos={20,12,21}}}
+source location is {{t=41,pos={16,5,5}}} with iterator number 6
+{{t=41,pos={16,5,5}}}
+source location is {{t=3,pos={20,12,13}}} with iterator number 7
+{{t=3,pos={20,12,13}}}
+source location is {{t=3,pos={4,3,10}}} with iterator number 8
+{{t=3,pos={4,3,10}}}
+Configuration number 0030
+Starting for config 0030
+# [] source location string is "{t=26,pos={20,10,20}};{t=30,pos={20,10,11}};{t=20,pos={18,0,0}};{t=16,pos={5,20,13}};{t=22,pos={10,22,12}};{t=9,pos={13,16,13}};{t=33,pos={17,14,21}};{t=11,pos={11,11,3}};" 
+source location is {{t=26,pos={20,10,20}}} with iterator number 1
+{{t=26,pos={20,10,20}}}
+source location is {{t=30,pos={20,10,11}}} with iterator number 2
+{{t=30,pos={20,10,11}}}
+source location is {{t=20,pos={18,0,0}}} with iterator number 3
+{{t=20,pos={18,0,0}}}
+source location is {{t=16,pos={5,20,13}}} with iterator number 4
+{{t=16,pos={5,20,13}}}
+source location is {{t=22,pos={10,22,12}}} with iterator number 5
+{{t=22,pos={10,22,12}}}
+source location is {{t=9,pos={13,16,13}}} with iterator number 6
+{{t=9,pos={13,16,13}}}
+source location is {{t=33,pos={17,14,21}}} with iterator number 7
+{{t=33,pos={17,14,21}}}
+source location is {{t=11,pos={11,11,3}}} with iterator number 8
+{{t=11,pos={11,11,3}}}
+Configuration number 0031
+Starting for config 0031
+# [] source location string is "{t=2,pos={8,18,20}};{t=5,pos={17,9,21}};{t=39,pos={4,12,19}};{t=25,pos={4,8,11}};{t=27,pos={10,16,13}};{t=2,pos={9,4,20}};{t=28,pos={4,16,23}};{t=45,pos={10,15,0}};" 
+source location is {{t=2,pos={8,18,20}}} with iterator number 1
+{{t=2,pos={8,18,20}}}
+source location is {{t=5,pos={17,9,21}}} with iterator number 2
+{{t=5,pos={17,9,21}}}
+source location is {{t=39,pos={4,12,19}}} with iterator number 3
+{{t=39,pos={4,12,19}}}
+source location is {{t=25,pos={4,8,11}}} with iterator number 4
+{{t=25,pos={4,8,11}}}
+source location is {{t=27,pos={10,16,13}}} with iterator number 5
+{{t=27,pos={10,16,13}}}
+source location is {{t=2,pos={9,4,20}}} with iterator number 6
+{{t=2,pos={9,4,20}}}
+source location is {{t=28,pos={4,16,23}}} with iterator number 7
+{{t=28,pos={4,16,23}}}
+source location is {{t=45,pos={10,15,0}}} with iterator number 8
+{{t=45,pos={10,15,0}}}
+Configuration number 0032
+Starting for config 0032
+# [] source location string is "{t=21,pos={9,17,3}};{t=43,pos={19,17,21}};{t=26,pos={12,18,7}};{t=20,pos={1,2,23}};{t=35,pos={1,8,15}};{t=20,pos={0,2,8}};{t=13,pos={10,14,7}};{t=39,pos={14,17,1}};" 
+source location is {{t=21,pos={9,17,3}}} with iterator number 1
+{{t=21,pos={9,17,3}}}
+source location is {{t=43,pos={19,17,21}}} with iterator number 2
+{{t=43,pos={19,17,21}}}
+source location is {{t=26,pos={12,18,7}}} with iterator number 3
+{{t=26,pos={12,18,7}}}
+source location is {{t=20,pos={1,2,23}}} with iterator number 4
+{{t=20,pos={1,2,23}}}
+source location is {{t=35,pos={1,8,15}}} with iterator number 5
+{{t=35,pos={1,8,15}}}
+source location is {{t=20,pos={0,2,8}}} with iterator number 6
+{{t=20,pos={0,2,8}}}
+source location is {{t=13,pos={10,14,7}}} with iterator number 7
+{{t=13,pos={10,14,7}}}
+source location is {{t=39,pos={14,17,1}}} with iterator number 8
+{{t=39,pos={14,17,1}}}
+Forward and Sequential Inversions over, starting stochastic inversions
+# [] srun finished successfully for oet_inversions.qlua, status was 0

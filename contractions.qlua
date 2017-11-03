@@ -258,7 +258,7 @@ for i_src, v_src in ipairs(source_locations) do
     printf("# [invert_contract_baryon] B - B contraction for source location[%d / %d] = (%d, %d, %d) t=%d\n", i_src, i_prop, 
             source_position[0], source_position[1], source_position[2], source_position[3]) 
   
-    local name = string.format("%s.%.4d.x%.2dy%.2dz%.2dt%.2d", "contract_baryon_2pt", nconf, pos[1],pos[2],pos[3], t)
+    local name = string.format("%s.%.4d.x%.2dy%.2dz%.2dt%.2d", "kontract_baryon_2pt", nconf, pos[1],pos[2],pos[3], t)
     printf("# [invert_contract_baryon] B - B 2pt output file %s\n", name)
     aw_b_b_2pt, am = qcd.aff.Writer(name)
     name = nil
@@ -279,7 +279,7 @@ for i_src, v_src in ipairs(source_locations) do
     printf("# [invert_contract_baryon] B - B/B - M - B contraction for source location[%d / %d] = (%d, %d, %d) t=%d\n", i_src, i_prop, 
             source_position[0], source_position[1], source_position[2], source_position[3]) 
   
-    local name = string.format("%s.%.4d.x%.2dy%.2dz%.2dt%.2d", "contract_meson_baryon_2pt", nconf, pos[1],pos[2],pos[3], t)
+    local name = string.format("%s.%.4d.x%.2dy%.2dz%.2dt%.2d", "kontract_meson_baryon_2pt", nconf, pos[1],pos[2],pos[3], t)
     printf("# [invert_contract_baryon] B - M - B 3pt output file %s\n", name)
     aw_b_m_b_3pt, am = qcd.aff.Writer(name)
     name = nil

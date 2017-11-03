@@ -1,11 +1,10 @@
 #!/bin/bash -l
-#SBATCH -p regular
+#SBATCH -p scavenger
 #SBATCH -n 24576
 #SBATCH -N 1024
 #SBATCH -t 07:00:00
 #SBATCH --mail-type=BEGIN,END,FAIL
 #SBATCH --mail-user=s.paul@cyi.ac.cy
-#SBATCH --qos=premium
 
 #SBATCH -e edison_01.err
 #SBATCH -o edison_01.out

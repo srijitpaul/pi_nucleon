@@ -9,7 +9,7 @@ require "qdpc_io"
 require "setup_util"
 require "lhpc-std"
 require "latvec"
-
+require "hex-smear"
 -- ************************************************************************************
 -- * we use the following numbering
 -- *
@@ -94,11 +94,12 @@ if stout_smear then
     printf("# [invert_contract] reading original gauge configuration from file %s\n", conf_name)
 
     u_load_timer = timer("u load")
-    uorig = load_nersc(L, conf_name)
+    u_orig = load_nersc(L, conf_name)
     u_load_timer("done")
-    printf("# [invert_contract] Plaquette (original) = %12.10f\n", plaquette_full(uorig))
+    printf("# [invert_contract] Plaquette (original) = %12.10f\n", plaquette_full(u_orig))
 
     -- smear the gauge configuration
+    uorig = bmw_hex(u_orig,2)
     stout_timer = timer("stout smear")
     printf("# [invert_contract] Stout-smearing gauge field\n")
     ustout = stout_smear_4d(uorig, stout_rho, stout_n)
@@ -406,7 +407,7 @@ for i_src, v_src in ipairs(source_locations) do
     source_position[3] = t
    
     -- open output files                                                          
-    local name = string.format("%s.%.4d.tsrc%.2d.aff", "contract_baryon_2pt", nconf, t) 
+    local name = string.format("%s.%.4d.x%.2dy%.2dz%.2dt%.2d.aff", "kontract_oet_pinpin_2pt", nconf,pos[1], pos[2], pos[3], t) 
     printf("# [] M - M 2pt output file %s\n", name)                               
     aw_2pt, am = qcd.aff.Writer(name)  
 

@@ -69,7 +69,7 @@ kappa_s = 0.12626262626
 -- Sheikholeslami-Wohlert coefficient
 csw = 1.0
 
-quark_bc = {1, 1, 1, 1}
+quark_bc = {1, 1, 1, -1}
 
 -- inverter_type = "deflated_clover"
    inverter_type = "multigrid"

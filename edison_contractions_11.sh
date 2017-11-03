@@ -23,7 +23,7 @@ path_to_prog=$scripts
 TSize=48
 Thalf=$(($TSize / 2))
 
-include="$scripts/plaquette.qlua  $scripts/timer.qlua $scripts/stout_smear.qlua $scripts/load_gauge_field.qlua $scripts/random_functions.qlua $scripts/gamma_perm_phase.qlua $scripts/gi_dcovi.qlua $scripts/make_mg_solver.qlua $scripts/read_propagator.qlua $scripts/deltapp_piN_openmp.qlua $scripts/deltaM_piN_openmp.qlua $scripts/piN_piN.qlua $scripts/piN_piN_oet.qlua"
+include="$scripts/plaquette.qlua  $scripts/timer.qlua $scripts/stout_smear.qlua $scripts/load_gauge_field.qlua $scripts/random_functions.qlua $scripts/gamma_perm_phase.qlua $scripts/gi_dcovi.qlua $scripts/make_mg_solver.qlua $scripts/read_propagator.qlua $scripts/deltapp_piN_openspin.qlua $scripts/deltaM_piN_openspin.qlua $scripts/piN_piN.qlua $scripts/piN_piN_oet.qlua"
 
 configlist_name='/global/homes/s/srijitp/spaul/projects/pi_nucleon/configlist.11'
 config_names=`cat $configlist_name`

@@ -1,0 +1,1575 @@
+qlua ERROR:: ...l_20170925_edison/qlua/lib/qlua/wuppertal-smear.qlua:43: attempt to call field 'laplacian_opt' (a nil value)
+stack traceback:
+	...l_20170925_edison/qlua/lib/qlua/wuppertal-smear.qlua:43: in function 'wuppertal_smear'
+	.../s/srijitp/spaul/projects/pi_nucleon/inversions.qlua:160: in main chunk
+QMP m22,n768@nid04996 error: abort: 1
+QMP m0,n768@nid04996 error: abort: 1
+QMP m1,n768@nid04996 error: abort: 1
+QMP m2,n768@nid04996 error: abort: 1
+QMP m3,n768@nid04996 error: abort: 1
+QMP m4,n768@nid04996 error: abort: 1
+QMP m5,n768@nid04996 error: abort: 1
+QMP m6,n768@nid04996 error: abort: 1
+QMP m344,n768@nid05190 error: abort: 1
+QMP m7,n768@nid04996 error: abort: 1
+QMP m8,n768@nid04996 error: abort: 1
+QMP m9,n768@nid04996 error: abort: 1
+QMP m10,n768@nid04996 error: abort: 1
+QMP m349,n768@nid05190 error: abort: 1
+QMP m11,n768@nid04996 error: abort: 1
+QMP m12,n768@nid04996 error: abort: 1
+QMP m350,n768@nid05190 error: abort: 1
+QMP m13,n768@nid04996 error: abort: 1
+QMP m351,n768@nid05190 error: abort: 1
+QMP m14,n768@nid04996 error: abort: 1
+QMP m152,n768@nid05179 error: abort: 1
+QMP m352,n768@nid05190 error: abort: 1
+QMP m15,n768@nid04996 error: abort: 1
+QMP m16,n768@nid04996 error: abort: 1
+QMP m154,n768@nid05179 error: abort: 1
+QMP m353,n768@nid05190 error: abort: 1
+QMP m17,n768@nid04996 error: abort: 1
+QMP m354,n768@nid05190 error: abort: 1
+QMP m18,n768@nid04996 error: abort: 1
+QMP m156,n768@nid05179 error: abort: 1
+QMP m19,n768@nid04996 error: abort: 1
+QMP m157,n768@nid05179 error: abort: 1
+QMP m356,n768@nid05190 error: abort: 1
+QMP m20,n768@nid04996 error: abort: 1
+QMP m357,n768@nid05190 error: abort: 1
+QMP m21,n768@nid04996 error: abort: 1
+QMP m67,n768@nid05148 error: abort: 1
+QMP m764,n768@nid05323 error: abort: 1
+QMP m358,n768@nid05190 error: abort: 1
+QMP m23,n768@nid04996 error: abort: 1
+Rank 4 [Fri Nov  3 03:20:16 2017] [c2-3c0s1n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 4
+QMP m68,n768@nid05148 error: abort: 1
+QMP m765,n768@nid05323 error: abort: 1
+QMP m162,n768@nid05179 error: abort: 1
+QMP m336,n768@nid05190 error: abort: 1
+Rank 14 [Fri Nov  3 03:20:16 2017] [c2-3c0s1n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 14
+QMP m337,n768@nid05190 error: abort: 1
+Rank 18 [Fri Nov  3 03:20:16 2017] [c2-3c0s1n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 18
+QMP m766,n768@nid05323 error: abort: 1
+QMP m163,n768@nid05179 error: abort: 1
+QMP m338,n768@nid05190 error: abort: 1
+Rank 20 [Fri Nov  3 03:20:16 2017] [c2-3c0s1n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 20
+QMP m339,n768@nid05190 error: abort: 1
+Rank 22 [Fri Nov  3 03:20:16 2017] [c2-3c0s1n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 22
+QMP m48,n768@nid05148 error: abort: 1
+QMP m767,n768@nid05323 error: abort: 1
+QMP m164,n768@nid05179 error: abort: 1
+QMP m340,n768@nid05190 error: abort: 1
+Rank 23 [Fri Nov  3 03:20:16 2017] [c2-3c0s1n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 23
+QMP m49,n768@nid05148 error: abort: 1
+QMP m744,n768@nid05323 error: abort: 1
+QMP m341,n768@nid05190 error: abort: 1
+Rank 0 [Fri Nov  3 03:20:16 2017] [c2-3c0s1n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 0
+QMP m50,n768@nid05148 error: abort: 1
+QMP m258,n768@nid05184 error: abort: 1
+QMP m165,n768@nid05179 error: abort: 1
+QMP m342,n768@nid05190 error: abort: 1
+Rank 1 [Fri Nov  3 03:20:16 2017] [c2-3c0s1n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 1
+QMP m51,n768@nid05148 error: abort: 1
+QMP m745,n768@nid05323 error: abort: 1
+QMP m343,n768@nid05190 error: abort: 1
+Rank 2 [Fri Nov  3 03:20:16 2017] [c2-3c0s1n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 2
+QMP m52,n768@nid05148 error: abort: 1
+QMP m746,n768@nid05323 error: abort: 1
+QMP m166,n768@nid05179 error: abort: 1
+QMP m345,n768@nid05190 error: abort: 1
+Rank 3 [Fri Nov  3 03:20:16 2017] [c2-3c0s1n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 3
+QMP m747,n768@nid05323 error: abort: 1
+QMP m346,n768@nid05190 error: abort: 1
+Rank 5 [Fri Nov  3 03:20:16 2017] [c2-3c0s1n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 5
+QMP m53,n768@nid05148 error: abort: 1
+QMP m748,n768@nid05323 error: abort: 1
+QMP m167,n768@nid05179 error: abort: 1
+QMP m347,n768@nid05190 error: abort: 1
+Rank 6 [Fri Nov  3 03:20:16 2017] [c2-3c0s1n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 6
+QMP m54,n768@nid05148 error: abort: 1
+QMP m144,n768@nid05179 error: abort: 1
+QMP m348,n768@nid05190 error: abort: 1
+Rank 7 [Fri Nov  3 03:20:16 2017] [c2-3c0s1n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 7
+QMP m263,n768@nid05184 error: abort: 1
+QMP m749,n768@nid05323 error: abort: 1
+QMP m145,n768@nid05179 error: abort: 1
+QMP m355,n768@nid05190 error: abort: 1
+Rank 8 [Fri Nov  3 03:20:16 2017] [c2-3c0s1n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 8
+QMP m55,n768@nid05148 error: abort: 1
+QMP m240,n768@nid05184 error: abort: 1
+QMP m750,n768@nid05323 error: abort: 1
+QMP m146,n768@nid05179 error: abort: 1
+QMP m359,n768@nid05190 error: abort: 1
+Rank 9 [Fri Nov  3 03:20:16 2017] [c2-3c0s1n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 9
+QMP m56,n768@nid05148 error: abort: 1
+QMP m751,n768@nid05323 error: abort: 1
+QMP m147,n768@nid05179 error: abort: 1
+Rank 346 [Fri Nov  3 03:20:16 2017] [c3-3c0s1n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 346
+Rank 10 [Fri Nov  3 03:20:16 2017] [c2-3c0s1n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 10
+QMP m57,n768@nid05148 error: abort: 1
+QMP m241,n768@nid05184 error: abort: 1
+QMP m148,n768@nid05179 error: abort: 1
+Rank 348 [Fri Nov  3 03:20:16 2017] [c3-3c0s1n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 348
+Rank 11 [Fri Nov  3 03:20:16 2017] [c2-3c0s1n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 11
+QMP m58,n768@nid05148 error: abort: 1
+QMP m242,n768@nid05184 error: abort: 1
+QMP m752,n768@nid05323 error: abort: 1
+Rank 356 [Fri Nov  3 03:20:16 2017] [c3-3c0s1n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 356
+Rank 12 [Fri Nov  3 03:20:16 2017] [c2-3c0s1n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 12
+QMP m59,n768@nid05148 error: abort: 1
+QMP m753,n768@nid05323 error: abort: 1
+QMP m149,n768@nid05179 error: abort: 1
+Rank 358 [Fri Nov  3 03:20:16 2017] [c3-3c0s1n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 358
+Rank 13 [Fri Nov  3 03:20:16 2017] [c2-3c0s1n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 13
+QMP m60,n768@nid05148 error: abort: 1
+QMP m243,n768@nid05184 error: abort: 1
+QMP m754,n768@nid05323 error: abort: 1
+QMP m150,n768@nid05179 error: abort: 1
+Rank 336 [Fri Nov  3 03:20:16 2017] [c3-3c0s1n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 336
+Rank 15 [Fri Nov  3 03:20:16 2017] [c2-3c0s1n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 15
+QMP m61,n768@nid05148 error: abort: 1
+QMP m244,n768@nid05184 error: abort: 1
+QMP m755,n768@nid05323 error: abort: 1
+QMP m151,n768@nid05179 error: abort: 1
+Rank 337 [Fri Nov  3 03:20:16 2017] [c3-3c0s1n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 337
+Rank 16 [Fri Nov  3 03:20:16 2017] [c2-3c0s1n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 16
+QMP m62,n768@nid05148 error: abort: 1
+QMP m245,n768@nid05184 error: abort: 1
+QMP m756,n768@nid05323 error: abort: 1
+QMP m153,n768@nid05179 error: abort: 1
+Rank 338 [Fri Nov  3 03:20:16 2017] [c3-3c0s1n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 338
+Rank 17 [Fri Nov  3 03:20:16 2017] [c2-3c0s1n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 17
+QMP m63,n768@nid05148 error: abort: 1
+QMP m246,n768@nid05184 error: abort: 1
+QMP m155,n768@nid05179 error: abort: 1
+Rank 339 [Fri Nov  3 03:20:16 2017] [c3-3c0s1n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 339
+Rank 19 [Fri Nov  3 03:20:16 2017] [c2-3c0s1n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 19
+QMP m64,n768@nid05148 error: abort: 1
+QMP m247,n768@nid05184 error: abort: 1
+QMP m757,n768@nid05323 error: abort: 1
+QMP m158,n768@nid05179 error: abort: 1
+Rank 340 [Fri Nov  3 03:20:16 2017] [c3-3c0s1n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 340
+Rank 21 [Fri Nov  3 03:20:16 2017] [c2-3c0s1n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 21
+QMP m65,n768@nid05148 error: abort: 1
+QMP m248,n768@nid05184 error: abort: 1
+QMP m758,n768@nid05323 error: abort: 1
+QMP m159,n768@nid05179 error: abort: 1
+Rank 341 [Fri Nov  3 03:20:16 2017] [c3-3c0s1n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 341
+QMP m66,n768@nid05148 error: abort: 1
+QMP m249,n768@nid05184 error: abort: 1
+QMP m759,n768@nid05323 error: abort: 1
+QMP m160,n768@nid05179 error: abort: 1
+Rank 342 [Fri Nov  3 03:20:16 2017] [c3-3c0s1n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 342
+QMP m69,n768@nid05148 error: abort: 1
+QMP m250,n768@nid05184 error: abort: 1
+QMP m760,n768@nid05323 error: abort: 1
+QMP m161,n768@nid05179 error: abort: 1
+Rank 343 [Fri Nov  3 03:20:16 2017] [c3-3c0s1n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 343
+QMP m70,n768@nid05148 error: abort: 1
+QMP m251,n768@nid05184 error: abort: 1
+Rank 149 [Fri Nov  3 03:20:16 2017] [c2-3c2s14n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 149
+Rank 344 [Fri Nov  3 03:20:16 2017] [c3-3c0s1n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 344
+QMP m71,n768@nid05148 error: abort: 1
+QMP m252,n768@nid05184 error: abort: 1
+QMP m761,n768@nid05323 error: abort: 1
+Rank 161 [Fri Nov  3 03:20:16 2017] [c2-3c2s14n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 161
+Rank 345 [Fri Nov  3 03:20:16 2017] [c3-3c0s1n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 345
+Rank 56 [Fri Nov  3 03:20:16 2017] [c2-3c2s7n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 56
+QMP m253,n768@nid05184 error: abort: 1
+QMP m762,n768@nid05323 error: abort: 1
+Rank 162 [Fri Nov  3 03:20:16 2017] [c2-3c2s14n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 162
+Rank 347 [Fri Nov  3 03:20:16 2017] [c3-3c0s1n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 347
+Rank 64 [Fri Nov  3 03:20:16 2017] [c2-3c2s7n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 64
+QMP m254,n768@nid05184 error: abort: 1
+QMP m763,n768@nid05323 error: abort: 1
+Rank 166 [Fri Nov  3 03:20:16 2017] [c2-3c2s14n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 166
+Rank 349 [Fri Nov  3 03:20:16 2017] [c3-3c0s1n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 349
+Rank 68 [Fri Nov  3 03:20:16 2017] [c2-3c2s7n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 68
+QMP m255,n768@nid05184 error: abort: 1
+Rank 752 [Fri Nov  3 03:20:16 2017] [c3-3c2s2n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 752
+Rank 144 [Fri Nov  3 03:20:16 2017] [c2-3c2s14n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 144
+Rank 350 [Fri Nov  3 03:20:16 2017] [c3-3c0s1n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 350
+Rank 48 [Fri Nov  3 03:20:16 2017] [c2-3c2s7n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 48
+QMP m256,n768@nid05184 error: abort: 1
+Rank 758 [Fri Nov  3 03:20:16 2017] [c3-3c2s2n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 758
+Rank 145 [Fri Nov  3 03:20:16 2017] [c2-3c2s14n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 145
+Rank 351 [Fri Nov  3 03:20:16 2017] [c3-3c0s1n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 351
+Rank 52 [Fri Nov  3 03:20:16 2017] [c2-3c2s7n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 52
+QMP m257,n768@nid05184 error: abort: 1
+Rank 760 [Fri Nov  3 03:20:16 2017] [c3-3c2s2n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 760
+Rank 146 [Fri Nov  3 03:20:16 2017] [c2-3c2s14n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 146
+Rank 53 [Fri Nov  3 03:20:16 2017] [c2-3c2s7n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 53
+QMP m259,n768@nid05184 error: abort: 1
+Rank 763 [Fri Nov  3 03:20:16 2017] [c3-3c2s2n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 763
+Rank 147 [Fri Nov  3 03:20:16 2017] [c2-3c2s14n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 147
+Rank 352 [Fri Nov  3 03:20:16 2017] [c3-3c0s1n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 352
+Rank 54 [Fri Nov  3 03:20:16 2017] [c2-3c2s7n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 54
+QMP m260,n768@nid05184 error: abort: 1
+Rank 764 [Fri Nov  3 03:20:16 2017] [c3-3c2s2n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 764
+Rank 148 [Fri Nov  3 03:20:16 2017] [c2-3c2s14n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 148
+Rank 353 [Fri Nov  3 03:20:16 2017] [c3-3c0s1n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 353
+Rank 58 [Fri Nov  3 03:20:16 2017] [c2-3c2s7n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 58
+QMP m261,n768@nid05184 error: abort: 1
+Rank 744 [Fri Nov  3 03:20:16 2017] [c3-3c2s2n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 744
+Rank 150 [Fri Nov  3 03:20:16 2017] [c2-3c2s14n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 150
+Rank 354 [Fri Nov  3 03:20:16 2017] [c3-3c0s1n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 354
+Rank 60 [Fri Nov  3 03:20:16 2017] [c2-3c2s7n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 60
+QMP m262,n768@nid05184 error: abort: 1
+Rank 745 [Fri Nov  3 03:20:16 2017] [c3-3c2s2n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 745
+Rank 151 [Fri Nov  3 03:20:16 2017] [c2-3c2s14n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 151
+Rank 355 [Fri Nov  3 03:20:16 2017] [c3-3c0s1n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 355
+Rank 70 [Fri Nov  3 03:20:16 2017] [c2-3c2s7n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 70
+Rank 252 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 252
+Rank 746 [Fri Nov  3 03:20:16 2017] [c3-3c2s2n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 746
+Rank 152 [Fri Nov  3 03:20:16 2017] [c2-3c2s14n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 152
+Rank 357 [Fri Nov  3 03:20:16 2017] [c3-3c0s1n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 357
+Rank 71 [Fri Nov  3 03:20:16 2017] [c2-3c2s7n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 71
+Rank 262 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 262
+Rank 747 [Fri Nov  3 03:20:16 2017] [c3-3c2s2n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 747
+Rank 153 [Fri Nov  3 03:20:16 2017] [c2-3c2s14n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 153
+Rank 359 [Fri Nov  3 03:20:16 2017] [c3-3c0s1n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 359
+Rank 49 [Fri Nov  3 03:20:16 2017] [c2-3c2s7n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 49
+Rank 263 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 263
+Rank 748 [Fri Nov  3 03:20:16 2017] [c3-3c2s2n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 748
+Rank 154 [Fri Nov  3 03:20:16 2017] [c2-3c2s14n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 154
+Rank 50 [Fri Nov  3 03:20:16 2017] [c2-3c2s7n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 50
+Rank 243 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 243
+Rank 749 [Fri Nov  3 03:20:16 2017] [c3-3c2s2n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 749
+Rank 155 [Fri Nov  3 03:20:16 2017] [c2-3c2s14n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 155
+Rank 51 [Fri Nov  3 03:20:16 2017] [c2-3c2s7n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 51
+Rank 246 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 246
+Rank 750 [Fri Nov  3 03:20:16 2017] [c3-3c2s2n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 750
+Rank 156 [Fri Nov  3 03:20:16 2017] [c2-3c2s14n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 156
+Rank 55 [Fri Nov  3 03:20:16 2017] [c2-3c2s7n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 55
+Rank 251 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 251
+Rank 751 [Fri Nov  3 03:20:16 2017] [c3-3c2s2n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 751
+Rank 157 [Fri Nov  3 03:20:16 2017] [c2-3c2s14n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 157
+Rank 57 [Fri Nov  3 03:20:16 2017] [c2-3c2s7n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 57
+Rank 254 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 254
+Rank 753 [Fri Nov  3 03:20:16 2017] [c3-3c2s2n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 753
+Rank 158 [Fri Nov  3 03:20:16 2017] [c2-3c2s14n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 158
+Rank 59 [Fri Nov  3 03:20:16 2017] [c2-3c2s7n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 59
+Rank 256 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 256
+Rank 754 [Fri Nov  3 03:20:16 2017] [c3-3c2s2n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 754
+Rank 159 [Fri Nov  3 03:20:16 2017] [c2-3c2s14n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 159
+Rank 61 [Fri Nov  3 03:20:16 2017] [c2-3c2s7n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 61
+Rank 257 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 257
+Rank 755 [Fri Nov  3 03:20:16 2017] [c3-3c2s2n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 755
+Rank 160 [Fri Nov  3 03:20:16 2017] [c2-3c2s14n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 160
+Rank 62 [Fri Nov  3 03:20:16 2017] [c2-3c2s7n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 62
+Rank 258 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 258
+Rank 756 [Fri Nov  3 03:20:16 2017] [c3-3c2s2n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 756
+Rank 163 [Fri Nov  3 03:20:16 2017] [c2-3c2s14n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 163
+Rank 63 [Fri Nov  3 03:20:16 2017] [c2-3c2s7n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 63
+Rank 259 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 259
+Rank 757 [Fri Nov  3 03:20:16 2017] [c3-3c2s2n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 757
+Rank 164 [Fri Nov  3 03:20:16 2017] [c2-3c2s14n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 164
+Rank 65 [Fri Nov  3 03:20:16 2017] [c2-3c2s7n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 65
+Rank 261 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 261
+Rank 759 [Fri Nov  3 03:20:16 2017] [c3-3c2s2n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 759
+Rank 165 [Fri Nov  3 03:20:16 2017] [c2-3c2s14n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 165
+Rank 66 [Fri Nov  3 03:20:16 2017] [c2-3c2s7n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 66
+Rank 240 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 240
+Rank 761 [Fri Nov  3 03:20:16 2017] [c3-3c2s2n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 761
+Rank 167 [Fri Nov  3 03:20:16 2017] [c2-3c2s14n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 167
+Rank 67 [Fri Nov  3 03:20:16 2017] [c2-3c2s7n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 67
+Rank 241 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 241
+Rank 762 [Fri Nov  3 03:20:16 2017] [c3-3c2s2n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 762
+Rank 69 [Fri Nov  3 03:20:16 2017] [c2-3c2s7n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 69
+Rank 242 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 242
+Rank 765 [Fri Nov  3 03:20:16 2017] [c3-3c2s2n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 765
+Rank 244 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 244
+Rank 766 [Fri Nov  3 03:20:16 2017] [c3-3c2s2n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 766
+Rank 245 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 245
+Rank 767 [Fri Nov  3 03:20:16 2017] [c3-3c2s2n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 767
+Rank 247 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 247
+Rank 248 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 248
+Rank 249 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 249
+Rank 250 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 250
+Rank 253 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 253
+Rank 255 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 255
+Rank 260 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 260
+QMP m24,n768@nid04998 error: abort: 1
+QMP m530,n768@nid05268 error: abort: 1
+QMP m374,n768@nid05195 error: abort: 1
+QMP m514,n768@nid05267 error: abort: 1
+QMP m676,n768@nid05303 error: abort: 1
+QMP m636,n768@nid05301 error: abort: 1
+QMP m532,n768@nid05268 error: abort: 1
+QMP m198,n768@nid05182 error: abort: 1
+QMP m34,n768@nid04998 error: abort: 1
+QMP m523,n768@nid05267 error: abort: 1
+QMP m640,n768@nid05301 error: abort: 1
+QMP m382,n768@nid05195 error: abort: 1
+QMP m704,n768@nid05304 error: abort: 1
+QMP m36,n768@nid04998 error: abort: 1
+QMP m680,n768@nid05303 error: abort: 1
+QMP m525,n768@nid05267 error: abort: 1
+QMP m383,n768@nid05195 error: abort: 1
+QMP m536,n768@nid05268 error: abort: 1
+QMP m450,n768@nid05264 error: abort: 1
+QMP m494,n768@nid05266 error: abort: 1
+QMP m360,n768@nid05195 error: abort: 1
+QMP m203,n768@nid05182 error: abort: 1
+QMP m706,n768@nid05304 error: abort: 1
+QMP m40,n768@nid04998 error: abort: 1
+QMP m527,n768@nid05267 error: abort: 1
+QMP m647,n768@nid05301 error: abort: 1
+QMP m504,n768@nid05267 error: abort: 1
+QMP m361,n768@nid05195 error: abort: 1
+QMP m683,n768@nid05303 error: abort: 1
+QMP m204,n768@nid05182 error: abort: 1
+QMP m624,n768@nid05301 error: abort: 1
+QMP m496,n768@nid05266 error: abort: 1
+QMP m41,n768@nid04998 error: abort: 1
+QMP m708,n768@nid05304 error: abort: 1
+QMP m505,n768@nid05267 error: abort: 1
+QMP m362,n768@nid05195 error: abort: 1
+QMP m684,n768@nid05303 error: abort: 1
+QMP m205,n768@nid05182 error: abort: 1
+QMP m625,n768@nid05301 error: abort: 1
+QMP m506,n768@nid05267 error: abort: 1
+QMP m232,n768@nid05183 error: abort: 1
+QMP m432,n768@nid05264 error: abort: 1
+QMP m710,n768@nid05304 error: abort: 1
+QMP m626,n768@nid05301 error: abort: 1
+QMP m363,n768@nid05195 error: abort: 1
+QMP m542,n768@nid05268 error: abort: 1
+QMP m206,n768@nid05182 error: abort: 1
+QMP m499,n768@nid05266 error: abort: 1
+QMP m44,n768@nid04998 error: abort: 1
+QMP m507,n768@nid05267 error: abort: 1
+QMP m433,n768@nid05264 error: abort: 1
+QMP m627,n768@nid05301 error: abort: 1
+QMP m364,n768@nid05195 error: abort: 1
+QMP m543,n768@nid05268 error: abort: 1
+QMP m712,n768@nid05304 error: abort: 1
+QMP m628,n768@nid05301 error: abort: 1
+QMP m508,n768@nid05267 error: abort: 1
+QMP m434,n768@nid05264 error: abort: 1
+QMP m208,n768@nid05182 error: abort: 1
+QMP m365,n768@nid05195 error: abort: 1
+QMP m689,n768@nid05303 error: abort: 1
+QMP m236,n768@nid05183 error: abort: 1
+QMP m544,n768@nid05268 error: abort: 1
+QMP m435,n768@nid05264 error: abort: 1
+QMP m629,n768@nid05301 error: abort: 1
+QMP m502,n768@nid05266 error: abort: 1
+QMP m25,n768@nid04998 error: abort: 1
+QMP m509,n768@nid05267 error: abort: 1
+QMP m209,n768@nid05182 error: abort: 1
+QMP m714,n768@nid05304 error: abort: 1
+QMP m366,n768@nid05195 error: abort: 1
+QMP m690,n768@nid05303 error: abort: 1
+QMP m237,n768@nid05183 error: abort: 1
+QMP m436,n768@nid05264 error: abort: 1
+QMP m630,n768@nid05301 error: abort: 1
+QMP m480,n768@nid05266 error: abort: 1
+QMP m26,n768@nid04998 error: abort: 1
+QMP m510,n768@nid05267 error: abort: 1
+QMP m367,n768@nid05195 error: abort: 1
+QMP m546,n768@nid05268 error: abort: 1
+QMP m210,n768@nid05182 error: abort: 1
+QMP m437,n768@nid05264 error: abort: 1
+QMP m716,n768@nid05304 error: abort: 1
+QMP m631,n768@nid05301 error: abort: 1
+QMP m481,n768@nid05266 error: abort: 1
+QMP m27,n768@nid04998 error: abort: 1
+QMP m511,n768@nid05267 error: abort: 1
+QMP m368,n768@nid05195 error: abort: 1
+QMP m239,n768@nid05183 error: abort: 1
+QMP m438,n768@nid05264 error: abort: 1
+QMP m482,n768@nid05266 error: abort: 1
+QMP m28,n768@nid04998 error: abort: 1
+QMP m216,n768@nid05183 error: abort: 1
+QMP m548,n768@nid05268 error: abort: 1
+QMP m717,n768@nid05304 error: abort: 1
+QMP m632,n768@nid05301 error: abort: 1
+QMP m29,n768@nid04998 error: abort: 1
+QMP m512,n768@nid05267 error: abort: 1
+QMP m369,n768@nid05195 error: abort: 1
+QMP m217,n768@nid05183 error: abort: 1
+QMP m439,n768@nid05264 error: abort: 1
+QMP m483,n768@nid05266 error: abort: 1
+QMP m513,n768@nid05267 error: abort: 1
+QMP m695,n768@nid05303 error: abort: 1
+QMP m218,n768@nid05183 error: abort: 1
+QMP m549,n768@nid05268 error: abort: 1
+QMP m440,n768@nid05264 error: abort: 1
+QMP m214,n768@nid05182 error: abort: 1
+QMP m718,n768@nid05304 error: abort: 1
+QMP m633,n768@nid05301 error: abort: 1
+QMP m484,n768@nid05266 error: abort: 1
+QMP m30,n768@nid04998 error: abort: 1
+QMP m370,n768@nid05195 error: abort: 1
+QMP m672,n768@nid05303 error: abort: 1
+QMP m219,n768@nid05183 error: abort: 1
+QMP m441,n768@nid05264 error: abort: 1
+QMP m634,n768@nid05301 error: abort: 1
+QMP m485,n768@nid05266 error: abort: 1
+QMP m31,n768@nid04998 error: abort: 1
+QMP m515,n768@nid05267 error: abort: 1
+QMP m371,n768@nid05195 error: abort: 1
+QMP m673,n768@nid05303 error: abort: 1
+QMP m220,n768@nid05183 error: abort: 1
+QMP m215,n768@nid05182 error: abort: 1
+QMP m696,n768@nid05304 error: abort: 1
+QMP m486,n768@nid05266 error: abort: 1
+QMP m674,n768@nid05303 error: abort: 1
+QMP m221,n768@nid05183 error: abort: 1
+QMP m312,n768@nid05187 error: abort: 1
+QMP m551,n768@nid05268 error: abort: 1
+QMP m442,n768@nid05264 error: abort: 1
+QMP m192,n768@nid05182 error: abort: 1
+QMP m697,n768@nid05304 error: abort: 1
+QMP m635,n768@nid05301 error: abort: 1
+QMP m32,n768@nid04998 error: abort: 1
+QMP m516,n768@nid05267 error: abort: 1
+QMP m372,n768@nid05195 error: abort: 1
+QMP m675,n768@nid05303 error: abort: 1
+QMP m222,n768@nid05183 error: abort: 1
+QMP m528,n768@nid05268 error: abort: 1
+QMP m193,n768@nid05182 error: abort: 1
+QMP m698,n768@nid05304 error: abort: 1
+QMP m96,n768@nid05150 error: abort: 1
+QMP m487,n768@nid05266 error: abort: 1
+QMP m677,n768@nid05303 error: abort: 1
+QMP m223,n768@nid05183 error: abort: 1
+QMP m666,n768@nid05302 error: abort: 1
+QMP m529,n768@nid05268 error: abort: 1
+QMP m443,n768@nid05264 error: abort: 1
+QMP m194,n768@nid05182 error: abort: 1
+QMP m699,n768@nid05304 error: abort: 1
+QMP m637,n768@nid05301 error: abort: 1
+QMP m488,n768@nid05266 error: abort: 1
+QMP m285,n768@nid05185 error: abort: 1
+QMP m33,n768@nid04998 error: abort: 1
+QMP m517,n768@nid05267 error: abort: 1
+QMP m373,n768@nid05195 error: abort: 1
+QMP m678,n768@nid05303 error: abort: 1
+QMP m224,n768@nid05183 error: abort: 1
+QMP m531,n768@nid05268 error: abort: 1
+QMP m444,n768@nid05264 error: abort: 1
+QMP m195,n768@nid05182 error: abort: 1
+QMP m178,n768@nid05181 error: abort: 1
+QMP m700,n768@nid05304 error: abort: 1
+QMP m97,n768@nid05150 error: abort: 1
+QMP m638,n768@nid05301 error: abort: 1
+QMP m489,n768@nid05266 error: abort: 1
+QMP m375,n768@nid05195 error: abort: 1
+QMP m679,n768@nid05303 error: abort: 1
+QMP m225,n768@nid05183 error: abort: 1
+QMP m671,n768@nid05302 error: abort: 1
+QMP m533,n768@nid05268 error: abort: 1
+QMP m445,n768@nid05264 error: abort: 1
+QMP m701,n768@nid05304 error: abort: 1
+QMP m490,n768@nid05266 error: abort: 1
+QMP m287,n768@nid05185 error: abort: 1
+QMP m35,n768@nid04998 error: abort: 1
+QMP m518,n768@nid05267 error: abort: 1
+QMP m376,n768@nid05195 error: abort: 1
+QMP m681,n768@nid05303 error: abort: 1
+QMP m226,n768@nid05183 error: abort: 1
+QMP m648,n768@nid05302 error: abort: 1
+QMP m534,n768@nid05268 error: abort: 1
+QMP m413,n768@nid05213 error: abort: 1
+QMP m446,n768@nid05264 error: abort: 1
+QMP m196,n768@nid05182 error: abort: 1
+QMP m702,n768@nid05304 error: abort: 1
+QMP m98,n768@nid05150 error: abort: 1
+QMP m639,n768@nid05301 error: abort: 1
+QMP m491,n768@nid05266 error: abort: 1
+QMP m264,n768@nid05185 error: abort: 1
+QMP m37,n768@nid04998 error: abort: 1
+QMP m377,n768@nid05195 error: abort: 1
+QMP m682,n768@nid05303 error: abort: 1
+QMP m227,n768@nid05183 error: abort: 1
+QMP m535,n768@nid05268 error: abort: 1
+QMP m197,n768@nid05182 error: abort: 1
+QMP m703,n768@nid05304 error: abort: 1
+QMP m492,n768@nid05266 error: abort: 1
+QMP m519,n768@nid05267 error: abort: 1
+QMP m685,n768@nid05303 error: abort: 1
+QMP m228,n768@nid05183 error: abort: 1
+QMP m649,n768@nid05302 error: abort: 1
+QMP m537,n768@nid05268 error: abort: 1
+QMP m414,n768@nid05213 error: abort: 1
+QMP m447,n768@nid05264 error: abort: 1
+QMP m199,n768@nid05182 error: abort: 1
+QMP m705,n768@nid05304 error: abort: 1
+QMP m99,n768@nid05150 error: abort: 1
+QMP m641,n768@nid05301 error: abort: 1
+QMP m493,n768@nid05266 error: abort: 1
+QMP m265,n768@nid05185 error: abort: 1
+QMP m38,n768@nid04998 error: abort: 1
+QMP m378,n768@nid05195 error: abort: 1
+QMP m686,n768@nid05303 error: abort: 1
+QMP m612,n768@nid05300 error: abort: 1
+QMP m229,n768@nid05183 error: abort: 1
+QMP m538,n768@nid05268 error: abort: 1
+QMP m448,n768@nid05264 error: abort: 1
+QMP m200,n768@nid05182 error: abort: 1
+QMP m191,n768@nid05181 error: abort: 1
+QMP m707,n768@nid05304 error: abort: 1
+QMP m100,n768@nid05150 error: abort: 1
+QMP m642,n768@nid05301 error: abort: 1
+QMP m495,n768@nid05266 error: abort: 1
+QMP m520,n768@nid05267 error: abort: 1
+QMP m687,n768@nid05303 error: abort: 1
+QMP m230,n768@nid05183 error: abort: 1
+QMP m650,n768@nid05302 error: abort: 1
+QMP m539,n768@nid05268 error: abort: 1
+QMP m201,n768@nid05182 error: abort: 1
+QMP m168,n768@nid05181 error: abort: 1
+QMP m497,n768@nid05266 error: abort: 1
+QMP m266,n768@nid05185 error: abort: 1
+QMP m39,n768@nid04998 error: abort: 1
+QMP m379,n768@nid05195 error: abort: 1
+QMP m688,n768@nid05303 error: abort: 1
+QMP m614,n768@nid05300 error: abort: 1
+QMP m231,n768@nid05183 error: abort: 1
+QMP m322,n768@nid05187 error: abort: 1
+QMP m540,n768@nid05268 error: abort: 1
+QMP m449,n768@nid05264 error: abort: 1
+QMP m202,n768@nid05182 error: abort: 1
+QMP m709,n768@nid05304 error: abort: 1
+QMP m101,n768@nid05150 error: abort: 1
+QMP m643,n768@nid05301 error: abort: 1
+QMP m498,n768@nid05266 error: abort: 1
+QMP m42,n768@nid04998 error: abort: 1
+QMP m521,n768@nid05267 error: abort: 1
+QMP m691,n768@nid05303 error: abort: 1
+QMP m233,n768@nid05183 error: abort: 1
+QMP m651,n768@nid05302 error: abort: 1
+QMP m541,n768@nid05268 error: abort: 1
+QMP m451,n768@nid05264 error: abort: 1
+QMP m207,n768@nid05182 error: abort: 1
+QMP m169,n768@nid05181 error: abort: 1
+QMP m711,n768@nid05304 error: abort: 1
+QMP m644,n768@nid05301 error: abort: 1
+QMP m500,n768@nid05266 error: abort: 1
+QMP m267,n768@nid05185 error: abort: 1
+QMP m43,n768@nid04998 error: abort: 1
+QMP m522,n768@nid05267 error: abort: 1
+QMP m380,n768@nid05195 error: abort: 1
+QMP m692,n768@nid05303 error: abort: 1
+QMP m616,n768@nid05300 error: abort: 1
+QMP m234,n768@nid05183 error: abort: 1
+QMP m545,n768@nid05268 error: abort: 1
+QMP m452,n768@nid05264 error: abort: 1
+QMP m211,n768@nid05182 error: abort: 1
+QMP m713,n768@nid05304 error: abort: 1
+QMP m102,n768@nid05150 error: abort: 1
+QMP m501,n768@nid05266 error: abort: 1
+QMP m45,n768@nid04998 error: abort: 1
+QMP m566,n768@nid05272 error: abort: 1
+QMP m524,n768@nid05267 error: abort: 1
+QMP m693,n768@nid05303 error: abort: 1
+QMP m235,n768@nid05183 error: abort: 1
+QMP m324,n768@nid05187 error: abort: 1
+QMP m652,n768@nid05302 error: abort: 1
+QMP m547,n768@nid05268 error: abort: 1
+QMP m453,n768@nid05264 error: abort: 1
+QMP m212,n768@nid05182 error: abort: 1
+QMP m170,n768@nid05181 error: abort: 1
+QMP m733,n768@nid05305 error: abort: 1
+QMP m715,n768@nid05304 error: abort: 1
+QMP m645,n768@nid05301 error: abort: 1
+QMP m134,n768@nid05178 error: abort: 1
+QMP m503,n768@nid05266 error: abort: 1
+QMP m268,n768@nid05185 error: abort: 1
+QMP m46,n768@nid04998 error: abort: 1
+QMP m381,n768@nid05195 error: abort: 1
+QMP m694,n768@nid05303 error: abort: 1
+QMP m618,n768@nid05300 error: abort: 1
+QMP m238,n768@nid05183 error: abort: 1
+QMP m550,n768@nid05268 error: abort: 1
+QMP m420,n768@nid05213 error: abort: 1
+QMP m454,n768@nid05264 error: abort: 1
+QMP m213,n768@nid05182 error: abort: 1
+QMP m719,n768@nid05304 error: abort: 1
+QMP m103,n768@nid05150 error: abort: 1
+QMP m646,n768@nid05301 error: abort: 1
+Rank 484 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 484
+QMP m269,n768@nid05185 error: abort: 1
+QMP m47,n768@nid04998 error: abort: 1
+QMP m567,n768@nid05272 error: abort: 1
+QMP m526,n768@nid05267 error: abort: 1
+Rank 360 [Fri Nov  3 03:20:16 2017] [c3-3c0s2n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 360
+Rank 684 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 684
+Rank 230 [Fri Nov  3 03:20:16 2017] [c2-3c2s15n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 230
+QMP m326,n768@nid05187 error: abort: 1
+QMP m653,n768@nid05302 error: abort: 1
+Rank 535 [Fri Nov  3 03:20:16 2017] [c3-3c1s5n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 535
+QMP m455,n768@nid05264 error: abort: 1
+Rank 200 [Fri Nov  3 03:20:16 2017] [c2-3c2s15n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 200
+QMP m171,n768@nid05181 error: abort: 1
+Rank 699 [Fri Nov  3 03:20:16 2017] [c3-3c1s14n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 699
+Rank 625 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 625
+QMP m87,n768@nid05149 error: abort: 1
+Rank 499 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 499
+QMP m270,n768@nid05185 error: abort: 1
+Rank 24 [Fri Nov  3 03:20:16 2017] [c2-3c0s1n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 24
+Rank 512 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 512
+QMP m472,n768@nid05265 error: abort: 1
+Rank 372 [Fri Nov  3 03:20:16 2017] [c3-3c0s2n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 372
+Rank 676 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 676
+QMP m619,n768@nid05300 error: abort: 1
+Rank 236 [Fri Nov  3 03:20:16 2017] [c2-3c2s15n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 236
+Rank 542 [Fri Nov  3 03:20:16 2017] [c3-3c1s5n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 542
+QMP m421,n768@nid05213 error: abort: 1
+Rank 432 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 432
+Rank 212 [Fri Nov  3 03:20:16 2017] [c2-3c2s15n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 212
+Rank 700 [Fri Nov  3 03:20:16 2017] [c3-3c1s14n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 700
+QMP m104,n768@nid05150 error: abort: 1
+Rank 628 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 628
+QMP m136,n768@nid05178 error: abort: 1
+Rank 503 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 503
+Rank 34 [Fri Nov  3 03:20:16 2017] [c2-3c0s1n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 34
+Rank 516 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 516
+Rank 363 [Fri Nov  3 03:20:16 2017] [c3-3c0s2n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 363
+Rank 677 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 677
+Rank 238 [Fri Nov  3 03:20:16 2017] [c2-3c2s15n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 238
+QMP m654,n768@nid05302 error: abort: 1
+Rank 544 [Fri Nov  3 03:20:16 2017] [c3-3c1s5n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 544
+Rank 434 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 434
+Rank 194 [Fri Nov  3 03:20:16 2017] [c2-3c2s15n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 194
+QMP m172,n768@nid05181 error: abort: 1
+Rank 713 [Fri Nov  3 03:20:16 2017] [c3-3c1s14n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 713
+Rank 636 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 636
+Rank 480 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 480
+QMP m271,n768@nid05185 error: abort: 1
+Rank 25 [Fri Nov  3 03:20:16 2017] [c2-3c0s1n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 25
+QMP m569,n768@nid05272 error: abort: 1
+Rank 506 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 506
+QMP m306,n768@nid05186 error: abort: 1
+Rank 364 [Fri Nov  3 03:20:16 2017] [c3-3c0s2n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 364
+Rank 680 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 680
+QMP m620,n768@nid05300 error: abort: 1
+QMP m594,n768@nid05289 error: abort: 1
+Rank 216 [Fri Nov  3 03:20:16 2017] [c2-3c2s15n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 216
+Rank 545 [Fri Nov  3 03:20:16 2017] [c3-3c1s5n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 545
+QMP m422,n768@nid05213 error: abort: 1
+Rank 436 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 436
+Rank 201 [Fri Nov  3 03:20:16 2017] [c2-3c2s15n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 201
+QMP m737,n768@nid05305 error: abort: 1
+Rank 697 [Fri Nov  3 03:20:16 2017] [c3-3c1s14n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 697
+QMP m105,n768@nid05150 error: abort: 1
+Rank 631 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 631
+Rank 481 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 481
+Rank 26 [Fri Nov  3 03:20:16 2017] [c2-3c0s1n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 26
+Rank 507 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 507
+QMP m474,n768@nid05265 error: abort: 1
+Rank 365 [Fri Nov  3 03:20:16 2017] [c3-3c0s2n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 365
+Rank 681 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 681
+Rank 217 [Fri Nov  3 03:20:16 2017] [c2-3c2s15n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 217
+QMP m655,n768@nid05302 error: abort: 1
+Rank 546 [Fri Nov  3 03:20:16 2017] [c3-3c1s5n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 546
+Rank 438 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 438
+Rank 204 [Fri Nov  3 03:20:16 2017] [c2-3c2s15n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 204
+QMP m173,n768@nid05181 error: abort: 1
+Rank 698 [Fri Nov  3 03:20:16 2017] [c3-3c1s14n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 698
+Rank 632 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 632
+QMP m90,n768@nid05149 error: abort: 1
+Rank 482 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 482
+QMP m272,n768@nid05185 error: abort: 1
+Rank 29 [Fri Nov  3 03:20:16 2017] [c2-3c0s1n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 29
+QMP m570,n768@nid05272 error: abort: 1
+Rank 508 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 508
+Rank 370 [Fri Nov  3 03:20:16 2017] [c3-3c0s2n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 370
+Rank 682 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 682
+QMP m622,n768@nid05300 error: abort: 1
+Rank 218 [Fri Nov  3 03:20:16 2017] [c2-3c2s15n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 218
+QMP m330,n768@nid05187 error: abort: 1
+Rank 551 [Fri Nov  3 03:20:16 2017] [c3-3c1s5n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 551
+Rank 440 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 440
+Rank 205 [Fri Nov  3 03:20:16 2017] [c2-3c2s15n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 205
+QMP m174,n768@nid05181 error: abort: 1
+Rank 702 [Fri Nov  3 03:20:16 2017] [c3-3c1s14n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 702
+QMP m106,n768@nid05150 error: abort: 1
+Rank 634 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 634
+Rank 483 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 483
+Rank 31 [Fri Nov  3 03:20:16 2017] [c2-3c0s1n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 31
+Rank 509 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 509
+QMP m308,n768@nid05186 error: abort: 1
+Rank 373 [Fri Nov  3 03:20:16 2017] [c3-3c0s2n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 373
+Rank 688 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 688
+Rank 220 [Fri Nov  3 03:20:16 2017] [c2-3c2s15n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 220
+QMP m656,n768@nid05302 error: abort: 1
+Rank 528 [Fri Nov  3 03:20:16 2017] [c3-3c1s5n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 528
+QMP m424,n768@nid05213 error: abort: 1
+Rank 444 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 444
+Rank 208 [Fri Nov  3 03:20:16 2017] [c2-3c2s15n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 208
+QMP m739,n768@nid05305 error: abort: 1
+Rank 703 [Fri Nov  3 03:20:16 2017] [c3-3c1s14n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 703
+Rank 637 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 637
+Rank 485 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 485
+QMP m273,n768@nid05185 error: abort: 1
+Rank 37 [Fri Nov  3 03:20:16 2017] [c2-3c0s1n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 37
+Rank 511 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 511
+QMP m476,n768@nid05265 error: abort: 1
+Rank 374 [Fri Nov  3 03:20:16 2017] [c3-3c0s2n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 374
+Rank 689 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 689
+QMP m623,n768@nid05300 error: abort: 1
+Rank 222 [Fri Nov  3 03:20:16 2017] [c2-3c2s15n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 222
+Rank 529 [Fri Nov  3 03:20:16 2017] [c3-3c1s5n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 529
+Rank 446 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 446
+Rank 209 [Fri Nov  3 03:20:16 2017] [c2-3c2s15n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 209
+QMP m175,n768@nid05181 error: abort: 1
+Rank 705 [Fri Nov  3 03:20:16 2017] [c3-3c1s14n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 705
+QMP m107,n768@nid05150 error: abort: 1
+Rank 644 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 644
+QMP m141,n768@nid05178 error: abort: 1
+Rank 486 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 486
+Rank 42 [Fri Nov  3 03:20:16 2017] [c2-3c0s1n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 42
+Rank 515 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 515
+QMP m309,n768@nid05186 error: abort: 1
+Rank 375 [Fri Nov  3 03:20:16 2017] [c3-3c0s2n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 375
+Rank 693 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 693
+QMP m600,n768@nid05300 error: abort: 1
+Rank 223 [Fri Nov  3 03:20:16 2017] [c2-3c2s15n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 223
+QMP m332,n768@nid05187 error: abort: 1
+QMP m657,n768@nid05302 error: abort: 1
+Rank 530 [Fri Nov  3 03:20:16 2017] [c3-3c1s5n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 530
+Rank 448 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 448
+QMP m384,n768@nid05212 error: abort: 1
+Rank 210 [Fri Nov  3 03:20:16 2017] [c2-3c2s15n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 210
+QMP m176,n768@nid05181 error: abort: 1
+QMP m740,n768@nid05305 error: abort: 1
+Rank 707 [Fri Nov  3 03:20:16 2017] [c3-3c1s14n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 707
+Rank 646 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 646
+Rank 487 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 487
+QMP m274,n768@nid05185 error: abort: 1
+Rank 45 [Fri Nov  3 03:20:16 2017] [c2-3c0s1n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 45
+Rank 517 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 517
+Rank 376 [Fri Nov  3 03:20:16 2017] [c3-3c0s2n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 376
+Rank 694 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 694
+QMP m576,n768@nid05289 error: abort: 1
+Rank 224 [Fri Nov  3 03:20:16 2017] [c2-3c2s15n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 224
+Rank 531 [Fri Nov  3 03:20:16 2017] [c3-3c1s5n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 531
+Rank 450 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 450
+QMP m385,n768@nid05212 error: abort: 1
+Rank 215 [Fri Nov  3 03:20:16 2017] [c2-3c2s15n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 215
+Rank 708 [Fri Nov  3 03:20:16 2017] [c3-3c1s14n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 708
+QMP m108,n768@nid05150 error: abort: 1
+Rank 647 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 647
+Rank 488 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 488
+Rank 47 [Fri Nov  3 03:20:16 2017] [c2-3c0s1n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 47
+Rank 523 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 523
+QMP m310,n768@nid05186 error: abort: 1
+Rank 378 [Fri Nov  3 03:20:16 2017] [c3-3c0s2n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 378
+Rank 695 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 695
+QMP m601,n768@nid05300 error: abort: 1
+QMP m577,n768@nid05289 error: abort: 1
+Rank 226 [Fri Nov  3 03:20:16 2017] [c2-3c2s15n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 226
+QMP m658,n768@nid05302 error: abort: 1
+Rank 532 [Fri Nov  3 03:20:16 2017] [c3-3c1s5n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 532
+QMP m427,n768@nid05213 error: abort: 1
+Rank 452 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 452
+QMP m386,n768@nid05212 error: abort: 1
+Rank 192 [Fri Nov  3 03:20:16 2017] [c2-3c2s15n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 192
+QMP m177,n768@nid05181 error: abort: 1
+Rank 709 [Fri Nov  3 03:20:16 2017] [c3-3c1s14n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 709
+Rank 624 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 624
+QMP m72,n768@nid05149 error: abort: 1
+QMP m120,n768@nid05178 error: abort: 1
+Rank 489 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 489
+QMP m275,n768@nid05185 error: abort: 1
+Rank 27 [Fri Nov  3 03:20:16 2017] [c2-3c0s1n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 27
+QMP m552,n768@nid05272 error: abort: 1
+Rank 524 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 524
+QMP m479,n768@nid05265 error: abort: 1
+Rank 380 [Fri Nov  3 03:20:16 2017] [c3-3c0s2n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 380
+Rank 672 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 672
+QMP m602,n768@nid05300 error: abort: 1
+QMP m578,n768@nid05289 error: abort: 1
+Rank 227 [Fri Nov  3 03:20:16 2017] [c2-3c2s15n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 227
+Rank 533 [Fri Nov  3 03:20:16 2017] [c3-3c1s5n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 533
+Rank 454 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 454
+QMP m387,n768@nid05212 error: abort: 1
+Rank 193 [Fri Nov  3 03:20:16 2017] [c2-3c2s15n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 193
+QMP m742,n768@nid05305 error: abort: 1
+Rank 710 [Fri Nov  3 03:20:16 2017] [c3-3c1s14n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 710
+QMP m109,n768@nid05150 error: abort: 1
+Rank 626 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 626
+QMP m73,n768@nid05149 error: abort: 1
+QMP m121,n768@nid05178 error: abort: 1
+Rank 490 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 490
+Rank 28 [Fri Nov  3 03:20:16 2017] [c2-3c0s1n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 28
+QMP m553,n768@nid05272 error: abort: 1
+Rank 504 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 504
+QMP m288,n768@nid05186 error: abort: 1
+QMP m456,n768@nid05265 error: abort: 1
+Rank 383 [Fri Nov  3 03:20:16 2017] [c3-3c0s2n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 383
+Rank 673 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 673
+QMP m579,n768@nid05289 error: abort: 1
+Rank 229 [Fri Nov  3 03:20:16 2017] [c2-3c2s15n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 229
+QMP m659,n768@nid05302 error: abort: 1
+Rank 534 [Fri Nov  3 03:20:16 2017] [c3-3c1s5n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 534
+QMP m428,n768@nid05213 error: abort: 1
+Rank 455 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 455
+QMP m388,n768@nid05212 error: abort: 1
+Rank 195 [Fri Nov  3 03:20:16 2017] [c2-3c2s15n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 195
+QMP m179,n768@nid05181 error: abort: 1
+Rank 712 [Fri Nov  3 03:20:16 2017] [c3-3c1s14n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 712
+Rank 627 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 627
+QMP m74,n768@nid05149 error: abort: 1
+QMP m122,n768@nid05178 error: abort: 1
+Rank 491 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 491
+QMP m276,n768@nid05185 error: abort: 1
+Rank 30 [Fri Nov  3 03:20:16 2017] [c2-3c0s1n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 30
+QMP m554,n768@nid05272 error: abort: 1
+Rank 505 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 505
+QMP m289,n768@nid05186 error: abort: 1
+QMP m457,n768@nid05265 error: abort: 1
+Rank 361 [Fri Nov  3 03:20:16 2017] [c3-3c0s2n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 361
+Rank 674 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 674
+QMP m603,n768@nid05300 error: abort: 1
+QMP m580,n768@nid05289 error: abort: 1
+Rank 231 [Fri Nov  3 03:20:16 2017] [c2-3c2s15n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 231
+QMP m313,n768@nid05187 error: abort: 1
+Rank 536 [Fri Nov  3 03:20:16 2017] [c3-3c1s5n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 536
+Rank 433 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 433
+QMP m389,n768@nid05212 error: abort: 1
+Rank 196 [Fri Nov  3 03:20:16 2017] [c2-3c2s15n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 196
+QMP m180,n768@nid05181 error: abort: 1
+QMP m743,n768@nid05305 error: abort: 1
+Rank 714 [Fri Nov  3 03:20:16 2017] [c3-3c1s14n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 714
+QMP m110,n768@nid05150 error: abort: 1
+Rank 629 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 629
+QMP m75,n768@nid05149 error: abort: 1
+QMP m123,n768@nid05178 error: abort: 1
+Rank 492 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 492
+Rank 32 [Fri Nov  3 03:20:16 2017] [c2-3c0s1n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 32
+QMP m555,n768@nid05272 error: abort: 1
+Rank 510 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 510
+QMP m290,n768@nid05186 error: abort: 1
+QMP m458,n768@nid05265 error: abort: 1
+Rank 362 [Fri Nov  3 03:20:16 2017] [c3-3c0s2n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 362
+Rank 675 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 675
+QMP m604,n768@nid05300 error: abort: 1
+QMP m581,n768@nid05289 error: abort: 1
+Rank 233 [Fri Nov  3 03:20:16 2017] [c2-3c2s15n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 233
+QMP m314,n768@nid05187 error: abort: 1
+QMP m660,n768@nid05302 error: abort: 1
+Rank 537 [Fri Nov  3 03:20:16 2017] [c3-3c1s5n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 537
+QMP m429,n768@nid05213 error: abort: 1
+Rank 435 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 435
+QMP m390,n768@nid05212 error: abort: 1
+Rank 197 [Fri Nov  3 03:20:16 2017] [c2-3c2s15n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 197
+QMP m720,n768@nid05305 error: abort: 1
+Rank 715 [Fri Nov  3 03:20:16 2017] [c3-3c1s14n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 715
+Rank 630 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 630
+QMP m76,n768@nid05149 error: abort: 1
+QMP m124,n768@nid05178 error: abort: 1
+Rank 493 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 493
+QMP m277,n768@nid05185 error: abort: 1
+Rank 33 [Fri Nov  3 03:20:16 2017] [c2-3c0s1n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 33
+QMP m556,n768@nid05272 error: abort: 1
+Rank 513 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 513
+QMP m291,n768@nid05186 error: abort: 1
+QMP m459,n768@nid05265 error: abort: 1
+Rank 366 [Fri Nov  3 03:20:16 2017] [c3-3c0s2n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 366
+Rank 678 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 678
+QMP m605,n768@nid05300 error: abort: 1
+QMP m582,n768@nid05289 error: abort: 1
+Rank 234 [Fri Nov  3 03:20:16 2017] [c2-3c2s15n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 234
+QMP m315,n768@nid05187 error: abort: 1
+Rank 538 [Fri Nov  3 03:20:16 2017] [c3-3c1s5n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 538
+Rank 437 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 437
+QMP m391,n768@nid05212 error: abort: 1
+Rank 198 [Fri Nov  3 03:20:16 2017] [c2-3c2s15n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 198
+QMP m181,n768@nid05181 error: abort: 1
+QMP m721,n768@nid05305 error: abort: 1
+Rank 716 [Fri Nov  3 03:20:16 2017] [c3-3c1s14n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 716
+QMP m111,n768@nid05150 error: abort: 1
+Rank 633 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 633
+QMP m77,n768@nid05149 error: abort: 1
+QMP m125,n768@nid05178 error: abort: 1
+Rank 494 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 494
+Rank 35 [Fri Nov  3 03:20:16 2017] [c2-3c0s1n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 35
+QMP m557,n768@nid05272 error: abort: 1
+Rank 514 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 514
+QMP m292,n768@nid05186 error: abort: 1
+QMP m460,n768@nid05265 error: abort: 1
+Rank 367 [Fri Nov  3 03:20:16 2017] [c3-3c0s2n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 367
+Rank 679 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 679
+QMP m606,n768@nid05300 error: abort: 1
+QMP m583,n768@nid05289 error: abort: 1
+Rank 239 [Fri Nov  3 03:20:16 2017] [c2-3c2s15n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 239
+QMP m316,n768@nid05187 error: abort: 1
+QMP m661,n768@nid05302 error: abort: 1
+Rank 539 [Fri Nov  3 03:20:16 2017] [c3-3c1s5n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 539
+QMP m430,n768@nid05213 error: abort: 1
+Rank 439 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 439
+QMP m392,n768@nid05212 error: abort: 1
+Rank 199 [Fri Nov  3 03:20:16 2017] [c2-3c2s15n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 199
+QMP m182,n768@nid05181 error: abort: 1
+QMP m722,n768@nid05305 error: abort: 1
+Rank 717 [Fri Nov  3 03:20:16 2017] [c3-3c1s14n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 717
+Rank 635 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 635
+QMP m78,n768@nid05149 error: abort: 1
+QMP m126,n768@nid05178 error: abort: 1
+Rank 495 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 495
+QMP m278,n768@nid05185 error: abort: 1
+Rank 36 [Fri Nov  3 03:20:16 2017] [c2-3c0s1n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 36
+QMP m558,n768@nid05272 error: abort: 1
+Rank 518 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 518
+QMP m293,n768@nid05186 error: abort: 1
+QMP m461,n768@nid05265 error: abort: 1
+Rank 368 [Fri Nov  3 03:20:16 2017] [c3-3c0s2n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 368
+Rank 683 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 683
+QMP m584,n768@nid05289 error: abort: 1
+Rank 219 [Fri Nov  3 03:20:16 2017] [c2-3c2s15n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 219
+QMP m317,n768@nid05187 error: abort: 1
+QMP m662,n768@nid05302 error: abort: 1
+Rank 540 [Fri Nov  3 03:20:16 2017] [c3-3c1s5n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 540
+Rank 441 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 441
+QMP m393,n768@nid05212 error: abort: 1
+Rank 202 [Fri Nov  3 03:20:16 2017] [c2-3c2s15n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 202
+QMP m723,n768@nid05305 error: abort: 1
+Rank 718 [Fri Nov  3 03:20:16 2017] [c3-3c1s14n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 718
+QMP m112,n768@nid05150 error: abort: 1
+Rank 638 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 638
+QMP m79,n768@nid05149 error: abort: 1
+QMP m127,n768@nid05178 error: abort: 1
+Rank 496 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 496
+Rank 38 [Fri Nov  3 03:20:16 2017] [c2-3c0s1n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 38
+QMP m559,n768@nid05272 error: abort: 1
+Rank 519 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 519
+QMP m294,n768@nid05186 error: abort: 1
+QMP m462,n768@nid05265 error: abort: 1
+Rank 369 [Fri Nov  3 03:20:16 2017] [c3-3c0s2n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 369
+Rank 685 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 685
+QMP m607,n768@nid05300 error: abort: 1
+QMP m585,n768@nid05289 error: abort: 1
+Rank 221 [Fri Nov  3 03:20:16 2017] [c2-3c2s15n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 221
+QMP m318,n768@nid05187 error: abort: 1
+Rank 541 [Fri Nov  3 03:20:16 2017] [c3-3c1s5n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 541
+QMP m431,n768@nid05213 error: abort: 1
+Rank 442 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 442
+QMP m394,n768@nid05212 error: abort: 1
+Rank 203 [Fri Nov  3 03:20:16 2017] [c2-3c2s15n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 203
+QMP m183,n768@nid05181 error: abort: 1
+QMP m724,n768@nid05305 error: abort: 1
+Rank 719 [Fri Nov  3 03:20:16 2017] [c3-3c1s14n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 719
+Rank 639 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 639
+QMP m80,n768@nid05149 error: abort: 1
+QMP m128,n768@nid05178 error: abort: 1
+Rank 497 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 497
+QMP m279,n768@nid05185 error: abort: 1
+Rank 39 [Fri Nov  3 03:20:16 2017] [c2-3c0s1n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 39
+QMP m560,n768@nid05272 error: abort: 1
+Rank 520 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 520
+QMP m295,n768@nid05186 error: abort: 1
+QMP m463,n768@nid05265 error: abort: 1
+Rank 371 [Fri Nov  3 03:20:16 2017] [c3-3c0s2n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 371
+Rank 686 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 686
+QMP m608,n768@nid05300 error: abort: 1
+QMP m586,n768@nid05289 error: abort: 1
+Rank 225 [Fri Nov  3 03:20:16 2017] [c2-3c2s15n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 225
+QMP m319,n768@nid05187 error: abort: 1
+QMP m663,n768@nid05302 error: abort: 1
+Rank 543 [Fri Nov  3 03:20:16 2017] [c3-3c1s5n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 543
+QMP m408,n768@nid05213 error: abort: 1
+Rank 443 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 443
+QMP m395,n768@nid05212 error: abort: 1
+Rank 206 [Fri Nov  3 03:20:16 2017] [c2-3c2s15n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 206
+QMP m184,n768@nid05181 error: abort: 1
+QMP m725,n768@nid05305 error: abort: 1
+Rank 696 [Fri Nov  3 03:20:16 2017] [c3-3c1s14n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 696
+QMP m113,n768@nid05150 error: abort: 1
+Rank 640 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 640
+QMP m81,n768@nid05149 error: abort: 1
+QMP m129,n768@nid05178 error: abort: 1
+Rank 498 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 498
+Rank 40 [Fri Nov  3 03:20:16 2017] [c2-3c0s1n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 40
+QMP m561,n768@nid05272 error: abort: 1
+Rank 521 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 521
+QMP m296,n768@nid05186 error: abort: 1
+QMP m464,n768@nid05265 error: abort: 1
+Rank 377 [Fri Nov  3 03:20:16 2017] [c3-3c0s2n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 377
+Rank 687 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 687
+QMP m609,n768@nid05300 error: abort: 1
+QMP m587,n768@nid05289 error: abort: 1
+Rank 228 [Fri Nov  3 03:20:16 2017] [c2-3c2s15n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 228
+QMP m320,n768@nid05187 error: abort: 1
+Rank 547 [Fri Nov  3 03:20:16 2017] [c3-3c1s5n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 547
+QMP m409,n768@nid05213 error: abort: 1
+Rank 445 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 445
+QMP m396,n768@nid05212 error: abort: 1
+Rank 207 [Fri Nov  3 03:20:16 2017] [c2-3c2s15n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 207
+QMP m726,n768@nid05305 error: abort: 1
+Rank 701 [Fri Nov  3 03:20:16 2017] [c3-3c1s14n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 701
+Rank 641 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 641
+QMP m82,n768@nid05149 error: abort: 1
+QMP m130,n768@nid05178 error: abort: 1
+Rank 500 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 500
+QMP m280,n768@nid05185 error: abort: 1
+Rank 41 [Fri Nov  3 03:20:16 2017] [c2-3c0s1n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 41
+QMP m562,n768@nid05272 error: abort: 1
+Rank 522 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 522
+QMP m297,n768@nid05186 error: abort: 1
+QMP m465,n768@nid05265 error: abort: 1
+Rank 379 [Fri Nov  3 03:20:16 2017] [c3-3c0s2n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 379
+Rank 690 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 690
+QMP m610,n768@nid05300 error: abort: 1
+QMP m588,n768@nid05289 error: abort: 1
+Rank 232 [Fri Nov  3 03:20:16 2017] [c2-3c2s15n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 232
+QMP m321,n768@nid05187 error: abort: 1
+QMP m664,n768@nid05302 error: abort: 1
+Rank 548 [Fri Nov  3 03:20:16 2017] [c3-3c1s5n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 548
+QMP m410,n768@nid05213 error: abort: 1
+Rank 447 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 447
+QMP m397,n768@nid05212 error: abort: 1
+Rank 211 [Fri Nov  3 03:20:16 2017] [c2-3c2s15n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 211
+QMP m185,n768@nid05181 error: abort: 1
+QMP m727,n768@nid05305 error: abort: 1
+Rank 704 [Fri Nov  3 03:20:16 2017] [c3-3c1s14n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 704
+QMP m114,n768@nid05150 error: abort: 1
+Rank 642 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 642
+QMP m83,n768@nid05149 error: abort: 1
+QMP m131,n768@nid05178 error: abort: 1
+Rank 501 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 501
+Rank 43 [Fri Nov  3 03:20:16 2017] [c2-3c0s1n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 43
+Rank 525 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 525
+QMP m298,n768@nid05186 error: abort: 1
+QMP m466,n768@nid05265 error: abort: 1
+Rank 381 [Fri Nov  3 03:20:16 2017] [c3-3c0s2n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 381
+Rank 691 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 691
+QMP m589,n768@nid05289 error: abort: 1
+Rank 235 [Fri Nov  3 03:20:16 2017] [c2-3c2s15n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 235
+QMP m323,n768@nid05187 error: abort: 1
+Rank 549 [Fri Nov  3 03:20:16 2017] [c3-3c1s5n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 549
+QMP m411,n768@nid05213 error: abort: 1
+Rank 449 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 449
+QMP m398,n768@nid05212 error: abort: 1
+Rank 213 [Fri Nov  3 03:20:16 2017] [c2-3c2s15n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 213
+QMP m728,n768@nid05305 error: abort: 1
+Rank 706 [Fri Nov  3 03:20:16 2017] [c3-3c1s14n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 706
+Rank 643 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 643
+QMP m84,n768@nid05149 error: abort: 1
+QMP m132,n768@nid05178 error: abort: 1
+Rank 502 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 502
+QMP m281,n768@nid05185 error: abort: 1
+Rank 44 [Fri Nov  3 03:20:16 2017] [c2-3c0s1n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 44
+QMP m563,n768@nid05272 error: abort: 1
+Rank 526 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 526
+QMP m299,n768@nid05186 error: abort: 1
+QMP m467,n768@nid05265 error: abort: 1
+Rank 382 [Fri Nov  3 03:20:16 2017] [c3-3c0s2n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 382
+Rank 692 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 692
+QMP m611,n768@nid05300 error: abort: 1
+QMP m590,n768@nid05289 error: abort: 1
+Rank 237 [Fri Nov  3 03:20:16 2017] [c2-3c2s15n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 237
+QMP m665,n768@nid05302 error: abort: 1
+Rank 550 [Fri Nov  3 03:20:16 2017] [c3-3c1s5n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 550
+QMP m412,n768@nid05213 error: abort: 1
+Rank 451 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 451
+QMP m399,n768@nid05212 error: abort: 1
+Rank 214 [Fri Nov  3 03:20:16 2017] [c2-3c2s15n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 214
+QMP m186,n768@nid05181 error: abort: 1
+QMP m729,n768@nid05305 error: abort: 1
+Rank 711 [Fri Nov  3 03:20:16 2017] [c3-3c1s14n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 711
+QMP m115,n768@nid05150 error: abort: 1
+Rank 645 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 645
+QMP m85,n768@nid05149 error: abort: 1
+QMP m133,n768@nid05178 error: abort: 1
+Rank 46 [Fri Nov  3 03:20:16 2017] [c2-3c0s1n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 46
+QMP m564,n768@nid05272 error: abort: 1
+Rank 527 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 527
+QMP m300,n768@nid05186 error: abort: 1
+QMP m468,n768@nid05265 error: abort: 1
+QMP m591,n768@nid05289 error: abort: 1
+QMP m325,n768@nid05187 error: abort: 1
+QMP m415,n768@nid05213 error: abort: 1
+Rank 453 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 453
+QMP m400,n768@nid05212 error: abort: 1
+QMP m730,n768@nid05305 error: abort: 1
+QMP m86,n768@nid05149 error: abort: 1
+QMP m135,n768@nid05178 error: abort: 1
+QMP m282,n768@nid05185 error: abort: 1
+QMP m565,n768@nid05272 error: abort: 1
+QMP m301,n768@nid05186 error: abort: 1
+QMP m469,n768@nid05265 error: abort: 1
+QMP m613,n768@nid05300 error: abort: 1
+QMP m592,n768@nid05289 error: abort: 1
+QMP m327,n768@nid05187 error: abort: 1
+QMP m667,n768@nid05302 error: abort: 1
+QMP m416,n768@nid05213 error: abort: 1
+QMP m401,n768@nid05212 error: abort: 1
+QMP m187,n768@nid05181 error: abort: 1
+QMP m731,n768@nid05305 error: abort: 1
+QMP m116,n768@nid05150 error: abort: 1
+QMP m88,n768@nid05149 error: abort: 1
+QMP m137,n768@nid05178 error: abort: 1
+QMP m568,n768@nid05272 error: abort: 1
+QMP m302,n768@nid05186 error: abort: 1
+QMP m470,n768@nid05265 error: abort: 1
+QMP m593,n768@nid05289 error: abort: 1
+QMP m328,n768@nid05187 error: abort: 1
+QMP m417,n768@nid05213 error: abort: 1
+QMP m402,n768@nid05212 error: abort: 1
+QMP m732,n768@nid05305 error: abort: 1
+QMP m89,n768@nid05149 error: abort: 1
+QMP m138,n768@nid05178 error: abort: 1
+QMP m283,n768@nid05185 error: abort: 1
+QMP m571,n768@nid05272 error: abort: 1
+QMP m303,n768@nid05186 error: abort: 1
+QMP m471,n768@nid05265 error: abort: 1
+QMP m615,n768@nid05300 error: abort: 1
+QMP m595,n768@nid05289 error: abort: 1
+QMP m329,n768@nid05187 error: abort: 1
+QMP m668,n768@nid05302 error: abort: 1
+QMP m418,n768@nid05213 error: abort: 1
+QMP m403,n768@nid05212 error: abort: 1
+QMP m188,n768@nid05181 error: abort: 1
+QMP m734,n768@nid05305 error: abort: 1
+QMP m117,n768@nid05150 error: abort: 1
+QMP m91,n768@nid05149 error: abort: 1
+QMP m139,n768@nid05178 error: abort: 1
+QMP m572,n768@nid05272 error: abort: 1
+QMP m304,n768@nid05186 error: abort: 1
+QMP m473,n768@nid05265 error: abort: 1
+QMP m596,n768@nid05289 error: abort: 1
+QMP m331,n768@nid05187 error: abort: 1
+QMP m419,n768@nid05213 error: abort: 1
+QMP m404,n768@nid05212 error: abort: 1
+QMP m735,n768@nid05305 error: abort: 1
+QMP m92,n768@nid05149 error: abort: 1
+QMP m140,n768@nid05178 error: abort: 1
+QMP m284,n768@nid05185 error: abort: 1
+QMP m573,n768@nid05272 error: abort: 1
+QMP m305,n768@nid05186 error: abort: 1
+QMP m475,n768@nid05265 error: abort: 1
+QMP m617,n768@nid05300 error: abort: 1
+QMP m597,n768@nid05289 error: abort: 1
+QMP m333,n768@nid05187 error: abort: 1
+QMP m669,n768@nid05302 error: abort: 1
+QMP m423,n768@nid05213 error: abort: 1
+QMP m405,n768@nid05212 error: abort: 1
+QMP m189,n768@nid05181 error: abort: 1
+QMP m736,n768@nid05305 error: abort: 1
+QMP m118,n768@nid05150 error: abort: 1
+QMP m93,n768@nid05149 error: abort: 1
+QMP m142,n768@nid05178 error: abort: 1
+QMP m574,n768@nid05272 error: abort: 1
+QMP m307,n768@nid05186 error: abort: 1
+QMP m477,n768@nid05265 error: abort: 1
+QMP m598,n768@nid05289 error: abort: 1
+QMP m334,n768@nid05187 error: abort: 1
+QMP m425,n768@nid05213 error: abort: 1
+QMP m406,n768@nid05212 error: abort: 1
+QMP m738,n768@nid05305 error: abort: 1
+QMP m94,n768@nid05149 error: abort: 1
+QMP m143,n768@nid05178 error: abort: 1
+QMP m286,n768@nid05185 error: abort: 1
+QMP m575,n768@nid05272 error: abort: 1
+QMP m311,n768@nid05186 error: abort: 1
+QMP m478,n768@nid05265 error: abort: 1
+QMP m621,n768@nid05300 error: abort: 1
+QMP m599,n768@nid05289 error: abort: 1
+QMP m335,n768@nid05187 error: abort: 1
+QMP m670,n768@nid05302 error: abort: 1
+QMP m426,n768@nid05213 error: abort: 1
+QMP m407,n768@nid05212 error: abort: 1
+QMP m190,n768@nid05181 error: abort: 1
+QMP m741,n768@nid05305 error: abort: 1
+QMP m119,n768@nid05150 error: abort: 1
+QMP m95,n768@nid05149 error: abort: 1
+Rank 126 [Fri Nov  3 03:20:16 2017] [c2-3c2s14n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 126
+Rank 266 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 266
+Rank 554 [Fri Nov  3 03:20:16 2017] [c3-3c1s6n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 554
+Rank 302 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 302
+Rank 460 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 460
+Rank 600 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 600
+Rank 594 [Fri Nov  3 03:20:16 2017] [c3-3c1s10n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 594
+Rank 314 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 314
+Rank 658 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 658
+Rank 422 [Fri Nov  3 03:20:16 2017] [c3-3c0s7n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 422
+Rank 386 [Fri Nov  3 03:20:16 2017] [c3-3c0s7n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 386
+Rank 168 [Fri Nov  3 03:20:16 2017] [c2-3c2s15n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 168
+Rank 732 [Fri Nov  3 03:20:16 2017] [c3-3c1s14n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 732
+Rank 108 [Fri Nov  3 03:20:16 2017] [c2-3c2s7n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 108
+Rank 72 [Fri Nov  3 03:20:16 2017] [c2-3c2s7n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 72
+Rank 140 [Fri Nov  3 03:20:16 2017] [c2-3c2s14n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 140
+Rank 268 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 268
+Rank 556 [Fri Nov  3 03:20:16 2017] [c3-3c1s6n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 556
+Rank 308 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 308
+Rank 470 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 470
+Rank 602 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 602
+Rank 598 [Fri Nov  3 03:20:16 2017] [c3-3c1s10n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 598
+Rank 330 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 330
+Rank 660 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 660
+Rank 408 [Fri Nov  3 03:20:16 2017] [c3-3c0s7n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 408
+Rank 388 [Fri Nov  3 03:20:16 2017] [c3-3c0s7n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 388
+Rank 172 [Fri Nov  3 03:20:16 2017] [c2-3c2s15n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 172
+Rank 740 [Fri Nov  3 03:20:16 2017] [c3-3c1s14n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 740
+Rank 114 [Fri Nov  3 03:20:16 2017] [c2-3c2s7n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 114
+Rank 74 [Fri Nov  3 03:20:16 2017] [c2-3c2s7n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 74
+Rank 142 [Fri Nov  3 03:20:16 2017] [c2-3c2s14n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 142
+Rank 270 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 270
+Rank 557 [Fri Nov  3 03:20:16 2017] [c3-3c1s6n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 557
+Rank 311 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 311
+Rank 474 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 474
+Rank 601 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 601
+Rank 576 [Fri Nov  3 03:20:16 2017] [c3-3c1s10n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 576
+Rank 332 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 332
+Rank 666 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 666
+Rank 409 [Fri Nov  3 03:20:16 2017] [c3-3c0s7n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 409
+Rank 399 [Fri Nov  3 03:20:16 2017] [c3-3c0s7n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 399
+Rank 180 [Fri Nov  3 03:20:16 2017] [c2-3c2s15n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 180
+Rank 741 [Fri Nov  3 03:20:16 2017] [c3-3c1s14n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 741
+Rank 116 [Fri Nov  3 03:20:16 2017] [c2-3c2s7n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 116
+Rank 75 [Fri Nov  3 03:20:16 2017] [c2-3c2s7n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 75
+Rank 143 [Fri Nov  3 03:20:16 2017] [c2-3c2s14n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 143
+Rank 282 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 282
+Rank 558 [Fri Nov  3 03:20:16 2017] [c3-3c1s6n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 558
+Rank 288 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 288
+Rank 456 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 456
+Rank 603 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 603
+Rank 579 [Fri Nov  3 03:20:16 2017] [c3-3c1s10n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 579
+Rank 333 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 333
+Rank 648 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 648
+Rank 410 [Fri Nov  3 03:20:16 2017] [c3-3c0s7n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 410
+Rank 384 [Fri Nov  3 03:20:16 2017] [c3-3c0s7n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 384
+Rank 169 [Fri Nov  3 03:20:16 2017] [c2-3c2s15n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 169
+Rank 743 [Fri Nov  3 03:20:16 2017] [c3-3c1s14n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 743
+Rank 97 [Fri Nov  3 03:20:16 2017] [c2-3c2s7n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 97
+Rank 77 [Fri Nov  3 03:20:16 2017] [c2-3c2s7n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 77
+Rank 120 [Fri Nov  3 03:20:16 2017] [c2-3c2s14n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 120
+Rank 265 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 265
+Rank 564 [Fri Nov  3 03:20:16 2017] [c3-3c1s6n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 564
+Rank 289 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 289
+Rank 458 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 458
+Rank 604 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 604
+Rank 580 [Fri Nov  3 03:20:16 2017] [c3-3c1s10n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 580
+Rank 335 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 335
+Rank 650 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 650
+Rank 417 [Fri Nov  3 03:20:16 2017] [c3-3c0s7n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 417
+Rank 387 [Fri Nov  3 03:20:16 2017] [c3-3c0s7n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 387
+Rank 170 [Fri Nov  3 03:20:16 2017] [c2-3c2s15n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 170
+Rank 720 [Fri Nov  3 03:20:16 2017] [c3-3c1s14n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 720
+Rank 99 [Fri Nov  3 03:20:16 2017] [c2-3c2s7n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 99
+Rank 79 [Fri Nov  3 03:20:16 2017] [c2-3c2s7n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 79
+Rank 121 [Fri Nov  3 03:20:16 2017] [c2-3c2s14n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 121
+Rank 267 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 267
+Rank 552 [Fri Nov  3 03:20:16 2017] [c3-3c1s6n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 552
+Rank 290 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 290
+Rank 463 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 463
+Rank 605 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 605
+Rank 584 [Fri Nov  3 03:20:16 2017] [c3-3c1s10n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 584
+Rank 312 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 312
+Rank 651 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 651
+Rank 419 [Fri Nov  3 03:20:16 2017] [c3-3c0s7n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 419
+Rank 391 [Fri Nov  3 03:20:16 2017] [c3-3c0s7n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 391
+Rank 171 [Fri Nov  3 03:20:16 2017] [c2-3c2s15n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 171
+Rank 721 [Fri Nov  3 03:20:16 2017] [c3-3c1s14n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 721
+Rank 102 [Fri Nov  3 03:20:16 2017] [c2-3c2s7n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 102
+Rank 81 [Fri Nov  3 03:20:16 2017] [c2-3c2s7n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 81
+Rank 122 [Fri Nov  3 03:20:16 2017] [c2-3c2s14n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 122
+Rank 269 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 269
+Rank 553 [Fri Nov  3 03:20:16 2017] [c3-3c1s6n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 553
+Rank 291 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 291
+Rank 468 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 468
+Rank 606 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 606
+Rank 587 [Fri Nov  3 03:20:16 2017] [c3-3c1s10n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 587
+Rank 313 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 313
+Rank 652 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 652
+Rank 425 [Fri Nov  3 03:20:16 2017] [c3-3c0s7n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 425
+Rank 392 [Fri Nov  3 03:20:16 2017] [c3-3c0s7n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 392
+Rank 174 [Fri Nov  3 03:20:16 2017] [c2-3c2s15n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 174
+Rank 722 [Fri Nov  3 03:20:16 2017] [c3-3c1s14n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 722
+Rank 103 [Fri Nov  3 03:20:16 2017] [c2-3c2s7n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 103
+Rank 82 [Fri Nov  3 03:20:16 2017] [c2-3c2s7n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 82
+Rank 123 [Fri Nov  3 03:20:16 2017] [c2-3c2s14n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 123
+Rank 272 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 272
+Rank 555 [Fri Nov  3 03:20:16 2017] [c3-3c1s6n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 555
+Rank 292 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 292
+Rank 471 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 471
+Rank 607 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 607
+Rank 588 [Fri Nov  3 03:20:16 2017] [c3-3c1s10n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 588
+Rank 315 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 315
+Rank 655 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 655
+Rank 429 [Fri Nov  3 03:20:16 2017] [c3-3c0s7n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 429
+Rank 393 [Fri Nov  3 03:20:16 2017] [c3-3c0s7n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 393
+Rank 175 [Fri Nov  3 03:20:16 2017] [c2-3c2s15n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 175
+Rank 725 [Fri Nov  3 03:20:16 2017] [c3-3c1s14n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 725
+Rank 104 [Fri Nov  3 03:20:16 2017] [c2-3c2s7n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 104
+Rank 84 [Fri Nov  3 03:20:16 2017] [c2-3c2s7n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 84
+Rank 127 [Fri Nov  3 03:20:16 2017] [c2-3c2s14n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 127
+Rank 273 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 273
+Rank 559 [Fri Nov  3 03:20:16 2017] [c3-3c1s6n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 559
+Rank 293 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 293
+Rank 472 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 472
+Rank 608 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 608
+Rank 589 [Fri Nov  3 03:20:16 2017] [c3-3c1s10n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 589
+Rank 316 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 316
+Rank 656 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 656
+Rank 411 [Fri Nov  3 03:20:16 2017] [c3-3c0s7n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 411
+Rank 395 [Fri Nov  3 03:20:16 2017] [c3-3c0s7n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 395
+Rank 177 [Fri Nov  3 03:20:16 2017] [c2-3c2s15n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 177
+Rank 726 [Fri Nov  3 03:20:16 2017] [c3-3c1s14n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 726
+Rank 106 [Fri Nov  3 03:20:16 2017] [c2-3c2s7n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 106
+Rank 91 [Fri Nov  3 03:20:16 2017] [c2-3c2s7n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 91
+Rank 128 [Fri Nov  3 03:20:16 2017] [c2-3c2s14n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 128
+Rank 274 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 274
+Rank 560 [Fri Nov  3 03:20:16 2017] [c3-3c1s6n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 560
+Rank 294 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 294
+Rank 473 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 473
+Rank 609 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 609
+Rank 595 [Fri Nov  3 03:20:16 2017] [c3-3c1s10n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 595
+Rank 317 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 317
+Rank 667 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 667
+Rank 412 [Fri Nov  3 03:20:16 2017] [c3-3c0s7n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 412
+Rank 396 [Fri Nov  3 03:20:16 2017] [c3-3c0s7n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 396
+Rank 178 [Fri Nov  3 03:20:16 2017] [c2-3c2s15n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 178
+Rank 728 [Fri Nov  3 03:20:16 2017] [c3-3c1s14n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 728
+Rank 107 [Fri Nov  3 03:20:16 2017] [c2-3c2s7n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 107
+Rank 93 [Fri Nov  3 03:20:16 2017] [c2-3c2s7n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 93
+Rank 129 [Fri Nov  3 03:20:16 2017] [c2-3c2s14n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 129
+Rank 276 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 276
+Rank 561 [Fri Nov  3 03:20:16 2017] [c3-3c1s6n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 561
+Rank 295 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 295
+Rank 476 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 476
+Rank 610 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 610
+Rank 596 [Fri Nov  3 03:20:16 2017] [c3-3c1s10n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 596
+Rank 318 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 318
+Rank 668 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 668
+Rank 413 [Fri Nov  3 03:20:16 2017] [c3-3c0s7n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 413
+Rank 397 [Fri Nov  3 03:20:16 2017] [c3-3c0s7n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 397
+Rank 181 [Fri Nov  3 03:20:16 2017] [c2-3c2s15n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 181
+Rank 729 [Fri Nov  3 03:20:16 2017] [c3-3c1s14n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 729
+Rank 110 [Fri Nov  3 03:20:16 2017] [c2-3c2s7n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 110
+Rank 95 [Fri Nov  3 03:20:16 2017] [c2-3c2s7n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 95
+Rank 131 [Fri Nov  3 03:20:16 2017] [c2-3c2s14n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 131
+Rank 277 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 277
+Rank 562 [Fri Nov  3 03:20:16 2017] [c3-3c1s6n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 562
+Rank 296 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 296
+Rank 477 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 477
+Rank 611 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 611
+Rank 599 [Fri Nov  3 03:20:16 2017] [c3-3c1s10n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 599
+Rank 319 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 319
+Rank 670 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 670
+Rank 414 [Fri Nov  3 03:20:16 2017] [c3-3c0s7n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 414
+Rank 400 [Fri Nov  3 03:20:16 2017] [c3-3c0s7n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 400
+Rank 182 [Fri Nov  3 03:20:16 2017] [c2-3c2s15n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 182
+Rank 731 [Fri Nov  3 03:20:16 2017] [c3-3c1s14n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 731
+Rank 111 [Fri Nov  3 03:20:16 2017] [c2-3c2s7n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 111
+Rank 73 [Fri Nov  3 03:20:16 2017] [c2-3c2s7n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 73
+Rank 132 [Fri Nov  3 03:20:16 2017] [c2-3c2s14n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 132
+Rank 278 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 278
+Rank 563 [Fri Nov  3 03:20:16 2017] [c3-3c1s6n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 563
+Rank 297 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 297
+Rank 457 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 457
+Rank 612 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 612
+Rank 577 [Fri Nov  3 03:20:16 2017] [c3-3c1s10n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 577
+Rank 320 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 320
+Rank 671 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 671
+Rank 415 [Fri Nov  3 03:20:16 2017] [c3-3c0s7n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 415
+Rank 402 [Fri Nov  3 03:20:16 2017] [c3-3c0s7n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 402
+Rank 184 [Fri Nov  3 03:20:16 2017] [c2-3c2s15n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 184
+Rank 733 [Fri Nov  3 03:20:16 2017] [c3-3c1s14n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 733
+Rank 112 [Fri Nov  3 03:20:16 2017] [c2-3c2s7n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 112
+Rank 76 [Fri Nov  3 03:20:16 2017] [c2-3c2s7n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 76
+Rank 134 [Fri Nov  3 03:20:16 2017] [c2-3c2s14n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 134
+Rank 279 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 279
+Rank 565 [Fri Nov  3 03:20:16 2017] [c3-3c1s6n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 565
+Rank 298 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 298
+Rank 459 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 459
+Rank 613 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 613
+Rank 578 [Fri Nov  3 03:20:16 2017] [c3-3c1s10n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 578
+Rank 321 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 321
+Rank 649 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 649
+Rank 416 [Fri Nov  3 03:20:16 2017] [c3-3c0s7n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 416
+Rank 404 [Fri Nov  3 03:20:16 2017] [c3-3c0s7n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 404
+Rank 185 [Fri Nov  3 03:20:16 2017] [c2-3c2s15n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 185
+Rank 735 [Fri Nov  3 03:20:16 2017] [c3-3c1s14n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 735
+Rank 113 [Fri Nov  3 03:20:16 2017] [c2-3c2s7n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 113
+Rank 78 [Fri Nov  3 03:20:16 2017] [c2-3c2s7n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 78
+Rank 135 [Fri Nov  3 03:20:16 2017] [c2-3c2s14n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 135
+Rank 280 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 280
+Rank 566 [Fri Nov  3 03:20:16 2017] [c3-3c1s6n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 566
+Rank 299 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 299
+Rank 461 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 461
+Rank 614 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 614
+Rank 581 [Fri Nov  3 03:20:16 2017] [c3-3c1s10n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 581
+Rank 322 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 322
+Rank 653 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 653
+Rank 418 [Fri Nov  3 03:20:16 2017] [c3-3c0s7n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 418
+Rank 385 [Fri Nov  3 03:20:16 2017] [c3-3c0s7n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 385
+Rank 186 [Fri Nov  3 03:20:16 2017] [c2-3c2s15n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 186
+Rank 736 [Fri Nov  3 03:20:16 2017] [c3-3c1s14n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 736
+Rank 115 [Fri Nov  3 03:20:16 2017] [c2-3c2s7n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 115
+Rank 80 [Fri Nov  3 03:20:16 2017] [c2-3c2s7n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 80
+Rank 136 [Fri Nov  3 03:20:16 2017] [c2-3c2s14n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 136
+Rank 281 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 281
+Rank 567 [Fri Nov  3 03:20:16 2017] [c3-3c1s6n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 567
+Rank 300 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 300
+Rank 462 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 462
+Rank 615 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 615
+Rank 582 [Fri Nov  3 03:20:16 2017] [c3-3c1s10n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 582
+Rank 323 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 323
+Rank 654 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 654
+Rank 420 [Fri Nov  3 03:20:16 2017] [c3-3c0s7n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 420
+Rank 389 [Fri Nov  3 03:20:16 2017] [c3-3c0s7n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 389
+Rank 187 [Fri Nov  3 03:20:16 2017] [c2-3c2s15n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 187
+Rank 737 [Fri Nov  3 03:20:16 2017] [c3-3c1s14n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 737
+Rank 117 [Fri Nov  3 03:20:16 2017] [c2-3c2s7n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 117
+Rank 83 [Fri Nov  3 03:20:16 2017] [c2-3c2s7n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 83
+Rank 137 [Fri Nov  3 03:20:16 2017] [c2-3c2s14n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 137
+Rank 283 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 283
+Rank 568 [Fri Nov  3 03:20:16 2017] [c3-3c1s6n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 568
+Rank 301 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 301
+Rank 464 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 464
+Rank 616 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 616
+Rank 583 [Fri Nov  3 03:20:16 2017] [c3-3c1s10n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 583
+Rank 324 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 324
+Rank 657 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 657
+Rank 421 [Fri Nov  3 03:20:16 2017] [c3-3c0s7n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 421
+Rank 390 [Fri Nov  3 03:20:16 2017] [c3-3c0s7n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 390
+Rank 188 [Fri Nov  3 03:20:16 2017] [c2-3c2s15n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 188
+Rank 738 [Fri Nov  3 03:20:16 2017] [c3-3c1s14n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 738
+Rank 118 [Fri Nov  3 03:20:16 2017] [c2-3c2s7n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 118
+Rank 85 [Fri Nov  3 03:20:16 2017] [c2-3c2s7n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 85
+Rank 138 [Fri Nov  3 03:20:16 2017] [c2-3c2s14n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 138
+Rank 284 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 284
+Rank 569 [Fri Nov  3 03:20:16 2017] [c3-3c1s6n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 569
+Rank 303 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 303
+Rank 465 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 465
+Rank 617 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 617
+Rank 585 [Fri Nov  3 03:20:16 2017] [c3-3c1s10n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 585
+Rank 325 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 325
+Rank 659 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 659
+Rank 423 [Fri Nov  3 03:20:16 2017] [c3-3c0s7n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 423
+Rank 394 [Fri Nov  3 03:20:16 2017] [c3-3c0s7n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 394
+Rank 189 [Fri Nov  3 03:20:16 2017] [c2-3c2s15n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 189
+Rank 739 [Fri Nov  3 03:20:16 2017] [c3-3c1s14n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 739
+Rank 119 [Fri Nov  3 03:20:16 2017] [c2-3c2s7n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 119
+Rank 86 [Fri Nov  3 03:20:16 2017] [c2-3c2s7n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 86
+Rank 139 [Fri Nov  3 03:20:16 2017] [c2-3c2s14n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 139
+Rank 285 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 285
+Rank 570 [Fri Nov  3 03:20:16 2017] [c3-3c1s6n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 570
+Rank 304 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 304
+Rank 466 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 466
+Rank 618 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 618
+Rank 586 [Fri Nov  3 03:20:16 2017] [c3-3c1s10n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 586
+Rank 326 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 326
+Rank 661 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 661
+Rank 424 [Fri Nov  3 03:20:16 2017] [c3-3c0s7n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 424
+Rank 398 [Fri Nov  3 03:20:16 2017] [c3-3c0s7n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 398
+Rank 190 [Fri Nov  3 03:20:16 2017] [c2-3c2s15n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 190
+Rank 742 [Fri Nov  3 03:20:16 2017] [c3-3c1s14n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 742
+Rank 96 [Fri Nov  3 03:20:16 2017] [c2-3c2s7n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 96
+Rank 87 [Fri Nov  3 03:20:16 2017] [c2-3c2s7n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 87
+Rank 141 [Fri Nov  3 03:20:16 2017] [c2-3c2s14n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 141
+Rank 286 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 286
+Rank 571 [Fri Nov  3 03:20:16 2017] [c3-3c1s6n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 571
+Rank 305 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 305
+Rank 467 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 467
+Rank 619 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 619
+Rank 590 [Fri Nov  3 03:20:16 2017] [c3-3c1s10n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 590
+Rank 327 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 327
+Rank 662 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 662
+Rank 426 [Fri Nov  3 03:20:16 2017] [c3-3c0s7n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 426
+Rank 401 [Fri Nov  3 03:20:16 2017] [c3-3c0s7n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 401
+Rank 191 [Fri Nov  3 03:20:16 2017] [c2-3c2s15n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 191
+Rank 723 [Fri Nov  3 03:20:16 2017] [c3-3c1s14n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 723
+Rank 98 [Fri Nov  3 03:20:16 2017] [c2-3c2s7n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 98
+Rank 88 [Fri Nov  3 03:20:16 2017] [c2-3c2s7n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 88
+Rank 124 [Fri Nov  3 03:20:16 2017] [c2-3c2s14n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 124
+Rank 287 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 287
+Rank 572 [Fri Nov  3 03:20:16 2017] [c3-3c1s6n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 572
+Rank 306 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 306
+Rank 469 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 469
+Rank 620 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 620
+Rank 591 [Fri Nov  3 03:20:16 2017] [c3-3c1s10n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 591
+Rank 328 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 328
+Rank 663 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 663
+Rank 427 [Fri Nov  3 03:20:16 2017] [c3-3c0s7n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 427
+Rank 403 [Fri Nov  3 03:20:16 2017] [c3-3c0s7n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 403
+Rank 173 [Fri Nov  3 03:20:16 2017] [c2-3c2s15n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 173
+Rank 724 [Fri Nov  3 03:20:16 2017] [c3-3c1s14n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 724
+Rank 100 [Fri Nov  3 03:20:16 2017] [c2-3c2s7n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 100
+Rank 89 [Fri Nov  3 03:20:16 2017] [c2-3c2s7n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 89
+Rank 125 [Fri Nov  3 03:20:16 2017] [c2-3c2s14n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 125
+Rank 264 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 264
+Rank 573 [Fri Nov  3 03:20:16 2017] [c3-3c1s6n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 573
+Rank 307 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 307
+Rank 475 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 475
+Rank 621 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 621
+Rank 592 [Fri Nov  3 03:20:16 2017] [c3-3c1s10n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 592
+Rank 329 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 329
+Rank 664 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 664
+Rank 428 [Fri Nov  3 03:20:16 2017] [c3-3c0s7n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 428
+Rank 405 [Fri Nov  3 03:20:16 2017] [c3-3c0s7n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 405
+Rank 176 [Fri Nov  3 03:20:16 2017] [c2-3c2s15n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 176
+Rank 727 [Fri Nov  3 03:20:16 2017] [c3-3c1s14n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 727
+Rank 101 [Fri Nov  3 03:20:16 2017] [c2-3c2s7n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 101
+Rank 90 [Fri Nov  3 03:20:16 2017] [c2-3c2s7n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 90
+Rank 130 [Fri Nov  3 03:20:16 2017] [c2-3c2s14n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 130
+Rank 271 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 271
+Rank 574 [Fri Nov  3 03:20:16 2017] [c3-3c1s6n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 574
+Rank 309 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 309
+Rank 478 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 478
+Rank 622 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 622
+Rank 593 [Fri Nov  3 03:20:16 2017] [c3-3c1s10n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 593
+Rank 331 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 331
+Rank 665 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 665
+Rank 430 [Fri Nov  3 03:20:16 2017] [c3-3c0s7n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 430
+Rank 406 [Fri Nov  3 03:20:16 2017] [c3-3c0s7n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 406
+Rank 179 [Fri Nov  3 03:20:16 2017] [c2-3c2s15n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 179
+Rank 730 [Fri Nov  3 03:20:16 2017] [c3-3c1s14n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 730
+Rank 105 [Fri Nov  3 03:20:16 2017] [c2-3c2s7n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 105
+Rank 92 [Fri Nov  3 03:20:16 2017] [c2-3c2s7n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 92
+Rank 133 [Fri Nov  3 03:20:16 2017] [c2-3c2s14n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 133
+Rank 275 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 275
+Rank 575 [Fri Nov  3 03:20:16 2017] [c3-3c1s6n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 575
+Rank 310 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 310
+Rank 479 [Fri Nov  3 03:20:16 2017] [c3-3c1s4n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 479
+Rank 623 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 623
+Rank 597 [Fri Nov  3 03:20:16 2017] [c3-3c1s10n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 597
+Rank 334 [Fri Nov  3 03:20:16 2017] [c3-3c0s0n3] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 334
+Rank 669 [Fri Nov  3 03:20:16 2017] [c3-3c1s13n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 669
+Rank 431 [Fri Nov  3 03:20:16 2017] [c3-3c0s7n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 431
+Rank 407 [Fri Nov  3 03:20:16 2017] [c3-3c0s7n0] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 407
+Rank 183 [Fri Nov  3 03:20:16 2017] [c2-3c2s15n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 183
+Rank 734 [Fri Nov  3 03:20:16 2017] [c3-3c1s14n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 734
+Rank 109 [Fri Nov  3 03:20:16 2017] [c2-3c2s7n2] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 109
+Rank 94 [Fri Nov  3 03:20:16 2017] [c2-3c2s7n1] application called MPI_Abort(MPI_COMM_WORLD, 1) - process 94
+srun: error: nid05190: tasks 336-359: Aborted
+srun: Terminating job step 7554443.0
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+srun: error: nid05301: tasks 624-647: Aborted
+slurmstepd: error: *** STEP 7554443.0 ON nid04996 CANCELLED AT 2017-11-03T03:20:17 ***
+srun: error: nid05267: tasks 504-527: Aborted
+srun: error: nid05265: tasks 456-479: Aborted
+srun: error: nid05212: tasks 384-407: Aborted
+srun: error: nid04998: tasks 24-47: Aborted
+srun: error: nid05181: tasks 168-191: Aborted
+srun: error: nid05178: tasks 120-143: Aborted
+srun: error: nid05266: tasks 480-503: Aborted
+srun: error: nid05179: tasks 144-167: Aborted
+srun: error: nid05272: tasks 552-575: Aborted
+srun: error: nid05182: tasks 192-215: Aborted
+srun: error: nid05305: tasks 720-743: Aborted
+srun: error: nid05302: tasks 648-671: Aborted
+srun: error: nid05185: tasks 264-287: Aborted
+srun: error: nid05213: tasks 408-431: Aborted
+srun: error: nid05150: tasks 96-119: Aborted
+srun: error: nid05183: tasks 216-239: Aborted
+srun: error: nid05149: tasks 72-95: Aborted
+srun: error: nid05186: tasks 288-311: Aborted
+srun: error: nid05323: tasks 744-767: Aborted
+srun: error: nid05268: tasks 528-551: Aborted
+srun: error: nid05304: tasks 696-719: Aborted
+srun: error: nid05303: tasks 672-695: Aborted
+srun: error: nid05187: tasks 312-335: Aborted
+srun: error: nid05184: tasks 240-263: Aborted
+srun: error: nid05148: tasks 48-71: Aborted
+srun: error: nid05300: tasks 600-623: Aborted
+srun: error: nid05264: tasks 432-455: Aborted
+srun: error: nid05195: tasks 360-383: Aborted
+srun: error: nid05289: tasks 576-599: Aborted
+srun: error: nid04996: tasks 0-23: Aborted
