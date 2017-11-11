@@ -1,4 +1,4 @@
-package.path = '/home/srijit/Dropbox/spaul/softwares/build2/parts/qlua/tree/lhpc/?.qlua;/home/srijit/Dropbox/spaul/softwares/build2/parts/qlua/tree/qlib/?.qlua;' .. package.path
+--package.path = '/home/srijit/Dropbox/spaul/softwares/build2/parts/qlua/tree/lhpc/?.qlua;/home/srijit/Dropbox/spaul/softwares/build2/parts/qlua/tree/qlib/?.qlua;' .. package.path
 require "stdlib"
 require "gauge"
 
@@ -59,7 +59,7 @@ function make_mg_solver (
          -- nlevels is #multigrid
          -- nc is U[1]:colors()
          verbose = -2,
-         profile = 1,
+         profile = -1,
          kappa   = kappa,
          kappanv = kappa,
          itmax   = 5000,

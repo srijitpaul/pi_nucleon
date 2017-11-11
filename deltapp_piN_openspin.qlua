@@ -190,3 +190,48 @@ function contract_baryon_2pt(L, prop, src_loc, snk_momenta, aff_out)
 
   boundary_phase = nil
 end  -- contract_baryon_2pt
+--**************************************
+--* pion  2-point function
+--* - use point-to-all propagators
+--**************************************
+
+function pion_2pt_local(u1, u2)
+  u3 = gamma{mu=5} * u2 * gamma{mu=5}
+
+        qq = {}
+        qq = qcd.dot(u3, gamma{mu=5} * u1 * gamma{mu=5})
+  
+  u3 = nil
+  return(qq)
+end
+
+function pion2pt(L, prop, p_list, src_loc, aff_out )
+--  local px = 2 * math.pi * p3[1] / L[0]
+--  local py = 2 * math.pi * p3[2] / L[1]
+--  local pz = 2 * math.pi * p3[3] / L[2]
+--  local w = (L:Real(L:pcoord(0)) * px +
+--             L:Real(L:pcoord(1)) * py +
+--             L:Real(L:pcoord(2)) * pz):expi()  -- plane wave with p=(px,py,pz)
+--  local pt2 = (qq_c * w):sum(L:MultiSet(L[3], L:pcoord(3)))  -- 2pt function
+--  momenta_save_directory = "Twop/pion/"
+--  momenta_format = "/px%dpy%dpz%d"
+--  directory_name = string.format("%s%s", momenta_save_directory, momenta_format)
+--  aw:write(string.format(directory_name, p3[1], p3[2], p3[3]),pt2)
+--  aw:close()
+    local cor2pt = {}
+    momenta_save_directory = "Twop/pion/"
+    
+    cor2pt[momenta_save_directory] = pion_2pt_local(prop, prop)
+  
+
+    t_axis = #dims - 1
+    src0 = {src_loc[0], src_loc[1], src_loc[2], src_loc[3]} 
+    
+    qcd.save_momproj(aff_out, '', cor2pt, src0, p_list, t_axis, 1, {ft_sign=1})              
+
+
+
+end
+
+
+

@@ -1,8 +1,8 @@
 #!/bin/bash -l
-#SBATCH -p debug
-#SBATCH -n 768
-#SBATCH -N 32
-#SBATCH -t 00:01:30
+#SBATCH -p regular
+#SBATCH -n 24576
+#SBATCH -N 1024
+#SBATCH -t 05:00:00
 #SBATCH --mail-type=BEGIN,END,FAIL
 #SBATCH --mail-user=s.paul@cyi.ac.cy
 
@@ -12,7 +12,7 @@
 
 top_level_dir=/scratch2/scratchdirs/srijitp/beta3.31_2hex_24c48_ml-0.09530_mh-0.04/propagators
 
-path_to_qlua=/global/homes/s/srijitp/Local/local_edison/qlua/bin
+path_to_qlua=/global/homes/s/srijitp/install/local_20170925_edison/qlua/bin
 
 scripts=/global/homes/s/srijitp/spaul/projects/pi_nucleon
 
@@ -22,10 +22,10 @@ TSize=48
 Thalf=$(($TSize / 2))
 
 params=params.qlua
-include="$scripts/plaquette.qlua  $scripts/timer.qlua $scripts/stout_smear.qlua $scripts/load_gauge_field.qlua $scripts/random_functions.qlua $scripts/gamma_perm_phase.qlua $scripts/gi_dcovi.qlua $scripts/make_mg_solver.qlua $scripts/write_propagator.qlua $scripts/read_propagator.qlua "
+include="$scripts/plaquette.qlua  $scripts/timer.qlua $scripts/stout_smear.qlua $scripts/load_gauge_field.qlua $scripts/random_functions.qlua $scripts/gamma_perm_phase.qlua $scripts/gi_dcovi.qlua $scripts/make_mg_solver.qlua $scripts/write_propagator.qlua $scripts/read_propagator.qlua $scripts/deltapp_piN_openspin.qlua $scripts/gamma_lists.qlua $scripts/contract_factors.qlua $scripts/deltaM_piN_openspin.qlua"
 
 
-configlist_name="$scripts/configlist.temp1"
+configlist_name="$scripts/split_config_names/config_0000"
 config_names=`cat $configlist_name`
 for config_number in $config_names ;
 do
@@ -40,8 +40,7 @@ do
   nproc=$(( 32 * 24 ))
   #echo "# [$MyName] number of processes = $nproc" >> $log
 
-  QLUA_SCRIPT=inversions.qlua
-  QLUA_STOCH_SCRIPT=stoch_inversions.qlua
+  QLUA_SCRIPT=invert_contract.qlua
 
   echo "Starting for config $g"
   
@@ -50,40 +49,17 @@ do
   echo "# [$MyName] source location string is \"$source_location_string\" "
   input="$top_level_dir/$g/params.$g.qlua"
     
-  cat $scripts/invert_params.qlua | awk '
+  cat $scripts/params.qlua | awk '
   /^source_locations/ {print "'"$source_location_string"'"; next}
   /^nconf/ {print "nconf = ", '$((10#$g))'; next}
   {print}' > $input
 
-  srun -n $nproc -N 32 -c2 --cpu_bind=cores $path_to_qlua/qlua  $include $input $path_to_prog/$QLUA_SCRIPT >edison_$g.out 
+  srun -n $nproc -N 32 -c2 --cpu_bind=cores $path_to_qlua/qlua  $include $input $path_to_prog/$QLUA_SCRIPT >edison_$g.out &
 done 
+wait
 
 
 
-
-#echo "Forward and Sequential Inversions over, starting stochastic inversions"
-#while read -r config_number 
-#do
-#  # gauge configuration number
-#  g=$config_number
-#
-#  mkdir -p $top_level_dir/$g && cd $top_level_dir/$g  || exit 1
-#
-#  echo "# [$MyName] `date`" > $log
-#  pwd >> $log
-#
-#  nproc=$(( 32 * 24 ))
-#  echo "# [$MyName] number of processes = $nproc" >> $log
-#
-##  QLUA_SCRIPT=inversions.qlua
-#  QLUA_STOCH_SCRIPT=stoch_inversions.qlua
-#
-##  source_location_string="$(awk 'BEGIN{printf("")}; $2=='$g' && $NF < '$Thalf' {printf("{t=%d,pos={%d,%d,%d}};", $6, $3, $4, $5)}END{printf("\n")}' $top_level_dir/source_location.nsrc08perConf )"
-##  echo "# [$MyName] source location string is \"$source_location_string\" "
-#  srun -n $nproc -N 32 -c2 --cpu_bind=cores  $path_to_qlua/qlua $include $input $path_to_prog/$QLUA_STOCH_SCRIPT >edison_stoch.out &
-#  
-#done < "$scripts/configtemp.list"
-#wait
 exitStatus=$?
 if [ $exitStatus -ne 0 ]; then
     echo "[$MyName] Error from srun for $QLUA_SCRIPT, status was $exitStatus"
@@ -92,5 +68,5 @@ if [ $exitStatus -ne 0 ]; then
         echo "# [$MyName] srun finished successfully for $QLUA_SCRIPT, status was $exitStatus"
       fi
 
-#echo "# [$MyName] `date`" >> $log
+
 exit 0

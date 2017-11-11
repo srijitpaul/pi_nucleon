@@ -1,5 +1,129 @@
 Configuration number 0001
-# Fri Nov  3 03:19:48 PDT 2017
+# Fri Nov 10 17:08:34 PST 2017
 Starting for config 0001
 # [] source location string is "source_locations = { {t=38, pos={8, 21, 2}}, {t=24, pos={9, 17, 6}}, {t=9, pos={13, 8, 0}}, {t=3, pos={4, 23, 14}}, {t=18, pos={15, 20, 14}}, {t=45, pos={20, 17, 13}}, {t=30, pos={2, 12, 14}}, {t=22, pos={21, 0, 0}}, }" 
-[] Error from srun for inversions.qlua, status was 134
+Configuration number 0002
+# Fri Nov 10 17:08:34 PST 2017
+Starting for config 0002
+# [] source location string is "source_locations = { {t=31, pos={0, 8, 1}}, {t=23, pos={12, 20, 11}}, {t=19, pos={1, 1, 1}}, {t=10, pos={3, 18, 10}}, {t=36, pos={7, 10, 0}}, {t=33, pos={3, 1, 1}}, {t=44, pos={21, 23, 3}}, {t=10, pos={20, 13, 7}}, }" 
+Configuration number 0003
+# Fri Nov 10 17:08:35 PST 2017
+Starting for config 0003
+# [] source location string is "source_locations = { {t=25, pos={16, 7, 9}}, {t=33, pos={8, 2, 8}}, {t=46, pos={19, 1, 19}}, {t=42, pos={23, 20, 19}}, {t=38, pos={4, 11, 6}}, {t=17, pos={21, 23, 16}}, {t=30, pos={13, 3, 5}}, {t=40, pos={2, 1, 2}}, }" 
+Configuration number 0004
+# Fri Nov 10 17:08:35 PST 2017
+Starting for config 0004
+# [] source location string is "source_locations = { {t=23, pos={16, 17, 20}}, {t=2, pos={13, 8, 6}}, {t=0, pos={5, 6, 21}}, {t=40, pos={5, 0, 3}}, {t=13, pos={16, 18, 2}}, {t=46, pos={14, 23, 15}}, {t=7, pos={18, 0, 20}}, {t=42, pos={16, 23, 1}}, }" 
+Configuration number 0005
+# Fri Nov 10 17:08:35 PST 2017
+Starting for config 0005
+# [] source location string is "source_locations = { {t=14, pos={21, 9, 18}}, {t=7, pos={17, 11, 2}}, {t=25, pos={6, 21, 23}}, {t=25, pos={4, 13, 16}}, {t=32, pos={14, 17, 3}}, {t=10, pos={2, 16, 12}}, {t=28, pos={7, 10, 2}}, {t=10, pos={12, 16, 14}}, }" 
+Configuration number 0006
+# Fri Nov 10 17:08:35 PST 2017
+Starting for config 0006
+# [] source location string is "source_locations = { {t=42, pos={4, 12, 2}}, {t=16, pos={18, 10, 0}}, {t=12, pos={23, 7, 4}}, {t=12, pos={9, 14, 19}}, {t=34, pos={23, 6, 17}}, {t=9, pos={9, 6, 14}}, {t=25, pos={16, 5, 1}}, {t=45, pos={23, 0, 4}}, }" 
+Configuration number 0007
+# Fri Nov 10 17:08:35 PST 2017
+Starting for config 0007
+# [] source location string is "source_locations = { {t=2, pos={2, 15, 13}}, {t=7, pos={17, 21, 11}}, {t=0, pos={15, 7, 19}}, {t=41, pos={17, 11, 14}}, {t=7, pos={16, 20, 12}}, {t=16, pos={23, 14, 9}}, {t=1, pos={9, 5, 2}}, {t=23, pos={7, 3, 12}}, }" 
+Configuration number 0008
+# Fri Nov 10 17:08:35 PST 2017
+Starting for config 0008
+# [] source location string is "source_locations = { {t=42, pos={20, 5, 23}}, {t=46, pos={1, 14, 22}}, {t=19, pos={6, 1, 13}}, {t=30, pos={12, 12, 22}}, {t=25, pos={9, 6, 20}}, {t=46, pos={3, 3, 3}}, {t=1, pos={3, 9, 17}}, {t=8, pos={10, 3, 5}}, }" 
+Configuration number 0009
+# Fri Nov 10 17:08:35 PST 2017
+Starting for config 0009
+# [] source location string is "source_locations = { {t=16, pos={20, 21, 12}}, {t=0, pos={13, 0, 18}}, {t=43, pos={7, 5, 6}}, {t=30, pos={15, 18, 12}}, {t=42, pos={14, 5, 7}}, {t=18, pos={3, 7, 17}}, {t=29, pos={17, 10, 18}}, {t=12, pos={10, 22, 4}}, }" 
+Configuration number 0010
+# Fri Nov 10 17:08:35 PST 2017
+Starting for config 0010
+# [] source location string is "source_locations = { {t=38, pos={21, 23, 2}}, {t=17, pos={19, 12, 19}}, {t=43, pos={1, 6, 8}}, {t=15, pos={0, 10, 2}}, {t=17, pos={23, 0, 17}}, {t=35, pos={16, 5, 17}}, {t=19, pos={0, 8, 14}}, {t=26, pos={8, 20, 12}}, }" 
+Configuration number 0011
+# Fri Nov 10 17:08:35 PST 2017
+Starting for config 0011
+# [] source location string is "source_locations = { {t=7, pos={17, 21, 20}}, {t=23, pos={5, 11, 10}}, {t=19, pos={8, 2, 16}}, {t=3, pos={14, 2, 23}}, {t=16, pos={11, 9, 22}}, {t=19, pos={0, 4, 9}}, {t=25, pos={14, 21, 11}}, {t=5, pos={3, 11, 10}}, }" 
+Configuration number 0012
+# Fri Nov 10 17:08:35 PST 2017
+Starting for config 0012
+# [] source location string is "source_locations = { {t=18, pos={2, 7, 14}}, {t=12, pos={10, 13, 1}}, {t=45, pos={4, 9, 17}}, {t=16, pos={1, 18, 3}}, {t=23, pos={17, 1, 14}}, {t=17, pos={22, 0, 19}}, {t=11, pos={6, 16, 19}}, {t=7, pos={16, 2, 21}}, }" 
+Configuration number 0013
+# Fri Nov 10 17:08:35 PST 2017
+Starting for config 0013
+# [] source location string is "source_locations = { {t=43, pos={2, 12, 0}}, {t=24, pos={0, 7, 6}}, {t=30, pos={20, 22, 23}}, {t=37, pos={14, 11, 23}}, {t=37, pos={5, 4, 20}}, {t=11, pos={12, 1, 17}}, {t=18, pos={11, 21, 2}}, {t=10, pos={18, 15, 21}}, }" 
+Configuration number 0014
+# Fri Nov 10 17:08:35 PST 2017
+Starting for config 0014
+# [] source location string is "source_locations = { {t=17, pos={12, 14, 23}}, {t=12, pos={22, 4, 0}}, {t=0, pos={8, 15, 18}}, {t=28, pos={2, 8, 15}}, {t=38, pos={16, 12, 8}}, {t=4, pos={4, 22, 20}}, {t=28, pos={4, 21, 8}}, {t=35, pos={1, 11, 5}}, }" 
+Configuration number 0015
+# Fri Nov 10 17:08:35 PST 2017
+Starting for config 0015
+# [] source location string is "source_locations = { {t=37, pos={6, 4, 15}}, {t=22, pos={9, 18, 15}}, {t=2, pos={6, 10, 6}}, {t=15, pos={18, 2, 3}}, {t=40, pos={15, 14, 10}}, {t=46, pos={13, 7, 3}}, {t=21, pos={14, 4, 3}}, {t=40, pos={4, 19, 18}}, }" 
+Configuration number 0016
+# Fri Nov 10 17:08:35 PST 2017
+Starting for config 0016
+# [] source location string is "source_locations = { {t=31, pos={23, 10, 16}}, {t=21, pos={0, 21, 20}}, {t=39, pos={18, 20, 9}}, {t=15, pos={18, 20, 23}}, {t=9, pos={14, 12, 16}}, {t=13, pos={20, 8, 5}}, {t=15, pos={15, 1, 21}}, {t=40, pos={1, 9, 18}}, }" 
+Configuration number 0017
+# Fri Nov 10 17:08:35 PST 2017
+Starting for config 0017
+# [] source location string is "source_locations = { {t=0, pos={0, 19, 21}}, {t=32, pos={0, 15, 22}}, {t=43, pos={14, 1, 1}}, {t=23, pos={9, 0, 16}}, {t=5, pos={0, 20, 23}}, {t=6, pos={2, 18, 21}}, {t=33, pos={18, 5, 13}}, {t=46, pos={19, 10, 23}}, }" 
+Configuration number 0018
+# Fri Nov 10 17:08:35 PST 2017
+Starting for config 0018
+# [] source location string is "source_locations = { {t=39, pos={7, 13, 17}}, {t=33, pos={11, 1, 10}}, {t=33, pos={9, 12, 11}}, {t=1, pos={5, 14, 23}}, {t=27, pos={10, 18, 15}}, {t=45, pos={5, 19, 16}}, {t=6, pos={15, 18, 19}}, {t=44, pos={5, 0, 9}}, }" 
+Configuration number 0019
+# Fri Nov 10 17:08:35 PST 2017
+Starting for config 0019
+# [] source location string is "source_locations = { {t=2, pos={22, 0, 7}}, {t=15, pos={14, 13, 19}}, {t=14, pos={14, 4, 13}}, {t=40, pos={4, 21, 12}}, {t=46, pos={2, 13, 15}}, {t=36, pos={8, 3, 23}}, {t=19, pos={21, 4, 16}}, {t=27, pos={17, 10, 12}}, }" 
+Configuration number 0020
+# Fri Nov 10 17:08:35 PST 2017
+Starting for config 0020
+# [] source location string is "source_locations = { {t=42, pos={17, 15, 4}}, {t=11, pos={18, 18, 3}}, {t=38, pos={13, 14, 0}}, {t=36, pos={18, 19, 14}}, {t=0, pos={4, 0, 10}}, {t=39, pos={15, 15, 22}}, {t=40, pos={11, 17, 23}}, {t=31, pos={6, 14, 7}}, }" 
+Configuration number 0021
+# Fri Nov 10 17:08:35 PST 2017
+Starting for config 0021
+# [] source location string is "source_locations = { {t=30, pos={5, 20, 22}}, {t=41, pos={9, 22, 9}}, {t=15, pos={12, 6, 13}}, {t=19, pos={20, 8, 6}}, {t=41, pos={1, 13, 7}}, {t=35, pos={4, 4, 3}}, {t=24, pos={23, 23, 20}}, {t=17, pos={17, 3, 1}}, }" 
+Configuration number 0022
+# Fri Nov 10 17:08:35 PST 2017
+Starting for config 0022
+# [] source location string is "source_locations = { {t=43, pos={22, 13, 20}}, {t=24, pos={18, 2, 16}}, {t=13, pos={12, 14, 16}}, {t=35, pos={17, 14, 17}}, {t=6, pos={4, 11, 17}}, {t=0, pos={13, 1, 2}}, {t=26, pos={10, 0, 16}}, {t=0, pos={15, 18, 23}}, }" 
+Configuration number 0023
+# Fri Nov 10 17:08:35 PST 2017
+Starting for config 0023
+# [] source location string is "source_locations = { {t=12, pos={18, 0, 18}}, {t=14, pos={6, 5, 17}}, {t=12, pos={22, 14, 10}}, {t=40, pos={14, 6, 21}}, {t=10, pos={2, 3, 19}}, {t=30, pos={7, 3, 12}}, {t=28, pos={11, 8, 2}}, {t=4, pos={21, 13, 3}}, }" 
+Configuration number 0024
+# Fri Nov 10 17:08:35 PST 2017
+Starting for config 0024
+# [] source location string is "source_locations = { {t=1, pos={5, 1, 8}}, {t=15, pos={17, 9, 16}}, {t=2, pos={7, 11, 5}}, {t=31, pos={17, 13, 0}}, {t=31, pos={22, 7, 21}}, {t=29, pos={13, 8, 8}}, {t=36, pos={11, 22, 12}}, {t=44, pos={20, 12, 20}}, }" 
+Configuration number 0025
+# Fri Nov 10 17:08:35 PST 2017
+Starting for config 0025
+# [] source location string is "source_locations = { {t=2, pos={6, 22, 5}}, {t=39, pos={2, 16, 6}}, {t=20, pos={20, 14, 21}}, {t=28, pos={9, 19, 19}}, {t=3, pos={3, 3, 16}}, {t=37, pos={13, 2, 3}}, {t=25, pos={6, 9, 12}}, {t=36, pos={22, 22, 3}}, }" 
+Configuration number 0026
+# Fri Nov 10 17:08:35 PST 2017
+Starting for config 0026
+# [] source location string is "source_locations = { {t=26, pos={7, 4, 9}}, {t=41, pos={23, 5, 16}}, {t=47, pos={12, 3, 20}}, {t=25, pos={12, 13, 3}}, {t=27, pos={6, 4, 1}}, {t=42, pos={23, 6, 7}}, {t=24, pos={10, 4, 2}}, {t=34, pos={15, 10, 13}}, }" 
+Configuration number 0027
+# Fri Nov 10 17:08:35 PST 2017
+Starting for config 0027
+# [] source location string is "source_locations = { {t=18, pos={11, 2, 7}}, {t=14, pos={6, 21, 15}}, {t=8, pos={9, 20, 5}}, {t=3, pos={12, 19, 20}}, {t=47, pos={5, 19, 18}}, {t=0, pos={18, 14, 8}}, {t=36, pos={15, 16, 17}}, {t=35, pos={19, 8, 3}}, }" 
+Configuration number 0028
+# Fri Nov 10 17:08:35 PST 2017
+Starting for config 0028
+# [] source location string is "source_locations = { {t=1, pos={22, 14, 9}}, {t=16, pos={20, 20, 9}}, {t=36, pos={18, 15, 5}}, {t=34, pos={13, 1, 7}}, {t=1, pos={14, 1, 2}}, {t=15, pos={8, 8, 10}}, {t=4, pos={20, 0, 5}}, {t=9, pos={17, 8, 17}}, }" 
+Configuration number 0029
+# Fri Nov 10 17:08:35 PST 2017
+Starting for config 0029
+# [] source location string is "source_locations = { {t=42, pos={17, 20, 13}}, {t=39, pos={17, 4, 1}}, {t=47, pos={9, 19, 14}}, {t=32, pos={18, 1, 0}}, {t=11, pos={20, 12, 21}}, {t=41, pos={16, 5, 5}}, {t=3, pos={20, 12, 13}}, {t=3, pos={4, 3, 10}}, }" 
+Configuration number 0030
+# Fri Nov 10 17:08:35 PST 2017
+Starting for config 0030
+# [] source location string is "source_locations = { {t=26, pos={20, 10, 20}}, {t=30, pos={20, 10, 11}}, {t=20, pos={18, 0, 0}}, {t=16, pos={5, 20, 13}}, {t=22, pos={10, 22, 12}}, {t=9, pos={13, 16, 13}}, {t=33, pos={17, 14, 21}}, {t=11, pos={11, 11, 3}}, }" 
+Configuration number 0031
+# Fri Nov 10 17:08:35 PST 2017
+Starting for config 0031
+# [] source location string is "source_locations = { {t=2, pos={8, 18, 20}}, {t=5, pos={17, 9, 21}}, {t=39, pos={4, 12, 19}}, {t=25, pos={4, 8, 11}}, {t=27, pos={10, 16, 13}}, {t=2, pos={9, 4, 20}}, {t=28, pos={4, 16, 23}}, {t=45, pos={10, 15, 0}}, }" 
+Configuration number 0032
+# Fri Nov 10 17:08:35 PST 2017
+Starting for config 0032
+# [] source location string is "source_locations = { {t=21, pos={9, 17, 3}}, {t=43, pos={19, 17, 21}}, {t=26, pos={12, 18, 7}}, {t=20, pos={1, 2, 23}}, {t=35, pos={1, 8, 15}}, {t=20, pos={0, 2, 8}}, {t=13, pos={10, 14, 7}}, {t=39, pos={14, 17, 1}}, }" 
+# [] srun finished successfully for inversions.qlua, status was 0
