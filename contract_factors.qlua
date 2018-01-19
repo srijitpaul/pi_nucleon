@@ -165,6 +165,7 @@ function contract_v4_modft_write(L, phi, fwd1, fwd2, gf1_list, pf1_list, aff_out
 
   local C = ( gamma{mu=3} * gamma{mu=1} ) * complex(0,1)
 
+  S = random_state(L)
   for i_gf1, gf1 in ipairs(gf1_list) do
     
     local gf1_tag  = gf1.tag
@@ -172,8 +173,12 @@ function contract_v4_modft_write(L, phi, fwd1, fwd2, gf1_list, pf1_list, aff_out
     local gf1_sign = gf1.gamma[2]
     local gf1_adjoint_sign = gf1.gamma[3]
     
-    local phi_gf1 = ( C * ( gamma{n=gf1_id} * phi  ) ) * gf1_sign
-    local fac_13  = qcd.quarkContract13(fwd1, fwd2) 
+    local phi_gf2 = ( C * ( gamma{n=gf1_id} * phi  ) ) * gf1_sign
+    printf("# norm of oet propagator = %g\n", phi_gf2:norm2())
+    local phi_gf1 = ( C *  ( gamma{n=gf1_id} * S:gaussian_DiracFermion())) * gf1_sign
+    printf("# norm of random propagator = %g\n", phi_gf1:norm2())
+    test_fwd = S:gaussian_DiracPropagator()
+    local fac_13  = qcd.quarkContract13(test_fwd, test_fwd) 
     local v4 = qcd.quarkContractV4(phi_gf1, fac_13)
 
     v4_color_vector = {}
