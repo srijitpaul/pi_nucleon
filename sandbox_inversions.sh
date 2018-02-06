@@ -1,24 +1,14 @@
 #!/bin/bash -l
-#SBATCH -p debug
-#SBATCH -n 24
-#SBATCH -N 1
-#SBATCH -t 00:30:00
-#SBATCH --mail-type=BEGIN,END,FAIL
-#SBATCH --mail-user=s.paul@cyi.ac.cy
 
-#SBATCH -e edison_00.err
-#SBATCH -o edison_00.out
-
-
-top_level_dir=/scratch2/scratchdirs/srijitp/beta3.31_2hex_24c48_ml-0.09530_mh-0.04/propagators/tests
+top_level_dir=/home/srijit/Dropbox/spaul/Dina_Work/pion_nucleon/propagators/tests
 
 path_to_qlua=/global/homes/s/srijitp/install/local_20170925_edison/qlua/bin
 
-scripts=/global/homes/s/srijitp/spaul/projects/pi_nucleon/test/pi_nucleon
+scripts=/home/srijit/Dropbox/spaul/Dina_Work/pion_nucleon_scripts/tests/pi_nucleon
 
 path_to_prog=$scripts
 
-TSize=48
+TSize=16
 Thalf=$(($TSize / 2))
 
 params=invert_params.qlua
@@ -37,7 +27,7 @@ do
   echo "# `date`" 
   #pwd >> $log
 
-  nproc=$(( 1 * 24 ))
+  nproc=$(( 1 ))
   #echo "# [$MyName] number of processes = $nproc" >> $log
 
   QLUA_SCRIPT=invert_contract.qlua
@@ -54,7 +44,7 @@ do
   /^nconf/ {print "nconf = ", '$((10#$g))'; next}
   {print}' > $input
 
-  srun -n $nproc -N 1 -c2 --cpu_bind=cores $path_to_qlua/qlua  $include $input $path_to_prog/$QLUA_SCRIPT >edison_$g.out &
+  mpirun -n 1 qlua_170925  $include $input $path_to_prog/$QLUA_SCRIPT >edison_factors_$g.out
 done 
 wait
 

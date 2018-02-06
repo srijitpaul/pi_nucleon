@@ -17,7 +17,7 @@ function prepare_seq2_propagator_oet (L, prop, phi_p, phi_0, pvec, gi2, gf2 )
   K = L:DiracPropagator()
 
 
-  local xi_gamma = ( gamma{n=gi2} * gamma{mu=5} ) * ( phi_0 * ( gamma{mu=5} * gamma{n=gf2} ) )
+  local xi_gamma = ( gamma{n=gi2} * gamma{mu=5}) * ( phi_0 * ( gamma{mu=5} * gamma{n=gf2} ) )
    
   for icol = 0, 2 do
     for ispin = 0, 3 do
@@ -84,6 +84,10 @@ function contract_mbmb_oet(prop, pfifi, inp, out)
 end
 
 
+
+
+
+--[[
 function contract_mxb_mxb_oet (L, prop, phi_p, phi_0, pi2, src_loc, sample, aff_out ) 
 
   -- boundary phase
@@ -155,4 +159,209 @@ function contract_mxb_mxb_oet (L, prop, phi_p, phi_0, pi2, src_loc, sample, aff_
   end -- of loop of momenta
   boundary_phase = nil
 end
+]]--
+function contract_mxb_mxb_oet (L, prop, phi_p, phi_0, pi2, src_loc, sample, aff_out ) 
+
+
+   -- boundary phase
+   local boundary_phase = vector.complex(L[3])
+   for it = 0, src_loc[3] - 1 do
+     boundary_phase[it] = -1
+   end
+   for it = src_loc[3], L[3]-1 do
+     boundary_phase[it] = 1
+   end 
+  local Gamma1 =  -1 * gamma{n=10} * gamma{n=15}
+
+  local Gamma2 = Gamma1
+
+ 
+   proton_gamma_index = {15, 0, 7, 8}
+   for ipf2, pf2 in ipairs ( pf2_list ) do 
+ 
+     local pfifi = prepare_seq2_propagator_oet (L, prop, phi_p, phi_0, pf2, 15, 15 )
+
+    local a2 = Gamma1 * ( prop * Gamma2 )
+
+    local a3 = qcd.quarkContract13 ( a2 , prop  )
+
+    local Z1 = ( ( (pfifi ) * a3 ))
+
+    local Z2 = ( (pfifi )* a3:spintrace() )
+
+    local a3 = qcd.quarkContract13 ( a2 , pfifi  )
+
+    local Z3 = ( ( (prop ) * a3 ))
+
+    local Z4 = ( (prop )* a3:spintrace() )
+
+--Extracting each spin projection of the result dirac propagator
+    local Z1spin_proj = {}
+    local Z2spin_proj = {}
+    local Z3spin_proj = {}
+    local Z4spin_proj = {}
   
+    for ispin1 = 0, 3 do
+    
+      Z1spin_proj[ispin1] = {}
+      for ispin2 = 0, 3 do
+        local dv = L:DiracFermion()
+        local corr = L:Complex()
+        for icol1 = 0, 2 do
+                
+            dv = Z1[{c=icol1, d=ispin2}]
+            corr = corr + dv[{c=icol1, d=ispin1}]
+            Z1spin_proj[ispin1][ispin2]  =  corr
+
+            
+        end
+        corr = nil
+        dv = nil
+     end
+   end
+
+
+    for ispin1 = 0, 3 do
+    
+      Z2spin_proj[ispin1] = {}
+      for ispin2 = 0, 3 do
+        local dv = L:DiracFermion()
+        local corr = L:Complex()
+        for icol1 = 0, 2 do
+                
+            dv = Z2[{c=icol1, d=ispin2}]
+            corr = corr + dv[{c=icol1, d=ispin1}]
+            Z2spin_proj[ispin1][ispin2]  =  corr
+
+            
+        end
+        corr = nil
+        dv = nil
+     end
+   end
+
+    for ispin1 = 0, 3 do
+    
+      Z3spin_proj[ispin1] = {}
+      for ispin2 = 0, 3 do
+        local dv = L:DiracFermion()
+        local corr = L:Complex()
+        for icol1 = 0, 2 do
+                
+            dv = Z3[{c=icol1, d=ispin2}]
+            corr = corr + dv[{c=icol1, d=ispin1}]
+            Z3spin_proj[ispin1][ispin2]  =  corr
+
+            
+        end
+        corr = nil
+        dv = nil
+     end
+   end
+
+    for ispin1 = 0, 3 do
+    
+      Z4spin_proj[ispin1] = {}
+      for ispin2 = 0, 3 do
+        local dv = L:DiracFermion()
+        local corr = L:Complex()
+        for icol1 = 0, 2 do
+                
+            dv = Z4[{c=icol1, d=ispin2}]
+            corr = corr + dv[{c=icol1, d=ispin1}]
+            Z4spin_proj[ispin1][ispin2]  =  corr
+
+            
+        end
+        corr = nil
+        dv = nil
+     end
+   end
+
+    for ipf1, pf1 in ipairs( pf1_list ) do
+
+      pi1 = { -( pf1[1] + pf2[1] + pi2[1] ),
+              -( pf1[2] + pf2[2] + pi2[2] ),
+              -( pf1[3] + pf2[3] + pi2[3] ) }
+
+      local pi1x = pi1[1] * 2 * math.pi / L[0]
+      local pi1y = pi1[2] * 2 * math.pi / L[1]
+      local pi1z = pi1[3] * 2 * math.pi / L[2]
+
+      local pf1x = (2 * math.pi * pf1[1]) / L[0]
+      local pf1y = (2 * math.pi * pf1[2]) / L[1]
+      local pf1z = (2 * math.pi * pf1[3]) / L[2]
+
+      local w = ( (L:Real(L:pcoord(0)) * pf1x + src_loc[0] * pi1x ) +
+                  (L:Real(L:pcoord(1)) * pf1y + src_loc[1] * pi1y ) +
+                  (L:Real(L:pcoord(2)) * pf1z + src_loc[2] * pi1z ) ):expi()
+
+      for index1 = 0, 3 do
+        for index2 = 0, 3 do
+
+          local q2 = vector.complex( L[3] )
+          local w2 = (Z1spin_proj[index1][index2]* w):sum(L:MultiSet(L[3], L:pcoord(3)))
+          for i = 0, #w2 - 1 do
+            it = ( i + src_loc[3] ) % L[3]
+            q2[i] = -w2[it] * boundary_phase[it]
+          end
+
+          name = string.format("/Z1/s1%.2d/s2%.2d/pi1x%.2dpi1y%.2dpi1z%.2d/pi2x%.2dpi2y%.2dpi2z%.2d/pf1x%.2dpf1y%.2dpf1z%.2d/pf2x%.2dpf2y%.2dpf2z%.2d/x%.2dy%.2dz%.2dt%.2d/s%d",index1, index2,
+              pi1[1], pi1[2], pi1[3],
+              pi2[1], pi2[2], pi2[3],
+              pf1[1], pf1[2], pf1[3],
+              pf2[1], pf2[2], pf2[3],
+              src_loc[0], src_loc[1], src_loc[2], src_loc[3], sample)
+          aff_out:write(name, q2)
+
+          local q2 = vector.complex( L[3] )
+          local w2 = (Z2spin_proj[index1][index2] * w):sum(L:MultiSet(L[3], L:pcoord(3)))
+          for i = 0, #w2 - 1 do
+            it = ( i + src_loc[3] ) % L[3]
+            q2[i] = -w2[it] * boundary_phase[it]
+          end
+
+          name = string.format("/Z2/s1%.2d/s2%.2d/pi1x%.2dpi1y%.2dpi1z%.2d/pi2x%.2dpi2y%.2dpi2z%.2d/pf1x%.2dpf1y%.2dpf1z%.2d/pf2x%.2dpf2y%.2dpf2z%.2d/x%.2dy%.2dz%.2dt%.2d/s%d",index1, index2,
+              pi1[1], pi1[2], pi1[3],
+              pi2[1], pi2[2], pi2[3],
+              pf1[1], pf1[2], pf1[3],
+              pf2[1], pf2[2], pf2[3],
+              src_loc[0], src_loc[1], src_loc[2], src_loc[3], sample)
+          aff_out:write(name, q2)
+
+          local q2 = vector.complex( L[3] )
+          local w2 = (Z3spin_proj[index1][index2] * w):sum(L:MultiSet(L[3], L:pcoord(3)))
+          for i = 0, #w2 - 1 do
+            it = ( i + src_loc[3] ) % L[3]
+            q2[i] = -w2[it] * boundary_phase[it]
+          end
+
+          name = string.format("/Z3/s1%.2d/s2%.2d/pi1x%.2dpi1y%.2dpi1z%.2d/pi2x%.2dpi2y%.2dpi2z%.2d/pf1x%.2dpf1y%.2dpf1z%.2d/pf2x%.2dpf2y%.2dpf2z%.2d/x%.2dy%.2dz%.2dt%.2d/s%d",index1, index2,
+              pi1[1], pi1[2], pi1[3],
+              pi2[1], pi2[2], pi2[3],
+              pf1[1], pf1[2], pf1[3],
+              pf2[1], pf2[2], pf2[3],
+              src_loc[0], src_loc[1], src_loc[2], src_loc[3], sample)
+          aff_out:write(name, q2)
+
+          local q2 = vector.complex( L[3] )
+          local w2 = (Z4spin_proj[index1][index2] * w):sum(L:MultiSet(L[3], L:pcoord(3)))
+          for i = 0, #w2 - 1 do
+            it = ( i + src_loc[3] ) % L[3]
+            q2[i] = -w2[it] * boundary_phase[it]
+          end
+
+          name = string.format("/Z4/s1%.2d/s2%.2d/pi1x%.2dpi1y%.2dpi1z%.2d/pi2x%.2dpi2y%.2dpi2z%.2d/pf1x%.2dpf1y%.2dpf1z%.2d/pf2x%.2dpf2y%.2dpf2z%.2d/x%.2dy%.2dz%.2dt%.2d/s%d",index1, index2,
+              pi1[1], pi1[2], pi1[3],
+              pi2[1], pi2[2], pi2[3],
+              pf1[1], pf1[2], pf1[3],
+              pf2[1], pf2[2], pf2[3],
+              src_loc[0], src_loc[1], src_loc[2], src_loc[3], sample)
+          aff_out:write(name, q2)
+        end
+      end
+
+    end  -- of loop on total momenta momenta
+
+  end 
+end 

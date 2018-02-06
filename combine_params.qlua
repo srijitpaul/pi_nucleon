@@ -1,3 +1,10 @@
+--package.path = '/global/homes/s/srijitp/install/local_20170925_edison/qlua/lib/qlua/?.qlua;/global/homes/s/srijitp/install/local_20170925_edison/qlua/lib/qlua/lhpc/?.qlua;' .. package.path
+package.path = '/home/srijit/Dropbox/spaul/softwares/local-20170925/qlua/lib/qlua/?.qlua;/home/srijit/Dropbox/spaul/softwares/local-20170925/qlua/lib/qlua/lhpc/?.qlua;' .. package.path
+require 'stdlib'                                                                
+require 'setup_util'                                                            
+require 'hadspec'                                                               
+require 'lhpc-std' 
+
 -- Smear parameters
 ape_alpha = 2.5
 ape_n = 25
@@ -5,11 +12,6 @@ ape_n = 25
 ape_accu    = 1e-16
 ape_maxiter = 250
 ape_orthdir = 3
-
-
---perform hex_smear on-th-fly
-hex_smear = true
-hex_n = 2
 
 
 wup_alpha = 3.0
@@ -22,10 +24,6 @@ stout_n   = 1
 
 heavy_stout_rho = 0.08
 heavy_stout_n   = 10
-
--- dimensions
-dims = {8, 8, 8, 16}
-network_dims={1, 1, 1, 2}
 
 -- source locations
 source_locations = 
@@ -52,11 +50,6 @@ twostep_seq_propfile_prefix = "twostep_sequential_light_light"
 stochastic_propfile_prefix   = "stochastic_propagator"
 stochastic_sourcefile_prefix = "stochastic_source"
 
-read_forward_propagator             = false
-write_forward_propagator            = true
-read_propagator_oet                 = false
-write_stochastic_oet_propagator     = true
-
 -- light quarks
 mq_l = -0.0953
 kappa_l = 0.12805081056
@@ -68,58 +61,22 @@ kappa_s = 0.12626262626
 -- Sheikholeslami-Wohlert coefficient
 csw = 1.0
 
-quark_bc = {1, 1, 1, -1}
+quark_bc = {1, 1, 1, 1}
 
 -- inverter_type = "deflated_clover"
-   inverter_type = "multigrid"
+inverter_type = "multigrid"
 
--- volume format for propagators
-prop_volfmt = "single"
 
-sequential_source_momentum_list = {
-    {0, 0, 0}}
-   --[[{ 0, 0, 1},
---   { 0, 1, 1},
---   { 4, 1, 6}
--- {0, 0, -1}
---}
---
-  { 0, 0,-1},
-  { 0, 1, 0},
-  { 0,-1, 0},
-  { 1, 0, 0},
-  {-1, 0, 0},
-  { 0, 1, 1},
-  { 0, 1,-1},
-  { 0,-1, 1},
-  { 0,-1,-1},
-  { 1, 0, 1},
-  { 1, 0,-1},
-  {-1, 0, 1},
-  {-1, 0,-1},
-  { 1, 1, 0},
-  { 1,-1, 0},
-  {-1, 1, 0},
-  {-1,-1, 0},
-  { 1, 1, 1},
-  { 1, 1,-1},
-  { 1,-1, 1},
-  { 1,-1,-1},
-  {-1, 1, 1},
-  {-1, 1,-1},
-  {-1,-1, 1},
-  {-1,-1,-1}
-}
---]]
-
+sequential_source_momentum_list =  make_mom_list(0)
 sequential_source_gamma = {tag="g5", val=gamma{mu=5}}
 
 sink_momentum_list = sequential_source_momentum_list
 
-pf1_list = sink_momentum_list
-pf2_list = pf1_list
+pf1_list = sequential_source_momentum_list
+pf2_list = sequential_source_momentum_list
 pi2_list = sequential_source_momentum_list
-twostep_sequential_source_momentum_list = sequential_source_momentum_list
+seq_src_mom_list = make_mom_list(0)
+
 dt_source_sink_2pt = 15
 --dt_source_sink_3pt_list = {8, 10, 12}
 

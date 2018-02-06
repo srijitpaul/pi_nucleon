@@ -4,7 +4,7 @@ top_level_dir=/home/srijit/Dropbox/spaul/Dina_Work/pion_nucleon/propagators
 log=$MyName.log
 
 
-scripts=/home/srijit/Dropbox/spaul/Dina_Work/pion_nucleon_scripts/edison/pi_nucleon
+scripts=/home/srijit/Dropbox/spaul/Dina_Work/pion_nucleon_scripts/edison/new_scripts/pi_nucleon
 
 path_to_prog=$scripts
 
@@ -35,7 +35,7 @@ cat $scripts/sandbox_params.qlua | awk '
   {print}' > $input
 
 
-QLUA_SCRIPT=invert_contract.qlua
+QLUA_SCRIPT=inversions.qlua
 
 mpirun -n 2 qlua $include $input $path_to_prog/$QLUA_SCRIPT
 

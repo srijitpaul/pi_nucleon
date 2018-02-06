@@ -1,0 +1,1226 @@
+--package.path = '/global/homes/s/srijitp/build/qlua_build_edison/build2/parts/qlua/tree/lhpc/?.qlua;/global/homes/s/srijitp/build/qlua_build_edison/build2/parts/qlua/tree/qlib/?.qlua;' .. package.path
+package.path = '/home/srijit/Dropbox/spaul/softwares/local-20170925/qlua/lib/qlua/?.qlua;/home/srijit/Dropbox/spaul/softwares/local-20170925/qlua/lib/qlua/lhpc/?.qlua;' .. package.path
+require "stdlib"
+require "gauge"
+require "ape-smear"
+require "wuppertal-smear"
+require "stout-smear"
+require "qdpc_io"
+require "setup_util"
+require "lhpc-std"
+require "latvec"
+
+
+-- ************************************************************************************
+-- * INITIALIZE
+-- ************************************************************************************
+
+total_timer = timer("total time")
+
+-- print parameters
+--printf("# [invert_contract_v3] Dimensions                = %d %d %d %d\n", dims[1], dims[2], dims[3], dims[4])
+printf("# [invert_contract_v3] prefix to conf name       = %s\n", conf_name_prefix)
+printf("# [invert_contract_v3] suffix to conf name       = %s\n", conf_name_input_suffix)
+printf("# [invert_contract_v3] suffix to conf name       = %s\n", conf_name_output_suffix)
+printf("# [invert_contract_v3] Clover Inverter\n")
+printf("#\t light quark mass               = %g\n", mq_l)
+printf("#\t light quark kappa              = %g\n", kappa_l)
+printf("#\t strange quark mass               = %g\n", mq_s)
+printf("#\t strange quark kappa              = %g\n", kappa_s)
+printf("#\t Boundary condition = %d, %d, %d, %d\n", quark_bc[1], quark_bc[2], quark_bc[3], quark_bc[4])
+
+-- initialize param set for writing propagators
+write_param = {
+    ["m_q"]         = mq_l,
+    ["c_sw"]        = csw,
+    ["ferm_bc"]     = quark_bc,
+    ["ensemble"]    = "beta3.31_2hex_24c48_ml-0.09530_mh-0.04",
+    ["cfg"]         = nconf,
+    ["ape_alpha"]   = ape_alpha,
+    ["ape_n"]       = ape_n,
+    ["ape_accu"]    = ape_accu,
+    ["ape_maxiter"] = ape_maxiter,
+    ["wup_alpha"]   = wup_alpha,
+    ["wup_n"]       = wup_n,
+    ["action_type"] = "clover",
+    ["stout_rho"]   = stout_rho,
+    ["stout_n"]     = stout_n,
+    ["solver_eps"]  = mg_max_relerr,
+    ["src_pos"]     = {-1, -1, -1},
+    ["src_t"]       = -1
+}
+
+
+-- ************************************************************************************
+-- * INVERT STOCHASTIC SOURCE
+-- ************************************************************************************
+
+
+D = qcd.lattice{16}
+--[[
+for i_sample = 0, nsample - 1 do
+
+
+
+    for i_src, v_src in ipairs(source_locations) do
+
+        
+        local b1_xi = {}
+        local w1_xi = {}
+        local b1_phi = {}
+        local b2_phi = {}
+        local w1_phi = {}
+        local w2_phi = {}
+        local w3_phi = {}
+        local w4_phi = {}
+
+        local t   = v_src["t"]
+        local pos = v_src["pos"]
+        printf("# [invert_contract_v3] base source location[%d] = (%d, %d, %d) t=%d\n", i_src, pos[1], pos[2], pos[3], t)
+        local source_timeslice = t
+
+
+        local source_position = vector.int(4)
+        source_position[0] = pos[1]
+        source_position[1] = pos[2]
+        source_position[2] = pos[3]
+        source_position[3] = t
+
+        --boundary phase                                                              
+        boundary_phase = vector.complex(D[0])                                         
+        for it = 0, t - 1 do               
+
+            boundary_phase[it] = -1                                                     
+        end                                                                           
+        for it = t, D[0]-1 do                                                
+         
+            boundary_phase[it] = 1                                                      
+        end
+
+
+        filename1 = string.format("%s.%.4d.x%.2dy%.2dz%.2dt%.2d.%.5d.aff", "contract_mb_factors", nconf, pos[1], pos[2], pos[3], t, i_sample)
+
+ 
+        aff_reader1 = qcd.aff.Reader(filename1)
+       
+
+        for i_pf1, pf1 in ipairs(pf1_list) do
+
+            b1_phi[i_pf1] = {}
+            b2_phi[i_pf1] = {}
+            w1_phi[i_pf1] = {}
+            w2_phi[i_pf1] = {}
+            w3_phi[i_pf1] = {}
+            w4_phi[i_pf1] = {}
+
+            for i_gf1, gf1 in ipairs(baryon_vertex_list) do
+                
+                local gf1_tag           =   gf1.tag
+                local gf1_id            =   gf1.gamma[1]
+                local gf1_sign          =   gf1.gamma[2]
+                local gf1_adjoint_sign  =   gf1.gamma[3]   
+            
+                b1_phi[i_pf1][i_gf1] = {}
+                b2_phi[i_pf1][i_gf1] = {}
+                w1_phi[i_pf1][i_gf1] = {}
+                w2_phi[i_pf1][i_gf1] = {}
+                w3_phi[i_pf1][i_gf1] = {}
+                w4_phi[i_pf1][i_gf1] = {}
+
+                local temp1 = {}
+                for icol = 0, 191 do
+                    write_param["filename"] =   filename1
+                    write_param["name"]     =   "phi-gf1-U--U"
+                    write_param["nconf"]    =   nconf
+                    write_param["src_t"]    =   t
+                    write_param["i_sample"] =   i_sample
+                    write_param["pf1"]      =   pf1
+                    write_param["icol"]     =   icol
+                    write_param["gf1_id"]   =   gf1_id
+                    temp1[icol]             =   read_factors_aff(write_param, aff_reader1)
+
+                end
+
+                for ispin1 = 0, 3 do
+
+                    b1_phi[i_pf1][i_gf1][ispin1] = {}
+                    b2_phi[i_pf1][i_gf1][ispin1] = {}
+                    for ispin2 = 0, 3 do
+                        
+                        b1_phi[i_pf1][i_gf1][ispin1][ispin2] = D:DiracFermion()
+                        b2_phi[i_pf1][i_gf1][ispin1][ispin2] = D:DiracFermion()
+                        for icolor = 0, 2 do
+                            
+                            for ispin3 = 0, 3 do
+
+                                printf("#reading factors for contraction  for gamma_f1 = %d, ispin1 = %d, ispin2 = %d, ispin3 = %d, icol = %d, pf1 = (%d, %d, %d)\n", 
+                                        gf1_id, ispin1, ispin2, ispin3,
+                                        icolor, pf1[1], pf1[2], pf1[3])    
+                                for it = 0, D[0]-1 do
+                                    b1_phi[i_pf1][i_gf1][ispin1][ispin2][{it,c=icolor,d=ispin3}] = temp1[icolor + 3* ispin3 + 12*ispin2 + 48*ispin1][it]
+                                    b2_phi[i_pf1][i_gf1][ispin1][ispin2][{it,c=icolor,d=ispin3}] = temp1[icolor + 3* ispin1 + 12*ispin2 + 48*ispin3][it]
+                                              
+                                end --loop over it
+                            end -- loop over spin3
+                        end -- loop over icolor
+                    end -- loop over ispin2
+                end -- loop over ispin1
+               
+                for i_pi2, pi2 in ipairs(pi2_list) do
+
+                    w1_phi[i_pf1][i_gf1][i_pi2] = {}
+                    w2_phi[i_pf1][i_gf1][i_pi2] = {}
+                    w3_phi[i_pf1][i_gf1][i_pi2] = {}
+                    w4_phi[i_pf1][i_gf1][i_pi2] = {}
+
+                    local temp4 = {}
+                    local temp5 = {}
+                    for icol = 0, 191 do
+                        write_param["name"]     =   "phi-gf1-U--T"
+                        write_param["nconf"]    =   nconf
+                        write_param["src_t"]    =   t
+                        write_param["i_sample"] =   i_sample
+                        write_param["pf1"]      =   pf1
+                        write_param["pi2"]      =   pi2
+                        write_param["icol"]     =   icol
+                        write_param["gf1_id"]   =   gf1_id
+                        temp4[icol]             =   read_factors_aff(write_param, aff_reader1)
+
+                        write_param["name"]     =   "phi-gf1-T--U"
+                        write_param["nconf"]    =   nconf
+                        write_param["src_t"]    =   t
+                        write_param["i_sample"] =   i_sample
+                        write_param["pf1"]      =   pf1
+                        write_param["pi2"]      =   pi2
+                        write_param["icol"]     =   icol
+                        write_param["gf1_id"]   =   gf1_id
+                        temp5[icol]             =   read_factors_aff(write_param, aff_reader1)
+
+                        --print(temp2)                                        
+                    end
+
+                    for ispin1 = 0, 3 do
+
+                        w1_phi[i_pf1][i_gf1][i_pi2][ispin1] = {}
+                        w2_phi[i_pf1][i_gf1][i_pi2][ispin1] = {}
+                        w3_phi[i_pf1][i_gf1][i_pi2][ispin1] = {}
+                        w4_phi[i_pf1][i_gf1][i_pi2][ispin1] = {}
+
+                        for ispin2 = 0, 3 do
+                            
+                            w1_phi[i_pf1][i_gf1][i_pi2][ispin1][ispin2] = D:DiracFermion()
+                            w2_phi[i_pf1][i_gf1][i_pi2][ispin1][ispin2] = D:DiracFermion()
+                            w3_phi[i_pf1][i_gf1][i_pi2][ispin1][ispin2] = D:DiracFermion()
+                            w4_phi[i_pf1][i_gf1][i_pi2][ispin1][ispin2] = D:DiracFermion()
+                            
+                        
+                            for icolor = 0, 2 do
+                                
+                                for ispin3 = 0, 3 do
+
+                                    printf("#reading factors for contraction  for gamma_f1 = %d, ispin1 = %d, ispin2 = %d, ispin3 = %d, icol = %d,\n pf1 = (%d, %d, %d), pi2 = (%d, %d, %d)\n", 
+                                            gf1_id, ispin1, ispin2, ispin3,
+                                            icolor, pf1[1], pf1[2], pf1[3], pi2[1], pi2[2], pi2[3])    
+                                    for it = 0, D[0]-1 do
+                                        w1_phi[i_pf1][i_gf1][i_pi2][ispin1][ispin2][{it,c=icolor,d=ispin3}] = temp4[icolor + 3* ispin3 + 12*ispin2 + 48*ispin1][it]
+                                        w2_phi[i_pf1][i_gf1][i_pi2][ispin1][ispin2][{it,c=icolor,d=ispin3}] = temp4[icolor + 3* ispin1 + 12*ispin2 + 48*ispin3][it]
+                                        w3_phi[i_pf1][i_gf1][i_pi2][ispin1][ispin2][{it,c=icolor,d=ispin3}] = temp5[icolor + 3* ispin3 + 12*ispin2 + 48*ispin1][it]
+                                        w4_phi[i_pf1][i_gf1][i_pi2][ispin1][ispin2][{it,c=icolor,d=ispin3}] = temp5[icolor + 3* ispin1 + 12*ispin2 + 48*ispin3][it]
+                                    end
+                                end
+                            end
+                        end
+                    end    
+                end
+
+            end -- loop over gf1
+        end -- loop over pf1
+
+        temp1 = nil
+        temp4 = nil
+        temp5 = nil
+        local gf2_list = { {tag="g5", gamma={15, 1, 1}}, {tag="id", gamma={0, 1, 1}} }
+        for i_pi2, pi2 in ipairs(pi2_list) do
+            
+            b1_xi[i_pi2] = {}
+
+            for i_pf2, pf2 in ipairs(pf2_list) do
+
+                b1_xi[i_pi2][i_pf2] = {}
+
+                for i_gf2, gf2 in ipairs(gf2_list) do
+                    
+                    local gf2_tag           =   gf2.tag
+                    local gf2_id            =   gf2.gamma[1]
+                    local gf2_sign          =   gf2.gamma[2]
+                    local gf2_adjoint_sign  =   gf2.gamma[3]   
+                    
+                    b1_xi[i_pi2][i_pf2][i_gf2]  =   {}
+                    
+                    local temp1 = {}
+                    for icol = 0, 11 do
+
+                        write_param["name"]     =   "xi-gf2-T"
+                        write_param["nconf"]    =   nconf
+                        write_param["src_t"]    =   t
+                        write_param["i_sample"] =   i_sample
+                        write_param["pi2"]      =   pi2
+                        write_param["pf2"]      =   pf2
+                        write_param["icol"]     =   icol
+                        write_param["gf2_id"]   =   gf2_id
+                        temp1[icol]  =   read_factors_aff(write_param, aff_reader1)
+                    end -- of loop icol
+                    
+                    for icolor = 0, 2 do
+                        
+                        b1_xi[i_pi2][i_pf2][i_gf2][icolor] = {}
+                        for ispin = 0, 3 do
+                            printf("#reading factors for contraction  for ispin = %d, icol = %d, gf2 = %d, pf2 = (%d, %d, %d), pi2 = (%d, %d, %d)\n", 
+                                    ispin,icolor, gf2_id, pf2[1], pf2[2], pf2[3], pi2[1], pi2[2], pi2[3])    
+
+                            b1_xi[i_pi2][i_pf2][i_gf2][icolor][ispin] = {}
+                            for it=0, D[0]-1 do
+                                b1_xi[i_pi2][i_pf2][i_gf2][icolor][ispin][it] = temp1[ispin + 4*icolor][it]
+                            end -- loop over it
+                        end -- loop over ispin
+                    end -- loop over icolor
+                end --loop over gf2
+            end --of loop pf2
+        end -- of loop pi2
+
+        temp1 = nil
+        for i_pf2, pf2 in ipairs(pf2_list) do
+
+            w1_xi[i_pf2] = {}
+            
+            for i_gf2, gf2 in ipairs(gf2_list) do
+                
+                local gf2_tag           =   gf2.tag
+                local gf2_id            =   gf2.gamma[1]
+                local gf2_sign          =   gf2.gamma[2]
+                local gf2_adjoint_sign  =   gf2.gamma[3]   
+                
+                w1_xi[i_pf2][i_gf2]  =   {}
+
+                local temp = {}
+                for icol = 0, 11 do
+
+                    write_param["name"]     =   "xi-gf2-U"
+                    write_param["nconf"]    =   nconf
+                    write_param["src_t"]    =   t
+                    write_param["i_sample"] =   i_sample
+                    write_param["pf2"]      =   pf2
+                    write_param["icol"]     =   icol
+                    write_param["gf2_id"]   =   gf2_id
+                    temp[icol]  =   read_factors_aff(write_param, aff_reader1)
+                end -- of loop icol
+             
+                w1_xi[i_pf2][i_gf2]  =   {}
+                
+                for icolor = 0, 2 do
+                    
+                    w1_xi[i_pf2][i_gf2][icolor] = {}
+                    for ispin = 0, 3 do
+                        printf("#reading factors for contraction  for ispin = %d, icol = %d, gf2 = %d, pf2 = (%d, %d, %d)\n", ispin,
+                                icolor, gf2_id, pf2[1], pf2[2], pf2[3])    
+
+                        w1_xi[i_pf2][i_gf2][icolor][ispin] = {}
+                        for it=0, D[0]-1 do
+                            w1_xi[i_pf2][i_gf2][icolor][ispin][it] = temp[ispin + 4*icolor][it]
+                        end -- loop over it
+                    end -- loop over ispin
+                end -- loop over icolor
+            end --loop over gf2
+        end --of loop pf2
+      
+
+        temp = nil
+
+        aff_reader1:close()
+        local name = string.format("%s.%.4d.x%.2dy%.2dz%.2dt%.2d.%.5d.aff", "BW_piN_piN", nconf, pos[1], pos[2], pos[3], t, i_sample)
+        printf("# MxB - MxB output file %s\n", name)
+        local aw, am = qcd.aff.Writer(name)
+        name = nil
+        --t_axis = #dims-1
+
+        for i_pi2, pi2 in ipairs(pi2_list) do
+            
+            for i_pf2, pf2 in ipairs(pf2_list) do
+
+                for i_pf1, pf1 in ipairs(pf1_list) do
+
+                    for i_gf2, gf2 in ipairs(gf2_list) do
+
+                        local gf2_tag           =   gf2.tag
+                        local gf2_id            =   gf2.gamma[1]
+                        local gf2_sign          =   gf2.gamma[2]
+                        local gf2_adjoint_sign  =   gf2.gamma[3]   
+
+                        local  pi1 = { -( pf1[1] + pf2[1] + pi2[1] ),                                
+                                       -( pf1[2] + pf2[2] + pi2[2] ),                                
+                                       -( pf1[3] + pf2[3] + pi2[3] ) }
+
+                        local px = (2 * math.pi * pi1[1]) / 8
+                        local py = (2 * math.pi * pi1[2]) / 8
+                        local pz = (2 * math.pi * pi1[3]) / 8
+                        local w = complex(0,1)*( (source_position[0]) * px +
+                                    (source_position[1]) * py +
+                                    (source_position[2]) * pz)
+                              w = w:exp()
+
+                        for i_gf1, gf1 in ipairs(baryon_vertex_list) do
+    
+                            local gf1_tag           =   gf1.tag
+                            local gf1_id            =   gf1.gamma[1]
+                            local gf1_sign          =   gf1.gamma[2]
+                            local gf1_adjoint_sign  =   gf1.gamma[3]   
+                        
+                            for i_gi1, gi1 in ipairs(baryon_vertex_list) do
+
+                                local gi1_tag           =   gi1.tag
+                                local gi1_id            =   gi1.gamma[1]
+                                local gi1_sign          =   gi1.gamma[2]
+                                local gi1_adjoint_sign  =   gi1.gamma[3]   
+
+                                local b1 = D:DiracPropagator()
+                                local b1_temp_fermion = D:DiracFermion()
+                                local b1_temp_prop = D:DiracPropagator()
+                                
+                                local b2 = D:DiracPropagator()
+                                local b2_temp_fermion = D:DiracFermion()
+                                local b2_temp_prop = D:DiracPropagator()
+
+                                local w1 = D:DiracPropagator()
+                                local w1_temp_fermion = D:DiracFermion()
+                                local w1_temp_prop = D:DiracPropagator()
+                                
+                                local w2 = D:DiracPropagator()
+                                local w2_temp_fermion = D:DiracFermion()
+                                local w2_temp_prop = D:DiracPropagator()
+                                
+                                local w3 = D:DiracPropagator()
+                                local w3_temp_fermion = D:DiracFermion()
+                                local w3_temp_prop = D:DiracPropagator()
+                                
+                                local w4 = D:DiracPropagator()
+                                local w4_temp_fermion = D:DiracFermion()
+                                local w4_temp_prop = D:DiracPropagator()
+                                
+
+                                for ispin1 = 0, 3 do
+                                
+                                    for ispin2 = 0, 3 do
+                                        
+                                        for icol = 0, 2 do
+                                            
+                                            for ispin = 0, 3 do
+                                        
+                                                local b1_temporary_var = D:DiracFermion()
+                                                local b2_temporary_var = D:DiracFermion()
+                                                local w1_temporary_var = D:DiracFermion()
+                                                local w2_temporary_var = D:DiracFermion()
+                                                local w3_temporary_var = D:DiracFermion()
+                                                local w4_temporary_var = D:DiracFermion()
+
+
+                                                for it = 0, D[0] -1  do
+
+                                                    D:Subset{axis=0, position=it}:where(function()
+                                                             b1_temporary_var:set(b1_phi[i_pf1][i_gf1][ispin1][ispin2] * 
+                                                                 b1_xi[i_pi2][i_pf2][i_gf2][icol][ispin][it])
+                                                             end)
+
+                                                    D:Subset{axis=0, position=it}:where(function()
+                                                             b2_temporary_var:set(b2_phi[i_pf1][i_gf1][ispin1][ispin2] * 
+                                                                 b1_xi[i_pi2][i_pf2][i_gf2][icol][ispin][it])
+                                                             end)
+
+                                                    D:Subset{axis=0, position=it}:where(function()
+                                                             w1_temporary_var:set(w1_phi[i_pf1][i_gf1][i_pi2][ispin1][ispin2] * 
+                                                                 w1_xi[i_pf2][i_gf2][icol][ispin][it])
+                                                             end)
+
+                                                    D:Subset{axis=0, position=it}:where(function()
+                                                             w2_temporary_var:set(w2_phi[i_pf1][i_gf1][i_pi2][ispin1][ispin2] * 
+                                                                 w1_xi[i_pf2][i_gf2][icol][ispin][it])
+                                                             end)
+                                                    D:Subset{axis=0, position=it}:where(function()
+                                                             w3_temporary_var:set(w3_phi[i_pf1][i_gf1][i_pi2][ispin1][ispin2] * 
+                                                                 w1_xi[i_pf2][i_gf2][icol][ispin][it])
+                                                             end)
+
+                                                    D:Subset{axis=0, position=it}:where(function()
+                                                             w4_temporary_var:set(w4_phi[i_pf1][i_gf1][i_pi2][ispin1][ispin2] * 
+                                                                 w1_xi[i_pf2][i_gf2][icol][ispin][it])
+                                                             end)
+                                                    
+                                                end
+
+
+                                                b1_temp_prop[{c=icol, d=ispin}] = b1_temporary_var
+                                                b2_temp_prop[{c=icol, d=ispin}] = b2_temporary_var
+                                                w1_temp_prop[{c=icol, d=ispin}] = w1_temporary_var
+                                                w2_temp_prop[{c=icol, d=ispin}] = w2_temporary_var
+                                                w3_temp_prop[{c=icol, d=ispin}] = w3_temporary_var
+                                                w4_temp_prop[{c=icol, d=ispin}] = w4_temporary_var
+
+                                            end
+                                        end
+                                        b1_temp_fermion[{c=0, d=ispin2}] = (b1_temp_prop * (-1 * gamma{n=10} *gamma{n=gi1_id})):spintrace():trace()
+                                        b2_temp_fermion[{c=0, d=ispin2}] = (b2_temp_prop * (-1 * gamma{n=10} *gamma{n=gi1_id})):spintrace():trace()                                 
+                                        w1_temp_fermion[{c=0, d=ispin2}] = (w1_temp_prop * (-1 * gamma{n=10} *gamma{n=gi1_id})):spintrace():trace()
+                                        w2_temp_fermion[{c=0, d=ispin2}] = (w2_temp_prop * (-1 * gamma{n=10} *gamma{n=gi1_id})):spintrace():trace()                                 
+                                        w3_temp_fermion[{c=0, d=ispin2}] = (w3_temp_prop * (-1 * gamma{n=10} *gamma{n=gi1_id})):spintrace():trace()
+                                        w4_temp_fermion[{c=0, d=ispin2}] = (w4_temp_prop * (-1 * gamma{n=10} *gamma{n=gi1_id})):spintrace():trace()                                 
+
+                                    end
+                                    b1[{c=0, d=ispin1}] = b1_temp_fermion
+                                    b2[{c=0, d=ispin1}] = b2_temp_fermion
+                                    w1[{c=0, d=ispin1}] = w1_temp_fermion
+                                    w2[{c=0, d=ispin1}] = w2_temp_fermion
+                                    w3[{c=0, d=ispin1}] = w3_temp_fermion
+                                    w4[{c=0, d=ispin1}] = w4_temp_fermion
+                                
+                                end
+
+				                --Extracting each spin projection of the result dirac propagator
+  				                      local b1_spin_proj = {}
+                                local b2_spin_proj = {}
+                                local w1_spin_proj = {}
+                                local w2_spin_proj = {}
+                                local w3_spin_proj = {}
+                                local w4_spin_proj = {}
+  
+                                for ispin1 = 0, 3 do
+    
+                                  b1_spin_proj[ispin1] = {}
+                                  b2_spin_proj[ispin1] = {} 
+                                  w1_spin_proj[ispin1] = {} 
+                                  w2_spin_proj[ispin1] = {} 
+                                  w3_spin_proj[ispin1] = {} 
+                                  w4_spin_proj[ispin1] = {} 
+
+                                  for ispin2 = 0, 3 do
+        					            
+                                      local dv_b1 = D:DiracFermion()
+                                      local dv_b2 = D:DiracFermion()
+                                      local dv_w1 = D:DiracFermion()
+                                      local dv_w2 = D:DiracFermion()
+                                      local dv_w3 = D:DiracFermion()
+                                      local dv_w4 = D:DiracFermion()
+                            
+                                      local corr_b1 = D:Complex()
+                                      local corr_b2 = D:Complex()
+                                      local corr_w1 = D:Complex()
+                                      local corr_w2 = D:Complex()
+                                      local corr_w3 = D:Complex()
+                                      local corr_w4 = D:Complex()
+              
+                                      dv_b1 = b1[{c=0, d=ispin2}]
+                                      dv_b2 = b2[{c=0, d=ispin2}]
+                                      dv_w1 = w1[{c=0, d=ispin2}]
+                                      dv_w2 = w2[{c=0, d=ispin2}]
+                                      dv_w3 = w3[{c=0, d=ispin2}]
+                                      dv_w4 = w4[{c=0, d=ispin2}]
+
+                                      corr_b1 = dv_b1[{c=0, d=ispin1}]
+                                      corr_b2 = dv_b2[{c=0, d=ispin1}]
+                                      corr_w1 = dv_w1[{c=0, d=ispin1}]
+                                      corr_w2 = dv_w2[{c=0, d=ispin1}]
+                                      corr_w3 = dv_w3[{c=0, d=ispin1}]
+                                      corr_w4 = dv_w4[{c=0, d=ispin1}]
+
+                                      b1_spin_proj[ispin1][ispin2]  =  corr_b1
+                                      b2_spin_proj[ispin1][ispin2]  =  corr_b2
+                                      w1_spin_proj[ispin1][ispin2]  =  corr_w1
+                                      w2_spin_proj[ispin1][ispin2]  =  corr_w2
+                                      w3_spin_proj[ispin1][ispin2]  =  corr_w3
+                                      w4_spin_proj[ispin1][ispin2]  =  corr_w4
+
+            
+        					                    corr_b1 = nil
+                                      corr_b2 = nil
+                                      corr_w1 = nil
+                                      corr_w2 = nil
+                                      corr_w3 = nil
+                                      corr_w4 = nil
+                                      dv_b1 = nil
+                                      dv_b2 = nil
+                                      dv_w1 = nil
+                                      dv_w2 = nil
+                                      dv_w3 = nil
+                                      dv_w4 = nil
+                                  end
+                                end
+
+
+    
+
+                                for index1 = 0, 3 do
+                                    for index2 = 0, 3 do
+                                        
+                                        local proj_b1 = string.format('b1/s1%.2d/s2%.2d/pi2x%.1dpi2y%.1dpi2z%.1d/pf1x%.1dpf1y%.1dpf1z%.1d/pf2x%.1dpf2y%.1dpf2z%.1d/gi1%.2d/gf1%.2d/gf2%.2d',
+                                                                        index1, index2, pi2[1], pi2[2], pi2[3], pf1[1], pf1[2], pf1[3], pf2[1], pf2[2], pf2[3], 
+                                                                        gi1_id, gf1_id, gf2_id)
+                                        local proj_b2 = string.format('b2/s1%.2d/s2%.2d/pi2x%.1dpi2y%.1dpi2z%.1d/pf1x%.1dpf1y%.1dpf1z%.1d/pf2x%.1dpf2y%.1dpf2z%.1d/gi1%.2d/gf1%.2d/gf2%.2d',
+                                                                        index1, index2,pi2[1], pi2[2], pi2[3], pf1[1], pf1[2], pf1[3], pf2[1], pf2[2], pf2[3], 
+                                                                        gi1_id, gf1_id, gf2_id)
+
+                                        local proj_w1 = string.format('w1/s1%.2d/s2%.2d/pi2x%.1dpi2y%.1dpi2z%.1d/pf1x%.1dpf1y%.1dpf1z%.1d/pf2x%.1dpf2y%.1dpf2z%.1d/gi1%.2d/gf1%.2d/gf2%.2d',
+                                                                        index1, index2,pi2[1], pi2[2], pi2[3], pf1[1], pf1[2], pf1[3], pf2[1], pf2[2], pf2[3], 
+                                                                        gi1_id, gf1_id, gf2_id)
+                                        local proj_w2 = string.format('w2/s1%.2d/s2%.2d/pi2x%.1dpi2y%.1dpi2z%.1d/pf1x%.1dpf1y%.1dpf1z%.1d/pf2x%.1dpf2y%.1dpf2z%.1d/gi1%.2d/gf1%.2d/gf2%.2d',
+                                                                        index1, index2,pi2[1], pi2[2], pi2[3], pf1[1], pf1[2], pf1[3], pf2[1], pf2[2], pf2[3], 
+                                                                        gi1_id, gf1_id, gf2_id)
+                                        local proj_w3 = string.format('w3/s1%.2d/s2%.2d/pi2x%.1dpi2y%.1dpi2z%.1d/pf1x%.1dpf1y%.1dpf1z%.1d/pf2x%.1dpf2y%.1dpf2z%.1d/gi1%.2d/gf1%.2d/gf2%.2d',
+                                                                        index1, index2,pi2[1], pi2[2], pi2[3], pf1[1], pf1[2], pf1[3], pf2[1], pf2[2], pf2[3], 
+                                                                        gi1_id, gf1_id, gf2_id)
+                                        local proj_w4 = string.format('w4/s1%.2d/s2%.2d/pi2x%.1dpi2y%.1dpi2z%.1d/pf1x%.1dpf1y%.1dpf1z%.1d/pf2x%.1dpf2y%.1dpf2z%.1d/gi1%.2d/gf1%.2d/gf2%.2d',
+                                                                        index1, index2,pi2[1], pi2[2], pi2[3], pf1[1], pf1[2], pf1[3], pf2[1], pf2[2], pf2[3], 
+                                                                        gi1_id, gf1_id, gf2_id)
+
+                                        local b1_res = (w * b1_spin_proj[index1][index2]):sum(D:MultiSet(D[0], D:pcoord(0)))
+                                        local b2_res = (w * b2_spin_proj[index1][index2]):sum(D:MultiSet(D[0], D:pcoord(0)))
+                                        local w1_res = (w * w1_spin_proj[index1][index2]):sum(D:MultiSet(D[0], D:pcoord(0)))
+                                        local w2_res = (w * w2_spin_proj[index1][index2]):sum(D:MultiSet(D[0], D:pcoord(0)))
+                                        local w3_res = (w * w3_spin_proj[index1][index2]):sum(D:MultiSet(D[0], D:pcoord(0)))
+                                        local w4_res = (w * w4_spin_proj[index1][index2]):sum(D:MultiSet(D[0], D:pcoord(0)))
+
+                                                                                          
+                                        local b1_q2  = vector.complex(D[0])
+                                        local b2_q2  = vector.complex(D[0])
+                                        local w1_q2  = vector.complex(D[0])
+                                        local w2_q2  = vector.complex(D[0])
+                                        local w3_q2  = vector.complex(D[0])
+                                        local w4_q2  = vector.complex(D[0])
+
+                                        for i = 0, D[0] - 1 do
+                                            it = (i + t)%D[0]
+                                        
+                                        
+                                            b1_q2[i] = -1*b1_res[it] * boundary_phase[it]
+                                            b2_q2[i] = -1*b2_res[it] * boundary_phase[it]
+                                            w1_q2[i] = -1*w1_res[it] * boundary_phase[it]
+                                            w2_q2[i] = -1*w2_res[it] * boundary_phase[it]
+                                            w3_q2[i] = -1*w3_res[it] * boundary_phase[it]
+                                            w4_q2[i] = -1*w4_res[it] * boundary_phase[it]
+
+                                        end
+                                        aw:write(proj_b1, b1_q2)
+                                        aw:write(proj_b2, b2_q2)
+                                        aw:write(proj_w1, w1_q2)
+                                        aw:write(proj_w2, w2_q2)
+                                        aw:write(proj_w3, w3_q2)
+                                        aw:write(proj_w4, w4_q2)
+                                        
+                                        b1_q2=nil
+                                        b2_q2=nil
+                                        b1_res=nil
+                                        b2_res=nil
+                                        w1_q2=nil
+                                        w2_q2=nil
+                                        w1_res=nil
+                                        w2_res=nil
+                                        w3_q2=nil
+                                        w4_q2=nil
+                                        w3_res=nil
+                                        w4_res=nil
+                                      
+
+                                    end
+                                end
+                                    --qcd.save_momproj(aw, '', res, src0, pf1_list, t_axis, 1, {ft_sign=1} )
+                                b1_temp_fermion = nil
+                                b2_temp_fermion = nil
+                                w1_temp_fermion = nil
+                                w2_temp_fermion = nil
+                                w3_temp_fermion = nil
+                                w4_temp_fermion = nil
+
+                            end
+
+                         end
+                    end
+                end
+            end
+        end
+        aw:close()
+    end  -- of loop on base source locations
+end -- of loop on samples
+]]--
+
+for i_sample = 0, nsample_oet - 1 do
+
+
+
+    for i_src, v_src in ipairs(source_locations) do
+
+        
+        local z1_xi = {}
+        local z1_phi = {}
+        local z2_phi = {}
+        local z3_phi = {}
+        local z4_phi = {}
+
+        local t   = v_src["t"]
+        local pos = v_src["pos"]
+        printf("# [invert_contract_v3] base source location[%d] = (%d, %d, %d) t=%d\n", i_src, pos[1], pos[2], pos[3], t)
+        local source_timeslice = t
+
+
+        local source_position = vector.int(4)
+        source_position[0] = pos[1]
+        source_position[1] = pos[2]
+        source_position[2] = pos[3]
+        source_position[3] = t
+      
+        --boundary phase                                                              
+        boundary_phase = vector.complex(D[0])                                         
+        for it = 0, t - 1 do               
+
+            boundary_phase[it] = -1                                                     
+        end                                                                           
+        for it = t, D[0]-1 do                                                
+         
+            boundary_phase[it] = 1                                                      
+        end
+
+
+        filename2 = string.format("%s.%.4d.x%.2dy%.2dz%.2dt%.2d.%.5d.aff", "contract_oet_mb_factors", nconf, pos[1], pos[2], pos[3], t, i_sample)
+ 
+        aff_reader2 = qcd.aff.Reader(filename2)
+
+        for i_pf1, pf1 in ipairs(pf1_list) do
+
+            z1_phi[i_pf1] = {}
+            z2_phi[i_pf1] = {}
+            z3_phi[i_pf1] = {}
+            z4_phi[i_pf1] = {}
+
+            for i_gf1, gf1 in ipairs(baryon_vertex_list) do
+                
+                local gf1_tag           =   gf1.tag
+                local gf1_id            =   gf1.gamma[1]
+                local gf1_sign          =   gf1.gamma[2]
+                local gf1_adjoint_sign  =   gf1.gamma[3]   
+            
+                z1_phi[i_pf1][i_gf1] = {}
+                z2_phi[i_pf1][i_gf1] = {}
+                z3_phi[i_pf1][i_gf1] = {}
+                z4_phi[i_pf1][i_gf1] = {}
+
+               
+                for kspin = 0, 3 do
+ 
+                  local temp2 = {}
+                  z1_phi[i_pf1][i_gf1][kspin] = {}
+                  z2_phi[i_pf1][i_gf1][kspin] = {}
+                  z3_phi[i_pf1][i_gf1][kspin] = {}
+                  z4_phi[i_pf1][i_gf1][kspin] = {}
+                  
+                  for icol = 0, 191 do
+
+                    write_param["name"]     =   "phi--gf1-U-U"
+                    write_param["nconf"]    =   nconf
+                    write_param["src_t"]    =   t
+                    write_param["i_sample"] =   i_sample
+                    write_param["pf1"]      =   pf1
+                    write_param["icol"]     =   icol
+                    write_param["gf1_id"]   =   gf1_id
+                    write_param["kspin"]    =   kspin
+                    temp2[icol]             =   read_factors_aff(write_param, aff_reader2)
+
+                  end
+
+                  for ispin1 = 0, 3 do
+
+                    z1_phi[i_pf1][i_gf1][kspin][ispin1] = {}
+                    z2_phi[i_pf1][i_gf1][kspin][ispin1] = {}
+                    for ispin2 = 0, 3 do
+                        
+                        z1_phi[i_pf1][i_gf1][kspin][ispin1][ispin2] = D:DiracFermion()
+                        z2_phi[i_pf1][i_gf1][kspin][ispin1][ispin2] = D:DiracFermion()
+                        for icolor = 0, 2 do
+                            
+                            for ispin3 = 0, 3 do
+
+                                printf("#reading oet factors for contraction  for gamma_f1 = %d, ispin1 = %d, ispin2 = %d, ispin3 = %d, icol = %d, pf1 = (%d, %d, %d)\n", 
+                                        gf1_id, ispin1, ispin2, ispin3,
+                                        icolor, pf1[1], pf1[2], pf1[3])    
+                                for it = 0, D[0]-1 do
+                                    z1_phi[i_pf1][i_gf1][kspin][ispin1][ispin2][{it,c=icolor,d=ispin3}] = temp2[icolor + 3* ispin2 + 12*ispin3 + 48*ispin1][it]
+                                    z2_phi[i_pf1][i_gf1][kspin][ispin1][ispin2][{it,c=icolor,d=ispin3}] = temp2[icolor + 3* ispin2 + 12*ispin3 + 48*ispin1][it]
+                                              
+                                end --loop over it
+                            end -- loop over spin3
+                        end -- loop over icolor
+                    end -- loop over ispin2
+                  end -- loop over ispin1
+                
+
+
+                  local temp3 = {}
+                  for icol = 0, 191 do
+                    write_param["filename"] =   filename2
+                    write_param["name"]     =   "phi-gf1-U--U"
+                    write_param["nconf"]    =   nconf
+                    write_param["src_t"]    =   t
+                    write_param["i_sample"] =   i_sample
+                    write_param["pf1"]      =   pf1
+                    write_param["icol"]     =   icol
+                    write_param["gf1_id"]   =   gf1_id
+                    write_param["kspin"]    =   kspin
+                    temp3[icol]             =   read_factors_aff(write_param, aff_reader2)
+
+                  end
+
+                  for ispin1 = 0, 3 do
+
+                    z3_phi[i_pf1][i_gf1][kspin][ispin1] = {}
+                    z4_phi[i_pf1][i_gf1][kspin][ispin1] = {}
+                    for ispin2 = 0, 3 do
+                        
+                        z3_phi[i_pf1][i_gf1][kspin][ispin1][ispin2] = D:DiracFermion()
+                        z4_phi[i_pf1][i_gf1][kspin][ispin1][ispin2] = D:DiracFermion()
+                        for icolor = 0, 2 do
+                            
+                            for ispin3 = 0, 3 do
+
+                                printf("#reading oet factors for contraction  for gamma_f1 = %d, ispin1 = %d, ispin2 = %d, ispin3 = %d, icol = %d, pf1 = (%d, %d, %d)\n", 
+                                        gf1_id, ispin1, ispin2, ispin3,
+                                        icolor, pf1[1], pf1[2], pf1[3])    
+                                for it = 0, D[0]-1 do
+                                    z3_phi[i_pf1][i_gf1][kspin][ispin1][ispin2][{it,c=icolor,d=ispin3}] = temp3[icolor + 3* ispin2 + 12*ispin1 + 48*ispin3][it]
+                                    z4_phi[i_pf1][i_gf1][kspin][ispin1][ispin2][{it,c=icolor,d=ispin3}] = temp3[icolor + 3* ispin2 + 12*ispin1 + 48*ispin3][it]
+                                              
+                                end --loop over it
+                            end -- loop over spin3
+                        end -- loop over icolor
+                    end -- loop over ispin2
+                  end -- loop over ispin1
+                end -- loop over kspin (spin dilution)
+
+            end -- loop over gf1
+        end -- loop over pf1
+
+
+        temp2 = nil
+        temp3 = nil
+      
+       
+        local gf2_list = { {tag="g5", gamma={15, 1, 1}}, {tag="id", gamma={0, 1, 1}} }
+        for i_pi2, pi2 in ipairs(pi2_list) do
+            
+     
+            z1_xi[i_pi2] = {}
+
+            for i_pf2, pf2 in ipairs(pf2_list) do
+
+               
+                z1_xi[i_pi2][i_pf2] = {}
+
+                for i_gf2, gf2 in ipairs(gf2_list) do
+                    
+                    local gf2_tag           =   gf2.tag
+                    local gf2_id            =   gf2.gamma[1]
+                    local gf2_sign          =   gf2.gamma[2]
+                    local gf2_adjoint_sign  =   gf2.gamma[3]   
+                    
+                  
+                    z1_xi[i_pi2][i_pf2][i_gf2]  =   {}
+                    
+                    for kspin = 0, 3 do 
+
+                      z1_xi[i_pi2][i_pf2][i_gf2][kspin] = {}
+                      local temp2 = {}
+                      for icol = 0, 11 do
+
+                        write_param["name"]     =   "phi-gf2-U"
+                        write_param["nconf"]    =   nconf
+                        write_param["src_t"]    =   t
+                        write_param["i_sample"] =   i_sample
+                        write_param["pi2"]      =   pi2
+                        write_param["pf2"]      =   pf2
+                        write_param["icol"]     =   icol
+                        write_param["kspin"]    =   kspin
+                        write_param["gf2_id"]   =   gf2_id
+                        temp2[icol]  =   read_factors_aff(write_param, aff_reader2)
+                      end -- of loop icol
+                    
+                      for icolor = 0, 2 do
+                        
+                        z1_xi[i_pi2][i_pf2][i_gf2][kspin][icolor] = {}
+                        for ispin = 0, 3 do
+                            printf("#reading factors for contraction  for ispin = %d, icol = %d, gf2 = %d, pf2 = (%d, %d, %d), pi2 = (%d, %d, %d)\n", 
+                                    ispin,icolor, gf2_id, pf2[1], pf2[2], pf2[3], pi2[1], pi2[2], pi2[3])    
+
+                            z1_xi[i_pi2][i_pf2][i_gf2][kspin][icolor][ispin] = {}
+                            for it=0, D[0]-1 do
+                                z1_xi[i_pi2][i_pf2][i_gf2][kspin][icolor][ispin][it] = temp2[ispin + 4*icolor][it]
+                            end -- loop over it
+                        end -- loop over ispin
+                      end -- loop over icolor
+                    end -- loop over kspin
+                end --loop over gf2
+            end --of loop pf2
+        end -- of loop pi2
+
+        temp2 = nil
+        aff_reader2:close()
+        local name = string.format("%s.%.4d.x%.2dy%.2dz%.2dt%.2d.%.5d.aff", "Z_piN_piN", nconf, pos[1], pos[2], pos[3], t, i_sample)
+        printf("# MxB - MxB output file %s\n", name)
+        local aw, am = qcd.aff.Writer(name)
+        name = nil
+        --t_axis = #dims-1
+
+        for i_pi2, pi2 in ipairs(pi2_list) do
+            
+            for i_pf2, pf2 in ipairs(pf2_list) do
+
+                for i_pf1, pf1 in ipairs(pf1_list) do
+
+                    for i_gf2, gf2 in ipairs(gf2_list) do
+
+                        local gf2_tag           =   gf2.tag
+                        local gf2_id            =   gf2.gamma[1]
+                        local gf2_sign          =   gf2.gamma[2]
+                        local gf2_adjoint_sign  =   gf2.gamma[3]   
+
+                        local  pi1 = { -( pf1[1] + pf2[1] + pi2[1] ),                                
+                                       -( pf1[2] + pf2[2] + pi2[2] ),                                
+                                       -( pf1[3] + pf2[3] + pi2[3] ) }
+
+                        local px = (2 * math.pi * pi1[1]) / 8
+                        local py = (2 * math.pi * pi1[2]) / 8
+                        local pz = (2 * math.pi * pi1[3]) / 8
+                        local w = complex(0,1)*( (source_position[0]) * px +
+                                    (source_position[1]) * py +
+                                    (source_position[2]) * pz)
+                              w = w:exp()
+
+                        for i_gf1, gf1 in ipairs(baryon_vertex_list) do
+    
+                            local gf1_tag           =   gf1.tag
+                            local gf1_id            =   gf1.gamma[1]
+                            local gf1_sign          =   gf1.gamma[2]
+                            local gf1_adjoint_sign  =   gf1.gamma[3]   
+                        
+                            for i_gi1, gi1 in ipairs(baryon_vertex_list) do
+
+                                local gi1_tag           =   gi1.tag
+                                local gi1_id            =   gi1.gamma[1]
+                                local gi1_sign          =   gi1.gamma[2]
+                                local gi1_adjoint_sign  =   gi1.gamma[3]   
+
+                                
+                                local z1 = D:DiracPropagator()
+                                local z1_temp_fermion = D:DiracFermion()
+                                local z1_temp_prop = D:DiracPropagator()
+                                
+                                local z2 = D:DiracPropagator()
+                                local z2_temp_fermion = D:DiracFermion()
+                                local z2_temp_prop = D:DiracPropagator()
+                                
+                                local z3 = D:DiracPropagator()
+                                local z3_temp_fermion = D:DiracFermion()
+                                local z3_temp_prop = D:DiracPropagator()
+                                
+                                local z4 = D:DiracPropagator()
+                                local z4_temp_fermion = D:DiracFermion()
+                                local z4_temp_prop = D:DiracPropagator()
+
+
+                                for ispin1 = 0, 3 do
+                                
+                                    for ispin2 = 0, 3 do
+                                        
+                                        for icol = 0, 2 do
+                                            
+                                            for ispin = 0, 3 do
+                                        
+
+                                                local z1_temporary_var_sp1 = D:DiracFermion()
+                                                local z1_temporary_var_sp2 = D:DiracFermion()
+                                                local z1_temporary_var_sp3 = D:DiracFermion()
+                                                local z1_temporary_var_sp4 = D:DiracFermion()
+                                                
+                                                local z4_temporary_var_sp1 = D:DiracFermion()
+                                                local z4_temporary_var_sp2 = D:DiracFermion()
+                                                local z4_temporary_var_sp3 = D:DiracFermion()
+                                                local z4_temporary_var_sp4 = D:DiracFermion()
+
+                                                for it = 0, D[0] -1  do
+
+
+                                                    D:Subset{axis=0, position=it}:where(function()
+                                                             z1_temporary_var_sp1:set(z1_xi[i_pi2][i_pf2][i_gf2][0][icol][ispin][it] *
+                                                                z1_phi[i_pf1][i_gf1][0][ispin1][ispin2] )
+                                                             end)
+                                                    D:Subset{axis=0, position=it}:where(function()
+                                                             z1_temporary_var_sp2:set(z1_xi[i_pi2][i_pf2][i_gf2][1][icol][ispin][it] *
+                                                                z1_phi[i_pf1][i_gf1][1][ispin1][ispin2] )
+                                                             end)
+                                                    D:Subset{axis=0, position=it}:where(function()
+                                                             z1_temporary_var_sp3:set(z1_xi[i_pi2][i_pf2][i_gf2][2][icol][ispin][it] *
+                                                                z1_phi[i_pf1][i_gf1][2][ispin1][ispin2] )
+                                                             end)
+                                                    D:Subset{axis=0, position=it}:where(function()
+                                                             z1_temporary_var_sp4:set(z1_xi[i_pi2][i_pf2][i_gf2][3][icol][ispin][it] *
+                                                                z1_phi[i_pf1][i_gf1][3][ispin1][ispin2] )
+                                                             end)
+                                                    D:Subset{axis=0, position=it}:where(function()
+                                                             z4_temporary_var_sp1:set(z4_phi[i_pf1][i_gf1][0][ispin1][ispin2] * 
+                                                                 z1_xi[i_pi2][i_pf2][i_gf2][0][icol][ispin][it])
+                                                             end)
+
+                                                    D:Subset{axis=0, position=it}:where(function()
+                                                             z4_temporary_var_sp2:set(z4_phi[i_pf1][i_gf1][1][ispin1][ispin2] * 
+                                                                 z1_xi[i_pi2][i_pf2][i_gf2][1][icol][ispin][it])
+                                                             end)
+                                                    D:Subset{axis=0, position=it}:where(function()
+                                                             z4_temporary_var_sp3:set(z4_phi[i_pf1][i_gf1][2][ispin1][ispin2] * 
+                                                                 z1_xi[i_pi2][i_pf2][i_gf2][2][icol][ispin][it])
+                                                             end)
+
+                                                    D:Subset{axis=0, position=it}:where(function()
+                                                             z4_temporary_var_sp4:set(z4_phi[i_pf1][i_gf1][3][ispin1][ispin2] * 
+                                                                 z1_xi[i_pi2][i_pf2][i_gf2][3][icol][ispin][it])
+                                                             end)
+
+                                                end
+
+                                                z1_temp_prop[{c=icol, d=ispin}] = z1_temporary_var_sp1 + z1_temporary_var_sp2 + z1_temporary_var_sp3 + z1_temporary_var_sp4
+                                     
+                                               
+                                                z4_temp_prop[{c=icol, d=ispin}] = z4_temporary_var_sp1 + z4_temporary_var_sp2 + z4_temporary_var_sp3 + z4_temporary_var_sp4
+
+
+                                            end
+                                        end
+                                        z1_temp_fermion[{c=0, d=ispin2}] = (z1_temp_prop * (-1 * gamma{n=10} * gamma{n=gi1_id})):spintrace():trace()
+                                 
+                                       
+                                        z4_temp_fermion[{c=0, d=ispin2}] = (z4_temp_prop * (-1 * gamma{n=10} * gamma{n=gi1_id})):spintrace():trace()                                 
+                                 
+
+                                    end
+                                    z1[{c=0, d=ispin1}] = z1_temp_fermion
+                              
+                                   
+                                    z4[{c=0, d=ispin1}] = z4_temp_fermion
+                                
+                                end
+
+                                for ispin1 = 0, 3 do
+                                
+                                    for ispin = 0, 3 do
+                                        
+                                        for icol = 0, 2 do
+                                            
+                                            for ispin2 = 0, 3 do
+                                        
+
+                                                
+                                                local z2_temporary_var_sp1 = D:DiracFermion()
+                                                local z2_temporary_var_sp2 = D:DiracFermion()
+                                                local z2_temporary_var_sp3 = D:DiracFermion()
+                                                local z2_temporary_var_sp4 = D:DiracFermion()
+                                                
+                                                local z3_temporary_var_sp1 = D:DiracFermion()
+                                                local z3_temporary_var_sp2 = D:DiracFermion()
+                                                local z3_temporary_var_sp3 = D:DiracFermion()
+                                                local z3_temporary_var_sp4 = D:DiracFermion()
+
+                                                for it = 0, D[0] -1  do
+
+
+                                                    D:Subset{axis=0, position=it}:where(function()
+                                                             z2_temporary_var_sp1:set(z2_phi[i_pf1][i_gf1][0][ispin1][ispin2] * 
+                                                                 z1_xi[i_pi2][i_pf2][i_gf2][0][icol][ispin][it])
+                                                             end)
+
+                                                    D:Subset{axis=0, position=it}:where(function()
+                                                             z2_temporary_var_sp2:set(z2_phi[i_pf1][i_gf1][1][ispin1][ispin2] * 
+                                                                 z1_xi[i_pi2][i_pf2][i_gf2][1][icol][ispin][it])
+                                                             end)
+                                                    D:Subset{axis=0, position=it}:where(function()
+                                                             z2_temporary_var_sp3:set(z2_phi[i_pf1][i_gf1][2][ispin1][ispin2] * 
+                                                                 z1_xi[i_pi2][i_pf2][i_gf2][2][icol][ispin][it])
+                                                             end)
+
+                                                    D:Subset{axis=0, position=it}:where(function()
+                                                             z2_temporary_var_sp4:set(z2_phi[i_pf1][i_gf1][3][ispin1][ispin2] * 
+                                                                 z1_xi[i_pi2][i_pf2][i_gf2][3][icol][ispin][it])
+                                                             end)
+                                                    
+                                                    D:Subset{axis=0, position=it}:where(function()
+                                                             z3_temporary_var_sp1:set(z3_phi[i_pf1][i_gf1][0][ispin1][ispin2] * 
+                                                                 z1_xi[i_pi2][i_pf2][i_gf2][0][icol][ispin][it])
+                                                             end)
+
+                                                    D:Subset{axis=0, position=it}:where(function()
+                                                             z3_temporary_var_sp2:set(z3_phi[i_pf1][i_gf1][1][ispin1][ispin2] * 
+                                                                 z1_xi[i_pi2][i_pf2][i_gf2][1][icol][ispin][it])
+                                                             end)
+                                                    D:Subset{axis=0, position=it}:where(function()
+                                                             z3_temporary_var_sp3:set(z3_phi[i_pf1][i_gf1][2][ispin1][ispin2] * 
+                                                                 z1_xi[i_pi2][i_pf2][i_gf2][2][icol][ispin][it])
+                                                             end)
+
+                                                    D:Subset{axis=0, position=it}:where(function()
+                                                             z3_temporary_var_sp4:set(z3_phi[i_pf1][i_gf1][3][ispin1][ispin2] * 
+                                                                 z1_xi[i_pi2][i_pf2][i_gf2][3][icol][ispin][it])
+                                                             end)
+
+                                                end
+
+
+                                                z2_temp_prop[{c=icol, d=ispin2}] = z2_temporary_var_sp1 + z2_temporary_var_sp2 + z2_temporary_var_sp3 + z2_temporary_var_sp4
+                                                z3_temp_prop[{c=icol, d=ispin2}] = z3_temporary_var_sp1 + z3_temporary_var_sp2 + z3_temporary_var_sp3 + z3_temporary_var_sp4
+                                               
+
+
+                                            end
+                                        end
+                                       
+                                        z2_temp_fermion[{c=0, d=ispin}] = (z2_temp_prop * (gamma{n=10} * gamma{n=gi1_id})):spintrace():trace()                                 
+                                        z3_temp_fermion[{c=0, d=ispin}] = (z3_temp_prop * -1 * (gamma{n=10} * gamma{n=gi1_id})):spintrace():trace()
+                                       
+                                       
+
+                                    end
+                                   
+                                    z2[{c=0, d=ispin1}] = z2_temp_fermion
+                                    z3[{c=0, d=ispin1}] = z3_temp_fermion
+                                   
+                                
+                                end
+
+
+
+				                --Extracting each spin projection of the result dirac propagator
+                                local z1_spin_proj = {}
+                                local z2_spin_proj = {}
+                                local z3_spin_proj = {}
+                                local z4_spin_proj = {}
+  
+                                for ispin1 = 0, 3 do
+    
+                                  z1_spin_proj[ispin1] = {} 
+                                  z2_spin_proj[ispin1] = {} 
+                                  z3_spin_proj[ispin1] = {} 
+                                  z4_spin_proj[ispin1] = {} 
+
+                                  for ispin2 = 0, 3 do
+        					            
+                                      local dv_z1 = D:DiracFermion()
+                                      local dv_z2 = D:DiracFermion()
+                                      local dv_z3 = D:DiracFermion()
+                                      local dv_z4 = D:DiracFermion()
+                            
+                                      local corr_z1 = D:Complex()
+                                      local corr_z2 = D:Complex()
+                                      local corr_z3 = D:Complex()
+                                      local corr_z4 = D:Complex()
+              
+                                      dv_z1 = z1[{c=0, d=ispin2}]
+                                      dv_z2 = z2[{c=0, d=ispin2}]
+                                      dv_z3 = z3[{c=0, d=ispin2}]
+                                      dv_z4 = z4[{c=0, d=ispin2}]
+
+                                      corr_z1 = dv_z1[{c=0, d=ispin1}]
+                                      corr_z2 = dv_z2[{c=0, d=ispin1}]
+                                      corr_z3 = dv_z3[{c=0, d=ispin1}]
+                                      corr_z4 = dv_z4[{c=0, d=ispin1}]
+
+                                      z1_spin_proj[ispin1][ispin2]  =  corr_z1
+                                      z2_spin_proj[ispin1][ispin2]  =  corr_z2
+                                      z3_spin_proj[ispin1][ispin2]  =  corr_z3
+                                      z4_spin_proj[ispin1][ispin2]  =  corr_z4
+
+            
+                                      corr_z1 = nil
+                                      corr_z2 = nil
+                                      corr_z3 = nil
+                                      corr_z4 = nil
+                                      dv_z1 = nil
+                                      dv_z2 = nil
+                                      dv_z3 = nil
+                                      dv_z4 = nil
+                                  end
+                                end
+
+
+    
+
+                                for index1 = 0, 3 do
+                                    for index2 = 0, 3 do
+                                        
+
+                                        local proj_z1 = string.format('z1/s1%.2d/s2%.2d/pi2x%.1dpi2y%.1dpi2z%.1d/pf1x%.1dpf1y%.1dpf1z%.1d/pf2x%.1dpf2y%.1dpf2z%.1d/gi1%.2d/gf1%.2d/gf2%.2d',
+                                                                        index1, index2,pi2[1], pi2[2], pi2[3], pf1[1], pf1[2], pf1[3], pf2[1], pf2[2], pf2[3], 
+                                                                        gi1_id, gf1_id, gf2_id)
+                                        local proj_z2 = string.format('z2/s1%.2d/s2%.2d/pi2x%.1dpi2y%.1dpi2z%.1d/pf1x%.1dpf1y%.1dpf1z%.1d/pf2x%.1dpf2y%.1dpf2z%.1d/gi1%.2d/gf1%.2d/gf2%.2d',
+                                                                        index1, index2,pi2[1], pi2[2], pi2[3], pf1[1], pf1[2], pf1[3], pf2[1], pf2[2], pf2[3], 
+                                                                        gi1_id, gf1_id, gf2_id)
+                                        local proj_z3 = string.format('z3/s1%.2d/s2%.2d/pi2x%.1dpi2y%.1dpi2z%.1d/pf1x%.1dpf1y%.1dpf1z%.1d/pf2x%.1dpf2y%.1dpf2z%.1d/gi1%.2d/gf1%.2d/gf2%.2d',
+                                                                        index1, index2,pi2[1], pi2[2], pi2[3], pf1[1], pf1[2], pf1[3], pf2[1], pf2[2], pf2[3], 
+                                                                        gi1_id, gf1_id, gf2_id)
+                                        local proj_z4 = string.format('z4/s1%.2d/s2%.2d/pi2x%.1dpi2y%.1dpi2z%.1d/pf1x%.1dpf1y%.1dpf1z%.1d/pf2x%.1dpf2y%.1dpf2z%.1d/gi1%.2d/gf1%.2d/gf2%.2d',
+                                                                        index1, index2,pi2[1], pi2[2], pi2[3], pf1[1], pf1[2], pf1[3], pf2[1], pf2[2], pf2[3], 
+                                                                        gi1_id, gf1_id, gf2_id)
+
+                                        local z1_res = (w * z1_spin_proj[index1][index2]):sum(D:MultiSet(D[0], D:pcoord(0)))
+                                        local z2_res = (w * z2_spin_proj[index1][index2]):sum(D:MultiSet(D[0], D:pcoord(0)))
+                                        local z3_res = (w * z3_spin_proj[index1][index2]):sum(D:MultiSet(D[0], D:pcoord(0)))
+                                        local z4_res = (w * z4_spin_proj[index1][index2]):sum(D:MultiSet(D[0], D:pcoord(0)))
+                                                                                          
+                                        local z1_q2  = vector.complex(D[0])
+                                        local z2_q2  = vector.complex(D[0])
+                                        local z3_q2  = vector.complex(D[0])
+                                        local z4_q2  = vector.complex(D[0])
+
+                                        for i = 0, D[0] - 1 do
+                                            it = (i + t)%D[0]
+                                        
+                                        
+                                            z1_q2[i] = -1*z1_res[it] * boundary_phase[it]
+                                            z2_q2[i] = -1*z2_res[it] * boundary_phase[it]
+                                            z3_q2[i] = -1*z3_res[it] * boundary_phase[it]
+                                            z4_q2[i] = -1*z4_res[it] * boundary_phase[it]
+
+                                        end
+                                        aw:write(proj_z1, z1_q2)
+                                        aw:write(proj_z2, z2_q2)
+                                        aw:write(proj_z3, z3_q2)
+                                        aw:write(proj_z4, z4_q2)
+                                        
+                                        z1_q2=nil
+                                        z2_q2=nil
+                                        z1_res=nil
+                                        z2_res=nil
+                                        z3_q2=nil
+                                        z4_q2=nil
+                                        z3_res=nil
+                                        z4_res=nil
+
+                                    end
+                                end
+                                    --qcd.save_momproj(aw, '', res, src0, pf1_list, t_axis, 1, {ft_sign=1} )
+                                z1_temp_fermion = nil
+                                z2_temp_fermion = nil
+                                z3_temp_fermion = nil
+                                z4_temp_fermion = nil
+
+                            end
+
+                         end
+                    end
+                end
+            end
+        end
+        aw:close()
+    end  -- of loop on base source locations
+end -- of loop on samples
+
+total_timer("done")

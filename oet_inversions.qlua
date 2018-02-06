@@ -1,5 +1,5 @@
---package.path = '/home/srijit/Dropbox/spaul/softwares/build2/parts/qlua/tree/lhpc/?.qlua;/home/srijit/Dropbox/spaul/softwares/build2/parts/qlua/tree/qlib/?.qlua;' .. package.path
-package.path = '/global/homes/s/srijitp/build/qlua_build_edison/build2/parts/qlua/tree/lhpc/?.qlua;/global/homes/s/srijitp/build/qlua_build_edison/build2/parts/qlua/tree/qlib/?.qlua;' .. package.path
+package.path = '/home/srijit/Dropbox/spaul/softwares/build2/parts/qlua/tree/lhpc/?.qlua;/home/srijit/Dropbox/spaul/softwares/build2/parts/qlua/tree/qlib/?.qlua;' .. package.path
+--package.path = '/global/homes/s/srijitp/build/qlua_build_edison/build2/parts/qlua/tree/lhpc/?.qlua;/global/homes/s/srijitp/build/qlua_build_edison/build2/parts/qlua/tree/qlib/?.qlua;' .. package.path
 require "stdlib"
 require "gauge"
 require "ape-smear"
@@ -88,33 +88,27 @@ L = qcd.lattice(dims, {network=network_dims})
     }
 
 
-if stout_smear then
+
+if hex_smear then
 -- read configuration
     conf_name = string.format("%s%04d%s", conf_name_prefix, nconf, conf_name_input_suffix)
     printf("# [invert_contract] reading original gauge configuration from file %s\n", conf_name)
 
     u_load_timer = timer("u load")
-    u_orig = load_nersc(L, conf_name)
+    uorig = load_nersc(L, conf_name)
     u_load_timer("done")
-    printf("# [invert_contract] Plaquette (original) = %12.10f\n", plaquette_full(u_orig))
+    printf("# [invert_contract] Plaquette (original) = %12.10f\n", plaquette_full(uorig))
 
+    
     -- smear the gauge configuration
-    uorig = bmw_hex(u_orig,2)
-    stout_timer = timer("stout smear")
-    printf("# [invert_contract] Stout-smearing gauge field\n")
-    ustout = stout_smear_4d(uorig, stout_rho, stout_n)
-    printf("# [invert_contract] Plaquette (smeared) = %12.10f\n", plaquette_full(ustout))
-    stout_timer("done")
+    hex_smear_timer = timer("hex smear")
+    ubmw_hex = bmw_hex(uorig, 2)
+    hex_smear_timer("done")
 else
     -- read configuration
     conf_name = string.format("%s%04d%s", conf_name_prefix, nconf, conf_name_output_suffix)
-    printf("# [invert_contract] reading 4d-stout-smeared gauge configuration from file %s\n", conf_name)
+    printf("# [invert_contract] reading hex-smeared gauge configuration from file %s\n", conf_name)
 
-    u_load_timer = timer("u load")
-    ustout = load_ildg(L, conf_name)
-    u_load_timer("done")
-    printf("# [invert_contract] Plaquette (4d-stout-smeared) = %12.10f\n", plaquette_full(ustout))
-    --printf("[invert_contract] Error, need original gauge configuration for heavy quark sector\n")
     os.exit(2)
 end
 
@@ -122,24 +116,14 @@ end
 -- APE-smear the configuration
 if ape_n > 0 then
     ape_timer = timer("APE smearing")
-    uape = APE_smear(ustout, ape_alpha, ape_n, ape_accu, ape_maxiter, ape_orthdir)
+    uape = APE_smear(ubmw_hex, ape_alpha, ape_n, ape_accu, ape_maxiter, ape_orthdir)
     ape_timer("done")
     printf("# [invert_contract] Plaquette after (light quark) APE smearing = %12.10f\n", plaquette_full(uape))
 end
-heavy_stout_timer = timer("heavy stout smear")
-ustout_heavy = stout_smear_full(uorig, heavy_stout_rho, heavy_stout_n, 3)
-heavy_stout_timer("done")
-    -- TEST
-    -- ustout_heavy = uorig
-printf("# [invert_contract] Plaquette after (heavy quark) stout smearing = %12.10f\n", plaquette_full(ustout_heavy))
-
-
-    -- TEST
+  
 if not ( read_stochastic_source and read_forward_propagator and read_sequential_propagator and read_propagator_oet) then
-    solver_light = make_mg_solver (L, ustout, mg_block, mg_max_abserr, mg_max_relerr, quark_bc, kappa_l, csw )
+    solver_light = make_mg_solver (L, ubmw_hex, mg_block, mg_max_abserr, mg_max_relerr, quark_bc, kappa_l, csw )
 end
---solver_heavy = make_aicl_solver(L, uorig, charm, bottom)
-
 
 -- random number generator
 S = random_state(L)
@@ -517,6 +501,7 @@ for i_src, v_src in ipairs(source_locations) do
                                  source_position, i_sample, aw_2pt )
         end
     end
+    aw_2pt:close()
     oet_timer("done")
 end
 total_timer("done")

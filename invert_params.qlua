@@ -1,4 +1,6 @@
-package.path = '/global/homes/s/srijitp/install/local_20170925_edison/qlua/lib/qlua/?.qlua;/global/homes/s/srijitp/install/local_20170925_edison/qlua/lib/qlua/lhpc/?.qlua;' .. package.path
+package.path = '/home/srijit/Dropbox/spaul/softwares/local-20170925/qlua/lib/qlua/?.qlua;/home/srijit/Dropbox/spaul/softwares/local-20170925/qlua/lib/qlua/lhpc/?.qlua;' .. package.path
+--package.path = '/global/homes/s/srijitp/install/local_20170925_edison/qlua/lib/qlua/?.qlua;/global/homes/s/srijitp/install/local_20170925_edison/qlua/lib/qlua/lhpc/?.qlua;' .. package.path
+--package.path = '/home/srijit/Dropbox/spaul/softwares/experimental_qlua/build2/parts/qlua/tree/lhpc/?.qlua;/home/srijit/Dropbox/spaul/softwares/experimental_qlua/build2/parts/qlua/tree/qlib/?.qlua;' .. package.path
 require 'stdlib'                                                                
 require 'setup_util'                                                            
 require 'hadspec'                                                               
@@ -21,8 +23,8 @@ hex_smear = true
 hex_n = 2
 
 -- dimensions
-dims = {24, 24, 24, 48}
-network_dims={4, 4, 4, 12}
+dims = {8, 8, 8, 16}
+--network_dims={4, 4, 4, 12}
 
 -- source locations
 source_locations = 
@@ -36,7 +38,7 @@ nconf =
 nsample = 12
 nsample_oet = 1
 -- conf	
-conf_name_prefix ="/scratch2/scratchdirs/srijitp/beta3.31_2hex_24c48_ml-0.09530_mh-0.04/configs/lat_"
+conf_name_prefix ="/home/srijit/Dropbox/spaul/Dina_Work/pion_nucleon_scripts/tests/pi_nucleon/configs/lat_"
 conf_name_input_suffix = ".nersc"
 conf_name_output_suffix = "_Stout_smeared.nersc"
 
@@ -48,7 +50,7 @@ seq_propfile_prefix = "sequential_light_light"
 stochastic_propfile_prefix   = "stochastic_propagator"
 stochastic_sourcefile_prefix = "stochastic_source"
 
-read_forward_propagator             = false
+read_forward_propagator             = true
 write_forward_propagator            = false
 write_sequential_propagator         = false
 read_sequential_propagator          = false
@@ -58,7 +60,7 @@ write_stochastic_source             = false
 write_stochastic_propagator         = false
 read_stochastic_source              = false
 read_stochastic_propagator          = false
-read_propagator_oet                 = false
+read_propagator_oet                 = true
 write_stochastic_oet_propagator     = false
 
 -- light quarks
@@ -112,7 +114,7 @@ prop_volfmt = "single"
 
 sequential_source_gamma = {tag="g5", val=gamma{mu=5}}
 
-pi2_list = make_mom_list(3)
+pi2_list = make_mom_list(0)
 pf1_list = pi2_list
 pf2_list = pf1_list
 dt_source_sink_2pt = 15

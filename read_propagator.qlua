@@ -116,7 +116,7 @@ os.exit(1)
       for ispin = 0, 3 do
 
         prop[{c=icol, d=ispin}] = nonstoch_reader:DiracFermion()
-  --    printf(" The norm of the Dirac Fermion with spin %d and color %d = %g\n",ispin, icol, prop[{c=icol, d=ispin}]:norm2()) 
+        printf(" The norm of the Dirac Fermion with spin %d and color %d = %g\n",ispin, icol, prop[{c=icol, d=ispin}]:norm2()) 
       end
     end
   
@@ -144,3 +144,91 @@ os.exit(1)
   print()
 --return prop
 end 
+
+function read_factors_aff (param, aff_reader)
+
+
+    printf("Reading factor name: %s\n",param.name)
+ 
+    if string.find(param.name, "xi-gf2-T", 1, true)then
+        
+        --printf("# [read_factor] filename is %s\n", filename)
+        printf("# xi-gf2-T [read_factor] factor name is %s\n",param.name)
+        local tag = string.format("%s/pi2x%.2dpi2y%.2dpi2z%.2d/sample%.2d/color_vector%.2d/gf2%.2d/PX%.1d_PY%.1d_PZ%.1d", 
+                param.name, param.pi2[1], param.pi2[2], param.pi2[3], param.i_sample, param.icol, param.gf2_id, param.pf2[1], param.pf2[2], param.pf2[3]) 
+        
+        b1_xi = aff_reader:read(tag)
+        return b1_xi
+   end
+   if string.find(param.name, "phi-gf1-U--U", 1, true) and string.find(param.filename, "oet") then
+        
+        --printf("# [read_factor] filename is %s\n", filename)
+        printf("# phi-gf1-U--U [read_factor] factor name is %s\n",param.name)
+        local tag = string.format("/%s/sample%.2d/spin%.2d/color_vector%.2d/gf1%.2d/PX%.1d_PY%.1d_PZ%.1d", 
+                param.name, param.i_sample, param.kspin, param.icol, param.gf1_id, param.pf1[1], param.pf1[2], param.pf1[3]) 
+        printf("%s\n", tag)
+        b1_phi = aff_reader:read(tag)
+      
+        return b1_phi
+   end
+   if string.find(param.name, "phi-gf1-U--U", 1, true) and not string.find(param.filename, "oet") then
+        
+        --printf("# [read_factor] filename is %s\n", filename)
+        printf("# phi-gf1-U--U [read_factor] factor name is %s\n",param.name)
+        local tag = string.format("/%s/sample%.2d/color_vector%.2d/gf1%.2d/PX%.1d_PY%.1d_PZ%.1d", 
+                param.name, param.i_sample, param.icol, param.gf1_id, param.pf1[1], param.pf1[2], param.pf1[3]) 
+        printf("%s\n", tag)
+        b1_phi = aff_reader:read(tag)
+      
+        return b1_phi
+   end
+
+   if string.find(param.name, "xi-gf2-U", 1, true)then
+        
+        --printf("# [read_factor] filename is %s\n", filename)
+        printf("# xi-gf2-U [read_factor] factor name is %s\n",param.name)
+        local tag = string.format("%s/sample%.2d/color_vector%.2d/gf2%.2d/PX%.1d_PY%.1d_PZ%.1d", 
+                param.name, param.i_sample, param.icol, param.gf2_id, param.pf2[1], param.pf2[2], param.pf2[3]) 
+        
+        b1_xi = aff_reader:read(tag)
+    
+        return b1_xi
+   end
+   if string.find(param.name, "phi")  and string.find(param.name, "T")then
+
+        
+        --printf("# [read_factor] filename is %s\n", filename)
+        printf("# [read_factor] factor name is %s\n",param.name)
+        local tag = string.format("/%s/pi2x%.2dpi2y%.2dpi2z%.2d/sample%.2d/color_vector%.2d/gf1%.2d/PX%.1d_PY%.1d_PZ%.1d", 
+                param.name, param.pi2[1], param.pi2[2], param.pi2[3],param.i_sample, param.icol, param.gf1_id, param.pf1[1], param.pf1[2], param.pf1[3]) 
+        printf("%s\n", tag)
+        b1_phi = aff_reader:read(tag)
+     
+        return b1_phi
+   end
+   if string.find(param.name, "phi--gf1-U-U", 1, true)then
+        
+        --printf("# [read_factor] filename is %s\n", filename)
+        printf("# phi--gf1-U-U [read_factor] factor name is %s\n",param.name)
+        local tag = string.format("/%s/sample%.2d/spin%.2d/color_vector%.2d/gf1%.2d/PX%.1d_PY%.1d_PZ%.1d", 
+                param.name, param.i_sample, param.kspin, param.icol, param.gf1_id, param.pf1[1], param.pf1[2], param.pf1[3]) 
+        printf("%s\n", tag)
+        b1_phi = aff_reader:read(tag)
+      
+        return b1_phi
+   end
+   if string.find(param.name, "phi-gf2-U", 1, true)then
+        
+        --printf("# [read_factor] filename is %s\n", filename)
+        printf("# phi-gf2-U [read_factor] factor name is %s\n",param.name)
+        local tag = string.format("%s/pi2x%.2dpi2y%.2dpi2z%.2d/sample%.2d/spin%.2d/color_vector%.2d/gf2%.2d/PX%.1d_PY%.1d_PZ%.1d", 
+                param.name, param.pi2[1], param.pi2[2], param.pi2[3], param.i_sample, param.kspin, param.icol, param.gf2_id, param.pf2[1], param.pf2[2], param.pf2[3]) 
+        
+               
+        
+        z1_xi = aff_reader:read(tag)
+    
+        return z1_xi
+   end
+   
+end

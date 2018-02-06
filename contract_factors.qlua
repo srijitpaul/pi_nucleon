@@ -1,0 +1,225 @@
+require "stdlib"
+
+-- ******************************************************************************************************
+-- * contractions for individual factors of 2- and 3-point functions
+-- ******************************************************************************************************
+
+-- ******************************************************************************************************
+
+-- ******************************************************************************************************
+-- *
+-- ******************************************************************************************************
+function contract_v3_ft_write(L, fwd, xi, gf2_list, mom_list, aff_out, tag)
+
+    
+    for i_pf2, pf2 in ipairs(mom_list) do
+
+    -- phase = exp(-i p x), because we multiply with xi(pf2)^+
+    local px = (-2 * math.pi * pf2[1]) / L[0]
+    local py = (-2 * math.pi * pf2[2]) / L[1]
+    local pz = (-2 * math.pi * pf2[3]) / L[2]
+
+    local phase = ( L:Real(L:pcoord(0)) * px + L:Real(L:pcoord(1)) * py + L:Real(L:pcoord(2)) * pz):expi()
+    local xi_pf2 = phase * xi
+
+    for i_gf2, gf2 in ipairs(gf2_list) do
+
+      local gf2_tag  = gf2.tag
+      local gf2_id   = gf2.gamma[1]
+      local gf2_sign = gf2.gamma[2]
+      local gf2_adjoint_sign = gf2.gamma[3]
+
+      local xi_pf2_gf2 = ( gamma{n=gf2_id} * xi_pf2  ) * gf2_adjoint_sign
+
+      local v3 = qcd.quarkContractV3( xi_pf2_gf2, fwd )
+
+      for icol = 0, 11 do
+        local w = v3[{c=icol}]:sum(L:MultiSet(L[3], L:pcoord(3)))
+
+        name = string.format("/%s/pf2x%.2dpf2y%.2dpf2z%.2d/gf2%.2d/c%.2d", tag, pf2[1], pf2[2], pf2[3], gf2_id, icol) 
+        aff_out:write(name, w)
+
+      end  -- end of loop on icol
+    end  -- end of loop on pf2 list
+  end  -- end of loop on gf2 list
+
+end  -- end of contract_v3_ft_write
+
+-- ******************************************************************************************************
+
+-- ******************************************************************************************************
+-- *
+-- ******************************************************************************************************
+function contract_v2_ft_write (L, phi, fwd1, fwd2, gf1_list, pf1_list, aff_out, tag)
+
+  local C = ( gamma{mu=3} * gamma{mu=1} ) * complex(0,1)
+
+  for i_pf1, pf1 in ipairs(pf1_list) do
+
+    local px = (2 * math.pi * pf1[1]) / L[0]
+    local py = (2 * math.pi * pf1[2]) / L[1]
+    local pz = (2 * math.pi * pf1[3]) / L[2]
+
+    local phase = ( L:Real(L:pcoord(0)) * px + L:Real(L:pcoord(1)) * py + L:Real(L:pcoord(2)) * pz):expi()
+
+    local phi_pf1 = phase * phi
+
+    for i_gf1, gf1 in ipairs(gf1_list) do
+
+      local gf1_tag  = gf1.tag
+      local gf1_id   = gf1.gamma[1]
+      local gf1_sign = gf1.gamma[2]
+      local gf1_adjoint_sign = gf1.gamma[3]
+
+      local phi_pf1_gf1 = ( C * ( gamma{n=gf1_id} * phi_pf1  ) ) * gf1_sign
+
+      local v1 = qcd.quarkContractV1 ( phi_pf1_gf1, fwd1 )
+      local v2 = qcd.quarkContractV2 ( v1, fwd2 )
+      
+      for icol = 0, 191 do
+
+        local w = v2[{c=icol}]:sum(L:MultiSet(L[3], L:pcoord(3)))
+
+        name = string.format("/%s/pf1x%.2dpf1y%.2dpf1z%.2d/gf1%.2d/c%.2d", tag, pf1[1], pf1[2], pf1[3], gf1_id, icol)
+
+        aff_out:write(name, w)
+
+      end  -- end of loop on icol
+    end  -- end of loop on gf1
+  end  -- end of loop on pf1 list
+
+end  -- end of contract_v2_ft_write
+
+-- ******************************************************************************************************
+function contract_v3_modft_write(L, fwd, xi, gf2_list, pf2_list, aff_out, t_axis, tag)
+
+
+    
+
+    for i_gf2, gf2 in ipairs(gf2_list) do
+
+        local gf2_tag  = gf2.tag
+        local gf2_id   = gf2.gamma[1]
+        local gf2_sign = gf2.gamma[2]
+        local gf2_adjoint_sign = gf2.gamma[3]
+
+        
+        local xi_gf2 = ( gamma{n=gf2_id} * xi  ) * gf2_adjoint_sign
+
+        local v3 = qcd.quarkContractV3( xi_gf2, fwd )
+        
+        v3_color_vector = {}
+        for icol = 0, 11 do
+            local color = string.format('%s/color_vector%02d/gf2%.2d', tag, icol, gf2_id)
+            v3_color_vector[color] = v3[{c=icol}]
+            --print(v3_color_vector[color])
+        end
+        --local w = v3[{c=icol}]:sum(L:MultiSet(L[3], L:pcoord(3)))
+
+        --name = string.format("%s", tag) 
+        qcd.save_momproj(aff_out, '', v3_color_vector,{0,0,0,0}, pf2_list, t_axis, 1, {ft_sign=1})
+
+    end  -- end of loop on icol
+end  -- end of loop on pf2 list
+--  end  -- end of loop on gf2 list
+
+--end  -- end of contract_v3_ft_write
+
+-- ******************************************************************************************************
+
+-- ******************************************************************************************************
+-- *
+-- ******************************************************************************************************
+function contract_v2_modft_write (L, phi, fwd1, fwd2, gf1_list, pf1_list, aff_out, t_axis, tag)
+
+    local C = ( gamma{mu=3} * gamma{mu=1} )
+
+
+    for i_gf1, gf1 in ipairs(gf1_list) do
+
+        local gf1_tag  = gf1.tag
+        local gf1_id   = gf1.gamma[1]
+        local gf1_sign = gf1.gamma[2]
+        local gf1_adjoint_sign = gf1.gamma[3]
+
+        local phi_gf1 = ( C * ( gamma{n=gf1_id} * phi  ) ) * gf1_sign
+
+        local v1 = qcd.quarkContractV1 ( phi_gf1, fwd1)
+        local v2 = qcd.quarkContractV2 ( v1, fwd2 )
+      
+        v2_color_vector = {}
+        for icol = 0, 191 do
+
+            local color = string.format('%s/color_vector%02d/gf1%.2d', tag, icol, gf1_id)
+            v2_color_vector[color] = v2[{c=icol}]
+        end
+        qcd.save_momproj(aff_out, '', v2_color_vector,{0,0,0,0}, pf1_list, t_axis, 1, {ft_sign=1})
+    end  -- end of loop on gf1
+
+
+end  -- end of contract_v2_ft_write
+-- ******************************************************************************************************
+-- *
+-- ******************************************************************************************************
+function contract_v4_modft_write(L, phi, fwd1, fwd2, gf1_list, pf1_list, aff_out, t_axis, tag )
+
+  local C = ( gamma{n=10} )
+
+  for i_gf1, gf1 in ipairs(gf1_list) do
+    
+    local gf1_tag  = gf1.tag
+    local gf1_id   = gf1.gamma[1]
+    local gf1_sign = gf1.gamma[2]
+    local gf1_adjoint_sign = gf1.gamma[3]
+    
+    --local phi_gf1 = ( C  * ( gamma{n=gf1_id} * phi  ) ) * gf1_sign
+    --printf("# norm of oet propagator = %g\n", phi_gf1:norm2())
+    --local phi_gf1 = ( C *  ( gamma{n=gf1_id} * S:gaussian_DiracFermion())) * gf1_sign
+    --printf("# norm of random propagator = %g\n", phi_gf1:norm2())
+    --test_fwd = S:gaussian_DiracPropagator()
+    local first_prop = ((fwd1 * (C * gamma{n=15}) * gf1_sign))
+    local fac_23  = qcd.quarkContractV4aux(fwd1, (C * gamma{n=15}) * fwd2) 
+    local v4 = qcd.quarkContractV4(phi, fac_23)
+
+    v4_color_vector = {}
+    for icol = 0, 191 do
+
+      local color = string.format('%s/color_vector%02d/gf1%.2d', tag, icol, gf1_id)
+      v4_color_vector[color] = v4[{c=icol}]
+    end
+    qcd.save_momproj(aff_out, '', v4_color_vector,{0,0,0,0}, pf1_list, t_axis, 1, {ft_sign=1})
+  end  -- end of loop on gf1
+end
+
+function contract_v3Z_modft_write(L, fwd, xi, gf2_list, pf2_list, aff_out, t_axis, tag)
+
+
+    
+
+    for i_gf2, gf2 in ipairs(gf2_list) do
+
+        local gf2_tag  = gf2.tag
+        local gf2_id   = gf2.gamma[1]
+        local gf2_sign = gf2.gamma[2]
+        local gf2_adjoint_sign = gf2.gamma[3]
+
+        
+        local xi_gf2 = ( xi  ) * gf2_adjoint_sign
+        
+        --local xi_gf2 = ( gamma{n=15} * gamma{n=gf2_id} * xi  ) * gf2_adjoint_sign
+
+        local v3 = qcd.quarkContractV3( xi_gf2, fwd )
+        
+        v3_color_vector = {}
+        for icol = 0, 11 do
+            local color = string.format('%s/color_vector%02d/gf2%.2d', tag, icol, gf2_id)
+            v3_color_vector[color] = v3[{c=icol}]
+            --print(v3_color_vector[color])
+        end
+        --local w = v3[{c=icol}]:sum(L:MultiSet(L[3], L:pcoord(3)))
+
+        --name = string.format("%s", tag) 
+        qcd.save_momproj(aff_out, '', v3_color_vector,{0,0,0,0}, pf2_list, t_axis, 1, {ft_sign=1})
+
+    end  -- end of loop on icol
+end  -- end of loop on pf2 list

@@ -15,6 +15,10 @@ stout_smear = true
 stout_rho = 0.125
 stout_n   = 1
 
+--perform hex_smear on-th-fly                                                   
+hex_smear = true                                                                
+hex_n = 2
+
 heavy_stout_rho = 0.08
 heavy_stout_n   = 10
 

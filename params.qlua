@@ -47,8 +47,8 @@ twostep_seq_propfile_prefix = "twostep_sequential_light_light"
 stochastic_propfile_prefix   = "stochastic_propagator"
 stochastic_sourcefile_prefix = "stochastic_source"
 
-read_forward_propagator             = false
-write_forward_propagator            = true
+read_forward_propagator             = true
+write_forward_propagator            = false
 write_sequential_propagator         = true
 read_sequential_propagator          = false
 write_twostep_sequential_propagator   = false
@@ -57,8 +57,8 @@ write_stochastic_source             = true
 write_stochastic_propagator         = true
 read_stochastic_source              = false
 read_stochastic_propagator          = false
-read_propagator_oet                 = false
-write_stochastic_oet_propagator     = true
+read_propagator_oet                 = true
+write_stochastic_oet_propagator     = false
 
 -- light quarks
 mq_l = -0.0953
@@ -128,8 +128,8 @@ quark_bc = {1, 1, 1, 1}
 prop_volfmt = "single"
 
 sequential_source_momentum_list = {
-   { 0, 0, 0},
-   { 0, 0, 1},
+   { 0, 0, 0}}
+--[[   { 0, 0, 1},
 --   { 0, 1, 1},
 --   { 4, 1, 6}
 -- {0, 0, -1}
