@@ -253,11 +253,11 @@ end  -- contract_baryon_2pt
 --* - use point-to-all propagators
 --**************************************
 
-function pion_2pt_local(u1, u2)
+function pion_2pt_local(u1, u2, gout_id, gin_id)
   u3 = gamma{mu=5} * u2 * gamma{mu=5}
 
         qq = {}
-        qq = qcd.dot(u3, gamma{mu=5} * u1 * gamma{mu=5})
+        qq = qcd.dot(u3, gamma{mu=gout_id} * u1 * gamma{mu=gin_id})
   
   u3 = nil
   return(qq)

@@ -14,10 +14,6 @@ function write_propagator (v, param)
 
   if string.find(param.name, "forward") then
     filename = string.format("%s.%.4d.x%.2dy%.2dz%.2dt%.2d.h5", param.name, param.cfg, param.src_pos[1], param.src_pos[2], param.src_pos[3], param.src_t)
-  elseif string.find(param.name, "twostep_sequential") then
-    filename = string.format("%s.%.4d.x%.2dy%.2dz%.2dt%.2d.px%.2dpy%.2dpz%.2d.kx%.2dky%.2dkz%.2d.h5", param.name, param.cfg,
-        param.src_pos[1], param.src_pos[2], param.src_pos[3], param.src_t,
-        param.mom[1], param.mom[2], param.mom[3], param.twostepmom[1], param.twostepmom[2], param.twostepmom[3])
   
     elseif string.find(param.name, "sequential") then
     filename = string.format("%s.%.4d.x%.2dy%.2dz%.2dt%.2d.px%.2dpy%.2dpz%.2d.h5", param.name, param.cfg,
@@ -30,7 +26,8 @@ function write_propagator (v, param)
   elseif string.find(param.name, "stochastic_propagator") and string.find(param.name, "oet") then
     filename = string.format("%s.%.4d.t%.2d.%.5d.px%.2dpy%.2dpz%.2d.h5", param.name, param.cfg, param.src_t, param.sample,
         param.mom[1], param.mom[2], param.mom[3])
-
+  elseif string.find(param.name, "stochastic_3pt_propagator") and not string.find(param.name, "oet") then
+    filename = string.format("%s.%.4d.%.5d.t%.2d.h5", param.name, param.cfg, param.sample, param.src_t)
   else
     os.exit(1)
   end
@@ -38,7 +35,7 @@ function write_propagator (v, param)
   printf("# [write_propagator] filename is %s\n", filename)
   h5_writer = qcd.hdf5.Writer(filename, Pcreat )
 
-  h5_writer:write("/diracpropagator/ensemble", param.ensemble)
+  --h5_writer:write("/diracpropagator/ensemble", param.ensemble)
   h5_writer:write("/diracpropagator/config", param.cfg)
   h5_writer:write("/diracpropagator/source/type", param.name)
   h5_writer:write("/diracpropagator/source/location/x", param.src_pos[1])
@@ -51,17 +48,17 @@ function write_propagator (v, param)
   h5_writer:write("/diracpropagator/source/smearingparams/ape_maxiter", param.ape_maxiter)
   h5_writer:write("/diracpropagator/source/smearingparams/wup_alpha", param.wup_alpha)
   h5_writer:write("/diracpropagator/source/smearingparams/wup_N", param.wup_n)
-  h5_writer:write("/diracpropagator/action/type", param.action_type)
-  h5_writer:write("/diracpropagator/action/params/m_q", param.m_q)
+  --h5_writer:write("/diracpropagator/action/type", param.action_type)
+  --h5_writer:write("/diracpropagator/action/params/m_q", param.m_q)
   h5_writer:write("/diracpropagator/action/params/c_sw", param.c_sw)
-  h5_writer:write("/diracpropagator/action/params/stout_rho", param.stout_rho)
-  h5_writer:write("/diracpropagator/action/params/stout_N", param.stout_n)
+  --h5_writer:write("/diracpropagator/action/params/stout_rho", param.stout_rho)
+  --h5_writer:write("/diracpropagator/action/params/stout_N", param.stout_n)
   h5_writer:write("/diracpropagator/action/params/bc_x", param.ferm_bc[1])
   h5_writer:write("/diracpropagator/action/params/bc_y", param.ferm_bc[2])
   h5_writer:write("/diracpropagator/action/params/bc_z", param.ferm_bc[3])
   h5_writer:write("/diracpropagator/action/params/bc_t", param.ferm_bc[4])
   h5_writer:write("/diracpropagator/solver/type", "multigrid")
-  h5_writer:write("/diracpropagator/solver/params/solver_eps", param.solver_eps)
+  --h5_writer:write("/diracpropagator/solver/params/solver_eps", param.solver_eps)
 
   cur_timer = timer("write " .. param.name )
   if string.find(param.name, "stochastic_propagator") and string.find(param.name, "oet") then
@@ -97,6 +94,8 @@ function write_propagator_lime (v, param)
   elseif string.find(param.name, "stochastic_propagator") and string.find(param.name, "oet") then
     filename = string.format("%s.%.4d.t%.2d.%.5d.px%.2dpy%.2dpz%.2d.s%.2d.lime", param.name, param.cfg, param.src_t, param.sample,
         param.mom[1], param.mom[2], param.mom[3],param.spin)
+  elseif string.find(param.name, "stochastic_3pt_propagator") and not string.find(param.name, "oet") then
+    filename = string.format("%s.%.4d.%.5d.t%.2d.lime", param.name, param.cfg, param.sample, param.src_t)
 
   
     else

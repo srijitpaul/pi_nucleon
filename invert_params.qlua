@@ -24,7 +24,7 @@ hex_n = 2
 
 -- dimensions
 dims = {8, 8, 8, 16}
---network_dims={4, 4, 4, 12}
+network_dims={1, 1, 1, 2}
 
 -- source locations
 source_locations = 
@@ -35,7 +35,7 @@ n_coherent_source = 1
 -- number of configuration
 nconf = 
 
-nsample = 12
+nsample = 3
 nsample_oet = 1
 -- conf	
 conf_name_prefix ="/home/srijit/Dropbox/spaul/Dina_Work/pion_nucleon_scripts/tests/pi_nucleon/configs/lat_"
@@ -46,22 +46,28 @@ light_propfile_prefix  = "forward_light"
 charm_propfile_prefix  = "forward_charm"
 bottom_propfile_prefix = "forward_bottom"
 
+light_propfile_path = "."
+seq_propfile_path = "."
+stochastic_sourcefile_path = "."
+stochastic_propfile_path = "."
+
 seq_propfile_prefix = "sequential_light_light"
 stochastic_propfile_prefix   = "stochastic_propagator"
+stochastic_3pt_propfile_prefix   = "stochastic_3pt_propagator"
 stochastic_sourcefile_prefix = "stochastic_source"
 
-read_forward_propagator             = true
-write_forward_propagator            = false
+read_forward_propagator             = false
+write_forward_propagator            = true
 write_sequential_propagator         = false
 read_sequential_propagator          = false
-write_twostep_sequential_propagator   = false
-read_twostep_sequential_propagator    = false
 write_stochastic_source             = false
 write_stochastic_propagator         = false
-read_stochastic_source              = false
+read_stochastic_source              = true
 read_stochastic_propagator          = false
-read_propagator_oet                 = true
+read_propagator_oet                 = false
 write_stochastic_oet_propagator     = false
+read_stochastic_oet_source          = true
+write_stochastic_oet_source         = false
 
 -- light quarks
 mq_l = -0.0953
@@ -81,51 +87,58 @@ quark_bc = {1, 1, 1, -1}
 
 prop_volfmt = "single"
 
---[[sequential_source_momentum_list = {
+sequential_source_momentum_list = {
   { 0, 0, 0},
-  { 0, 0, 1},
-  { 0, 0,-1},
-  { 0, 1, 0},
-  { 0,-1, 0},
-  { 1, 0, 0},
-  {-1, 0, 0},
-  { 0, 1, 1},
-  { 0, 1,-1},
-  { 0,-1, 1},
-  { 0,-1,-1},
-  { 1, 0, 1},
-  { 1, 0,-1},
-  {-1, 0, 1},
-  {-1, 0,-1},
-  { 1, 1, 0},
-  { 1,-1, 0},
-  {-1, 1, 0},
-  {-1,-1, 0},
-  { 1, 1, 1},
-  { 1, 1,-1},
-  { 1,-1, 1},
-  { 1,-1,-1},
-  {-1, 1, 1},
-  {-1, 1,-1},
-  {-1,-1, 1},
-  {-1,-1,-1}
+  {-1, 2,-3},
+  { 4, 7,-6}
 }
---]]
+--  { 0, 0,-1},
+--  { 0, 1, 0},
+--  { 0,-1, 0},
+--  { 1, 0, 0},
+--  {-1, 0, 0},
+--  { 0, 1, 1},
+--  { 0, 1,-1},
+--  { 0,-1, 1},
+--  { 0,-1,-1},
+--  { 1, 0, 1},
+--  { 1, 0,-1},
+--  {-1, 0, 1},
+--  {-1, 0,-1},
+--  { 1, 1, 0},
+--  { 1,-1, 0},
+--  {-1, 1, 0},
+--  {-1,-1, 0},
+--  { 1, 1, 1},
+--  { 1, 1,-1},
+--  { 1,-1, 1},
+--  { 1,-1,-1},
+--  {-1, 1, 1},
+--  {-1, 1,-1},
+--  {-1,-1, 1},
+--  {-1,-1,-1}
+--}
+sink_momentum_list = {
+  {  0,  0,  0},
+  {  0,  0,  1},
+  {  1, -1, -1},
+  { -1,  1,  0},
+}
 
 sequential_source_gamma = {tag="g5", val=gamma{mu=5}}
 
-pi2_list = make_mom_list(0)
-pf1_list = pi2_list
+pi2_list = sequential_source_momentum_list
+pf1_list = sink_momentum_list
 pf2_list = pf1_list
-dt_source_sink_2pt = 15
-
+dt_source_sink_2pt = 2
+dt_source_sink_3pt_list = {3, 4, 5}
 
 -- Multigrid solver parameters
 
 mg_block = {
-  {3,3,3,2},
+  {2,2,2,2},
   {2,2,2,2}}
 
-mg_max_abserr = 1.e-22
-mg_max_relerr = 1.e-22
+mg_max_abserr = 1.e-20
+mg_max_relerr = 1.e-20
 

@@ -29,49 +29,48 @@ function deltaMpiN_3pt(seq, u, inp, out, out_index)
   bar_sign[1] = -1  -- y
   bar_sign[2] =  1  -- z
 --  bar_sign[3] =  1  -- t
-
+  local res = {}
   local a2 = u 
 --  printf("Sequential propagator norm: %12.10f\n",seq:spintrace():trace():real():norm2())
 --  printf("Forward propagator norm:%12.10f\n", u:spintrace():trace():real():norm2())
   local a3 = qcd.quarkContract13( Cgout * seq * Cgin, u )
   local a4 = qcd.quarkContract13( seq * Cgin, Cgout * u )
-  local res = a2 * (( a3 + a4 ):spintrace()) + (a2 * ( a3 + a4 ))
+  res[0] = a2 * (( a3 ):spintrace()) 
+  res[1] = a2 * (( a4 ):spintrace())
+  res[2] = a2 * ( a3 )
+  res[3] = a2 * ( a4 )
 
   a4 = seq * Cgin
   a3 = qcd.quarkContract13( Cgout * u, u )
-  res = res + (a4 * (a3 + a3:spintranspose()))
+  res[4]  = (a4 * (a3 )) 
+  res[5]  = (a4 * a3:spintranspose())
   
---  out_i = (out_index - 1)%3
---  for i=0, 15 do
---
---    local Pp = gamma{n=i}
---    corr_proj[i] = ((Pp * res ):spintrace():trace()) * bar_sign[out_i]
---  end
---
---  return corr_proj
 
 --Extracting each spin projection of the result dirac propagator
   local spin_proj = {}
   
-  for ispin1 = 0, 3 do
+  for diag_index = 0, 5 do
     
-    spin_proj[ispin1] = {}
-    for ispin2 = 0, 3 do
-        local dv = L:DiracFermion()
-        local corr = L:Complex()
-        for icol1 = 0, 2 do
+    spin_proj[diag_index] = {}
+    for ispin1 = 0, 3 do
+    
+        spin_proj[diag_index][ispin1] = {}
+        for ispin2 = 0, 3 do
+            local dv = L:DiracFermion()
+            local corr = L:Complex()
+            for icol1 = 0, 2 do
                 
-            dv = res[{c=icol1, d=ispin2}]
-            corr = corr + dv[{c=icol1, d=ispin1}]
-            spin_proj[ispin1][ispin2]  =  corr
+                dv = res[diag_index][{c=icol1, d=ispin2}]
+                corr = corr + dv[{c=icol1, d=ispin1}]
+                spin_proj[diag_index][ispin1][ispin2]  =  corr
 
             
+            end
+            corr = nil
+            dv = nil
         end
-        corr = nil
-        dv = nil
-     end
-   end
-
+    end
+  end
   return spin_proj
 
 end
@@ -93,6 +92,7 @@ function contract_meson_baryon_3pt(L, seq, prop, src_loc, snk_momenta, seq_mom, 
   local proton_gamma_index = {15, 0, 7, 8}
   local delta_gamma_index = { 9, 10, 12, 1, 2, 4}
 -- delta 2-point
+ for diag_index = 0, 5 do
   for input_gamma = 1, #proton_gamma_index do
     for output_gamma = 1, #delta_gamma_index do 
  
@@ -106,11 +106,11 @@ function contract_meson_baryon_3pt(L, seq, prop, src_loc, snk_momenta, seq_mom, 
 
         for index2 = 0, 3 do
         
-          name = string.format("/deltaMpiN/s1%.2d/s2%.2d/in%dout%d/pi2x%.2dpi2y%.2dpi2z%.2d",
+          name = string.format("/deltaMpiN/diag%.2d/s1%.2d/s2%.2d/in%dout%d/pi2x%.2dpi2y%.2dpi2z%.2d",diag_index,
                                 index1, index2, proton_gamma_index[input_gamma], delta_gamma_index[output_gamma],
                                 seq_mom[1], seq_mom[2], seq_mom[3])
 
-          dNpiN3pt_fw_index[name] = dNpiN3pt_fw[index1][index2]
+          dNpiN3pt_fw_index[name] = dNpiN3pt_fw[diag_index][index1][index2]
 
         end
       end   -- of index of projectors
@@ -121,5 +121,6 @@ function contract_meson_baryon_3pt(L, seq, prop, src_loc, snk_momenta, seq_mom, 
  
     end  -- of output_gamma
   end -- of input_gamma
+  end
   boundary_phase = nil
 end  -- contract_baryon_2pt

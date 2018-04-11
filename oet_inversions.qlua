@@ -391,9 +391,9 @@ for i_src, v_src in ipairs(source_locations) do
     source_position[3] = t
    
     -- open output files                                                          
-    local name = string.format("%s.%.4d.x%.2dy%.2dz%.2dt%.2d.aff", "kontract_oet_pinpin_2pt", nconf,pos[1], pos[2], pos[3], t) 
-    printf("# [] M - M 2pt output file %s\n", name)                               
-    aw_2pt, am = qcd.aff.Writer(name)  
+    --local name = string.format("%s.%.4d.x%.2dy%.2dz%.2dt%.2d.aff", "kontract_oet_pinpin_2pt", nconf,pos[1], pos[2], pos[3], t) 
+    --printf("# [] M - M 2pt output file %s\n", name)                               
+    --aw_2pt, am = qcd.aff.Writer(name)  
 
     oet_timer = timer("stochastic oet contraction timer")
     for i_sample = 0, nsample_oet - 1 do
@@ -497,11 +497,11 @@ for i_src, v_src in ipairs(source_locations) do
                     os.exit(2)
                 end
             end
-            contract_mxb_mxb_oet (L, light_propagator_smeared_list[i_prop], light_stochastic_propagator_oet_list_smeared, phi_0, mom,
-                                 source_position, i_sample, aw_2pt )
+            --contract_mxb_mxb_oet (L, light_propagator_smeared_list[i_prop], light_stochastic_propagator_oet_list_smeared, phi_0, mom,
+            --                     source_position, i_sample, aw_2pt )
         end
     end
-    aw_2pt:close()
+    --aw_2pt:close()
     oet_timer("done")
 end
 total_timer("done")

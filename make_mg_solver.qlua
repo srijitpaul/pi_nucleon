@@ -58,7 +58,7 @@ function make_mg_solver (
       global = { -- for -1
          -- nlevels is #multigrid
          -- nc is U[1]:colors()
-         verbose = -2,
+         verbose = 0,
          profile = 1,
          kappa   = kappa,
          kappanv = kappa,
@@ -91,7 +91,7 @@ function make_mg_solver (
           ngcr             =   8,
           setup_res        = 0.4,
           setup_maxit      = 100;
-          setup_change_fac = 0.5
+          setup_change_fac = 0.6
            --- setup_nvecs
         },
 

@@ -1,0 +1,374 @@
+-- ***********************************************************************************
+-- *
+-- ************************************************************************************
+function show_mem(name)
+  printf("# Memory usage at %s:\n", name);
+  for i,v in pairs(qcd.memory_usage()) do
+    printf("   %-20s %d\n", i, v)
+  end
+end
+
+-- ***********************************************************************************
+-- ***********************************************************************************
+
+-- ***********************************************************************************
+-- *
+-- ************************************************************************************
+function point_source (Lat, x,y,z,t)
+  G = Lat:DiracPropagator()
+  for icol  = 0, 2 do
+    for ispin = 0, 3 do
+      local dv = Lat:DiracFermion()
+      dv[{x, y, z, t, c=icol, d=ispin}] = complex(1, 0)
+      G[{c=icol,d=ispin}] = dv
+    end
+  end
+  return G
+end  -- * end of function point_source
+
+-- ************************************************************************************
+-- ************************************************************************************
+
+-- ************************************************************************************
+-- *
+-- ************************************************************************************
+function pack_propagator_as_sink (L, vpacked, v, t0, dt, fbwd )
+ 
+  local w = L:DiracPropagator()
+
+  -- ************************************************************************************
+  -- * forward direction
+  -- ************************************************************************************
+  if fbwd == "fwd" then
+
+    L:Subset{axis=3, position = t0}:where( function() w:set( v ) end)
+
+    for it = 1, dt do
+      local dv = w:shift(3, "from_forward" )
+      w = dv
+
+      L:Subset{axis=3, position = t0}:where( function()
+        w:set( v )
+      end)
+    end
+
+  -- ************************************************************************************
+  -- * backward direction
+  -- ************************************************************************************
+  elseif fbwd == "bwd" then
+
+    L:Subset{axis=3, position = t0}:where( function() w:set( v ) end)
+
+    for it = 1, dt do
+      local dv = w:shift(3, "from_backward" )
+
+      L:Subset{axis=3, position = t0}:where( function()
+        w:set( dv )
+      end)
+    end
+
+  end
+
+--[[
+  -- TEST
+  local c = qcd.dot ( w, w ):sum(L:MultiSet(L[3], L:pcoord(3)))
+  for i = 0, L[3]-1 do
+    printf( "# [pack_propagator_as_sink] t = %2d norm = %16.7e\n", i, c[i]:real() )
+  end
+  -- END OF TEST
+--]]
+
+  vpacked = vpacked + w
+
+  return( vpacked )
+end  -- * end of pack_propagator_as_sink
+-- ************************************************************************************
+-- *
+-- ************************************************************************************
+function pack_propagator (L, vpacked, v, t0, dt)
+   
+  -- * loop on source - sink time separations
+  for dt_tmp = -dt+1, dt do
+
+    local t_tmp = ( t0 + dt_tmp + L[3] ) % L[3]
+    printf("# [pack_propagator] packing timslice t = %3d for t0 = %3d and dt = %3d\n", t_tmp, t0, dt_tmp )
+
+    L:Subset{axis=3, position = t_tmp}:where( 
+      function()
+        vpacked:set( v )
+      end
+    )
+
+    end -- of loop on source - sink time separations
+end  -- * end of function pack_propagator
+
+-- ************************************************************************************
+-- ************************************************************************************
+
+-- ************************************************************************************
+-- *
+-- ************************************************************************************
+function pack_propagator_from_sink (L, vpacked, vf, vb, t0, dt )
+ 
+  -- ************************************************************************************
+  -- * forward direction
+  -- ************************************************************************************
+  for dt_tmp = 0, dt do
+    local t_tmp = ( t0 + dt_tmp + L[3] ) % L[3]
+    printf("# [pack_propagator_from_sink] packing propagator from forward at t = %2d for tsrc = %2d and dt = %2d\n", t_tmp, t0, dt )
+    L:Subset{axis=3, position = t_tmp}:where( function()
+        vpacked:set( vf )
+    end)
+  end  -- of loop on intermediate times dt_tmp
+
+  -- ************************************************************************************
+  -- * backward direction
+  -- ************************************************************************************
+  for dt_tmp = -dt+1, -1 do
+    local t_tmp = ( t0 + dt_tmp + L[3] ) % L[3]
+    printf("# [pack_propagator_from_sink] packing propagator from backward at t = %2d for tsrc = %2d and dt = %2d\n", t_tmp, t0, dt )
+    L:Subset{axis=3, position = t_tmp}:where( function()
+        vpacked:set( vb )
+    end)
+  end  -- of loop on intermediate times dt_tmp
+end
+
+-- ************************************************************************************
+-- ************************************************************************************
+
+-- ************************************************************************************
+-- *
+-- ************************************************************************************
+function pack_fermion_from_sink (L, vpacked, v, t0, dt, fbwd )
+ 
+  -- ************************************************************************************
+  -- * forward direction
+  -- ************************************************************************************
+  if fbwd == "fwd" then
+    for dt_tmp = 0, dt do
+      local t_tmp = ( t0 - dt_tmp + L[3] ) % L[3]
+      printf("# [pack_fermion_from_sink] packing fermion at t = %2d for tsrc = %2d and dt = %2d\n", t_tmp, t0, dt )
+      L:Subset{axis=3, position = t_tmp}:where( function()
+          vpacked:set( v )
+      end)
+    end  -- of loop on intermediate times dt_tmp
+  end
+
+  -- ************************************************************************************
+  -- * backward direction
+  -- ************************************************************************************
+  if fbwd == "bwd" then
+    for dt_tmp = 0, dt do
+      local t_tmp = ( t0 + dt_tmp + L[3] ) % L[3]
+      printf("# [pack_propagator_from_sink] packing fermion at t = %2d for tsrc = %2d and dt = %2d\n", t_tmp, t0, dt )
+      L:Subset{axis=3, position = t_tmp}:where( function()
+          vpacked:set( v )
+      end)
+    end  -- of loop on intermediate times dt_tmp
+  end
+end
+
+
+-- ************************************************************************************
+-- * determine all stochastic source timeslices needed; make a source timeslice list
+-- ************************************************************************************
+function make_stochastic_source_timeslice_list (L, source_locations, n_coherent_source, dt_source_sink_2pt )
+
+  timeslice_lookup_table = {}
+  timeslice_list = {}
+
+  local ttimer = timer("stochastic source timeslices")
+  local tmp_list = {}
+  for t = 0, L[3]-1 do
+    tmp_list[t] = -1
+  end
+
+  local i_snk = 0
+  for i_src, v_src in ipairs(source_locations) do
+  
+    local t = v_src["t"]
+
+    for i_coherent = 0, n_coherent_source - 1 do
+
+      local i_prop = (i_src - 1 ) * n_coherent_source + i_coherent + 1
+      local t_coherent = ( t + i_coherent * (L[3] / n_coherent_source) ) % L[3]
+
+      timeslice_lookup_table[i_prop] = {}
+
+      for dt = -dt_source_sink_2pt, dt_source_sink_2pt do
+        t_snk = ( t_coherent + dt + L[3] ) % L[3]
+        if tmp_list[t_snk] == -1 then
+          tmp_list[t_snk] = i_snk
+          timeslice_list[ i_snk ] = t_snk
+          i_snk = i_snk + 1
+        end
+        timeslice_lookup_table[i_prop][ ( dt + L[3] ) % L[3] ] = tmp_list[t_snk]
+      end
+
+    end  -- of loop on coherent source timeslices
+  end    -- of loop on base source timeslices
+
+  timeslice_number = i_snk
+  printf("# [make_stochastic_source_timeslice_list] number of stochastic source timeslices = %d\n", timeslice_number)
+
+  tmp_list = nil
+  i_snk = nil
+
+  -- ************************************************************************************
+  -- * TEST
+  -- ************************************************************************************
+  for i_src, v_src in ipairs(source_locations) do
+    local t = v_src["t"]
+
+    for i_coherent = 0, n_coherent_source - 1 do
+
+      local i_prop = (i_src - 1 ) * n_coherent_source + i_coherent + 1
+      local t_coherent = ( t + i_coherent * (L[3] / n_coherent_source) ) % L[3]
+
+      for dt = -dt_source_sink_2pt, dt_source_sink_2pt do
+        local ddt = ( dt + L[3] ) % L[3]
+        printf("# [make_stochastic_source_timeslice_list] i_src = %2d  i_prop = %2d  t_src = %3d  dt = %3d  t_snk = %3d  lookup table = %2d\n", i_src, i_prop, t_coherent, dt,
+            timeslice_list[ timeslice_lookup_table[i_prop][ddt] ],
+            timeslice_lookup_table[i_prop][ddt])
+      end
+
+    end
+  end
+  -- ************************************************************************************
+  -- * END OF TEST
+  -- ************************************************************************************
+
+  -- ************************************************************************************
+  -- ************************************************************************************
+
+  -- ************************************************************************************
+  -- * TEST
+  -- ************************************************************************************
+  for i_stoch =0, timeslice_number - 1 do
+    printf("# [make_stochastic_source_timeslice_list] stochastic source timeslice no. %3d is t = %3d\n", i_stoch, timeslice_list[i_stoch])
+  end
+  -- ************************************************************************************
+  -- * END OF TEST
+  -- ************************************************************************************
+
+  ttimer("done")
+
+  res = { timeslice_number = timeslice_number, timeslice_list = timeslice_list, timeslice_lookup_table = timeslice_lookup_table}
+
+  return( res )
+end  -- of make_stochastic_source_timeslice_list
+
+-- ************************************************************************************
+-- ************************************************************************************
+
+-- ************************************************************************************
+-- *
+-- ************************************************************************************
+function pack_propagator_in_sink (L, vpacked, v, t0, dt, fbwd )
+ 
+  local w = L:DiracPropagator()
+
+  -- ************************************************************************************
+  -- * forward direction
+  -- ************************************************************************************
+  if fbwd == "fwd" then
+
+    L:Subset{axis=3, position = t0}:where( function() w:set( v ) end)
+
+    for it = 1, dt do
+      local dv = w:shift(3, "from_forward" )
+ 
+
+      L:Subset{axis=3, position = (t0 - it + L[3])%L[3]}:where( function()
+        w:set( dv )
+      end)
+    end
+
+  -- ************************************************************************************
+  -- * backward direction
+  -- ************************************************************************************
+  elseif fbwd == "bwd" then
+
+    L:Subset{axis=3, position = t0}:where( function() w:set( v ) end)
+
+    for it = 1, dt do
+      local dv = w:shift(3, "from_backward" )
+
+      L:Subset{axis=3, position = (t0 + it + L[3])%L[3]}:where( function()
+        w:set( dv )
+      end)
+    end
+
+  end
+
+
+  -- TEST
+  local c = qcd.dot ( w, w ):sum(L:MultiSet(L[3], L:pcoord(3)))
+  for i = 0, L[3]-1 do
+    printf( "# [pack_propagator_as_sink] t = %2d norm = %16.7e\n", i, c[i]:real() )
+  end
+  -- END OF TEST
+--]]
+
+  vpacked = w
+
+  return( vpacked )
+end  -- * end of pack_propagator_as_sink
+
+-- ************************************************************************************
+-- ************************************************************************************
+
+-- ************************************************************************************
+-- * pack fermion field from intermediate time to sink
+-- ************************************************************************************
+function pack_fermion_to_sink (L, vpacked, v_list, t0, dt, fbwd )
+
+  local w = L:DiracFermion()
+
+  -- ************************************************************************************
+  -- * forward diretion
+  -- ************************************************************************************
+  if fbwd == "fwd" then
+
+    L:Subset{axis=3, position = t0}:where( function()
+      w:set( v_list[(t0 - dt + L[3])%L[3]] )
+    end)
+
+    for it = 1, dt do
+
+      local k = ( t0 - dt + it + L[3] ) % L[3]
+
+      local dv = w:shift(3, "from_forward" )
+      w = dv
+
+      L:Subset{axis=3, position = t0}:where( function()
+        w:set( v_list[ k ] )
+      end)
+    end
+
+  -- ************************************************************************************
+  -- * backward diretion
+  -- ************************************************************************************
+  elseif fbwd == "bwd" then
+
+    L:Subset{axis=3, position = t0}:where( function()
+      w:set( v_list[(t0 + dt + L[3])%L[3]] )
+    end)
+
+    for it = 1, dt do
+
+      local k = ( t0 + dt - it + L[3] ) % L[3]
+
+      local dv = w:shift(3, "from_backward" )
+      w = dv
+
+      L:Subset{axis=3, position = t0}:where( function()
+        w:set( v_list[ k ] )
+      end)
+    end
+
+  end
+
+  vpacked = vpacked + w
+  return ( vpacked )
+end  -- * end of pack_fermion_to_sink

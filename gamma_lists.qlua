@@ -65,21 +65,40 @@ vat_current_gamma_list = {
 
 -- baryon vertices
 baryon_vertex_list = {  
---  {tag="gx",     gamma={  1,  1,  1}},
---  {tag="gy",     gamma={  2,  1,  1}},
---  {tag="gz",     gamma={  4,  1,  1}},
+  {tag="gx",     gamma={  1,  1,  1}},
+  {tag="gy",     gamma={  2,  1,  1}},
+  {tag="gz",     gamma={  4,  1,  1}},
   {tag="g5",     gamma={ 15,  1,  1}},
-  {tag="gtg5",   gamma={  7, -1, -1}}
---  {tag="gxgt",   gamma={  9,  1, -1}},
---  {tag="gygt",   gamma={ 10,  1, -1}},
---  {tag="gzgt",   gamma={ 12,  1, -1}},
+  {tag="g5gt",   gamma={  7, 1, 1}},
+  {tag="gxgt",   gamma={  9,  1, -1}},
+  {tag="gygt",   gamma={ 10,  1, -1}},
+  {tag="gzgt",   gamma={ 12,  1, -1}},
 --  {tag="gxg5",   gamma={ 14,  1, -1}},
 --  {tag="gyg5",   gamma={ 13, -1, -1}},
 --  {tag="gzg5",   gamma={ 11,  1, -1}},
---  {tag="id",     gamma={  0,  1,  1}},
+  {tag="id",     gamma={  0,  1,  1}},
 --  {tag="gt",     gamma={  8,  1,  1}},
---  {tag="gxgtg5", gamma={  6, -1, -1}},
---  {tag="gygtg5", gamma={  5,  1, -1}},
---  {tag="gzgtg5", gamma={  3, -1, -1}}
+  {tag="gxgtg5", gamma={  6, -1, -1}},
+  {tag="gygtg5", gamma={  5,  1, -1}},
+  {tag="gzgtg5", gamma={  3, -1, -1}}
+}
+pion_vertex_list = {
+    {tag="g5",      gamma={ 15, 1,  1}},
+    {tag="g5gt",    gamma={ 7,  1,  1}}
+}
+gc_vertex_list = {
+  {tag="gx",   gamma={  1,  1,  1}},
+  {tag="gy",   gamma={  2,  1,  1}},
+  {tag="gz",   gamma={  4,  1,  1}},
+  {tag="gt",   gamma={  8,  1,  1}},
+  {tag="gxg5", gamma={ 14,  1, -1}},
+  {tag="gyg5", gamma={ 13, -1, -1}},
+  {tag="gzg5", gamma={ 11,  1, -1}},
+  {tag="gtg5", gamma={  7, -1, -1}},
+
+}
+g5pion_vertex_list = {
+    {tag="id",    gamma={ 0,  1,  1}},
+    {tag="gt",    gamma={ 8,  1,  1}}
 }
 

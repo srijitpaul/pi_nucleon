@@ -12,7 +12,7 @@ TSize=16
 Thalf=$(($TSize / 2))
 
 params=invert_params.qlua
-include="$scripts/plaquette.qlua  $scripts/timer.qlua $scripts/stout_smear.qlua $scripts/load_gauge_field.qlua $scripts/random_functions.qlua  $scripts/make_mg_solver.qlua $scripts/write_propagator.qlua $scripts/read_propagator.qlua $scripts/gamma_lists.qlua $scripts/contract_factors.qlua"
+include="$scripts/plaquette.qlua  $scripts/propagator_utils.qlua $scripts/timer.qlua $scripts/stout_smear.qlua $scripts/load_gauge_field.qlua $scripts/random_functions.qlua  $scripts/make_mg_solver.qlua $scripts/write_propagator.qlua $scripts/read_propagator.qlua $scripts/gamma_lists.qlua $scripts/contract_factors.qlua $scripts/deltapp_piN_openspin.qlua $scripts/deltaM_piN_openspin.qlua"
 
 
 configlist_name="$scripts/oet_config00"
@@ -44,7 +44,7 @@ do
   /^nconf/ {print "nconf = ", '$((10#$g))'; next}
   {print}' > $input
 
-  mpirun -n 1 qlua_170925  $include $input $path_to_prog/$QLUA_SCRIPT >edison_factors_$g.out
+  mpiexec -n 2 qlua_170925  $include $input $path_to_prog/$QLUA_SCRIPT >edison_factors_$g.out
 done 
 wait
 

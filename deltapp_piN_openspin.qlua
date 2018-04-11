@@ -23,170 +23,205 @@ require "stdlib"
 
 function proton_2pt(d, u, inp1, out1)
 
-  local inp2
-  local out2
-  if inp1 == 15 then
+    local inp2
+    local out2
+    if inp1 == 15 then
     inp2 = 0
-  elseif inp1 == 0 then
+    elseif inp1 == 0 then
     inp2 = 15 
-  elseif inp1 == 7 then
+    elseif inp1 == 7 then
     inp2 = 0
-  elseif inp1 == 8 then
+    elseif inp1 == 8 then
     inp2 = 15
-  end
+    end
 
 
-  if out1 == 15 then
+    if out1 == 15 then
     out2 = 0
-  elseif out1 == 0 then
+    elseif out1 == 0 then
     out2 = 15 
-  elseif out1 == 7 then
+    elseif out1 == 7 then
     out2 = 0
-  elseif out1 == 8 then
+    elseif out1 == 8 then
     out2 = 15
-  end
+    end
 
 
 
-  local Cgin  = -1 * gamma{n=10} * gamma{n=inp1}
-  local Cgout = -1 * gamma{n=10} * gamma{n=out1}  
-  corr_proj = {}
-  local a2    = gamma{n=out2} * gamma{n=inp2} * u
-  local a3    = qcd.quarkContract13(Cgout * d * Cgin, u )
-  local res   = (a2 * a3:spintrace()) + (a2 * a3)
-  
---Extracting each spin projection of the result dirac propagator
-  local spin_proj = {}
-  
-  for ispin1 = 0, 3 do
-    
+    local Cgin  = -1 * gamma{n=10} * gamma{n=inp1}
+    local Cgout = -1 * gamma{n=10} * gamma{n=out1}  
+    corr_proj = {}
+    local a2    = gamma{n=out2} * gamma{n=inp2} * u
+    local a3    = qcd.quarkContract13(Cgout * d * Cgin, u )
+local res   = (a2 * a3:spintrace()) + (a2 * a3)
+
+    --Extracting each spin projection of the result dirac propagator
+    local spin_proj = {}
+
+    for ispin1 = 0, 3 do
+
     spin_proj[ispin1] = {}
     for ispin2 = 0, 3 do
-        local dv = L:DiracFermion()
-        local corr = L:Complex()
-        for icol1 = 0, 2 do
-                
-            dv = res[{c=icol1, d=ispin2}]
-            corr = corr + dv[{c=icol1, d=ispin1}]
-            spin_proj[ispin1][ispin2]  =  corr
+    local dv = L:DiracFermion()
+    local corr = L:Complex()
+    for icol1 = 0, 2 do
 
-            
-        end
-        corr = nil
-        dv = nil
-     end
-   end
-
-  return spin_proj
-
-end
+    dv = res[{c=icol1, d=ispin2}]
+    corr = corr + dv[{c=icol1, d=ispin1}]
+    spin_proj[ispin1][ispin2]  =  corr
 
 
--- delta
+    end
+    corr = nil
+    dv = nil
+    end
+    end
+
+    return spin_proj
+
+    end
+
+
+    -- delta
 
 function deltapp_2pt( u, inp, out, out_index)
-  --          g0            g2            gmu 
-  corr_proj = {}
-  local Cgin = -1 * gamma{n=10} * gamma{n=inp}
-  local Cgout = -1 * gamma{n=10}* gamma{n=out}
-  local a2 = u
+    --          g0            g2            gmu 
+    corr_proj = {}
+    local Cgin = -1 * gamma{n=10} * gamma{n=inp}
+    local Cgout = -1 * gamma{n=10}* gamma{n=out}
+    local a2 = u
 
-  local a3 = qcd.quarkContract13( Cgout * u * Cgin, u )
-  local a4 = qcd.quarkContract13( u * Cgin, Cgout * u )
-  local res = a2*((a3 + a4):spintrace())  + (a2 *( a3 + a4 ))
+    local a3 = qcd.quarkContract13( Cgout * u * Cgin, u )
+    local a4 = qcd.quarkContract13( u * Cgin, Cgout * u )
+local res = a2*((a3 + a4):spintrace())  + (a2 *( a3 + a4 ))
 
-  a4 = a2 * Cgin
-  a3 = qcd.quarkContract13( Cgout * u, u )
-  res = res + (a4 * (a3 + a3:spintranspose()))
-  out_i = (out_index - 1)%3
+    a4 = a2 * Cgin
+    a3 = qcd.quarkContract13( Cgout * u, u )
+res = res + (a4 * (a3 + a3:spintranspose()))
+    out_i = (out_index - 1)%3
 
---Extracting each spin projection of the result dirac propagator
-  local spin_proj = {}
-  
-  for ispin1 = 0, 3 do
-    
+    --Extracting each spin projection of the result dirac propagator
+    local spin_proj = {}
+
+    for ispin1 = 0, 3 do
+
     spin_proj[ispin1] = {}
     for ispin2 = 0, 3 do
-        local dv = L:DiracFermion()
-        local corr = L:Complex()
-        for icol1 = 0, 2 do
-                
-            dv = res[{c=icol1, d=ispin2}]
-            corr = corr + dv[{c=icol1, d=ispin1}]
-            spin_proj[ispin1][ispin2]  =  corr
+    local dv = L:DiracFermion()
+    local corr = L:Complex()
+    for icol1 = 0, 2 do
 
-            
-        end
-        corr = nil
-        dv = nil
-     end
-   end
+    dv = res[{c=icol1, d=ispin2}]
+    corr = corr + dv[{c=icol1, d=ispin1}]
+    spin_proj[ispin1][ispin2]  =  corr
 
-  return spin_proj
 
-end
+    end
+    corr = nil
+    dv = nil
+    end
+    end
 
---*********************************************************************
--- * run contractions
--- ********************************************************************
+    return spin_proj
+
+    end
+
+    --*********************************************************************
+    -- * run contractions
+    -- ********************************************************************
 function contract_baryon_2pt(L, prop, src_loc, snk_momenta, aff_out)
 
-  -- boundary phase
-  boundary_phase = vector.complex(L[3])
-  for it = 0, src_loc[3] - 1 do
+    -- boundary phase
+boundary_phase = vector.complex(L[3])
+    for it = 0, src_loc[3] - 1 do
     boundary_phase[it] = -1
-  end
-  for it = src_loc[3], L[3]-1 do
+    end
+    for it = src_loc[3], L[3]-1 do
     boundary_phase[it] = 1
-  end
-  
-  local proton_gamma_index = {15, 0, 7, 8}
-  -- proton
-  for input_gamma = 1, #proton_gamma_index do
+    end
+
+    local proton_gamma_index = {15, 0, 7, 8}
+    -- proton
+    for input_gamma = 1, #proton_gamma_index do
     for output_gamma = 1, #proton_gamma_index do
 
-      p2pt_fw = proton_2pt(prop, prop, proton_gamma_index[input_gamma], proton_gamma_index[output_gamma])
+p2pt_fw = proton_2pt(prop, prop, proton_gamma_index[input_gamma], proton_gamma_index[output_gamma])
 
-      p2pt_fw_index = {}
-      for index1 = 0,3 do
-        for index2 = 0,3 do
-       
-        local name = string.format("/proton/s1%.2d/s2%.2d/in%.2dout%.2d", index1,index2, 
-                              proton_gamma_index[input_gamma], proton_gamma_index[output_gamma])
-        p2pt_fw_index[name] = p2pt_fw[index1][index2] 
-         
-        --aff_out:write(name, q2)
-        end
-      end                    
-      t_axis = #dims - 1
-      src0 = {src_loc[0], src_loc[1], src_loc[2], src_loc[3]} 
-      qcd.save_momproj(aff_out, '', p2pt_fw_index,src0, snk_momenta, t_axis, 1, {ft_sign=1})              
---      end  -- of loop on snk_momenta
+    p2pt_fw_index = {}
+    for index1 = 0,3 do
+    for index2 = 0,3 do
+
+    local name = string.format("/proton/s1%.2d/s2%.2d/in%.2dout%.2d", index1,index2, 
+            proton_gamma_index[input_gamma], proton_gamma_index[output_gamma])
+    p2pt_fw_index[name] = p2pt_fw[index1][index2] 
+
+    --aff_out:write(name, q2)
     end
-  end
-  
-  -- delta 2-point
+    end                    
+    t_axis = #dims - 1
+    src0 = {src_loc[0], src_loc[1], src_loc[2], src_loc[3]} 
+    qcd.save_momproj(aff_out, '', p2pt_fw_index,src0, snk_momenta, t_axis, 1, {ft_sign=1})              
+    --      end  -- of loop on snk_momenta
+    end
+    end
 
-  local delta_gamma_index = { 9, 10, 12, 1, 2, 4}
-  for input_gamma = 1, #delta_gamma_index do
+    -- delta 2-point
+
+    local delta_gamma_index = { 9, 10, 12, 1, 2, 4}
+    for input_gamma = 1, #delta_gamma_index do
     for output_gamma = 1, #delta_gamma_index do
 
-      dpp2pt_fw = deltapp_2pt(prop, delta_gamma_index[input_gamma], delta_gamma_index[output_gamma], output_gamma)
-      dpp2pt_fw_index = {}
-      for index1 = 0,3 do
-          for index2 = 0,3 do
-          name = string.format("/deltapp/s1%.2d/s2%.2d/in%dout%d",
-                                index1, index2, delta_gamma_index[input_gamma], delta_gamma_index[output_gamma])
-          dpp2pt_fw_index[name] = dpp2pt_fw[index1][index2]
-          end
-      end   -- of index of projectors
-      t_axis = #dims - 1
-      src0 = {src_loc[0], src_loc[1], src_loc[2], src_loc[3]}
-      qcd.save_momproj(aff_out, '', dpp2pt_fw_index, src0, snk_momenta, t_axis, 1, {ft_sign=1})              
-  
+dpp2pt_fw = deltapp_2pt(prop, delta_gamma_index[input_gamma], delta_gamma_index[output_gamma], output_gamma)
+    dpp2pt_fw_index = {}
+    for index1 = 0,3 do
+    for index2 = 0,3 do
+    name = string.format("/deltapp/s1%.2d/s2%.2d/in%dout%d",
+            index1, index2, delta_gamma_index[input_gamma], delta_gamma_index[output_gamma])
+    dpp2pt_fw_index[name] = dpp2pt_fw[index1][index2]
+    end
+    end   -- of index of projectors
+    t_axis = #dims - 1
+    src0 = {src_loc[0], src_loc[1], src_loc[2], src_loc[3]}
+    qcd.save_momproj(aff_out, '', dpp2pt_fw_index, src0, snk_momenta, t_axis, 1, {ft_sign=1})              
+
 
     end  -- of nu
-  end  -- of mu
+    end  -- of mu
 
-  boundary_phase = nil
-end  -- contract_baryon_2pt
+    boundary_phase = nil
+    end  -- contract_baryon_2pt
+
+    --**************************************
+    --* pion  2-point function
+    --* - use point-to-all propagators
+    --**************************************
+
+function pion2pt(L, prop1, prop2, src_loc, gin_list, gout_list, mom, tag, aff_out)
+    
+    
+    u = gamma{mu=5} * prop2 * gamma{mu=5}
+ 
+     
+    qq = {}
+    for i_gout, gout in ipairs(gout_list) do
+          
+      local gout_tag  = gout.tag
+      local gout_id   = gout.gamma[1]
+      local gout_sign = gout.gamma[2]
+      local gout_adjoint_sign = gout.gamma[3]
+
+      for i_gin, gin in ipairs(gin_list) do
+            
+        local gin_tag  = gin.tag
+        local gin_id   = gin.gamma[1]
+        local gin_sign = gin.gamma[2]
+        local gin_adjoint_sign = gin.gamma[3]
+        printf("%.2d\n", gin_id)
+        local name2 = string.format("/%s/gi%.2d/gf%.2d", tag, gin_id, gout_id)
+        qq[name2] = qcd.dot(u, gamma{n=gout_id} * prop1 * gamma{n=gin_id})
+      end
+    end
+    t_axis = 3
+    src0 = {src_loc[0], src_loc[1], src_loc[2], src_loc[3]}
+    qcd.save_momproj(aff_out, '', qq, src0, mom, t_axis, 1, {ft_sign=1})
+end
