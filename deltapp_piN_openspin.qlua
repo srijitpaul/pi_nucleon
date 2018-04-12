@@ -196,7 +196,7 @@ dpp2pt_fw = deltapp_2pt(prop, delta_gamma_index[input_gamma], delta_gamma_index[
     --* - use point-to-all propagators
     --**************************************
 
-function pion2pt(L, prop1, prop2, src_loc, gin_list, gout_list, mom, tag, aff_out)
+function pion2pt(L, prop1, prop2, src_loc, gin_list, gout_list, mom_list, tag, aff_out)
     
     
     u = gamma{mu=5} * prop2 * gamma{mu=5}
@@ -223,5 +223,5 @@ function pion2pt(L, prop1, prop2, src_loc, gin_list, gout_list, mom, tag, aff_ou
     end
     t_axis = 3
     src0 = {src_loc[0], src_loc[1], src_loc[2], src_loc[3]}
-    qcd.save_momproj(aff_out, '', qq, src0, mom, t_axis, 1, {ft_sign=1})
+    qcd.save_momproj(aff_out, '', qq, {0, 0, 0, 0}, mom_list, t_axis, 1, {ft_sign=1})
 end

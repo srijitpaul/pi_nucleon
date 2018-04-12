@@ -1,5 +1,5 @@
-package.path = '/home/srijit/Dropbox/spaul/softwares/local-20170925/qlua/lib/qlua/?.qlua;/home/srijit/Dropbox/spaul/softwares/local-20170925/qlua/lib/qlua/lhpc/?.qlua;' .. package.path
---package.path = '/global/homes/s/srijitp/install/local_20170925_edison/qlua/lib/qlua/?.qlua;/global/homes/s/srijitp/install/local_20170925_edison/qlua/lib/qlua/lhpc/?.qlua;' .. package.path
+--package.path = '/home/srijit/Dropbox/spaul/softwares/local-20170925/qlua/lib/qlua/?.qlua;/home/srijit/Dropbox/spaul/softwares/local-20170925/qlua/lib/qlua/lhpc/?.qlua;' .. package.path
+package.path = '/global/homes/s/srijitp/install/local_20170925_edison/qlua/lib/qlua/?.qlua;/global/homes/s/srijitp/install/local_20170925_edison/qlua/lib/qlua/lhpc/?.qlua;' .. package.path
 --package.path = '/home/srijit/Dropbox/spaul/softwares/experimental_qlua/build2/parts/qlua/tree/lhpc/?.qlua;/home/srijit/Dropbox/spaul/softwares/experimental_qlua/build2/parts/qlua/tree/qlib/?.qlua;' .. package.path
 require 'stdlib'                                                                
 require 'setup_util'                                                            
@@ -24,7 +24,7 @@ hex_n = 2
 
 -- dimensions
 dims = {8, 8, 8, 16}
-network_dims={1, 1, 1, 2}
+network_dims={2, 2, 2, 2}
 
 -- source locations
 source_locations = 
@@ -38,7 +38,7 @@ nconf =
 nsample = 3
 nsample_oet = 1
 -- conf	
-conf_name_prefix ="/home/srijit/Dropbox/spaul/Dina_Work/pion_nucleon_scripts/tests/pi_nucleon/configs/lat_"
+conf_name_prefix ="/global/homes/s/srijitp/spaul/projects/pi_nucleon/sandbox/pi_nucleon/configs/lat_"
 conf_name_input_suffix = ".nersc"
 conf_name_output_suffix = "_Stout_smeared.nersc"
 
@@ -125,7 +125,7 @@ sink_momentum_list = {
   { -1,  1,  0},
 }
 
-sequential_source_gamma = {tag="g5", val=gamma{mu=5}}
+--sequential_source_gamma = {tag="g5", val=gamma{mu=5}}
 
 pi2_list = sequential_source_momentum_list
 pf1_list = sink_momentum_list
@@ -136,7 +136,7 @@ dt_source_sink_3pt_list = {3, 4, 5}
 -- Multigrid solver parameters
 
 mg_block = {
-  {2,2,2,2},
+  {2,2,2,4},
   {2,2,2,2}}
 
 mg_max_abserr = 1.e-20
