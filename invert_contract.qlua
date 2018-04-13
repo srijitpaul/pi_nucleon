@@ -38,110 +38,112 @@ printf("#\t Boundary condition = %d, %d, %d, %d\n", quark_bc[1], quark_bc[2], qu
     -- initialize the lattice
 L = qcd.lattice(dims)
 
-    Nd = #L
+Nd = #L
 
-    volume = 1
-    for i = 0, #L - 1 do
-    volume = volume * L[i]
-    end
-    printf("# [invert_contract] lattice volume = %d\n", volume)
+volume = 1
+for i = 0, #L - 1 do
+  volume = volume * L[i]
+end
+printf("# [invert_contract] lattice volume = %d\n", volume)
 
-    -- initialize param set for writing propagators
-    write_param = {
-        ["m_q"]         = mq_l,
-        ["c_sw"]        = csw,
-        ["ferm_bc"]     = quark_bc,
-        ["ensemble"]    = "beta3.31_2hex_24c48_ml-0.09530_mh-0.04",
-        ["cfg"]         = nconf,
-        ["ape_alpha"]   = ape_alpha,
-        ["ape_n"]       = ape_n,
-        ["ape_accu"]    = ape_accu,
-        ["ape_maxiter"] = ape_maxiter,
-        ["wup_alpha"]   = wup_alpha,
-        ["wup_n"]       = wup_n,
-        ["action_type"] = "clover",
-        --["stout_rho"]   = stout_rho,
-        --["stout_n"]     = stout_n,
-        ["solver_eps"]  = mg_max_relerr,
-        ["src_pos"]     = {-1, -1, -1},
-        ["src_t"]       = -1
-    }
+-- initialize param set for writing propagators
+write_param = {
+    ["m_q"]         = mq_l,
+    ["c_sw"]        = csw,
+    ["ferm_bc"]     = quark_bc,
+    ["ensemble"]    = "beta3.31_2hex_24c48_ml-0.09530_mh-0.04",
+    ["cfg"]         = nconf,
+    ["ape_alpha"]   = ape_alpha,
+    ["ape_n"]       = ape_n,
+    ["ape_accu"]    = ape_accu,
+    ["ape_maxiter"] = ape_maxiter,
+    ["wup_alpha"]   = wup_alpha,
+    ["wup_n"]       = wup_n,
+    ["action_type"] = "clover",
+    --["stout_rho"]   = stout_rho,
+    --["stout_n"]     = stout_n,
+    ["solver_eps"]  = mg_max_relerr,
+    ["src_pos"]     = {-1, -1, -1},
+    ["src_t"]       = -1
+}
 
 
-if hex_smear then
 -- read configuration
 conf_name = string.format("%s%04d%s", conf_name_prefix, nconf, conf_name_input_suffix)
 printf("# [invert_contract] reading original gauge configuration from file %s\n", conf_name)
 
-    u_load_timer = timer("u load")
-    uorig = load_nersc(L, conf_name)
-    u_load_timer("done")
-    printf("# [invert_contract] Plaquette (original) = %12.10f\n", plaquette_full(uorig))
+u_load_timer = timer("u load")
+uorig = load_nersc(L, conf_name)
+u_load_timer("done")
+printf("# [invert_contract] Plaquette (original) = %12.10f\n", plaquette_full(uorig))
 
 
-    -- smear the gauge configuration
-    hex_smear_timer = timer("hex smear")
-    ubmw_hex = bmw_hex(uorig, 2)
-    hex_smear_timer("done")
-    else
-    -- read configuration
-    conf_name = string.format("%s%04d%s", conf_name_prefix, nconf, conf_name_output_suffix)
-    printf("# [invert_contract] reading hex-smeared gauge configuration from file %s\n", conf_name)
+-- smear the gauge configuration
+if hex_smear then
 
-os.exit(2)
-    end
+  hex_smear_timer = timer("hex smear")
+  ubmw_hex = bmw_hex(uorig, 2)
+  hex_smear_timer("done")
+else
+  -- read configuration
+  conf_name = string.format("%s%04d%s", conf_name_prefix, nconf, conf_name_output_suffix)
+  printf("# [invert_contract] reading hex-smeared gauge configuration from file %s\n", conf_name)
 
-
-    -- APE-smear the configuration
-    if ape_n > 0 then
-    ape_timer = timer("APE smearing")
-    uape = APE_smear(ubmw_hex, ape_alpha, ape_n, ape_accu, ape_maxiter, ape_orthdir)
-    ape_timer("done")
-    printf("# [invert_contract] Plaquette after (light quark) APE smearing = %12.10f\n", plaquette_full(uape))
-    end
-
-    if  not( read_stochastic_propagator and read_forward_propagator and read_sequential_propagator and read_propagator_oet) then
-    solver_light = make_mg_solver (L, ubmw_hex, mg_block, mg_max_abserr, mg_max_relerr, quark_bc, kappa_l, csw )
-    end
+  os.exit(2)
+end
 
 
-    -- random number generator
-    S = random_state(L)
+-- APE-smear the configuration
+if ape_n > 0 then
+  ape_timer = timer("APE smearing")
+  uape = APE_smear(ubmw_hex, ape_alpha, ape_n, ape_accu, ape_maxiter, ape_orthdir)
+  ape_timer("done")
+  printf("# [invert_contract] Plaquette after (light quark) APE smearing = %12.10f\n", plaquette_full(uape))
+end
 
-    -- propagator lists
-    light_propagator_list = {}
-    light_propagator_smeared_list = {}
-    light_sequential_propagator_list = {}
-    light_sequential_propagator_smeared = {}
-    -- ************************************************************************************
-    -- * INVERT STOCHASTIC SOURCE
-    -- ************************************************************************************
+if  not( read_stochastic_propagator and read_forward_propagator and read_sequential_propagator and read_propagator_oet) then
+  solver_light = make_mg_solver (L, ubmw_hex, mg_block, mg_max_abserr, mg_max_relerr, quark_bc, kappa_l, csw )
+end
 
 
-    local light_stochastic_propagator_list = {}
-    local light_stochastic_source_smeared = {}
-    local light_stochastic_source = {}
-    local light_stochastic_propagator_smeared_allsink = {}
-    local light_stochastic_propagator_smeared_all = {}
-    local light_stochastic_propagator_all = {}
-    local stoch_timer = timer("stochastic_source_propagator")
-    for i_sample = 0, nsample - 1 do
+-- random number generator
+S = random_state(L)
 
-    light_stochastic_source_smeared[i_sample] = L:DiracFermion()
-    light_stochastic_source[i_sample] = L:DiracFermion()
-    light_stochastic_propagator_smeared_allsink[i_sample] = {}
-    light_stochastic_propagator_smeared_all[i_sample] = L:DiracFermion()
-    light_stochastic_propagator_all[i_sample] = L:DiracFermion()
-    if not read_stochastic_source then
+-- propagator lists
+light_propagator_list = {}
+light_propagator_smeared_list = {}
+light_sequential_propagator_list = {}
+light_sequential_propagator_smeared = {}
+    
+-- ************************************************************************************
+-- * INVERT STOCHASTIC SOURCE
+-- ************************************************************************************
+
+
+local light_stochastic_propagator_list = {}
+local light_stochastic_source_smeared = {}
+local light_stochastic_source = {}
+local light_stochastic_propagator_smeared_allsink = {}
+local light_stochastic_propagator_smeared_all = {}
+local light_stochastic_propagator_all = {}
+local stoch_timer = timer("stochastic_source_propagator")
+for i_sample = 0, nsample - 1 do
+
+  light_stochastic_source_smeared[i_sample] = L:DiracFermion()
+  light_stochastic_source[i_sample] = L:DiracFermion()
+  light_stochastic_propagator_smeared_allsink[i_sample] = {}
+  light_stochastic_propagator_smeared_all[i_sample] = L:DiracFermion()
+  light_stochastic_propagator_all[i_sample] = L:DiracFermion()
+  if not read_stochastic_source then
     -- make a Z2 x Z2 noise volume source
     light_stochastic_source[i_sample] = Z2_SpinComponent_DiracFermion(S, {0,1,2,3})
-    if  write_stochastic_source then
+  if  write_stochastic_source then
     write_param["name"] = stochastic_sourcefile_prefix
     write_param["sample"] = i_sample
     write_propagator(light_stochastic_source[i_sample], write_param)
-    end
+  end
 
-    else
+  else
     -- read a stochastic source from disk
     printf("Reading stochastic source")
     write_param["name"] = stochastic_sourcefile_prefix
@@ -149,135 +151,136 @@ os.exit(2)
     write_param["sample"] = i_sample 
     light_stochastic_source[i_sample] = read_propagator(L, write_param)
 
-    end
+  end
 
-    light_stochastic_propagator_list[i_sample] = {}
-    if not read_stochastic_propagator then
-
-    for t = 0, L[3] - 1 do
-    
-    light_stochastic_propagator_list[i_sample][t] = L:DiracFermion()
-
-    local source = L:DiracFermion()
-    -- select stochastic source timeslice t from volume source
-    L:Subset{axis=3, position=t}:where( function()
-            source:set( light_stochastic_source[i_sample] )
-            end)
-    -- invert on the stochastic timeslice source
-    -- light quark
-
-    local v = L:DiracFermion()
-    local inversion_time = timer("light stochastic propagator")
-    v = solver_light(source)
-    inversion_time("done")
-
-    light_stochastic_propagator_list[i_sample][t] = v
-    v = nil
-    source = nil
-    
-    if write_stochastic_propagator then
-    printf("Writing stochastic propagator")
-    write_param["src_t"]  = t
-    write_param["sample"] = i_sample
-
-    write_param["name"]   = string.format("%s_light", stochastic_3pt_propfile_prefix)
-    write_propagator(light_stochastic_propagator_list[i_sample][t], write_param)
-    end
-    end
-    else
-    for t = 0, L[3] - 1 do
-
-    light_stochastic_propagator_list[i_sample][t] = L:DiracFermion()
-    printf("reading stochastic propagator for sample %d", i_sample)
-    write_param["src_t"]  = t
-    write_param["sample"] = i_sample
-    write_param["path"]   = stochastic_propfile_path
-
-    write_param["name"]   = string.format("%s_light", stochastic_3pt_propfile_prefix)
-    light_stochastic_propagator_list[i_sample][t] = read_propagator(L, write_param)
-    end
-    end  -- of if not read_stochastic_propagator
-
-
-    --pack_fermion_from_sink (L,light_stochastic_source_tc[i_sample], light_stochastic_source[i_sample], t, dt, "bwd")
-    -- smear the stochastic source
-    -- source smearing for stochastic up / down source
-
-    if wup_n > 0 then
-        light_stochastic_source_smeared[i_sample] = wuppertal_smear(uape, wup_alpha, wup_n, light_stochastic_source[i_sample], 3)
-    else
-        light_stochastic_source_smeared[i_sample] = light_stochastic_source[i_sample]
-    end
+  light_stochastic_propagator_list[i_sample] = {}
+  if not read_stochastic_propagator then
 
     for t = 0, L[3] - 1 do
+  
+      light_stochastic_propagator_list[i_sample][t] = L:DiracFermion()
+
+      local source = L:DiracFermion()
+      -- select stochastic source timeslice t from volume source
+      L:Subset{axis=3, position=t}:where( function()
+          source:set( light_stochastic_source[i_sample] )
+          end)
+      -- invert on the stochastic timeslice source
+      -- light quark
+
+      local v = L:DiracFermion()
+      local inversion_time = timer("light stochastic propagator")
+      v = solver_light(source)
+      inversion_time("done")
+
+      light_stochastic_propagator_list[i_sample][t] = v
+      v = nil
+      source = nil
+  
+      if write_stochastic_propagator then
+        printf("Writing stochastic propagator")
+        write_param["src_t"]  = t
+        write_param["sample"] = i_sample
+
+        write_param["name"]   = string.format("%s_light", stochastic_3pt_propfile_prefix)
+        write_propagator(light_stochastic_propagator_list[i_sample][t], write_param)
+      end
+    end
+
+  else
+    for t = 0, L[3] - 1 do
+
+      light_stochastic_propagator_list[i_sample][t] = L:DiracFermion()
+      printf("reading stochastic propagator for sample %d", i_sample)
+      write_param["src_t"]  = t
+      write_param["sample"] = i_sample
+      write_param["path"]   = stochastic_propfile_path
+
+      write_param["name"]   = string.format("%s_light", stochastic_3pt_propfile_prefix)
+      light_stochastic_propagator_list[i_sample][t] = read_propagator(L, write_param)
+    end
+  end  -- of if not read_stochastic_propagator
+
+
+
+  -- smear the stochastic source
+  -- source smearing for stochastic up / down source
+
+  if wup_n > 0 then
+    light_stochastic_source_smeared[i_sample] = wuppertal_smear(uape, wup_alpha, wup_n, light_stochastic_source[i_sample], 3)
+  else
+    light_stochastic_source_smeared[i_sample] = light_stochastic_source[i_sample]
+  end
+
+  for t = 0, L[3] - 1 do
     light_stochastic_propagator_smeared_allsink[i_sample][t] = L:DiracFermion()
 
     -- sink smearing of the light stochastic timeslice propagator                 
     if wup_n > 0 then                                                             
-        light_stochastic_propagator_smeared_allsink[i_sample][t] = wuppertal_smear(uape, wup_alpha, wup_n, light_stochastic_propagator_list[i_sample][t], 3)
+      light_stochastic_propagator_smeared_allsink[i_sample][t] = wuppertal_smear(uape, wup_alpha, wup_n, light_stochastic_propagator_list[i_sample][t], 3)
     end
-    
+  
     L:Subset{axis=3, position=t}:where( function()
-          light_stochastic_propagator_smeared_all[i_sample]:set( light_stochastic_propagator_smeared_allsink[i_sample][t])
-          end)
+        light_stochastic_propagator_smeared_all[i_sample]:set( light_stochastic_propagator_smeared_allsink[i_sample][t])
+        end)
     L:Subset{axis=3, position=t}:where( function()
-          light_stochastic_propagator_all[i_sample]:set( light_stochastic_propagator_list[i_sample][t])
-          end)
-    end
-    end  -- of loop on samples
-    stoch_timer("done")
+        light_stochastic_propagator_all[i_sample]:set( light_stochastic_propagator_list[i_sample][t])
+        end)
+  end
+end  -- of loop on samples
+stoch_timer("done")
 
-    -- ************************************************************************************
-    -- * LOOP ON BASE SOURCE TIMESLICES
-    -- ************************************************************************************
-    for i_src, v_src in ipairs(source_locations) do
+-- ************************************************************************************
+-- * LOOP ON BASE SOURCE TIMESLICES
+-- ************************************************************************************
+for i_src, v_src in ipairs(source_locations) do
 
-    local src_loc_timer = timer("Time for each source location")
+  local src_loc_timer = timer("Time for each source location")
 
-    local t   = v_src["t"]
-    local pos = v_src["pos"]
-    printf("# [invert_contract] base source location[%d] = (%d, %d, %d) t=%d\n", i_src, pos[1], pos[2], pos[3], t)
-
-
-
-    local i_prop = i_src
-    printf("# [invert_contract] setting forward propagator no. %d\n", i_prop)
-
-
-    local source_timeslice = t
-
-
-local source_position = vector.int(4)
-    source_position[0] = pos[1]
-    source_position[1] = pos[2]
-    source_position[2] = pos[3]
-    source_position[3] = t
+  local t   = v_src["t"]
+  local pos = v_src["pos"]
+  printf("# [invert_contract] base source location[%d] = (%d, %d, %d) t=%d\n", i_src, pos[1], pos[2], pos[3], t)
 
 
 
-    -- ************************************************************************************
-    -- * INVERT POINT SOURCE
-    -- ************************************************************************************
+  local i_prop = i_src
+  printf("# [invert_contract] setting forward propagator no. %d\n", i_prop)
 
-    -- set a point source and smear the source
 
-    local source = L:DiracPropagator()
+  local source_timeslice = t
 
-    if not read_forward_propagator then
+
+  local source_position = vector.int(4)
+  source_position[0] = pos[1]
+  source_position[1] = pos[2]
+  source_position[2] = pos[3]
+  source_position[3] = t
+
+
+
+  -- ************************************************************************************
+  -- * INVERT POINT SOURCE
+  -- ************************************************************************************
+
+  -- set a point source and smear the source
+
+  local source = L:DiracPropagator()
+
+  if not read_forward_propagator then
 
     for icol  = 0, 2 do
-    for ispin = 0, 3 do
-    printf("# [invert_contract] setting / smearing point source  %d / %d - (c=%2d, s=%2d)\n", i_src, i_prop, icol, ispin)
-    local dv  = L:DiracFermion()
-    dv[{pos[1], pos[2], pos[3], t, c=icol, d=ispin}] = complex(1, 0)
-    if wup_n > 0 then
-    -- source smearing
-    source[{c=icol,d=ispin}] = wuppertal_smear(uape, wup_alpha, wup_n, dv, 3)
-    else
-    source[{c=icol,d=ispin}] = dv
-    end
-    dv = nil
-    end
+      for ispin = 0, 3 do
+        printf("# [invert_contract] setting / smearing point source  %d / %d - (c=%2d, s=%2d)\n", i_src, i_prop, icol, ispin)
+        local dv  = L:DiracFermion()
+        dv[{pos[1], pos[2], pos[3], t, c=icol, d=ispin}] = complex(1, 0)
+        if wup_n > 0 then
+        -- source smearing
+          source[{c=icol,d=ispin}] = wuppertal_smear(uape, wup_alpha, wup_n, dv, 3)
+        else
+          source[{c=icol,d=ispin}] = dv
+        end
+        dv = nil
+      end
     end
 
     -- propagator
@@ -287,323 +290,400 @@ local source_position = vector.int(4)
 
     -- write the propagator UNSMEARED
     if write_forward_propagator then
-    write_param["name"]    = light_propfile_prefix
-    write_param["src_pos"] = pos
-    write_param["src_t"]   = t
+      write_param["name"]    = light_propfile_prefix
+      write_param["src_pos"] = pos
+      write_param["src_t"]   = t
 
-    write_propagator(light_propagator_list[i_prop], write_param)
+      write_propagator(light_propagator_list[i_prop], write_param)
 
     end
 
-    else
+  else
     printf("# [invert_contract] reading light forward propagator\n")
     write_param["name"]    = light_propfile_prefix
     write_param["path"]    = light_propfile_path
     write_param["src_pos"] = pos
     write_param["src_t"]   = t
     light_propagator_list[i_prop] = read_propagator(L, write_param)
-    end
-    -- sink smearing of the light forward propagator                          
-    light_propagator_smeared_list[i_prop] = {}
-    local temp = L:DiracPropagator()
-    if wup_n > 0 then 
+  end
+  -- sink smearing of the light forward propagator                          
+  light_propagator_smeared_list[i_prop] = {}
+  local temp = L:DiracPropagator()
+  if wup_n > 0 then 
     wup_smear = timer("wuppertal smearing")
     for icol  = 0, 2 do                                                     
-    for ispin = 0, 3 do                                                     
-    local dv = light_propagator_list[i_prop][{c=icol,d=ispin}]            
-    temp[{c=icol, d=ispin}] = wuppertal_smear(uape, wup_alpha, wup_n, dv, 3)
-    end                                                                     
+      for ispin = 0, 3 do                                                     
+        local dv = light_propagator_list[i_prop][{c=icol,d=ispin}]            
+        temp[{c=icol, d=ispin}] = wuppertal_smear(uape, wup_alpha, wup_n, dv, 3)
+      end                                                                     
     end                            
     wup_smear("done")
     light_propagator_smeared_list[i_prop] = temp
-    else                                                                      
+  else                                                                      
     light_propagator_smeared_list[i_prop]  = light_propagator_list[i_prop]               
-    end 
-    temp = nil
-    -- ************************************************************************************
-    -- * INVERT SEQUENTIAL SOURCE
-    -- ************************************************************************************
+  end 
+  temp = nil
+  -- ************************************************************************************
+  -- * INVERT SEQUENTIAL SOURCE
+  -- ************************************************************************************
 
-    light_sequential_propagator_list[i_src] = {}
-    light_sequential_propagator_smeared[i_src] = {}
+  light_sequential_propagator_list[i_src] = {}
+  light_sequential_propagator_smeared[i_src] = {}
 
-    
-    for i_gi2, gi2 in ipairs(pion_vertex_list) do
+  
+  for i_gi2, gi2 in ipairs(pion_vertex_list) do
 
-      local gi2_tag = gi2.tag
-      local gi2_id  = gi2.gamma[1]
-      local gi2_sign= gi2.gamma[2]
-      local gi2_adjoin_sign = gi2.gamma[3]
-      local seq_gamma = gamma{n=gi2_id}
+    local gi2_tag = gi2.tag
+    local gi2_id  = gi2.gamma[1]
+    local gi2_sign= gi2.gamma[2]
+    local gi2_adjoin_sign = gi2.gamma[3]
+    local seq_gamma = gamma{n=gi2_id}
 
-      light_sequential_propagator_list[i_src][i_gi2] = {}
-      light_sequential_propagator_smeared[i_src][i_gi2] = {}
-    
+    light_sequential_propagator_list[i_src][i_gi2] = {}
+    light_sequential_propagator_smeared[i_src][i_gi2] = {}
+  
     for i_seq_mom, seq_mom in ipairs(pi2_list) do
 
 
-    local seq_source_mom_timer = timer("seq_source_mom")
-    printf("#[invert_contract]  sequential source momentum(%d) = (%d, %d, %d)\n", i_seq_mom, seq_mom[1], seq_mom[2], seq_mom[3])
+      local seq_source_mom_timer = timer("seq_source_mom")
+      printf("#[invert_contract]  sequential source momentum(%d) = (%d, %d, %d)\n", i_seq_mom, seq_mom[1], seq_mom[2], seq_mom[3])
 
-    local seq_source_mom = L:DiracPropagator()
+      local seq_source_mom = L:DiracPropagator()
+      local seq_source     = L:DiracPropagator()
+
+      if not read_sequential_propagator then
+
+        -- local field exp(i p x)
+        --   p = seq_mom sequential source momentum
+        --   x = sink of light propagator
+        local px = (2 * math.pi * seq_mom[1]) / L[0]
+        local py = (2 * math.pi * seq_mom[2]) / L[1]
+        local pz = (2 * math.pi * seq_mom[3]) / L[2]
+        local phase = ( (L:Real(L:pcoord(0))) * px +
+                (L:Real(L:pcoord(1))) * py +
+                (L:Real(L:pcoord(2))) * pz):expi()
+
+        -- Dirac gamma matrix at sequential vertex, is always g5 (binary gamma id 15)
+        -- local seq_gamma = sequential_source_gamma["val"]
+        -- sequential source at t = propagator at t
+        printf("# [invert_contract] adding source timeslice %d to sequential source list from propagator number %d\n", t, i_prop)
+        L:Subset{axis=3, position = t}:where(function()
+                seq_source:set( light_propagator_smeared_list[i_prop] )
+                end)
+        --[[if(gi2_id == 15) then
+          local name = string.format("%s.fwd.g%.2d", seq_propfile_prefix,15 )
+          write_param["name"]    = name
+          write_param["path"]    = "."
+          write_param["src_t"]   = 7
+          write_param["src_pos"] = { 1, 1, 6 }
+          write_param["mom"]     = { seq_mom[1], seq_mom[2], seq_mom[3] } 
+          light_test_fwd = read_propagator (L, write_param)
+          -- seq_source_mom <- J exp(i p x) g5 J seq_source_mom
+          printf("The difference between fwds of gi %.2d and src_t %.2d with mom = (%.1d, %.1d, %.1d) = %g\n",gi2_id,  
+                  t, seq_mom[1], seq_mom[2], seq_mom[3], (light_test_fwd - seq_source):norm2()/seq_source:norm2())
+        end]]--
+
+        seq_source_mom = phase * seq_source
+
+        --[[  if(gi2_id == 15) then
+          local name = string.format("%s.exp.g%.2d", seq_propfile_prefix,15 )
+                write_param["name"]    = name
+                write_param["path"]    = "."
+                write_param["src_t"]   = 7
+                write_param["src_pos"] = { 1, 1, 6 }
+                write_param["mom"]     = { seq_mom[1], seq_mom[2], seq_mom[3] } 
+                light_test_exp = read_propagator (L, write_param)
+          -- seq_source_mom <- J exp(i p x) g5 J seq_source_mom
+          printf("The difference between exps of gi %.2d and src_t %.2d with mom = (%.1d, %.1d, %.1d) = %g\n",gi2_id,  
+                  t, seq_mom[1], seq_mom[2], seq_mom[3], (light_test_exp - seq_source_mom):norm2()/seq_source_mom:norm2())
+        end]]--
+
+        seq_source = seq_gamma * seq_source_mom
+        --[[   if(gi2_id == 15) then
+          local name = string.format("%s.gam.g%.2d", seq_propfile_prefix,15 )
+                write_param["name"]    = name
+                write_param["path"]    = "."
+                write_param["src_t"]   = 7
+                write_param["src_pos"] = { 1, 1, 6 }
+                write_param["mom"]     = { seq_mom[1], seq_mom[2], seq_mom[3] } 
+          light_test_gam = read_propagator (L, write_param)
+          -- seq_source_mom <- J exp(i p x) g5 J seq_source_mom
+          printf("The difference between gams of gi %.2d and src_t %.2d with mom = (%.1d, %.1d, %.1d) = %g\n",gi2_id,  
+                  t, seq_mom[1], seq_mom[2], seq_mom[3], (light_test_gam - seq_source):norm2()/seq_source:norm2())
+         local cv  = qcd.dot ( light_test_gam - seq_source, light_test_gam - seq_source):sum(L:MultiSet(L[3], L:pcoord(3)))
+         local cv2 = qcd.dot ( seq_source,  seq_source):sum(L:MultiSet(L[3], L:pcoord(3)))
+        for i = 0, L[3]-1 do
+            printf ("  |light_unsmeared_sequential_source| t %2d %16.7e    %16.7e\n", i, cv[i]:real(), cv2[i]:real() )
+        end
+        end]]--
+
+        for icol  = 0, 2 do
+          for ispin = 0, 3 do
 
 
-    if not read_sequential_propagator then
-
--- local field exp(i p x)
-    --   p = seq_mom sequential source momentum
-    --   x = sink of light propagator
-    local px = (2 * math.pi * seq_mom[1]) / L[0]
-    local py = (2 * math.pi * seq_mom[2]) / L[1]
-    local pz = (2 * math.pi * seq_mom[3]) / L[2]
-    local phase = ( (L:Real(L:pcoord(0))) * px +
-            (L:Real(L:pcoord(1))) * py +
-            (L:Real(L:pcoord(2))) * pz):expi()
-
-                                                 -- Dirac gamma matrix at sequential vertex, is always g5 (binary gamma id 15)
-    --local seq_gamma = sequential_source_gamma["val"]
-      -- sequential source at t = propagator at t
-    printf("# [invert_contract] adding source timeslice %d to sequential source list from propagator number %d\n", t, i_prop)
-    L:Subset{axis=3, position = t}:where(function()
-            seq_source_mom:set( light_propagator_smeared_list[i_prop] )
-            end)
-    -- seq_source_mom <- J exp(i p x) g5 J seq_source_mom
-    for icol  = 0, 2 do
-    for ispin = 0, 3 do
-
-
-    if wup_n > 0 then
-    printf("# [invert_contract] smearing source + setting gamma x momentum + smearing source %d / %d - (c=%2d, s=%2d)\n", i_src, i_seq_mom, icol, ispin)
-    local dv = seq_source_mom[{c=icol,d=ispin}]
-    --local dv2 = wuppertal_smear(uape, wup_alpha, wup_n, dv, 3)
-    dv = phase * ( seq_gamma * dv ) * gi2_sign 
-    seq_source_mom[{c=icol,d=ispin}] = wuppertal_smear(uape, wup_alpha, wup_n, dv, 3)
-    else
-    printf("# [invert_contract] setting gamma x momentum %d / %d - (c=%2d, s=%2d)\n", i_src, i_seq_mom, icol, ispin)
-    seq_source_mom[{c=icol,d=ispin}] = phase * ( seq_gamma * seq_source_mom[{c=icol,d=ispin}] )
-
-
-    end
-
-    end
-    end
-    seq_source_mom_timer("done")
-
-    -- invert on the sequential momentum source
-    local i_timer = timer("light sequential inversion")
-    light_sequential_propagator_list[i_src][i_gi2][i_seq_mom] = solver_light(seq_source_mom)
-    i_timer("done")
-
-    -- write sequential propagator to file
-    if write_sequential_propagator then
-    write_param["name"]    = seq_propfile_prefix
-    write_param["src_pos"] = pos
-    write_param["src_t"]   = t
-    write_param["mom"]     = seq_mom
-    write_param["seq_gamma"]= seq_gamma
-write_propagator(light_sequential_propagator_list[i_src][i_gi2][i_seq_mom], write_param)
-
-    end  -- of if write_sequential_propagator
-    
-    else
-    printf("# [invert_contract] reading light sequential propagator\n")
-    write_param["name"]    = seq_propfile_prefix
-    write_param["path"]    = seq_propfile_path
-    write_param["src_pos"] = pos
-    write_param["src_t"]   = t
-    write_param["mom"]     = seq_mom
-    write_param["seq_gamma"]= seq_gamma
-    light_sequential_propagator_list[i_src][i_gi2][i_seq_mom] = read_propagator (L, write_param)
-    end
-
-
-
-
-    light_sequential_propagator_smeared[i_src][i_gi2][i_seq_mom] = L:DiracPropagator()
-    --  sink smearing of sequential propagator
-    --  can be smeared at this point, since for 2-point and 3-point functions we
-    --  always use the sequential propagator smeared at source and sink
-    if wup_n > 0 then
-    for icol  = 0, 2 do
-    for ispin = 0, 3 do
-    printf("# [invert_contract] smearing sequential propagator %d / %d - (c=%2d, s=%2d)\n", i_src, i_seq_mom, icol, ispin)
-    local dv = light_sequential_propagator_list[i_src][i_gi2][i_seq_mom][{c=icol, d=ispin}]
-    light_sequential_propagator_smeared[i_src][i_gi2][i_seq_mom][{c=icol, d=ispin}] = wuppertal_smear(uape, wup_alpha, wup_n, dv, 3)
-    end
-    end
-
-    end
-
-    seq_source_mom = nil
-
-    end
-
-    end  -- end of loop on sequential source momenta
-
-    
-    -- ****************************************************************************
-    -- * INVERSION FOR OET STOCHASTIC TIMESLICES SOURCES WITH ONE-END TRICK          *
-    -- ****************************************************************************
-  
-        local light_stochastic_propagator_oet_list_smeared = {}
-        local light_stochastic_propagator_oet_zero_mom = {}
-        local light_stochastic_propagator_oet_list = {}
-        local zero_mom_index; 
-       oet_timer = timer("stochastic oet contraction timer")
-        for i_sample = 0, nsample_oet - 1 do
-
-        light_stochastic_propagator_oet_list[i_sample] = {}
-        light_stochastic_propagator_oet_list_smeared[i_sample] = {}
-        light_stochastic_propagator_oet_zero_mom[i_sample] = {}
-
-   
-
-        write_param["name"]   = string.format("%s_oet", "stochastic_source")
-        write_param["sample"] = i_sample
-        write_param["path"]   = "."
-        
-          if read_stochastic_oet_source then
-              -- ***************************************************************************************
-                  -- * read from file
-                      -- ***************************************************************************************
-                          light_stochastic_oet_source = read_propagator(L, write_param)
-    
+            if wup_n > 0 then
+              printf("# [invert_contract] smearing source + setting gamma x momentum + smearing source %d / %d - (c=%2d, s=%2d)\n", 
+                        i_src, i_seq_mom, icol, ispin)
+              local dv = seq_source[{c=icol,d=ispin}]
+              seq_source_mom[{c=icol,d=ispin}] = wuppertal_smear(uape, wup_alpha, wup_n, dv, 3)
+              --seq_source_mom[{c=icol,d=ispin}] = dv
             else
-          -- ***************************************************************************************
-              -- * construct / read a volume source with Z2 x Z2 noise in spin component 0
-                  -- ***************************************************************************************
-                      light_stochastic_oet_source = Z2_SpinComponent_DiracFermion( S, 0 )
-            if write_stochastic_oet_source then
-              write_propagator( light_stochastic_source, write_param )
-            end
-            end
-         for i_mom, mom in ipairs(pi2_list) do
+              printf("# [invert_contract] setting gamma x momentum %d / %d - (c=%2d, s=%2d)\n", i_src, i_seq_mom, icol, ispin)
+              seq_source_mom[{c=icol,d=ispin}] = phase * ( seq_gamma * seq_source_mom[{c=icol,d=ispin}] )
 
-        mom[1] = -mom[1]
-        mom[2] = -mom[2]
-        mom[3] = -mom[3]
-    light_stochastic_propagator_oet_list_smeared[i_sample][i_mom] = {}
-    light_stochastic_propagator_oet_list[i_sample][i_mom] = {}
-    if not read_propagator_oet then
+
+            end
+
+          end
+        end
+        seq_source_mom_timer("done")
+
+        -- invert on the sequential momentum source
+        local i_timer = timer("light sequential inversion")
+        light_sequential_propagator_list[i_src][i_gi2][i_seq_mom] = solver_light(seq_source_mom)
+        i_timer("done")
+        --[[
+          if(gi2_id == 15) then
+           local name = string.format("%s.src.g%.2d", seq_propfile_prefix,15 )
+                  write_param["name"]    = name
+                  write_param["path"]    = "."
+                  write_param["src_t"]   = 7
+                  write_param["src_pos"] = { 1, 1, 6 }
+                  write_param["mom"]     = { seq_mom[1], seq_mom[2], seq_mom[3] } 
+            light_test_src = read_propagator (L, write_param)
+           local name = string.format("%s.g%.2d", seq_propfile_prefix,15 )
+                  write_param["name"]    = name
+                  write_param["path"]    = "."
+                  write_param["src_t"]   = 7
+                  write_param["src_pos"] = { 1, 1, 6 }
+                  write_param["mom"]     = { seq_mom[1], seq_mom[2], seq_mom[3] } 
+            light_test_prop = read_propagator (L, write_param)
+
+            printf("The difference between sources of gi %.2d and src_t %.2d with mom = (%.1d, %.1d, %.1d) = %g\n",gi2_id,  
+            t, seq_mom[1], seq_mom[2], seq_mom[3], (light_test_src - seq_source_mom):norm2()/seq_source_mom:norm2())
+            printf("The difference between props of gi %.2d and src_t %.2d with mom = (%.1d, %.1d, %.1d) = %g\n",gi2_id,  
+            t, seq_mom[1], seq_mom[2], seq_mom[3], 
+            (light_test_prop - light_sequential_propagator_list[i_src][i_gi2][i_seq_mom]):norm2()
+            /light_sequential_propagator_list[i_src][i_gi2][i_seq_mom]:norm2())
+            local cv  = qcd.dot ( light_test_src, light_test_src):sum(L:MultiSet(L[3], L:pcoord(3)))
+            local cv2 = qcd.dot ( seq_source_mom,  seq_source_mom):sum(L:MultiSet(L[3], L:pcoord(3)))
+            for i = 0, L[3]-1 do
+              printf ("  |light_smeared_sequential_source| t %2d %16.7e    %16.7e\n", i, cv[i]:real(), cv2[i]:real() )
+            end
+          
+          end]]--
+        -- write sequential propagator to file
+        if write_sequential_propagator then
+          write_param["name"]    = seq_propfile_prefix
+          write_param["src_pos"] = pos
+          write_param["src_t"]   = t
+          write_param["mom"]     = seq_mom
+          write_param["seq_gamma"]= seq_gamma
+          write_propagator(light_sequential_propagator_list[i_src][i_gi2][i_seq_mom], write_param)
+
+        end  -- of if write_sequential_propagator
+  
+      else
+        printf("# [invert_contract] reading light sequential propagator\n")
+        write_param["name"]    = seq_propfile_prefix
+        write_param["path"]    = seq_propfile_path
+        write_param["src_pos"] = pos
+        write_param["src_t"]   = t
+        write_param["mom"]     = seq_mom
+        write_param["seq_gamma"]= seq_gamma
+        light_sequential_propagator_list[i_src][i_gi2][i_seq_mom] = read_propagator (L, write_param)
+      end
+
+
+
+
+      light_sequential_propagator_smeared[i_src][i_gi2][i_seq_mom] = L:DiracPropagator()
+      --  sink smearing of sequential propagator
+      --  can be smeared at this point, since for 2-point and 3-point functions we
+      --  always use the sequential propagator smeared at source and sink
+      if wup_n > 0 then
+        for icol  = 0, 2 do
+          for ispin = 0, 3 do
+            printf("# [invert_contract] smearing sequential propagator %d / %d - (c=%2d, s=%2d)\n", i_src, i_seq_mom, icol, ispin)
+            local dv = light_sequential_propagator_list[i_src][i_gi2][i_seq_mom][{c=icol, d=ispin}]
+            light_sequential_propagator_smeared[i_src][i_gi2][i_seq_mom][{c=icol, d=ispin}] = wuppertal_smear(uape, wup_alpha, wup_n, dv, 3)
+          end
+        end
+
+      end
+
+      seq_source_mom = nil
+
+    end
+
+  end  -- end of loop on sequential source momenta
+
     
+  -- ****************************************************************************
+  -- * INVERSION FOR OET STOCHASTIC TIMESLICES SOURCES WITH ONE-END TRICK          *
+  -- ****************************************************************************
+  
+  local light_stochastic_propagator_oet_list_smeared = {}
+  local light_stochastic_propagator_oet_zero_mom = {}
+  local light_stochastic_propagator_oet_list = {}
+  local zero_mom_index 
+  oet_timer = timer("stochastic oet contraction timer")
+  for i_sample = 0, nsample_oet - 1 do
+
+    light_stochastic_propagator_oet_list[i_sample] = {}
+    light_stochastic_propagator_oet_list_smeared[i_sample] = {}
+    light_stochastic_propagator_oet_zero_mom[i_sample] = {}
 
 
-    printf("# [invert_contract_oet] momentum(%d) = (%d,%d, %d)\n", i_mom, mom[1], mom[2], mom[3])
 
-    local px = (2 * math.pi * mom[1]) / L[0]
-    local py = (2 * math.pi * mom[2]) / L[1]
-    local pz = (2 * math.pi * mom[3]) / L[2]
+    write_param["name"]   = string.format("%s_oet", "stochastic_source")
+    write_param["sample"] = i_sample
+    write_param["path"]   = "."
+        
+    if read_stochastic_oet_source then
+    -- ***************************************************************************************
+    -- * read from file
+    -- ***************************************************************************************
+      light_stochastic_oet_source = read_propagator(L, write_param)
+    
+    else
+    -- ***************************************************************************************
+    -- * construct / read a volume source with Z2 x Z2 noise in spin component 0
+    -- ***************************************************************************************
+      light_stochastic_oet_source = Z2_SpinComponent_DiracFermion( S, 0 )
+      if write_stochastic_oet_source then
+        write_propagator( light_stochastic_source, write_param )
+      end
+    end
+    local mom = {}
+    for i_mom, mom_read in ipairs(pi2_list) do
+
+      mom[1] = -mom_read[1]
+      mom[2] = -mom_read[2]
+      mom[3] = -mom_read[3]
+      light_stochastic_propagator_oet_list_smeared[i_sample][i_mom] = {}
+      light_stochastic_propagator_oet_list[i_sample][i_mom] = {}
+      if not read_propagator_oet then
+    
+        printf("# [invert_contract_oet] momentum(%d) = (%d,%d, %d)\n", i_mom, mom[1], mom[2], mom[3])
+
+        local px = (2 * math.pi * mom[1]) / L[0]
+        local py = (2 * math.pi * mom[2]) / L[1]
+        local pz = (2 * math.pi * mom[3]) / L[2]
 
 
-    local phase = ( (L:Real(L:pcoord(0)) ) * px +
+        local phase = ( (L:Real(L:pcoord(0)) ) * px +
             (L:Real(L:pcoord(1)) ) * py +
             (L:Real(L:pcoord(2)) ) * pz):expi()
 
-     local dv = L:DiracFermion()
-     local momentum_source = L:DiracFermion()
-     --selcet stochastic source timeslice t from volume souce, multiply with phase
-     L:Subset{axis=3, position = t}:where(
+        local dv = L:DiracFermion()
+        local momentum_source = L:DiracFermion()
+        --selcet stochastic source timeslice t from volume souce, multiply with phase
+        L:Subset{axis=3, position = t}:where(
              function()
              dv:set( phase * light_stochastic_oet_source )
              end)
 
-     momentum_source = wuppertal_smear(uape, wup_alpha, wup_n, dv, 3)
+        momentum_source = wuppertal_smear(uape, wup_alpha, wup_n, dv, 3)
 
-     for kspin = 0, 3 do
+        for kspin = 0, 3 do
 
-     light_stochastic_propagator_oet_list[i_sample][i_mom][kspin] = L:DiracFermion()
-     printf("# [invert_contract_oet] spin component %d\n", kspin)
+          light_stochastic_propagator_oet_list[i_sample][i_mom][kspin] = L:DiracFermion()
+          printf("# [invert_contract_oet] spin component %d\n", kspin)
 
-     local dv = L:DiracFermion()
-     dv[{d= kspin}] = momentum_source[{d=0}]
-     --printf("Norm of mom source %g\n", momentum_source[{d=0}]:norm2())
-     --printf("Norm of stoch source %g\n", dv:norm2())
-     printf("# [invert_contract_oet] t = %d, spin component %d\n", t, kspin)
+          local dv = L:DiracFermion()
+          dv[{d= kspin}] = momentum_source[{d=0}]
+          --printf("Norm of mom source %g\n", momentum_source[{d=0}]:norm2())
+          --printf("Norm of stoch source %g\n", dv:norm2())
+          printf("# [invert_contract_oet] t = %d, spin component %d\n", t, kspin)
 
-    local i_timer = timer("invert") 
-    light_stochastic_propagator_oet_list[i_sample][i_mom][kspin] = solver_light(dv)
-    i_timer("done")
-    dv = nil
-    end
-    if write_stochastic_oet_propagator then
-        write_param["name"] = string.format("%s_oet", stochastic_propfile_prefix)
-        write_param["src_t"] = t
-        write_param["mom"]   = mom
-        write_param["spin"]     = kspin
-        write_param["sample"] = i_sample
-        write_propagator(light_stochastic_propagator_oet_list[i_sample][i_mom], write_param) 
-    
+          local i_timer = timer("invert") 
+          light_stochastic_propagator_oet_list[i_sample][i_mom][kspin] = solver_light(dv)
+          i_timer("done")
+          dv = nil
+        end
+        if write_stochastic_oet_propagator then
+          write_param["name"] = string.format("%s_oet", stochastic_propfile_prefix)
+          write_param["src_t"] = t
+          write_param["mom"]   = mom
+          write_param["spin"]     = kspin
+          write_param["sample"] = i_sample
+          write_propagator(light_stochastic_propagator_oet_list[i_sample][i_mom], write_param) 
+      
 
         end
     
-    else
-    -- read a stochastic source from disk
-    --light_stochastic_propagator_oet_list[kspin] = L:DiracFermion()
+      else
+      -- read a stochastic source from disk
+      --light_stochastic_propagator_oet_list[kspin] = L:DiracFermion()
 
-    printf("Reading stochastic propagator\n")
-    write_param["name"]     = string.format("%s_oet", stochastic_propfile_prefix)
-    write_param["path"]     = stochastic_sourcefile_path
-    write_param["src_t"]    = t
-    write_param["mom"]      = mom
-    write_param["sample"]   = i_sample 
-    light_stochastic_propagator_oet_list[i_sample][i_mom] = read_propagator(L, write_param)
-    end
+        printf("Reading stochastic propagator\n")
+        write_param["name"]     = string.format("%s_oet", stochastic_propfile_prefix)
+        write_param["path"]     = stochastic_sourcefile_path
+        write_param["src_t"]    = t
+        write_param["mom"]      = mom
+        write_param["sample"]   = i_sample 
+        light_stochastic_propagator_oet_list[i_sample][i_mom] = read_propagator(L, write_param)
+      end
 
-    if  wup_n > 0 then                                                         
-    for kspin = 0, 3 do                                                     
-    light_stochastic_propagator_oet_list_smeared[i_sample][i_mom][kspin] = L:DiracFermion()
-    local dv = light_stochastic_propagator_oet_list[i_sample][i_mom][kspin]                    
-light_stochastic_propagator_oet_list_smeared[i_sample][i_mom][kspin] = wuppertal_smear(uape, wup_alpha, wup_n, dv, 3) 
-    end                                                                     
-    else                                                                      
-    --light_stochastic_propagator_oet_list_smeared[i_sample][i_mom] = light_stochastic_propagator_oet_list 
-    end
+      if  wup_n > 0 then                                                         
+        for kspin = 0, 3 do                                                     
+          light_stochastic_propagator_oet_list_smeared[i_sample][i_mom][kspin] = L:DiracFermion()
+          local dv = light_stochastic_propagator_oet_list[i_sample][i_mom][kspin]                    
+          light_stochastic_propagator_oet_list_smeared[i_sample][i_mom][kspin] = wuppertal_smear(uape, wup_alpha, wup_n, dv, 3) 
+        end                                                                     
+      else                                                                      
+        --light_stochastic_propagator_oet_list_smeared[i_sample][i_mom] = light_stochastic_propagator_oet_list 
+      end
 
-    if  mom[1] == 0 and mom[2] == 0 and mom[3] == 0 then
-    printf("# [invert_contract_oet] setting zero momentum stochastic propagator\n")
-    zero_mom_index = i_mom;
-    -- set phi_0 only on color component c = 0                            
-    for kspin = 0, 3 do 
-    light_stochastic_propagator_oet_zero_mom[i_sample][kspin] = L:DiracFermion()
-    light_stochastic_propagator_oet_zero_mom[i_sample][kspin] = light_stochastic_propagator_oet_list_smeared[i_sample][i_mom][kspin]       
-    --printf("# norm of zero mom oet propagator = %g\n", light_stochastic_propagator_oet_zero_mom[i_sample][kspin]:norm2())
-    end
-    else
-    end
+      if  mom[1] == 0 and mom[2] == 0 and mom[3] == 0 then
+        printf("# [invert_contract_oet] setting zero momentum stochastic propagator\n")
+        zero_mom_index = i_mom;
+        -- set phi_0 only on color component c = 0                            
+        for kspin = 0, 3 do 
+          light_stochastic_propagator_oet_zero_mom[i_sample][kspin] = L:DiracFermion()
+          light_stochastic_propagator_oet_zero_mom[i_sample][kspin] = light_stochastic_propagator_oet_list_smeared[i_sample][i_mom][kspin]       
+          --printf("# norm of zero mom oet propagator = %g\n", light_stochastic_propagator_oet_zero_mom[i_sample][kspin]:norm2())
+        end
+      else
+      end
 
     end -- of momenta
-    end -- of samples
-    
-  --[[
-    --************************************************************************************
-    --* CONTRACTIONS 
-    --************************************************************************************
-    local pion_timer = timer("pion J contractions")
-    for i_oet_sample = 0, nsample_oet - 1 do
+  end -- of samples
+  
+  
+  --************************************************************************************
+  --* CONTRACTIONS 
+  --************************************************************************************
+  local pion_timer = timer("pion J contractions")
+  for i_oet_sample = 0, nsample_oet - 1 do
 
-        local name = string.format("pion_current_2pt_%04d_x%.2dy%.2dz%.2dt%.2d.%.4d.aff", nconf, pos[1], pos[2], pos[3], t,i_oet_sample)
-        aw_pion_2pt, aw = qcd.aff.Writer(name) 
-        name = nil
-            for i_pi2, pi2 in ipairs(pi2_list) do
-            
-                tag = string.format("pi2x%.2dpi2y%.2dpi2z%.2d/sample%.2d", pi2[1], pi2[2], pi2[3], i_oet_sample)
+    local name = string.format("pion_current_2pt_%04d_x%.2dy%.2dz%.2dt%.2d.%.4d.aff", nconf, pos[1], pos[2], pos[3], t,i_oet_sample)
+    aw_pion_2pt, aw = qcd.aff.Writer(name) 
+    name = nil
+    for i_pi2, pi2 in ipairs(pi2_list) do
+      
+      tag = string.format("pi2x%.2dpi2y%.2dpi2z%.2d/sample%.2d", pi2[1], pi2[2], pi2[3], i_oet_sample)
 
-                local oet_prop_nonzero = L:DiracPropagator()
-                local oet_prop_zero = L:DiracPropagator()
-                for col = 0, 2 do
-                    for spin = 0, 3 do
-                        oet_prop_nonzero[{c = 0, d = spin}] = light_stochastic_propagator_oet_list[i_oet_sample][i_pi2][spin]
-                        oet_prop_zero[{c = 0, d = spin}] = light_stochastic_propagator_oet_list[i_oet_sample][zero_mom_index][spin]
-                     end
-                 end
-                 
-                pion2pt(L,oet_prop_zero,oet_prop_nonzero, source_position, pion_vertex_list, va_current_gamma_list, pf1_list, tag,aw_pion_2pt)
-          
+      local oet_prop_nonzero = L:DiracPropagator()
+      local oet_prop_zero = L:DiracPropagator()
+      for col = 0, 2 do
+        for spin = 0, 3 do
+  
+          oet_prop_nonzero[{c = 0, d = spin}] = light_stochastic_propagator_oet_list[i_oet_sample][i_pi2][spin]
+         
+          oet_prop_zero[{c = 0, d = spin}] = light_stochastic_propagator_oet_list[i_oet_sample][zero_mom_index][spin]
+             
         end
-        aw_pion_2pt:close()
+      end
+       
+      pion2pt(L,oet_prop_zero,oet_prop_nonzero, source_position, pion_vertex_list, va_current_gamma_list, pf1_list, tag,aw_pion_2pt)
+    
     end
-    pion_timer("done")
-]]--
+    aw_pion_2pt:close()
+  end
+  pion_timer("done")
+
 --[[
     printf("# [invert_contract_baryon] B - B contraction for source location[%d / %d] = (%d, %d, %d) t=%d\n", i_src, i_prop, 
             source_position[0], source_position[1], source_position[2], source_position[3]) 
@@ -640,87 +720,101 @@ contract_meson_baryon_3pt(L, light_sequential_propagator_list[i_src][i_seq_mom],
 
     aw_b_m_b_3pt:close()
     ]]--
-   --[[
-        for i_oet_sample = 0, nsample_oet - 1 do
+  
+  for i_oet_sample = 0, nsample_oet - 1 do
 
-        -- * open output files
-        local name = string.format("%s.%.4d.x%.2dy%.2dz%.2dt%.2d.%.5d.aff", "contract_oet_mb_factors", nconf, pos[1], pos[2], pos[3], t, i_oet_sample)
+    -- * open output files
+    local name = string.format("%s.%.4d.x%.2dy%.2dz%.2dt%.2d.%.5d.aff", "contract_oet_mb_factors", nconf, pos[1], pos[2], pos[3], t, i_oet_sample)
     printf("# [invert_contract_v4] MxB - MxB oet output file %s\n", name)
-local aw, am = qcd.aff.Writer(name)
+    local aw, am = qcd.aff.Writer(name)
     name = nil
     t_axis = #dims -1
-    local gf2 = { {tag="g5", gamma={15, 1, 1}}, {tag="id", gamma={0, 1, 1}} } -- Gamma_f2 = g5, 1
     for kspin = 0, 3 do
 
-    -- ******************************************************
-    -- * mod V2/V1: (phi CG_f1 U)U
-    -- ******************************************************
-    tag = string.format("%s/sample%.2d/spin%.2d", "phi-gf1-U--U", i_oet_sample, kspin)
-    contract_timer = timer("phi-gf1-U--U")
-contract_v2_ft_write (L, light_stochastic_propagator_oet_zero_mom[i_oet_sample][kspin], 
+      -- ******************************************************
+      -- * mod V2/V1: (phi CG_f1 U)U
+      -- ******************************************************
+      tag = string.format("%s/sample%.2d/spin%.2d", "phi-gf1-U--U", i_oet_sample, kspin)
+      contract_timer = timer("phi-gf1-U--U")
+      contract_v2_ft_write (L, light_stochastic_propagator_oet_zero_mom[i_oet_sample][kspin], 
         light_propagator_smeared_list[i_src], light_propagator_smeared_list[i_src], baryon_vertex_list, 
         pf1_list, aw, t_axis, tag)
-    contract_timer("done")
-    -- ******************************************************
-    -- * mod V4: phi(CG_f1 U U)
-    -- ******************************************************
-    tag = string.format("%s/sample%.2d/spin%.2d", "phi--gf1-U-U", i_oet_sample, kspin)
-    contract_timer = timer("phi--gf1-U-U")
-contract_v4_ft_write (L, light_stochastic_propagator_oet_zero_mom[i_oet_sample][kspin], 
-        light_propagator_smeared_list[i_src], light_propagator_smeared_list[i_src], baryon_vertex_list, 
-        pf1_list, aw, t_axis, tag)
-    contract_timer("done")
+      contract_timer("done")
+      -- ******************************************************
+      -- * mod V4: phi(CG_f1 U U)
+      -- ******************************************************
+      tag = string.format("%s/sample%.2d/spin%.2d", "phi--gf1-U-U", i_oet_sample, kspin)
+      contract_timer = timer("phi--gf1-U-U")
+      contract_v4_ft_write (L, light_stochastic_propagator_oet_zero_mom[i_oet_sample][kspin], 
+          light_propagator_smeared_list[i_src], light_propagator_smeared_list[i_src], baryon_vertex_list, 
+          pf1_list, aw, t_axis, tag)
+      contract_timer("done")
     end
 
     for i_pi2, pi2 in ipairs(pi2_list) do
 
-    local gf2 = { {tag="g5", gamma={15, 1, 1}}, {tag="id", gamma={0, 1, 1}} } -- Gamma_f2 = g5, 1
-    for kspin = 0, 3 do
-    -- ******************************************************
-    -- * mod_V3: phi^+ G_c U
-    -- ******************************************************
-    tag = string.format("%s/pi2x%.2dpi2y%.2dpi2z%.2d/sample%.2d/spin%.2d", "phi-gf2-U", pi2[1], pi2[2], pi2[3], i_oet_sample, kspin)
-    t_axis = #dims -1
-    contract_timer = timer("contract phi-gf2-U")
-    contract_v3_ft_write(L, light_propagator_smeared_list[i_src], 
+    
+      for kspin = 0, 3 do
+        -- ******************************************************
+        -- * mod_V3: phi^+ G_c U
+        -- ******************************************************
+        tag = string.format("%s/pi2x%.2dpi2y%.2dpi2z%.2d/sample%.2d/spin%.2d", "phi-gf2-U", pi2[1], pi2[2], pi2[3], i_oet_sample, kspin)
+        t_axis = #dims -1
+        contract_timer = timer("contract phi-gf2-U")
+        contract_v3_ft_write(L, light_propagator_smeared_list[i_src], 
         gamma{mu=5} * light_stochastic_propagator_oet_list_smeared[i_oet_sample][i_pi2][kspin], 
         pion_vertex_list, pf2_list, aw, t_axis, tag)
-    contract_timer("done")
-    -- ******************************************************
-    -- * mod_V3: phi^+ G_c U
-    -- ******************************************************
-    tag = string.format("%s/pi2x%.2dpi2y%.2dpi2z%.2d/sample%.2d/spin%.2d", "phi-gc-U", pi2[1], pi2[2], pi2[3], i_oet_sample, kspin)
-    t_axis = #dims -1
-    contract_timer = timer("contract phi-gc-U")
-    contract_v3_ft_write(L, light_propagator_list[i_src], 
-        gamma{mu=5} * light_stochastic_propagator_oet_list[i_oet_sample][i_pi2][kspin], 
-        va_current_gamma_list, pf2_list, aw, t_axis, tag)
-    contract_timer("done")
-    
-    end
-    end
-
-    aw:close()
-    end
-    
-    ]]--
-        for i_sample = 0, nsample - 1 do
-        local name = string.format("%s.%.4d.x%.2dy%.2dz%.2dt%.2d.%.5d.aff", "contract_mb_factors", nconf, pos[1], pos[2], pos[3], t, i_sample)
-        printf("# [invert_contract_v4] MxB - MxB stochastic output file %s\n", name)
-        local aw, am = qcd.aff.Writer(name)
-        name = nil
+        contract_timer("done")
+        -- ******************************************************
+        -- * mod_V3: phi^+ G_c U
+        -- ******************************************************
+        tag = string.format("%s/pi2x%.2dpi2y%.2dpi2z%.2d/sample%.2d/spin%.2d", "phi-gc-U", pi2[1], pi2[2], pi2[3], i_oet_sample, kspin)
         t_axis = #dims -1
+        contract_timer = timer("contract phi-gc-U")
+        contract_v3_ft_write(L, light_propagator_list[i_src], 
+            gamma{mu=5} * light_stochastic_propagator_oet_list[i_oet_sample][i_pi2][kspin], 
+            va_current_gamma_list, pf2_list, aw, t_axis, tag)
+        contract_timer("done")
+  
+      end
+    end
+    aw:close()
+  end
+    
+    
+ 
+  for i_sample = 0, nsample - 1 do
+    
+    local name = string.format("%s.%.4d.x%.2dy%.2dz%.2dt%.2d.%.5d.aff", "contract_mb_factors", nconf, pos[1], pos[2], pos[3], t, i_sample)
+    printf("# [invert_contract_v4] MxB - MxB stochastic output file %s\n", name)
+    local aw, am = qcd.aff.Writer(name)
+    name = nil
+    t_axis = #dims -1
 
     tag = string.format("%s/sample%.2d", "phi-gf1-U--U", i_sample)
     contract_timer = timer("phi-gf1-U--U")
     contract_v2_ft_write (L, light_stochastic_propagator_smeared_all[i_sample], 
         light_propagator_smeared_list[i_src], light_propagator_smeared_list[i_src], baryon_vertex_list, 
-        pi2_list, aw, t_axis, tag)
+        pf1_list, aw, t_axis, tag)
     contract_timer("done")
     -- v4
     tag = string.format("%s/sample%.2d", "phi=gf1-U--U", i_sample)
     contract_timer = timer("phi-gf1-T--U")
     contract_v4_ft_write (L, light_stochastic_propagator_smeared_all[i_sample], 
+        light_propagator_smeared_list[i_src], light_propagator_smeared_list[i_src], baryon_vertex_list, 
+        pf1_list, aw, t_axis, tag)
+    contract_timer("done")
+    
+    tag = string.format("%s/sample%.2d", "g5xi-gf1-U=U", i_sample)
+    contract_timer = timer("xi-gf1-U--U")
+    contract_v2_ft_write (L, gamma{mu=5} * light_stochastic_source_smeared[i_sample], 
+        light_propagator_smeared_list[i_src], light_propagator_smeared_list[i_src], baryon_vertex_list, 
+        pf1_list, aw, t_axis, tag)
+    contract_timer("done")
+    -- v4
+    tag = string.format("%s/sample%.2d", "g5xi=gf1-U-U", i_sample)
+    contract_timer = timer("xi=gf1-U--U")
+    contract_v4_ft_write (L, gamma{mu=5} * light_stochastic_source_smeared[i_sample], 
         light_propagator_smeared_list[i_src], light_propagator_smeared_list[i_src], baryon_vertex_list, 
         pf1_list, aw, t_axis, tag)
     contract_timer("done")
@@ -731,7 +825,7 @@ contract_v4_ft_write (L, light_stochastic_propagator_oet_zero_mom[i_oet_sample][
     tag = string.format("%s/sample%.2d", "phi-g5gf2-U", i_sample)
     contract_timer = timer("contract phi-g5gf2-U")
     contract_v3_ft_write(L, light_propagator_smeared_list[i_src], gamma{mu=5} * light_stochastic_propagator_smeared_all[i_sample], 
-        pion_vertex_list, pi2_list, aw, t_axis, tag)
+        pion_vertex_list, pf2_list, aw, t_axis, tag)
     contract_timer("done")
 
     -- ******************************************************
@@ -744,29 +838,29 @@ contract_v4_ft_write (L, light_stochastic_propagator_oet_zero_mom[i_oet_sample][
                             va_current_gamma_list, pi2_list, aw, t_axis, tag)
     contract_timer("done")
 
-      -- ******************************************************
-      -- * mod_V3: xi^+ G_f2 fl
-      -- ******************************************************
-      tag = string.format("%s/sample%.2d", "xi-gf2-U", i_sample)
-      t_axis = #dims -1
-      contract_timer = timer("contract xi-gf2-U")
-      contract_v3_ft_write(L, light_propagator_smeared_list[i_src], light_stochastic_source_smeared[i_sample], 
-        pion_vertex_list, pf2_list, aw, t_axis, tag)
-      contract_timer("done")
-      -- ******************************************************
-      -- * mod_V3: xi^+ G_c fl
-      -- ******************************************************
-      tag = string.format("%s/sample%.2d", "xi-gc-U", i_sample)
-      t_axis = #dims -1
-      contract_timer = timer("contract xi-gc-U")
-      contract_v3_ft_write(L, light_propagator_list[i_src], light_stochastic_source[i_sample], 
-        va_current_gamma_list, pf2_list, aw, t_axis, tag)
-      contract_timer("done")
+    -- ******************************************************
+    -- * mod_V3: xi^+ G_f2 fl
+    -- ******************************************************
+    tag = string.format("%s/sample%.2d", "xi-gf2-U", i_sample)
+    t_axis = #dims -1
+    contract_timer = timer("contract xi-gf2-U")
+    contract_v3_ft_write(L, light_propagator_smeared_list[i_src], light_stochastic_source_smeared[i_sample], 
+      pion_vertex_list, pf2_list, aw, t_axis, tag)
+    contract_timer("done")
+    -- ******************************************************
+    -- * mod_V3: xi^+ G_c fl
+    -- ******************************************************
+    tag = string.format("%s/sample%.2d", "xi-gc-U", i_sample)
+    t_axis = #dims -1
+    contract_timer = timer("contract xi-gc-U")
+    contract_v3_ft_write(L, light_propagator_list[i_src], light_stochastic_source[i_sample], 
+      va_current_gamma_list, pf2_list, aw, t_axis, tag)
+    contract_timer("done")
 
 
     for i_seq_mom, seq_mom in ipairs(pi2_list) do
 
-    for i_gi2, gi2 in ipairs(pion_vertex_list) do
+      for i_gi2, gi2 in ipairs(pion_vertex_list) do
 
         local gi2_tag = gi2.tag
         local gi2_id  = gi2.gamma[1]
@@ -774,154 +868,150 @@ contract_v4_ft_write (L, light_stochastic_propagator_oet_zero_mom[i_oet_sample][
         local gi2_adjoin_sign = gi2.gamma[3]
         local seq_gamma = gamma{n=gi2_id}
 
-      -- ******************************************************
-      -- * mod_V3: xi^+ G_f2 sll
-      -- ******************************************************
-      tag = string.format("%s/pi2x%.2dpi2y%.2dpi2z%.2d/gi2%.2d/sample%.2d", "xi-gf2-T", seq_mom[1], seq_mom[2], seq_mom[3], gi2_id, i_sample)
-      t_axis = #dims -1
-      contract_timer = timer("contract xi-gf2-T")
-      contract_v3_ft_write(L, light_sequential_propagator_smeared[i_src][i_gi2][i_seq_mom], light_stochastic_source_smeared[i_sample], 
-        pion_vertex_list, pf2_list, aw, t_axis, tag)
-      contract_timer("done")
-      
-      -- ******************************************************
-      -- * mod_V3: xi^+ G_c sll
-      -- ******************************************************
-      tag = string.format("%s/pi2x%.2dpi2y%.2dpi2z%.2d/gi2%.2d/sample%.2d", "xi-gc-T", seq_mom[1], seq_mom[2], seq_mom[3], gi2_id, i_sample)
-      t_axis = #dims -1
-      contract_timer = timer("contract xi-gc-T")
-      contract_v3_ft_write(L, light_sequential_propagator_list[i_src][i_gi2][i_seq_mom], light_stochastic_source[i_sample], 
-        va_current_gamma_list, pf1_list, aw, t_axis, tag)
-      contract_timer("done")
+        -- ******************************************************
+        -- * mod_V3: xi^+ G_f2 sll
+        -- ******************************************************
+        tag = string.format("%s/pi2x%.2dpi2y%.2dpi2z%.2d/gi2%.2d/sample%.2d", "xi-gf2-T", seq_mom[1], seq_mom[2], seq_mom[3], gi2_id, i_sample)
+        t_axis = #dims -1
+        contract_timer = timer("contract xi-gf2-T")
+        contract_v3_ft_write(L, light_sequential_propagator_smeared[i_src][i_gi2][i_seq_mom], light_stochastic_source_smeared[i_sample], 
+          pion_vertex_list, pf2_list, aw, t_axis, tag)
+        contract_timer("done")
+        
+        -- ******************************************************
+        -- * mod_V3: xi^+ G_c sll
+        -- ******************************************************
+        tag = string.format("%s/pi2x%.2dpi2y%.2dpi2z%.2d/gi2%.2d/sample%.2d", "xi-gc-T", seq_mom[1], seq_mom[2], seq_mom[3], gi2_id, i_sample)
+        t_axis = #dims -1
+        contract_timer = timer("contract xi-gc-T")
+        contract_v3_ft_write(L, light_sequential_propagator_list[i_src][i_gi2][i_seq_mom], light_stochastic_source[i_sample], 
+          va_current_gamma_list, pf1_list, aw, t_axis, tag)
+        contract_timer("done")
 
-    -- ******************************************************
-    -- * mod V2/V1: xi^+ g5 G_f1 fl sll
-    -- ******************************************************
-    
-    tag = string.format("%s/pi2x%.2dpi2y%.2dpi2z%.2d/gi2%.2d/sample%.2d", "xi-g5gf1-U--T", seq_mom[1], seq_mom[2], seq_mom[3], gi2_id, i_sample)
-    contract_timer = timer("xi-g5gf1-U--T")
-    contract_v2_ft_write (L, gamma{mu=5} * light_stochastic_source_smeared[i_sample], 
-        light_propagator_smeared_list[i_src], light_sequential_propagator_smeared[i_src][i_gi2][i_seq_mom], baryon_vertex_list, 
-        pf1_list, aw, t_axis, tag)
-    contract_timer("done")
+        -- ******************************************************
+        -- * mod V2/V1: xi^+ g5 G_f1 fl sll
+        -- ******************************************************
+        
+        tag = string.format("%s/pi2x%.2dpi2y%.2dpi2z%.2d/gi2%.2d/sample%.2d", "xi-g5gf1-U--T", seq_mom[1], seq_mom[2], seq_mom[3], gi2_id, i_sample)
+        contract_timer = timer("xi-g5gf1-U--T")
+        contract_v2_ft_write (L, gamma{mu=5} * light_stochastic_source_smeared[i_sample], 
+            light_propagator_smeared_list[i_src], light_sequential_propagator_smeared[i_src][i_gi2][i_seq_mom], baryon_vertex_list, 
+            pf1_list, aw, t_axis, tag)
+        contract_timer("done")
 
-    -- ******************************************************
-    -- * mod V2/V1: xi^+ g5 G_f1 sll fl
-    -- ******************************************************
-    tag = string.format("%s/pi2x%.2dpi2y%.2dpi2z%.2d/gi2%.2d/sample%.2d", "xi-g5gf1-T--U", seq_mom[1], seq_mom[2], seq_mom[3], gi2_id, i_sample)
-    contract_timer = timer("xi-g5gf1-T--U")
-    contract_v2_ft_write (L, gamma{mu=5} * light_stochastic_source_smeared[i_sample], 
-        light_sequential_propagator_smeared[i_src][i_gi2][i_seq_mom],  light_propagator_smeared_list[i_src],baryon_vertex_list, 
-        pf1_list, aw, t_axis, tag)
-    contract_timer("done")
-    -- ******************************************************
-    -- ******************************************************
-    -- * V4: phi(CG_f1 U T)
-    -- ******************************************************
+        -- ******************************************************
+        -- * mod V2/V1: xi^+ g5 G_f1 sll fl
+        -- ******************************************************
+        tag = string.format("%s/pi2x%.2dpi2y%.2dpi2z%.2d/gi2%.2d/sample%.2d", "xi-g5gf1-T--U", seq_mom[1], seq_mom[2], seq_mom[3], gi2_id, i_sample)
+        contract_timer = timer("xi-g5gf1-T--U")
+        contract_v2_ft_write (L, gamma{mu=5} * light_stochastic_source_smeared[i_sample], 
+            light_sequential_propagator_smeared[i_src][i_gi2][i_seq_mom],  light_propagator_smeared_list[i_src],baryon_vertex_list, 
+            pf1_list, aw, t_axis, tag)
+        contract_timer("done")
+        -- ******************************************************
+        -- ******************************************************
+        -- * V4: phi(CG_f1 U T)
+        -- ******************************************************
 
-    tag = string.format("%s/pi2x%.2dpi2y%.2dpi2z%.2d/gi2%.2d/sample%.2d", "xi=gf1-T--U", seq_mom[1], seq_mom[2], seq_mom[3], gi2_id, i_sample)
-    contract_timer = timer("xi-g5gf1-T--U")
-    contract_v4_ft_write (L, gamma{mu=5} * light_stochastic_source_smeared[i_sample], 
-        light_sequential_propagator_smeared[i_src][i_gi2][i_seq_mom], light_propagator_smeared_list[i_src], baryon_vertex_list, 
-        pf1_list, aw, t_axis, tag)
-    contract_timer("done")
-    -- ******************************************************
-    -- * V4: phi(CG_f1 T U)
-    -- ******************************************************
+        tag = string.format("%s/pi2x%.2dpi2y%.2dpi2z%.2d/gi2%.2d/sample%.2d", "xi=gf1-T--U", seq_mom[1], seq_mom[2], seq_mom[3], gi2_id, i_sample)
+        contract_timer = timer("xi-g5gf1-T--U")
+        contract_v4_ft_write (L, gamma{mu=5} * light_stochastic_source_smeared[i_sample], 
+            light_sequential_propagator_smeared[i_src][i_gi2][i_seq_mom], light_propagator_smeared_list[i_src], baryon_vertex_list, 
+            pf1_list, aw, t_axis, tag)
+        contract_timer("done")
+        -- ******************************************************
+        -- * V4: phi(CG_f1 T U)
+        -- ******************************************************
 
-    tag = string.format("%s/pi2x%.2dpi2y%.2dpi2z%.2d/gi2%.2d/sample%.2d", "xi=gf1-U--T", seq_mom[1], seq_mom[2], seq_mom[3] , gi2_id, i_sample)
-    contract_timer = timer("xi-g5gf1-U--T")
-    contract_v4_ft_write (L, gamma{mu=5} * light_stochastic_source_smeared[i_sample], 
-        light_propagator_smeared_list[i_src], light_sequential_propagator_smeared[i_src][i_gi2][i_seq_mom], baryon_vertex_list, 
-        pf1_list, aw, t_axis, tag)
-    contract_timer("done")
-    end
-   
-
+        tag = string.format("%s/pi2x%.2dpi2y%.2dpi2z%.2d/gi2%.2d/sample%.2d", "xi=gf1-U--T", seq_mom[1], seq_mom[2], seq_mom[3] , gi2_id, i_sample)
+        contract_timer = timer("xi-g5gf1-U--T")
+        contract_v4_ft_write (L, gamma{mu=5} * light_stochastic_source_smeared[i_sample], 
+            light_propagator_smeared_list[i_src], light_sequential_propagator_smeared[i_src][i_gi2][i_seq_mom], baryon_vertex_list, 
+            pf1_list, aw, t_axis, tag)
+        contract_timer("done")
+      end
     end --of momenta
-    aw:close()
-    end -- of samples
+  aw:close()
+  end -- of samples
    
 
 
 
-    src_loc_timer("done")
-    end  -- of loop on base source locations
-    -- * open output files
+  src_loc_timer("done")
+end  -- of loop on base source locations
 
-
-    for i_src, v_src in ipairs(source_locations) do
+for i_src, v_src in ipairs(source_locations) do
 
         
-        local src_loc_timer = timer("Time for each source location")
+  local src_loc_timer = timer("Time for each source location")
 
-        local t   = v_src["t"]
-        local pos = v_src["pos"]
-        printf("# [invert_contract] base source location[%d] = (%d, %d, %d) t=%d\n", i_src, pos[1], pos[2], pos[3], t)
-        
-
-        for i_dt, dt in ipairs(dt_source_sink_3pt_list) do
-
-            local name = string.format("%s.%.4d.x%.2dy%.2dz%.2dt%.2d.dt%.2d.aff", "contract_3pt_factors", nconf, pos[1], pos[2], pos[3], t, dt)
-            printf("# [invert_contract_v4] MxB - MxB factors output file %s\n", name)
-            local aw, am = qcd.aff.Writer(name)
-            name = nil
-            t_axis = #dims -1
-
-            local light_sequential_propagator_srctc         = {}
-            local light_stochastic_propagator_alltc         = {}
-            local light_stochastic_propagator_smeared_alltc = {}
-            local light_stochastic_source_tc                = {}
-            local light_sequential_propagator_tcsink        = {}
-            local light_forward_propagator_smeared_sink     = L:DiracPropagator()
-    
-            light_forward_propagator_smeared_sink = pack_propagator_in_sink(L, light_forward_propagator_smeared_sink, 
-                    light_propagator_smeared_list[i_src], (t+dt)%L[3], dt, "fwd")
-            for i_sample = 0,  nsample - 1 do
-
-                light_stochastic_source_tc[i_sample]                =   L:DiracFermion()
-                light_stochastic_propagator_alltc[i_sample]         =   L:DiracFermion()
-                light_stochastic_propagator_smeared_alltc[i_sample] =   L:DiracFermion()
-               pack_fermion_from_sink (L,light_stochastic_source_tc[i_sample], 
-                       light_stochastic_source[i_sample], t, dt, "bwd")
-               pack_fermion_from_sink (L, light_stochastic_propagator_alltc[i_sample], 
-                       light_stochastic_propagator_list[i_sample][(t+dt)%L[3]  ],t+dt, dt, "fwd" )
-               light_stochastic_propagator_smeared_alltc[i_sample] = pack_fermion_to_sink(L, light_stochastic_propagator_smeared_alltc[i_sample], 
-                        light_stochastic_propagator_smeared_allsink[i_sample], (t+dt)%L[3], dt, "fwd")
-                -- ******************************************************
-                -- * mod_V3: phi^+ G_c sll
-                -- ******************************************************
-                tag = string.format("%s/sample%.2d", "phi=g5gc-U", i_sample)
-                contract_timer = timer("phi=g5gc-U")
-                local input_stoch = gamma{mu=5} * light_stochastic_propagator_alltc[i_sample]
-                contract_v3_ft_write(L, light_propagator_list[i_src], input_stoch, 
-                                        va_current_gamma_list, pi2_list, aw, t_axis, tag)
-                contract_timer("done")
-
-                -- ******************************************************
-                -- * mod V2/V1: Phi^+ g5 G_f1 fl 
-                -- ******************************************************
-                tag = string.format("%s/sample%.2d", "phi-gf1-D=U", i_sample)
-                contract_timer = timer("phi-gf1-D=U")
-                contract_v2_ft_write (L,light_stochastic_propagator_smeared_alltc[i_sample], 
-                    light_forward_propagator_smeared_sink, light_forward_propagator_smeared_sink, baryon_vertex_list, 
-                    pi2_list, aw, t_axis, tag)
-                contract_timer("done")
-                -- ******************************************************
-                -- * mod V4/V4: xi^+ g5 G_f1 fl sll
-                -- ******************************************************
-                tag = string.format("%s/sample%.2d", "phi=gf1-D-U", i_sample)
-                contract_timer = timer("phi=gf1-D-U")
-                contract_v4_ft_write (L, light_stochastic_propagator_smeared_alltc[i_sample], 
-                    light_forward_propagator_smeared_sink, light_forward_propagator_smeared_sink, baryon_vertex_list, 
-                    pi2_list, aw, t_axis, tag)
-                contract_timer("done")
-
-            end
-            aw:close()
-          end
-    src_loc_timer("done")
-        end
-        --src_loc_timer("done")
+  local t   = v_src["t"]
+  local pos = v_src["pos"]
+  printf("# [invert_contract] base source location[%d] = (%d, %d, %d) t=%d\n", i_src, pos[1], pos[2], pos[3], t)
   
-    total_timer("done")
+
+  for i_dt, dt in ipairs(dt_source_sink_3pt_list) do
+
+    local name = string.format("%s.%.4d.x%.2dy%.2dz%.2dt%.2d.dt%.2d.aff", "contract_3pt_factors", nconf, pos[1], pos[2], pos[3], t, dt)
+    printf("# [invert_contract_v4] MxB - MxB factors output file %s\n", name)
+    local aw, am = qcd.aff.Writer(name)
+    name = nil
+    t_axis = #dims -1
+
+    local light_sequential_propagator_srctc         = {}
+    local light_stochastic_propagator_alltc         = {}
+    local light_stochastic_propagator_smeared_alltc = {}
+    local light_stochastic_source_tc                = {}
+    local light_sequential_propagator_tcsink        = {}
+    local light_forward_propagator_smeared_sink     = L:DiracPropagator()
+
+    light_forward_propagator_smeared_sink = pack_propagator_in_sink(L, light_forward_propagator_smeared_sink, 
+            light_propagator_smeared_list[i_src], (t+dt)%L[3], dt, "fwd")
+    for i_sample = 0,  nsample - 1 do
+
+      light_stochastic_source_tc[i_sample]                =   L:DiracFermion()
+      light_stochastic_propagator_alltc[i_sample]         =   L:DiracFermion()
+      light_stochastic_propagator_smeared_alltc[i_sample] =   L:DiracFermion()
+      pack_fermion_from_sink (L,light_stochastic_source_tc[i_sample], 
+               light_stochastic_source[i_sample], t, dt, "bwd")
+      pack_fermion_from_sink (L, light_stochastic_propagator_alltc[i_sample], 
+               light_stochastic_propagator_list[i_sample][(t+dt)%L[3]  ],t+dt, dt, "fwd" )
+      light_stochastic_propagator_smeared_alltc[i_sample] = pack_fermion_to_sink(L, light_stochastic_propagator_smeared_alltc[i_sample], 
+                light_stochastic_propagator_smeared_allsink[i_sample], (t+dt)%L[3], dt, "fwd")
+      -- ******************************************************
+      -- * mod_V3: phi^+ G_c sll
+      -- ******************************************************
+      tag = string.format("%s/sample%.2d", "phi=g5gc-U", i_sample)
+      contract_timer = timer("phi=g5gc-U")
+      local input_stoch = gamma{mu=5} * light_stochastic_propagator_alltc[i_sample]
+      contract_v3_ft_write(L, light_propagator_list[i_src], input_stoch, 
+                                va_current_gamma_list, pf1_list, aw, t_axis, tag)
+      contract_timer("done")
+
+      -- ******************************************************
+      -- * mod V2/V1: Phi^+ g5 G_f1 fl 
+      -- ******************************************************
+      tag = string.format("%s/sample%.2d", "phi-gf1-D=U", i_sample)
+      contract_timer = timer("phi-gf1-D=U")
+      contract_v2_ft_write (L,light_stochastic_propagator_smeared_alltc[i_sample], 
+          light_forward_propagator_smeared_sink, light_forward_propagator_smeared_sink, baryon_vertex_list, 
+          pf1_list, aw, t_axis, tag)
+      contract_timer("done")
+      -- ******************************************************
+      -- * mod V4/V4: xi^+ g5 G_f1 fl sll
+      -- ******************************************************
+      tag = string.format("%s/sample%.2d", "phi=gf1-D-U", i_sample)
+      contract_timer = timer("phi=gf1-D-U")
+      contract_v4_ft_write (L, light_stochastic_propagator_smeared_alltc[i_sample], 
+          light_forward_propagator_smeared_sink, light_forward_propagator_smeared_sink, baryon_vertex_list, 
+          pf1_list, aw, t_axis, tag)
+      contract_timer("done")
+
+    end
+    aw:close()
+  end
+  src_loc_timer("done")
+end
+--src_loc_timer("done")
+  
+total_timer("done")

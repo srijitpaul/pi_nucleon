@@ -14,8 +14,8 @@ ape_maxiter = 250
 ape_orthdir = 3
 
 
-wup_alpha = 3.0
-wup_n = 45
+wup_alpha = 0.5
+wup_n = 10
 
 
 --perform hex_smear on-th-fly
@@ -91,6 +91,7 @@ sequential_source_momentum_list = {
   { 0, 0, 0},
   {-1, 2,-3},
   { 4, 7,-6}
+-- { 0, 0, 0}
 }
 --  { 0, 0,-1},
 --  { 0, 1, 0},
